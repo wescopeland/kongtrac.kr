@@ -1,0 +1,39 @@
+{
+  "name": "dksta.ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wescopeland/dksta.ts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wescopeland/dksta.ts/issues"
+  },
+  "homepage": "https://github.com/wescopeland/dksta.ts",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "bower": "^1.5.3",
+    "compression": "^1.5.2",
+    "express": "^4.13.3",
+    "serve-static": "^1.10.0"
+  },
+  "devDependencies": {
+    "del": "^2.0.2",
+    "gulp": "^3.9.0",
+    "gulp-buster": "^1.0.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-ng-annotate": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.4.1",
+    "gulp-watch": "^4.3.5",
+    "jshint-stylish": "^2.0.1"
+  }
+}
