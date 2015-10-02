@@ -1,0 +1,382 @@
+<div class="row">
+
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<h2>Submit game</h2>
+	</div>
+
+</div>
+
+<br>
+
+<div class="row">
+
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<h3>Required fields</h3>
+	</div>
+
+	<form>
+
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<label class="control-label">Player</label>
+			<input class="form-control" placeholder="Player" ng-model="submit.inputPlayer">
+		</div>
+
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<label class="control-label">Date</label>
+			<datepicker date-format="{{ 'MM/dd/yyyy' }}" ng-if="!submit.inputIsDayUnknown">
+				<input class="form-control" ng-model="submit.inputDate" type="text">
+			</datepicker>
+
+			<datepicker date-format="{{ 'MMMM yyyy' }}" ng-if="submit.inputIsDayUnknown && !submit.inputIsMonthUnknown">
+				<input class="form-control" ng-model="submit.inputDate" type="text">
+			</datepicker>
+
+			<datepicker date-format="{{ 'yyyy' }}" ng-if="submit.inputIsDayUnknown && submit.inputIsMonthUnknown">
+				<input class="form-control" ng-model="submit.inputDate" type="text">
+			</datepicker>
+
+			<label for="isMonthUnknown" 
+			       class="pull-right" 
+			       ng-if="submit.inputIsDayUnknown === true" 
+			       style="margin-left: 15px;">
+				<input type="checkbox" ng-change="submit.inputDate = null" id="isMonthUnknown" name="isMonthUnknown" ng-model="submit.inputIsMonthUnknown"> Month Unknown
+			</label>
+
+			<label for="isDayUnknown" 
+			       class="pull-right">
+				<input type="checkbox" ng-change="submit.inputDate = null" id="isDayUnknown" name="isDayUnknown" ng-model="submit.inputIsDayUnknown"> Day Unknown
+			</label>
+				
+		</div>
+
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<label class="control-label">Score</label>
+			<input class="form-control" placeholder="Score" ng-model="submit.inputScore">
+		</div>
+
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<label class="control-label">Platform</label>
+			<select class="form-control" ng-model="submit.inputPlatform">
+				<option>Arcade</option>
+				<option>MAME</option>
+				<option>JAMMA</option>
+			</select>
+		</div>
+
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<div>
+				<label for="isKS">
+					<input type="checkbox" id="isKS" name="isKS" ng-model="submit.inputIsKillscreen"> Kill screen?
+				</label>
+			</div>
+		</div>
+
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<div>
+				<label for="hasCompleteData">
+					<input type="checkbox" id="hasCompleteData" name="hasCompleteData" ng-model="submit.inputHasCompleteData">
+					 Complete board-by-board data?
+				</label>
+			</div>
+		</div>
+
+		<!-- Complete Board-by-Board Input -->
+		<div>
+
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+				<hr>
+			</div>
+
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+				<div class="table">
+
+					<table class="table responsive-table">
+
+						<thead>
+							<tr>
+								<th></th>
+								<th>Barrel 1</th>
+								<th>Conveyor</th>
+								<th>Barrel 2</th>
+								<th>Elevator</th>
+								<th>Barrel 3</th>
+								<th>Rivet</th>
+							</tr>
+						</thead>
+
+						<tbody>
+
+							<tr>
+								<td>L1</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[0]"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[1]"></td>
+							</tr>
+							<tr>
+								<td>L2</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[2]"></td>
+								<td></td>
+								<td></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[3]"></td>
+								<td></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[4]"></td>
+							</tr>
+							<tr>
+								<td>L3</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[5]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[6]"></td>
+								<td></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[7]"></td>
+								<td></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[8]"></td>
+							</tr>
+							<tr>
+								<td>L4</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[9]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[10]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[11]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[12]"></td>
+								<td></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[13]"></td>
+							</tr>
+							<tr>
+								<td>L5</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[14]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[15]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[16]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[17]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[18]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[19]"></td>
+							</tr>
+							<tr>
+								<td>L6</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[20]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[21]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[22]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[23]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[24]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[25]"></td>
+							</tr>
+							<tr>
+								<td>L7</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[26]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[27]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[28]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[29]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[30]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[31]"></td>
+							</tr>
+							<tr>
+								<td>L8</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[32]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[33]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[34]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[35]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[36]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[37]"></td>
+							</tr>
+							<tr>
+								<td>L9</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[38]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[39]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[40]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[41]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[42]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[43]"></td>
+							</tr>
+							<tr>
+								<td>L10</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[44]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[45]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[46]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[47]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[48]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[49]"></td>
+							</tr>
+							<tr>
+								<td>L11</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[50]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[51]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[52]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[53]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[54]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[55]"></td>
+							</tr>
+							<tr>
+								<td>L12</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[56]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[57]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[58]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[59]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[60]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[61]"></td>
+							</tr>
+							<tr>
+								<td>L13</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[62]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[63]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[64]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[65]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[66]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[67]"></td>
+							</tr>
+							<tr>
+								<td>L14</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[68]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[69]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[70]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[71]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[72]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[73]"></td>
+							</tr>
+							<tr>
+								<td>L15</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[74]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[75]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[76]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[77]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[78]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[79]"></td>
+							</tr>
+							<tr>
+								<td>L16</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[80]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[81]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[82]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[83]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[84]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[85]"></td>
+							</tr>
+							<tr>
+								<td>L17</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[86]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[87]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[88]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[89]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[90]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[91]"></td>
+							</tr>
+							<tr>
+								<td>L18</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[92]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[93]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[94]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[95]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[96]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[97]"></td>
+							</tr>
+							<tr>
+								<td>L19</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[98]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[99]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[100]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[101]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[102]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[103]"></td>
+							</tr>
+							<tr>
+								<td>L20</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[104]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[105]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[106]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[107]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[108]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[109]"></td>
+							</tr>
+							<tr>
+								<td>L21</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[110]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[111]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[112]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[113]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[114]"></td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.gameScoresMap[115]"></td>
+							</tr>
+
+						</tbody>
+
+					</table>
+
+				</div>
+
+			</div>
+
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+				<div class="table">
+
+					<table class="table responsive-table">
+
+						<thead>
+							<tr>
+								<th></th>
+								<th>Board</th>
+								<th>Points</th>
+							</tr>
+						</thead>
+
+						<tbody>
+
+							<tr>
+								<td>Death One</td>
+								<td>
+									<select style="width: 75px;" 
+									        ng-model="submit.deathScores[0].board"
+									        ng-options="level as level for level in submit.getAllLevels()">
+									</select>
+								</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.deathScores[0].points"></td>
+							</tr>
+							<tr>
+								<td>Death Two</td>
+								<td>
+									<select style="width: 75px;" 
+									        ng-model="submit.deathScores[1].board"
+									        ng-options="level as level for level in submit.getAllLevels()">
+									</select>
+								</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.deathScores[1].points"></td>
+							</tr>
+							<tr>
+								<td>Death Three</td>
+								<td>
+									<select style="width: 75px;" 
+									        ng-model="submit.deathScores[2].board"
+									        ng-options="level as level for level in submit.getAllLevels()">
+									</select>
+								</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.deathScores[2].points"></td>
+							</tr>
+							<tr>
+								<td>Death Four</td>
+								<td>
+									<select style="width: 75px;" 
+									        ng-model="submit.deathScores[3].board"
+									        ng-options="level as level for level in submit.getAllLevels()">
+									</select>
+								</td>
+								<td><input type="number" style="width: 75px;" ng-model="submit.deathScores[3].points"></td>
+							</tr>
+
+						</tbody>
+
+					</table>
+
+			</div>
+
+
+		</div>
+
+		<div class="form-group text-right col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<button class="btn btn-primary" ng-click="submit.handleCommit()">
+				Commit
+			</button>
+		</div>
+
+	</form>
+
+</div>

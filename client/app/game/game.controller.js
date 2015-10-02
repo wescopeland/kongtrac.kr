@@ -1,0 +1,247 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('kongtrac.game')
+        .controller('GameController', GameController);
+
+    /* @ngInject */
+    function GameController($stateParams, $state, $filter, gameService, boardMapper, highchartsNG) {
+
+        var vm = this;
+
+        // Public Variables
+        vm.weights = {};
+        vm.gameData = {};
+        vm.$state = $state;
+        vm.paceChartConfiguration = {};
+        vm.scoreChartConfiguration = {};
+
+        // Public Functions
+        vm.getMappedBoardNumber = getMappedBoardNumber;
+
+        // Private Functions
+        // -- abbreviateNumber();
+        // -- getScoreChartMappedBoardNumber();
+        // -- getPaceChartMappedBoardNumber();
+
+        activate();
+
+        ////////////////
+
+        function abbreviateNumber() {
+		    
+        	var number = this.value;
+        	var decPlaces = 2;
+
+        	number = Number(number);
+
+		    // 2 decimal places => 100, 3 => 1000, etc
+		    decPlaces = Math.pow(10,decPlaces);
+
+		    // Enumerate number abbreviations
+		    var abbrev = [ "k", "m", "b", "t" ];
+
+		    // Go through the array backwards, so we do the largest first
+		    for (var i=abbrev.length-1; i>=0; i--) {
+
+		        // Convert array index to "1000", "1000000", etc
+		        var size = Math.pow(10,(i+1)*3);
+
+		        // If the number is bigger or equal do the abbreviation
+		        if(size <= number) {
+		             // Here, we multiply by decPlaces, round, and then divide by decPlaces.
+		             // This gives us nice rounding to a particular decimal place.
+		             number = Math.round(number*decPlaces/size)/decPlaces;
+
+		             // Handle special case where we round up to the next abbreviation
+		             if((number == 1000) && (i < abbrev.length - 1)) {
+		                 number = 1;
+		                 i++;
+		             }
+
+		             // Add the letter for the abbreviation
+		             number += abbrev[i];
+
+		             // We are done... stop
+		             break;
+		        }
+		    }
+
+		    return number;
+		}
+
+        function activate() {
+
+        	vm.paceChartConfiguration = {
+
+        		options: {
+        			chart: {
+        				type: 'line'
+        			},
+        			title: {
+        				text: 'Pace history for this game'
+        			},
+                    tooltip: {
+                        formatter: function() {
+                            return '<b>' + getPaceChartMappedBoardNumber(this.x) + '</b>: ' + $filter('number')(this.y);
+                        }
+                    },
+        		},
+        		series: [],
+    			credits: {
+    				enabled: false
+    			},
+                subtitle: {
+    				text: 'Click and drag to zoom'
+    			},
+    			xAxis: {
+    				title: {
+    					text: 'Level'
+    				},
+    				labels: {
+    					formatter: getPaceChartMappedBoardNumber
+    				},
+                    tickPositions: [0, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96, 102, 108, 114, 115]
+    			},
+    			yAxis: {
+    				title: {
+    					text: 'Pace'
+    				},
+    				labels: {
+    					formatter: abbreviateNumber
+    				},
+    			},
+    			plotOptions: {
+    				marker: {
+    					enabled: false,
+    					symbol: 'circle'
+    				}
+    			},
+    			exporting: {
+    				enabled: true
+    			}
+
+        	};
+
+            vm.scoreChartConfiguration = {
+
+                options: {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Score history for this game'
+                    },
+                    tooltip: {
+                        formatter: function() {
+                            return '<b>' + getScoreChartMappedBoardNumber(this.x) + '</b>: ' + $filter('number')(this.y);
+                        }
+                    },
+                },
+                series: [],
+                credits: {
+                    enabled: false
+                },
+                subtitle: {
+                    text: 'Click and drag to zoom'
+                },
+                xAxis: {
+                    title: {
+                        text: 'Level'
+                    },
+                    labels: {
+                        formatter: getScoreChartMappedBoardNumber
+                    },
+                    tickPositions: [1, 4, 8, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, 79, 85, 91, 97, 103, 109, 115]
+                },
+                yAxis: {
+                    title: {
+                        text: 'Score'
+                    },
+                    labels: {
+                        formatter: abbreviateNumber
+                    },
+                    min: 0
+                },
+                plotOptions: {
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle'
+                    }
+                },
+                exporting: {
+                    enabled: true
+                }
+
+            };
+
+        	gameService.getBoardWeights().then(function then(response) {
+        		vm.weights = response;
+        	});
+
+        	gameService.getGameData($stateParams.gameId).then(function then(response) {
+
+        		vm.gameData = response;
+        		console.log(vm.gameData);
+
+        		vm.paceChartConfiguration.series.push({
+        			data: vm.gameData.paceMap,
+        			name: vm.gameData.player.split(' ').pop() + ' (Pace) ' + $filter('number')(vm.gameData.score),
+    				color: '#000000',
+    				lineWidth: 3,
+    				borderWidth: 0,
+    				marker: {
+    					enabled: false
+    				}
+        		});
+
+                vm.scoreChartConfiguration.series.push({
+                    data: vm.gameData.scoreMap,
+                    name: vm.gameData.player.split(' ').pop() + ' (Score) ' + $filter('number')(vm.gameData.score),
+                    color: '#000000',
+                    lineWidth: 3,
+                    borderWidth: 0,
+                    marker: {
+                        enabled: false
+                    }
+                });
+
+        	});
+
+        }
+
+        function getScoreChartMappedBoardNumber(inputBoardNumber) {
+
+            var boardNumber;
+
+            if (this && this.value) {
+                boardNumber = this.value;
+            } else {
+                boardNumber = inputBoardNumber;
+            }
+
+            return boardMapper.mapBoardNumberToLevel(boardNumber);
+
+        }
+
+        function getPaceChartMappedBoardNumber(inputBoardNumber) {
+
+        	var boardNumber;
+
+            if (this && this.value) {
+                boardNumber = this.value + 19;
+            } else {
+                boardNumber = inputBoardNumber + 19;
+            }
+
+        	return boardMapper.mapBoardNumberToLevel(boardNumber);
+
+        }
+
+        function getMappedBoardNumber(inputBoardNumber) {
+        	return boardMapper.mapBoardNumberToLevel(inputBoardNumber);
+        }
+
+    }
+})();

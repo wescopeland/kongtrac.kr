@@ -1,0 +1,20 @@
+<div class="row">
+	<h2>
+		{{ game.gameData.player }} &mdash; {{ game.gameData.score | number }}
+		<small>
+		    <a ng-if="game.$state.current.name !== 'game.summary'" ng-href="{{ '#/game/' + game.gameData.$id + '/summary' }}">Summary</a>
+		    <span ng-if="game.$state.current.name === 'game.summary'">Summary</span>
+		    {{ $state.current.name }}
+		</small>
+		<small>
+		    <a ng-if="game.$state.current.name !== 'game.boards'" ng-href="{{ '#/game/' + game.gameData.$id + '/boards' }}">Score breakdown</a>
+		    <span ng-if="game.$state.current.name === 'game.boards'">Score breakdown</span>
+		</small>
+		<small>
+		    <a ng-if="game.$state.current.name !== 'game.graphs'">Graphs</a>
+		    <span ng-if="game.$state.current.name === 'game.graphs'">Graphs</span>
+		</small>
+	</h2>
+</div>
+
+<ui-view></ui-view>

@@ -1,0 +1,177 @@
+<div class="row">
+
+	<!-- Score Summary Bars -->
+	<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+		<div class="table-responsive">
+			<table class="table">
+				<tbody>
+
+					<tr>
+						<th class="text-right" style="width: 5em; border-top: none;">Levels</th>
+						<td style="border-top: none;">
+							<div class="progress progress-striped" style="height: 100%;">
+								<div class="progress-bar progress-bar-default"
+								     ng-style="{ 'width': ( ( (game.gameData.levelAverage - game.weights.minLevel) / (game.weights.maxLevel - game.weights.minLevel) ) * 100 ) + '%' }">
+									{{ game.gameData.levelAverage | number }}
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<th class="text-right" style="width: 5em; border-top: none;">Barrels</th>
+						<td style="border-top: none;">
+							<div class="progress progress-striped" style="height: 100%;">
+								<div class="progress-bar progress-bar-danger"
+								     ng-style="{ 'width': ( ( (game.gameData.barrelAverage - game.weights.minBarrel) / (game.weights.maxBarrel - game.weights.minBarrel) ) * 100 ) + '%' }">
+									{{ game.gameData.barrelAverage | number }}
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<th class="text-right" style="width: 5em; border-top: none;">Pies</th>
+						<td style="border-top: none;">
+							<div class="progress progress-striped" style="height: 100%;">
+								<div class="progress-bar progress-bar-warning"
+								     ng-style="{ 'width': ( ( (game.gameData.pieAverage - game.weights.minPie) / (game.weights.maxPie - game.weights.minPie) ) * 100 ) + '%' }">
+									{{ game.gameData.pieAverage | number }}
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<th class="text-right" style="width: 5em; border-top: none;">Springs</th>
+						<td style="border-top: none;">
+							<div class="progress progress-striped" style="height: 100%;">
+								<div class="progress-bar progress-bar-info"
+								     ng-style="{ 'width': ( ( (game.gameData.springAverage - game.weights.minSpring) / (game.weights.maxSpring - game.weights.minSpring) ) * 100 ) + '%' }">
+									{{ game.gameData.springAverage | number }}
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<th class="text-right" style="width: 5em; border-top: none;">Rivets</th>
+						<td style="border-top: none;">
+							<div class="progress progress-striped" style="height: 100%;">
+								<div class="progress-bar progress-bar-primary"
+								     ng-style="{ 'width': ( ( (game.gameData.rivetAverage - game.weights.minRivet) / (game.weights.maxRivet - game.weights.minRivet) ) * 100 ) + '%' }">
+									{{ game.gameData.rivetAverage | number }}
+								</div>
+							</div>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="clearfix visible-sm visible-xs"></div>
+
+	<!-- Detail Table -->
+	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+		<div class="table-responsive">
+
+			<table class="table table-condensed table-striped table-hover">
+
+				<thead>
+					<tr>
+						<th colspan="2" class="text-center ibox-header">{{ game.gameData.score | number }}</th>
+					</tr>
+				</thead>
+
+				<tbody>
+
+					<tr class="small">
+						<td class="text-right ibox-left" style="width: 40%">Player</td>
+						<td>{{ game.gameData.player }}</td>
+					</tr>
+					<tr class="small">
+						<td class="text-right ibox-left">Date</td>
+						<td>{{ game.gameData.date }}</td>
+					</tr>
+					<tr class="small">
+						<td class="text-right ibox-left">Platform</td>
+						<td>
+							<i class="fa fa-lg fa-keyboard-o" ng-if="game.gameData.platform === 'MAME'"></i>
+							<i class="fa fa-lg fa-map-pin" ng-if="game.gameData.platform === 'Arcade'"></i>
+							{{ game.gameData.platform }}
+						</td>
+					</tr>
+					<tr class="small">
+						<td class="text-right ibox-left">Final Board</td>
+						<td>
+							L{{ game.getMappedBoardNumber(game.gameData.deaths[3].board) }}
+							<span ng-if="game.getMappedBoardNumber(game.gameData.deaths[3].board) === '22-1'"> (Kill Screen)</span>
+						</td>
+					</tr>
+					<tr class="small">
+						<td class="text-right ibox-left">Start</td>
+						<td>
+							{{ game.gameData.startScore | number }}
+						</td>
+					</tr>
+					<tr class="small">
+						<td class="text-right ibox-left">Death Points</td>
+						<td>
+							{{ game.gameData.deathPoints | number }}
+						</td>
+					</tr>
+					<tr class="small">
+						<td class="text-right ibox-left">Level Average</td>
+						<td>
+							{{ game.gameData.levelAverage | number }}
+						</td>
+					</tr>
+					<tr class="small">
+						<td class="text-right ibox-left">Max Pace</td>
+						<td>
+							{{ game.gameData.maxPace.pace | number }} (L{{ game.getMappedBoardNumber(game.gameData.maxPace.boardNumber) }})
+						</td>
+					</tr>
+					<tr class="small">
+						<td class="text-right ibox-left">Min Pace</td>
+						<td>
+							{{ game.gameData.minPace.pace | number }} (L{{ game.getMappedBoardNumber(game.gameData.minPace.boardNumber) }})
+						</td>
+					</tr>
+					<tr class="small">
+						<td class="text-right ibox-left">Longest Life</td>
+						<td>
+							{{ game.gameData.longestLifeBoardCount | number }} Boards ({{game.gameData.longestLifeBoardCount / 6 | number:0}} Levels)
+						</td>
+					</tr>
+					<tr class="small">
+						<td class="text-right ibox-left">Average Life</td>
+						<td>
+							{{ game.gameData.averageLifeBoardCount | number }} Boards ({{game.gameData.averageLifeBoardCount / 6 | number:0}} Levels)
+						</td>
+					</tr>
+
+
+				</tbody>
+
+			</table>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+
+	<!-- Pace Chart -->
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+		<highchart id="gamePaceChart" config="game.paceChartConfiguration"></highchart>
+
+	</div>
+
+</div>
