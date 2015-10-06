@@ -1,0 +1,15 @@
+<form class="form-inline" role="form">
+	<div class="form-group">
+		<input class="form-control" 
+		       type="text" 
+		       id="globalSearch"
+		       placeholder="Find a player, game, or event" 
+		       style="width: 30em;" 
+		       typeahead="player for player in vm.makeQuickSearch($viewValue) | limitTo:8"
+		       typeahead-min-length="1"
+		       typeahead-wait-ms="100"
+		       typeahead-template-url="./app/quicksearch/globalsearch.popup.template.html"
+		       ng-model="vm.inputSearchQuery"
+		       autocomplete="off">
+	</div>
+</form>

@@ -25,6 +25,8 @@
         // -- calculateLongestLife(inputDeathsArray);
         // -- findMaxBarrel(inputBoardScores);
         // -- findMinBarrel(inputBoardScores);
+        // -- findMinLevel(inputLevelScores);
+        // -- findMaxLevel(inputLevelScores);
         // -- findMaxPie(inputBoardScores);
         // -- findMinPie(inputBoardScores);
         // -- findMaxSpring(inputBoardScores);
@@ -295,6 +297,56 @@
             var minBarrel = Math.min.apply(Math, barrelScores);
 
             return minBarrel;
+
+        }
+
+        function findMaxLevel(inputLevelScores) {
+
+            var levelScoresArray = [];
+            var currentLevel = 1;
+
+            for (var key in inputLevelScores) {
+
+                if (inputLevelScores.hasOwnProperty(key)) {
+
+                    if (currentLevel >= 5) {
+                        levelScoresArray.push(inputLevelScores[key]);
+                    }
+                    
+                    currentLevel += 1;
+
+                }
+
+            }
+
+            var maxLevel = Math.max.apply(Math, levelScoresArray);
+
+            return maxLevel;
+
+        }
+
+        function findMinLevel(inputLevelScores) {
+
+            var levelScoresArray = [];
+            var currentLevel = 1;
+
+            for (var key in inputLevelScores) {
+
+                if (inputLevelScores.hasOwnProperty(key)) {
+
+                    if (currentLevel >= 5) {
+                        levelScoresArray.push(inputLevelScores[key]);
+                    }
+                    
+                    currentLevel += 1;
+
+                }
+
+            }
+
+            var minLevel = Math.min.apply(Math, levelScoresArray);
+
+            return minLevel;
 
         }
 
@@ -618,6 +670,8 @@
                     _game.maxSpring = findMaxSpring(_game.boardScores);
                     _game.minRivet = findMinRivet(_game.boardScores);
                     _game.maxRivet = findMaxRivet(_game.boardScores);
+                    _game.minLevel = findMinLevel(_game.levelScores);
+                    _game.maxLevel = findMaxLevel(_game.levelScores);
 
         			resolve(_game);
 

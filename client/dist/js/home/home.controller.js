@@ -6,7 +6,7 @@
         .controller('HomeController', HomeController);
 
     /* @ngInject */
-    function HomeController(scoresService) {
+    function HomeController($scope, scoresService) {
 
         var vm = this;
 
@@ -15,7 +15,7 @@
         vm.combinedTopTenScores = [];
         vm.mameTopTenScores = [];
         vm.showSeparate = false;
-
+        
         // Public Functions
         vm.camelize = camelize;
         vm.hideSeparateScores = hideSeparateScores;
@@ -33,6 +33,8 @@
 
         		vm.arcadeTopTenScores = scoresService.getArcadeTopTen();
         		vm.mameTopTenScores = scoresService.getMameTopTen();
+
+                console.log(response);
 
         	});
 
@@ -55,5 +57,5 @@
         }
 
     }
-    HomeController.$inject = ["scoresService"];
+    HomeController.$inject = ["$scope", "scoresService"];
 })();

@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/bower_components'));
 
 app.listen(app.get('port'), function() {
-	console.log('dktrac.kr server is now running at port ' + app.get('port'));
+	console.log('kongtrac.kr server is now running at port ' + app.get('port'));
 });
 
 // Add headers

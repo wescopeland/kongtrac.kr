@@ -7,6 +7,7 @@
             'kongtrac.home',
             'kongtrac.submit',
             'kongtrac.scores',
-            'kongtrac.game'
+            'kongtrac.game',
+            'kongtrac.search'
         ]);
 })();

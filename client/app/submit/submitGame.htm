@@ -80,8 +80,14 @@
 			</div>
 		</div>
 
+		<div class="form-group text-right col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12" ng-if="!submit.inputHasCompleteData">
+			<button class="btn btn-primary" ng-click="submit.handleCommit()">
+				Commit
+			</button>
+		</div>
+
 		<!-- Complete Board-by-Board Input -->
-		<div>
+		<div ng-if="submit.inputHasCompleteData">
 
 			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 				<hr>
@@ -368,13 +374,12 @@
 
 			</div>
 
+			<div class="form-group text-right col-sm-12 col-xs-12">
+				<button class="btn btn-primary pull-right" ng-click="submit.handleCommit()">
+					Commit
+				</button>
+			</div>
 
-		</div>
-
-		<div class="form-group text-right col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-			<button class="btn btn-primary" ng-click="submit.handleCommit()">
-				Commit
-			</button>
 		</div>
 
 	</form>

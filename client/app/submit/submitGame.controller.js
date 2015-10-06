@@ -53,6 +53,7 @@
         	gamePropertiesObject.score = Number(vm.inputScore);
         	gamePropertiesObject.platform = vm.inputPlatform;
         	gamePropertiesObject.isKillscreen = vm.inputIsKillscreen;
+            gamePropertiesObject.hasCompleteData = vm.inputHasCompleteData;
 
         	if (vm.inputHasCompleteData) {
 

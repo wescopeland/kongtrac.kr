@@ -102,6 +102,7 @@
     				labels: {
     					formatter: getPaceChartMappedBoardNumber
     				},
+                    plotLines: [],
                     tickPositions: [0, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96, 102, 108, 114, 115]
     			},
     			yAxis: {
@@ -110,7 +111,7 @@
     				},
     				labels: {
     					formatter: abbreviateNumber
-    				},
+    				}
     			},
     			plotOptions: {
     				marker: {
@@ -153,7 +154,8 @@
                     labels: {
                         formatter: getScoreChartMappedBoardNumber
                     },
-                    tickPositions: [1, 4, 8, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, 79, 85, 91, 97, 103, 109, 115]
+                    plotLines: [],
+                    tickPositions: [8, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, 79, 85, 91, 97, 103, 109, 115]
                 },
                 yAxis: {
                     title: {
@@ -196,6 +198,33 @@
     				}
         		});
 
+                vm.gameData.deaths.forEach(function(death) {
+
+                    var newPacePlotLine = {
+                        color: '#C0D0E0',
+                        value: death.board - 19,
+                        width: 1
+                    };
+
+                    var newScorePlotLine = {
+                        color: '#C0D0E0',
+                        value: death.board,
+                        width: 1
+                    };
+
+                    // Don't render the KS.
+                    if (vm.paceChartConfiguration.xAxis.plotLines.indexOf(newPacePlotLine) === -1
+                            && newPacePlotLine.value !== 97) {
+                        vm.paceChartConfiguration.xAxis.plotLines.push(newPacePlotLine);
+                    }
+
+                    if (vm.scoreChartConfiguration.xAxis.plotLines.indexOf(newScorePlotLine) === -1
+                            && newScorePlotLine.value !== 116) {
+                        vm.scoreChartConfiguration.xAxis.plotLines.push(newScorePlotLine);
+                    }
+
+                });
+
                 vm.scoreChartConfiguration.series.push({
                     data: vm.gameData.scoreMap,
                     name: vm.gameData.player.split(' ').pop() + ' (Score) ' + $filter('number')(vm.gameData.score),
@@ -215,7 +244,7 @@
 
             var boardNumber;
 
-            if (this && this.value) {
+            if (this && this.value && !inputBoardNumber) {
                 boardNumber = this.value;
             } else {
                 boardNumber = inputBoardNumber;

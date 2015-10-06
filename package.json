@@ -24,7 +24,9 @@
     "serve-static": "^1.10.0"
   },
   "devDependencies": {
+    "algoliasearch": "^3.8.1",
     "del": "^2.0.2",
+    "firebase": "^2.3.1",
     "gulp": "^3.9.0",
     "gulp-buster": "^1.0.0",
     "gulp-concat": "^2.6.0",

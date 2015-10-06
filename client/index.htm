@@ -60,7 +60,7 @@
 	              	</a>
 	              	<ul class="dropdown-menu">
 		                <li>
-		                	<a href="/periods/latest/">Current Top</a>
+		                	<a href="#/home">Current Top</a>
 		                </li>
 	                </ul>
 
@@ -90,12 +90,8 @@
 
     	<!-- Quick Search -->
     	<div class="row">
-	    	<div class="col-xs-offset-4 col-xs-8 col-sm-8 col-md-8 col-lg-8 text-right text-muted">
-	    		<form class="form-inline" role="form">
-	    			<div class="form-group">
-	    				<input class="form-control input-sm ui-autocomplete-input" type="text" name="q" placeholder="Find a player, game, or event" style="width: 30em;" autocomplete="off">
-	    			</div>
-	    		</form>
+			<div class="col-xs-offset-4 col-xs-8 col-sm-8 col-md-8 col-lg-8 text-right text-muted">
+	    		<global-search></global-search>
 	    	</div>
     	</div>
 
@@ -120,12 +116,14 @@
 
 	<!-- Vendor Dependencies -->
 	<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 	<script src="firebase/firebase.js"></script>
 	<script src="angularfire/dist/angularfire.min.js"></script>
 	<script src="angularjs-datepicker/dist/angular-datepicker.min.js"></script>
 	<script src="http://code.highcharts.com/highcharts.src.js"></script>
 	<script src="http://code.highcharts.com/modules/exporting.js"></script>
 	<script src="highcharts-ng/dist/highcharts-ng.min.js"></script>
+	<script src="algoliasearch/dist/algoliasearch.angular.min.js"></script>
 
 	<!-- App JS -->
 	<script src="dist/js/app.module.js"></script>
@@ -145,6 +143,8 @@
 	<script src="dist/js/game/game.controller.js"></script>
 	<script src="dist/js/game/game.service.js"></script>
 	<script src="dist/js/game/boardmapper.service.js"></script>
+	<script src="dist/js/quicksearch/quicksearch.module.js"></script>
+	<script src="dist/js/quicksearch/globalsearch.directive.js"></script>
 
 </body>
 
