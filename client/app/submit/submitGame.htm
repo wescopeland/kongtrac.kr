@@ -335,7 +335,7 @@
 									        ng-options="level as level for level in submit.getAllLevels()">
 									</select>
 								</td>
-								<td><input type="text" style="width: 75px;" ng-model="submit.deathScores[0].points"></td>
+								<td><input type="text" style="width: 75px;" ng-blur="submit.deathScores[0] = submit.expand(submit.deathScores[0])" ng-model="submit.deathScores[0].points"></td>
 							</tr>
 							<tr>
 								<td>Death Two</td>
@@ -345,7 +345,7 @@
 									        ng-options="level as level for level in submit.getAllLevels()">
 									</select>
 								</td>
-								<td><input type="text" style="width: 75px;" ng-model="submit.deathScores[1].points"></td>
+								<td><input type="text" style="width: 75px;" ng-blur="submit.deathScores[1] = submit.expand(submit.deathScores[1])" ng-model="submit.deathScores[1].points"></td>
 							</tr>
 							<tr>
 								<td>Death Three</td>
@@ -355,7 +355,7 @@
 									        ng-options="level as level for level in submit.getAllLevels()">
 									</select>
 								</td>
-								<td><input type="text" style="width: 75px;" ng-model="submit.deathScores[2].points"></td>
+								<td><input type="text" style="width: 75px;" ng-blur="submit.deathScores[2] = submit.expand(submit.deathScores[2])" ng-model="submit.deathScores[2].points"></td>
 							</tr>
 							<tr>
 								<td>Death Four</td>
@@ -365,7 +365,7 @@
 									        ng-options="level as level for level in submit.getAllLevels()">
 									</select>
 								</td>
-								<td><input type="text" style="width: 75px;" ng-model="submit.deathScores[3].points"></td>
+								<td><input type="text" style="width: 75px;" ng-blur="submit.deathScores[3] = submit.expand(submit.deathScores[3])" ng-model="submit.deathScores[3].points"></td>
 							</tr>
 
 						</tbody>

@@ -43,7 +43,7 @@
         	} else if (inputPointsString.charAt(inputPointsString.length - 1) !== 0) {
         		return (Number(inputPointsString) * 1000);
         	} else {
-        		return inputPointsString;
+        		return Number(inputPointsString);
         	}
 
         	expansion = (Number(splitString[0]) * 1000) + (Number(splitString[1]) * 100);
