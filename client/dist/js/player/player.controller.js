@@ -75,7 +75,7 @@
         			},
                     tooltip: {
                         formatter: function() {
-                            return '<b>' + $filter('date')(this.x) + '</b>: ' + $filter('number')(this.y);
+                            return '<b>' + $filter('amDateFormat')(this.x, 'MM/DD/YYYY') + '</b>: ' + $filter('number')(this.y);
                         }
                     },
         		},
@@ -153,7 +153,7 @@
 
         			console.log(vm.playerData);
 
-        			if (vm.playerData.arcadeBest || vm.playerData.mameBest) {
+        			if (vm.playerData.pbMap.length > 0) {
         				$interval.cancel(processPlayerInterval);
         			}
 

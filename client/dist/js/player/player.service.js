@@ -61,7 +61,9 @@
         			newPbObject.fillColor = '#ff4136';
         		} else if (pb.platform === 'MAME') {
         			newPbObject.fillColor = '#0074d9';
-        		}
+        		} else {
+                    newPbObject.fillColor = '#F012BE';
+                }
 
         		sanitizedPbMap.push(newPbObject);
 
