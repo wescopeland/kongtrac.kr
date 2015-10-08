@@ -40,7 +40,7 @@
         		splitString = inputPointsString.split('.');
         	} else if (inputPointsString.indexOf('-') > -1) {
         		splitString = inputPointsString.split('-');
-        	} else if (inputPointsString.charAt(inputPointsString.length - 1) !== 0) {
+        	} else if (inputPointsString.length <= 2) {
         		return (Number(inputPointsString) * 1000);
         	} else {
         		return Number(inputPointsString);
