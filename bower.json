@@ -24,8 +24,6 @@
     "angular-bootstrap": "~0.13.4",
     "angularjs-datepicker": "~0.2.11",
     "highcharts-ng": "~0.0.11",
-    "handsontable": "~0.18.0",
-    "ngHandsontable": "~0.6.0",
     "algoliasearch": "3",
     "moment": "~2.10.6",
     "angular-smart-table": "~2.1.4",
