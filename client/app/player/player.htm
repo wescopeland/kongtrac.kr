@@ -94,8 +94,14 @@
 					<tr ng-repeat="game in player.playerData.gamesData | orderBy:'-date'" ng-hide="player.onlyShowComplete && !game.hasCompleteData">
 						<td>{{ game.date | amDateFormat: 'MM/DD/YYYY' }}</td>
 
+						<!--
 						<td ng-if="!game.hasCompleteData">{{ game.score | number }}</td>
 						<td ng-if="game.hasCompleteData">
+							<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
+						</td>
+						-->
+
+						<td>
 							<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
 						</td>
 
