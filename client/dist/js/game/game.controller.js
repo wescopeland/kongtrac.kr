@@ -6,19 +6,23 @@
         .controller('GameController', GameController);
 
     /* @ngInject */
-    function GameController($stateParams, $state, $filter, gameService, boardMapper, highchartsNG) {
+    function GameController($stateParams, $state, $filter, $timeout, gameService, submitGameService, boardMapper, highchartsNG) {
 
         var vm = this;
 
         // Public Variables
-        vm.weights = {};
-        vm.gameData = {};
         vm.$state = $state;
+        vm.gameData = {};
+        vm.gameEditData = {};
         vm.paceChartConfiguration = {};
         vm.scoreChartConfiguration = {};
+        vm.weights = {};
 
         // Public Functions
+        vm.expand = expand;
+        vm.getAllLevels = getAllLevels;
         vm.getMappedBoardNumber = getMappedBoardNumber;
+        vm.handleEditCommit = handleEditCommit;
 
         // Private Functions
         // -- abbreviateNumber();
@@ -178,7 +182,7 @@
 
             };
 
-        	gameService.getBoardWeights().then(function then(response) {
+            gameService.getBoardWeights().then(function then(response) {
         		vm.weights = response;
         	});
 
@@ -186,6 +190,29 @@
 
         		vm.gameData = response;
                 console.log(response);
+
+                vm.gameEditData.date = vm.gameData.date;
+                vm.gameEditData.score = vm.gameData.score;
+                vm.gameEditData.player = vm.gameData.player;
+                vm.gameEditData.platform = vm.gameData.platform;
+                vm.gameEditData.isKillscreen = vm.gameData.isKillscreen;
+
+                if (vm.gameData.hasCompleteData) {
+
+                    vm.gameEditData.hasCompleteData = true;
+                    vm.gameEditData.boardScores = vm.gameData.boardScores;
+                    vm.gameEditData.deaths = angular.copy(vm.gameData.deaths);
+
+                    vm.gameEditData.deaths[0].board = boardMapper.mapBoardNumberToLevel(vm.gameEditData.deaths[0].board);
+                    vm.gameEditData.deaths[1].board = boardMapper.mapBoardNumberToLevel(vm.gameEditData.deaths[1].board);
+                    vm.gameEditData.deaths[2].board = boardMapper.mapBoardNumberToLevel(vm.gameEditData.deaths[2].board);
+                    vm.gameEditData.deaths[3].board = boardMapper.mapBoardNumberToLevel(vm.gameEditData.deaths[3].board);
+
+                } else {
+                    vm.gameEditData.hasCompleteData = false;
+                }
+
+                console.log(vm.gameEditData);
 
         		vm.paceChartConfiguration.series.push({
         			data: vm.gameData.paceMap,
@@ -240,6 +267,14 @@
 
         }
 
+        function expand(inputPoints) {
+            return submitGameService.expandAbbreviatedPoints(inputPoints);
+        }
+
+        function getAllLevels() {
+            return boardMapper.getAllLevels();
+        }
+
         function getScoreChartMappedBoardNumber(inputBoardNumber) {
 
             var boardNumber;
@@ -272,6 +307,43 @@
         	return boardMapper.mapBoardNumberToLevel(inputBoardNumber);
         }
 
+        function handleEditCommit() {
+
+            var gamePropertiesObject = {};
+
+            gamePropertiesObject.player = vm.gameData.player;
+            gamePropertiesObject.date = vm.gameEditData.date;
+            gamePropertiesObject.score = Number(vm.gameEditData.score);
+            gamePropertiesObject.platform = vm.gameEditData.platform;
+            gamePropertiesObject.isKillscreen = vm.gameEditData.isKillscreen;
+            gamePropertiesObject.hasCompleteData = vm.gameEditData.hasCompleteData;
+
+            if (vm.gameEditData.hasCompleteData) {
+
+                gamePropertiesObject.boardScores = vm.gameEditData.boardScores;
+
+                vm.gameEditData.deaths[0].board = boardMapper.mapLevelToBoardNumber(vm.gameEditData.deaths[0].board);
+                vm.gameEditData.deaths[1].board = boardMapper.mapLevelToBoardNumber(vm.gameEditData.deaths[1].board);
+                vm.gameEditData.deaths[2].board = boardMapper.mapLevelToBoardNumber(vm.gameEditData.deaths[2].board);
+                vm.gameEditData.deaths[3].board = boardMapper.mapLevelToBoardNumber(vm.gameEditData.deaths[3].board);
+
+                console.log(vm.gameEditData.deaths);
+
+                gamePropertiesObject.deaths = vm.gameEditData.deaths;
+
+            }
+
+            submitGameService.overwriteGame(gamePropertiesObject, $stateParams.gameId).then(function() {
+
+                $timeout(function() {
+                    $state.go('game.summary', {gameId: $stateParams.gameId});
+                    activate();
+                }, 100);
+
+            });
+
+        }
+
     }
-    GameController.$inject = ["$stateParams", "$state", "$filter", "gameService", "boardMapper", "highchartsNG"];
+    GameController.$inject = ["$stateParams", "$state", "$filter", "$timeout", "gameService", "submitGameService", "boardMapper", "highchartsNG"];
 })();

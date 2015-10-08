@@ -12,6 +12,7 @@
 
     	this.checkAndSetWeights = checkAndSetWeights;
     	this.expandAbbreviatedPoints = expandAbbreviatedPoints;
+        this.overwriteGame = overwriteGame;
         this.submitGame = submitGame;
 
         ////////////////
@@ -48,6 +49,40 @@
         	expansion = (Number(splitString[0]) * 1000) + (Number(splitString[1]) * 100);
 
         	return Number(expansion);
+
+        }
+
+        function overwriteGame(inputGameProperties, inputGameId) {
+
+            // Load the game from the database.
+            var gameData = $firebaseObject(
+                _fbRef
+                    .child('games')
+                    .child(inputGameId)
+            );
+
+            return $q(function(resolve, reject) {
+
+                gameData.$loaded().then(function() {
+
+                    gameData.score = inputGameProperties.score;
+                    gameData.platform = inputGameProperties.platform;
+                    gameData.isKillscreen = inputGameProperties.isKillscreen;
+                    gameData.date = inputGameProperties.date;
+
+                    if (inputGameProperties.hasCompleteData) {
+                        gameData.boardScores = inputGameProperties.boardScores;
+                        gameData.deaths = inputGameProperties.deaths;
+                    }
+
+                    console.log(gameData);
+
+                    gameData.$save();
+                    resolve();
+
+                });
+
+            });
 
         }
 

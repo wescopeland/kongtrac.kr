@@ -10,9 +10,9 @@
 		    <a ng-if="game.$state.current.name !== 'game.boards'" ng-href="{{ '#/game/' + game.gameData.$id + '/boards' }}">Score breakdown</a>
 		    <span ng-if="game.$state.current.name === 'game.boards'">Score breakdown</span>
 		</small>
-		<small>
-		    <a ng-if="game.$state.current.name !== 'game.graphs'">Graphs</a>
-		    <span ng-if="game.$state.current.name === 'game.graphs'">Graphs</span>
+		<small class="pull-right" style="margin-top: 10px;">
+		    <a ng-if="game.$state.current.name !== 'game.edit'" ng-href="{{ '#/game/' + game.gameData.$id + '/edit' }}">Edit</a>
+		    <span ng-if="game.$state.current.name === 'game.edit'">Edit</span>
 		</small>
 	</h2>
 </div>

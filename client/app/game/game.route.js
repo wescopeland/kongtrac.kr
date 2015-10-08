@@ -21,6 +21,10 @@
             .state('game.boards', {
                 url: '/boards',
                 templateUrl: '/app/game/gameBoards.htm'
+            })
+            .state('game.edit', {
+                url: '/edit',
+                templateUrl: '/app/game/gameEdit.htm'
             });
 
     }
