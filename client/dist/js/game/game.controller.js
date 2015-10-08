@@ -225,43 +225,48 @@
     				}
         		});
 
-                vm.gameData.deaths.forEach(function(death) {
+                if (vm.gameData.deaths) {
 
-                    var newPacePlotLine = {
-                        color: '#C0D0E0',
-                        value: death.board - 19,
-                        width: 1
-                    };
+                    vm.gameData.deaths.forEach(function(death) {
 
-                    var newScorePlotLine = {
-                        color: '#C0D0E0',
-                        value: death.board,
-                        width: 1
-                    };
+                        var newPacePlotLine = {
+                            color: '#C0D0E0',
+                            value: death.board - 19,
+                            width: 1
+                        };
 
-                    // Don't render the KS.
-                    if (vm.paceChartConfiguration.xAxis.plotLines.indexOf(newPacePlotLine) === -1
-                            && newPacePlotLine.value !== 97) {
-                        vm.paceChartConfiguration.xAxis.plotLines.push(newPacePlotLine);
-                    }
+                        var newScorePlotLine = {
+                            color: '#C0D0E0',
+                            value: death.board,
+                            width: 1
+                        };
 
-                    if (vm.scoreChartConfiguration.xAxis.plotLines.indexOf(newScorePlotLine) === -1
-                            && newScorePlotLine.value !== 116) {
-                        vm.scoreChartConfiguration.xAxis.plotLines.push(newScorePlotLine);
-                    }
+                        // Don't render the KS.
+                        if (vm.paceChartConfiguration.xAxis.plotLines.indexOf(newPacePlotLine) === -1
+                                && newPacePlotLine.value !== 97) {
+                            vm.paceChartConfiguration.xAxis.plotLines.push(newPacePlotLine);
+                        }
 
-                });
+                        if (vm.scoreChartConfiguration.xAxis.plotLines.indexOf(newScorePlotLine) === -1
+                                && newScorePlotLine.value !== 116) {
+                            vm.scoreChartConfiguration.xAxis.plotLines.push(newScorePlotLine);
+                        }
 
-                vm.scoreChartConfiguration.series.push({
-                    data: vm.gameData.scoreMap,
-                    name: vm.gameData.player.split(' ').pop() + ' (Score) ' + $filter('number')(vm.gameData.score),
-                    color: '#000000',
-                    lineWidth: 3,
-                    borderWidth: 0,
-                    marker: {
-                        enabled: false
-                    }
-                });
+                    });
+
+                    vm.scoreChartConfiguration.series.push({
+                        data: vm.gameData.scoreMap,
+                        name: vm.gameData.player.split(' ').pop() + ' (Score) ' + $filter('number')(vm.gameData.score),
+                        color: '#000000',
+                        lineWidth: 3,
+                        borderWidth: 0,
+                        marker: {
+                            enabled: false
+                        }
+                    });
+
+                }
+                
 
         	});
 
