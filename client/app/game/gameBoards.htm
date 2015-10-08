@@ -57,7 +57,7 @@
 		<label for="showScoreMap" 
 		       class="pull-right" 
 		       style="margin-left: 15px;">
-			<input type="checkbox" id="showScoreMap" name="showScoreMap" ng-model="game.toggleScoreMap"> Show Score Sum Table
+			<input type="checkbox" id="showScoreMap" name="showScoreMap" ng-model="game.toggleScoreMap"> Show Complete Sum Table
 		</label>
 	</div>
 
@@ -332,7 +332,6 @@
 						<td>Spring</td>
 						<td>Barrel</td>
 						<td>Rivet</td>
-						<td>Level</td>
 					</tr>
 
 				</thead>
@@ -346,7 +345,6 @@
 						<td></td>
 						<td></td>
 						<td>{{ game.gameData.scoreMap[1] | number }}</td>
-						<td>{{ game.gameData.levelScores.L1 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[2] | number }}</td>
@@ -355,7 +353,6 @@
 						<td>{{ game.gameData.scoreMap[3] | number }}</td>
 						<td></td>
 						<td>{{ game.gameData.scoreMap[4] | number }}</td>
-						<td>{{ game.gameData.levelScores.L2 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[5] | number }}</td>
@@ -364,7 +361,6 @@
 						<td>{{ game.gameData.scoreMap[7] | number }}</td>
 						<td></td>
 						<td>{{ game.gameData.scoreMap[8] | number }}</td>
-						<td>{{ game.gameData.levelScores.L3 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[9] | number }}</td>
@@ -373,7 +369,6 @@
 						<td>{{ game.gameData.scoreMap[12] | number }}</td>
 						<td></td>
 						<td>{{ game.gameData.scoreMap[13] | number }}</td>
-						<td>{{ game.gameData.levelScores.L4 | number }}</td>
 					</tr>
 					<tr style="border-top-style: double;">
 						<td>{{ game.gameData.scoreMap[14] | number }}</td>
@@ -382,7 +377,6 @@
 						<td>{{ game.gameData.scoreMap[17] | number }}</td>
 						<td>{{ game.gameData.scoreMap[18] | number }}</td>
 						<td>{{ game.gameData.scoreMap[19] | number }}</td>
-						<td>{{ game.gameData.levelScores.L5 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[20] | number }}</td>
@@ -391,7 +385,6 @@
 						<td>{{ game.gameData.scoreMap[23] | number }}</td>
 						<td>{{ game.gameData.scoreMap[24] | number }}</td>
 						<td>{{ game.gameData.scoreMap[25] | number }}</td>
-						<td>{{ game.gameData.levelScores.L6 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[26] | number }}</td>
@@ -400,7 +393,6 @@
 						<td>{{ game.gameData.scoreMap[29] | number }}</td>
 						<td>{{ game.gameData.scoreMap[30] | number }}</td>
 						<td>{{ game.gameData.scoreMap[31] | number }}</td>
-						<td>{{ game.gameData.levelScores.L7 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[32] | number }}</td>
@@ -409,7 +401,6 @@
 						<td>{{ game.gameData.scoreMap[35] | number }}</td>
 						<td>{{ game.gameData.scoreMap[36] | number }}</td>
 						<td>{{ game.gameData.scoreMap[37] | number }}</td>
-						<td>{{ game.gameData.levelScores.L8 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[38] | number }}</td>
@@ -418,7 +409,6 @@
 						<td>{{ game.gameData.scoreMap[41] | number }}</td>
 						<td>{{ game.gameData.scoreMap[42] | number }}</td>
 						<td>{{ game.gameData.scoreMap[43] | number }}</td>
-						<td>{{ game.gameData.levelScores.L9 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[44] | number }}</td>
@@ -427,7 +417,6 @@
 						<td>{{ game.gameData.scoreMap[47] | number }}</td>
 						<td>{{ game.gameData.scoreMap[48] | number }}</td>
 						<td>{{ game.gameData.scoreMap[49] | number }}</td>
-						<td>{{ game.gameData.levelScores.L10 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[50] | number }}</td>
@@ -436,7 +425,6 @@
 						<td>{{ game.gameData.scoreMap[53] | number }}</td>
 						<td>{{ game.gameData.scoreMap[54] | number }}</td>
 						<td>{{ game.gameData.scoreMap[55] | number }}</td>
-						<td>{{ game.gameData.levelScores.L11 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[56] | number }}</td>
@@ -445,7 +433,6 @@
 						<td>{{ game.gameData.scoreMap[59] | number }}</td>
 						<td>{{ game.gameData.scoreMap[60] | number }}</td>
 						<td>{{ game.gameData.scoreMap[61] | number }}</td>
-						<td>{{ game.gameData.levelScores.L12 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[62] | number }}</td>
@@ -454,7 +441,6 @@
 						<td>{{ game.gameData.scoreMap[65] | number }}</td>
 						<td>{{ game.gameData.scoreMap[66] | number }}</td>
 						<td>{{ game.gameData.scoreMap[67] | number }}</td>
-						<td>{{ game.gameData.levelScores.L13 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[68] | number }}</td>
@@ -463,7 +449,6 @@
 						<td>{{ game.gameData.scoreMap[71] | number }}</td>
 						<td>{{ game.gameData.scoreMap[72] | number }}</td>
 						<td>{{ game.gameData.scoreMap[73] | number }}</td>
-						<td>{{ game.gameData.levelScores.L14 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[74] | number }}</td>
@@ -472,7 +457,6 @@
 						<td>{{ game.gameData.scoreMap[77] | number }}</td>
 						<td>{{ game.gameData.scoreMap[78] | number }}</td>
 						<td>{{ game.gameData.scoreMap[79] | number }}</td>
-						<td>{{ game.gameData.levelScores.L15 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[80] | number }}</td>
@@ -481,7 +465,6 @@
 						<td>{{ game.gameData.scoreMap[83] | number }}</td>
 						<td>{{ game.gameData.scoreMap[84] | number }}</td>
 						<td>{{ game.gameData.scoreMap[85] | number }}</td>
-						<td>{{ game.gameData.levelScores.L16 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[86] | number }}</td>
@@ -490,7 +473,6 @@
 						<td>{{ game.gameData.scoreMap[89] | number }}</td>
 						<td>{{ game.gameData.scoreMap[90] | number }}</td>
 						<td>{{ game.gameData.scoreMap[91] | number }}</td>
-						<td>{{ game.gameData.levelScores.L17 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[92] | number }}</td>
@@ -499,7 +481,6 @@
 						<td>{{ game.gameData.scoreMap[95] | number }}</td>
 						<td>{{ game.gameData.scoreMap[96] | number }}</td>
 						<td>{{ game.gameData.scoreMap[97] | number }}</td>
-						<td>{{ game.gameData.levelScores.L18 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[98] | number }}</td>
@@ -508,7 +489,6 @@
 						<td>{{ game.gameData.scoreMap[101] | number }}</td>
 						<td>{{ game.gameData.scoreMap[102] | number }}</td>
 						<td>{{ game.gameData.scoreMap[103] | number }}</td>
-						<td>{{ game.gameData.levelScores.L19 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[104] | number }}</td>
@@ -517,7 +497,6 @@
 						<td>{{ game.gameData.scoreMap[107] | number }}</td>
 						<td>{{ game.gameData.scoreMap[108] | number }}</td>
 						<td>{{ game.gameData.scoreMap[109] | number }}</td>
-						<td>{{ game.gameData.levelScores.L20 | number }}</td>
 					</tr>
 					<tr>
 						<td>{{ game.gameData.scoreMap[110] | number }}</td>
@@ -526,7 +505,6 @@
 						<td>{{ game.gameData.scoreMap[113] | number }}</td>
 						<td>{{ game.gameData.scoreMap[114] | number }}</td>
 						<td>{{ game.gameData.scoreMap[115] | number }}</td>
-						<td>{{ game.gameData.levelScores.L21 | number }}</td>
 					</tr>
 
 				</tbody>

@@ -11,6 +11,7 @@
     	var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
 
     	this.checkAndSetWeights = checkAndSetWeights;
+    	this.expandAbbreviatedPoints = expandAbbreviatedPoints;
         this.submitGame = submitGame;
 
         ////////////////
@@ -27,6 +28,27 @@
 
         	
         	
+        }
+
+        function expandAbbreviatedPoints(inputPointsString) {
+
+        	var expansion;
+        	var splitString = [];
+
+        	if (inputPointsString.indexOf('.') > -1) {
+        		splitString = inputPointsString.split('.');
+        	} else if (inputPointsString.indexOf('-') > -1) {
+        		splitString = inputPointsString.split('-');
+        	} else if (inputPointsString.charAt(inputPointsString.length - 1) !== 0) {
+        		return (Number(inputPointsString) * 1000);
+        	} else {
+        		return inputPointsString;
+        	}
+
+        	expansion = (Number(splitString[0]) * 1000) + (Number(splitString[1]) * 100);
+
+        	return Number(expansion);
+
         }
 
         function submitGame(inputGameProperties) {

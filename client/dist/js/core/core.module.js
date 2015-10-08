@@ -8,6 +8,8 @@
             '720kb.datepicker',
             'firebase',
             'highcharts-ng',
-            'algoliasearch'
+            'algoliasearch',
+            'smart-table',
+            'angularMoment'
         ]);
 })();

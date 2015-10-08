@@ -38,6 +38,7 @@
         // -- getAveragePieFromBoardScores(inputBoardScores);
         // -- getAverageSpringFromBoardScores(inputBoardScores);
         // -- getAverageRivetFromBoardScores(inputBoardScores);
+        // -- getFinalBoard(inputGame);
         // -- getIndividualLevelScoresFromBoardScores(inputBoardScores);
         // -- getMaxPace(inputPaceMap);
         // -- getMinPace(inputPaceMap);
@@ -79,7 +80,6 @@
 
         	}
 
-        	console.log(scoreMap);
         	return scoreMap;
 
         }
@@ -604,6 +604,20 @@
 
         }
 
+        function getFinalBoard(inputGame) {
+
+            if ( _game.isKillscreen || (_game.deaths && _game.deaths[3].board === 116) ) {
+                return '22-1';
+            }
+
+            if (!_game.hasCompleteData) {
+                return 'Unknown';
+            }
+
+            return boardMapper.mapBoardNumberToLevel(_game.boardScores.length);
+
+        }
+
         function getIndividualLevelScoresFromBoardScores(inputBoardScores) {
 
         	// To save redundancy and typing.
@@ -652,26 +666,32 @@
         			
         			_game = gameData;
 
-        			processBoardScores(_game.boardScores);
-        			_game.deathPoints = calculateDeathPoints(_game.deaths);
-        			_game.longestLifeBoardCount = calculateLongestLife(_game.deaths);
-        			_game.averageLifeBoardCount = calculateAverageLife(_game.deaths);
+                    if (_game.boardScores) {
 
-        			_game.paceMap = buildPaceMap(_game.boardScores, _game.deaths, _game.startScore);
-        			_game.scoreMap = buildScoreMap(_game.boardScores, _game.deaths, _game.startScore);
-        			_game.maxPace = getMaxPace(_game.paceMap);
-        			_game.minPace = getMinPace(_game.paceMap);
+                        processBoardScores(_game.boardScores);
+                        _game.deathPoints = calculateDeathPoints(_game.deaths);
+                        _game.longestLifeBoardCount = calculateLongestLife(_game.deaths);
+                        _game.averageLifeBoardCount = calculateAverageLife(_game.deaths);
+                        
+                        _game.paceMap = buildPaceMap(_game.boardScores, _game.deaths, _game.startScore);
+                        _game.scoreMap = buildScoreMap(_game.boardScores, _game.deaths, _game.startScore);
+                        _game.maxPace = getMaxPace(_game.paceMap);
+                        _game.minPace = getMinPace(_game.paceMap);
 
-                    _game.minBarrel = findMinBarrel(_game.boardScores);
-                    _game.maxBarrel = findMaxBarrel(_game.boardScores);
-                    _game.minPie = findMinPie(_game.boardScores);
-                    _game.maxPie = findMaxPie(_game.boardScores);
-                    _game.minSpring = findMinSpring(_game.boardScores);
-                    _game.maxSpring = findMaxSpring(_game.boardScores);
-                    _game.minRivet = findMinRivet(_game.boardScores);
-                    _game.maxRivet = findMaxRivet(_game.boardScores);
-                    _game.minLevel = findMinLevel(_game.levelScores);
-                    _game.maxLevel = findMaxLevel(_game.levelScores);
+                        _game.minBarrel = findMinBarrel(_game.boardScores);
+                        _game.maxBarrel = findMaxBarrel(_game.boardScores);
+                        _game.minPie = findMinPie(_game.boardScores);
+                        _game.maxPie = findMaxPie(_game.boardScores);
+                        _game.minSpring = findMinSpring(_game.boardScores);
+                        _game.maxSpring = findMaxSpring(_game.boardScores);
+                        _game.minRivet = findMinRivet(_game.boardScores);
+                        _game.maxRivet = findMaxRivet(_game.boardScores);
+                        _game.minLevel = findMinLevel(_game.levelScores);
+                        _game.maxLevel = findMaxLevel(_game.levelScores);
+
+                    }
+
+                    _game.finalBoard = getFinalBoard(_game);
 
         			resolve(_game);
 

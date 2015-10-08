@@ -28,8 +28,6 @@
     	vm.inputSearchQuery = '';
     	vm.hits = [];
 
-    	vm.testData = ['Test1', 'Test2', 'Test3'];
-
     	// Public Functions
     	vm.makeQuickSearch = makeQuickSearch;
 
@@ -38,9 +36,9 @@
     	var gamesIndex = algoliaClient.initIndex('games');
     	var playersIndex = algoliaClient.initIndex('players');
 
-    	function makeQuickSearch(inputQuery) {
+        function makeQuickSearch(inputQuery) {
 
-    		return $q(function(resolve, reject) {
+            return $q(function(resolve, reject) {
 
     			$q.all([
 
@@ -53,8 +51,6 @@
 	    		});
 
     		});
-
-    		
 
     	}
 
@@ -75,7 +71,7 @@
     				reject(err);
     			});
 
-    		})
+    		});
 
     	}
 

@@ -8,6 +8,7 @@
             'kongtrac.submit',
             'kongtrac.scores',
             'kongtrac.game',
+            'kongtrac.player',
             'kongtrac.search'
         ]);
 })();

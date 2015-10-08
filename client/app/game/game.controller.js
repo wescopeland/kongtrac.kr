@@ -185,7 +185,7 @@
         	gameService.getGameData($stateParams.gameId).then(function then(response) {
 
         		vm.gameData = response;
-        		console.log(vm.gameData);
+                console.log(response);
 
         		vm.paceChartConfiguration.series.push({
         			data: vm.gameData.paceMap,

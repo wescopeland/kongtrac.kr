@@ -11,18 +11,20 @@
         var vm = this;
 
         // Public Variables
-        vm.inputPlayer = '';
-        vm.inputDate = '';
-        vm.inputScore = undefined;
-        vm.inputPlatform = '';
-        vm.inputIsKillscreen = false;
-        vm.inputIsDayUnknown = false;
-        vm.inputIsMonthUnknown = false;
         vm.dateFormat = 'MM/dd/yyyy';
-        vm.gameScoresMap = [];
         vm.deathScores = [];
+        vm.gameScoresMap = [];
+        vm.inputDate = '';
+        vm.inputHasCompleteData = false;
+        vm.inputIsDayUnknown = false;
+        vm.inputIsKillscreen = false;
+        vm.inputIsMonthUnknown = false;
+        vm.inputPlatform = '';
+        vm.inputPlayer = '';
+        vm.inputScore = undefined;
 
         // Public Functions
+        vm.expand = expand;
         vm.getAllLevels = getAllLevels;
         vm.handleCommit = handleCommit;
 
@@ -38,6 +40,10 @@
         		]
         	};
 
+        }
+
+        function expand(inputPoints) {
+            return submitGameService.expandAbbreviatedPoints(inputPoints);
         }
 
         function getAllLevels() {
