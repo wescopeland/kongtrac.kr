@@ -6,7 +6,7 @@
         .controller('PlayerController', PlayerController);
 
     /* @ngInject */
-    function PlayerController($interval, $stateParams, playerService, gameService) {
+    function PlayerController($interval, $stateParams, $filter, playerService, gameService) {
 
         var vm = this;
 
@@ -72,7 +72,12 @@
         			},
         			title: {
         				text: 'Personal best history' 
-        			}
+        			},
+                    tooltip: {
+                        formatter: function() {
+                            return '<b>' + $filter('amDateFormat')('MM/DD/YYYY'), this.x) + '</b>: ' + $filter('number')(this.y);
+                        }
+                    },
         		},
         		series: [],
         		credits: {
