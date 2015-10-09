@@ -20,6 +20,7 @@
         vm.weights = {};
 
         // Public Functions
+        vm.calculateAverageBarPercentage = calculateAverageBarPercentage;
         vm.camelize = camelize;
         vm.expand = expand;
         vm.formatSlider = formatSlider;
@@ -271,6 +272,26 @@
                 }    
 
         	});
+
+        }
+
+        function calculateAverageBarPercentage(inputAverageMap, inputMin, inputMax) {
+
+            //game.gameData.levelAverages[game.inputLevelSlider - 5] - game.weights.minLevel) / (game.weights.maxLevel - game.weights.minLevel) ) * 100 ) + '%'
+
+            var screenPeriodAverage = inputAverageMap[vm.inputLevelSlider - 5];
+
+            var percentage = (screenPeriodAverage - inputMin) / (inputMax - inputMin) * 100;
+
+            if (percentage > 100) {
+                percentage = 100;
+            }
+
+            if (percentage < 14) {
+                percentage = 14;
+            }
+
+            return percentage + '%';
 
         }
 

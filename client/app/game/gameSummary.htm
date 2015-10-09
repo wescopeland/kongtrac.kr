@@ -14,7 +14,7 @@
 							<td style="border-top: none;">
 								<div class="progress progress-striped" style="height: 100%;">
 									<div class="progress-bar progress-bar-default"
-									     ng-style="{ 'width': ( ( (game.gameData.levelAverages[game.inputLevelSlider - 5] - game.weights.minLevel) / (game.weights.maxLevel - game.weights.minLevel) ) * 100 ) + '%' }">
+									     ng-style="{ 'width': game.calculateAverageBarPercentage(game.gameData.levelAverages, game.weights.minLevel, game.weights.maxLevel) }">
 										{{ game.gameData.levelAverages[game.inputLevelSlider - 5] | number }}
 									</div>
 								</div>
@@ -26,7 +26,7 @@
 							<td style="border-top: none;">
 								<div class="progress progress-striped" style="height: 100%;">
 									<div class="progress-bar progress-bar-danger"
-									     ng-style="{ 'width': ( ( (game.gameData.barrelAverages[game.inputLevelSlider - 5] - game.weights.minBarrel) / (game.weights.maxBarrel - game.weights.minBarrel) ) * 100 ) + '%' }">
+									     ng-style="{ 'width': game.calculateAverageBarPercentage(game.gameData.barrelAverages, game.weights.minBarrel, game.weights.maxBarrel) }">
 										{{ game.gameData.barrelAverages[game.inputLevelSlider - 5] | number }}
 									</div>
 								</div>
@@ -38,7 +38,7 @@
 							<td style="border-top: none;">
 								<div class="progress progress-striped" style="height: 100%;">
 									<div class="progress-bar progress-bar-warning"
-									     ng-style="{ 'width': ( ( (game.gameData.pieAverages[game.inputLevelSlider - 5] - game.weights.minPie) / (game.weights.maxPie - game.weights.minPie) ) * 100 ) + '%' }">
+									     ng-style="{ 'width': game.calculateAverageBarPercentage(game.gameData.pieAverages, game.weights.minPie, game.weights.maxPie) }">
 										{{ game.gameData.pieAverages[game.inputLevelSlider - 5] | number }}
 									</div>
 								</div>
@@ -50,7 +50,7 @@
 							<td style="border-top: none;">
 								<div class="progress progress-striped" style="height: 100%;">
 									<div class="progress-bar progress-bar-info"
-									     ng-style="{ 'width': ( ( (game.gameData.springAverages[game.inputLevelSlider - 5] - game.weights.minSpring) / (game.weights.maxSpring - game.weights.minSpring) ) * 100 ) + '%' }">
+									     ng-style="{ 'width': game.calculateAverageBarPercentage(game.gameData.springAverages, game.weights.minSpring, game.weights.maxSpring) }">
 										{{ game.gameData.springAverages[game.inputLevelSlider - 5] | number }}
 									</div>
 								</div>
@@ -62,7 +62,7 @@
 							<td style="border-top: none;">
 								<div class="progress progress-striped" style="height: 100%;">
 									<div class="progress-bar progress-bar-primary"
-									     ng-style="{ 'width': ( ( (game.gameData.rivetAverages[game.inputLevelSlider - 5] - game.weights.minRivet) / (game.weights.maxRivet - game.weights.minRivet) ) * 100 ) + '%' }">
+									     ng-style="{ 'width': game.calculateAverageBarPercentage(game.gameData.rivetAverages, game.weights.minRivet, game.weights.maxRivet) }">
 										{{ game.gameData.rivetAverages[game.inputLevelSlider - 5] | number }}
 									</div>
 								</div>
