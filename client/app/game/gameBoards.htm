@@ -93,7 +93,7 @@
 
 				<tbody>
 
-					<tr ng-if="game.gameData.levelScores.L1">
+					<tr ng-if="game.gameData.scoreMap[0]">
 						<td><strong>L1</strong></td>
 						<td>{{ game.gameData.boardScores[0] | number }}</td>
 						<td></td>
@@ -103,7 +103,7 @@
 						<td>{{ game.gameData.boardScores[1] | number }}</td>
 						<td>{{ game.gameData.levelScores.L1 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L2">
+					<tr ng-if="game.gameData.scoreMap[2]">
 						<td><strong>L2</strong></td>
 						<td>{{ game.gameData.boardScores[2] | number }}</td>
 						<td></td>
@@ -113,7 +113,7 @@
 						<td>{{ game.gameData.boardScores[4] | number }}</td>
 						<td>{{ game.gameData.levelScores.L2 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L3">
+					<tr ng-if="game.gameData.scoreMap[5]">
 						<td><strong>L3</strong></td>
 						<td>{{ game.gameData.boardScores[5] | number }}</td>
 						<td>{{ game.gameData.boardScores[6] | number }}</td>
@@ -123,7 +123,7 @@
 						<td>{{ game.gameData.boardScores[8] | number }}</td>
 						<td>{{ game.gameData.levelScores.L3 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L4">
+					<tr ng-if="game.gameData.scoreMap[9]">
 						<td><strong>L4</strong></td>
 						<td>{{ game.gameData.boardScores[9] | number }}</td>
 						<td>{{ game.gameData.boardScores[10] | number }}</td>
@@ -133,7 +133,7 @@
 						<td>{{ game.gameData.boardScores[13] | number }}</td>
 						<td>{{ game.gameData.levelScores.L4 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L5" style="border-top-style: double;">
+					<tr ng-if="game.gameData.scoreMap[14]" style="border-top-style: double;">
 						<td><strong>L5</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[14] === game.gameData.minBarrel, 'success': game.gameData.boardScores[14] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[14] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[15] === game.gameData.minPie, 'success': game.gameData.boardScores[15] === game.gameData.maxPie }">{{ game.gameData.boardScores[15] | number }}</td>
@@ -143,7 +143,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[19] === game.gameData.minRivet, 'success': game.gameData.boardScores[19] === game.gameData.maxRivet }">{{ game.gameData.boardScores[19] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L5 === game.gameData.minLevel, 'success': game.gameData.levelScores.L5 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L5 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L6">
+					<tr ng-if="game.gameData.scoreMap[20]">
 						<td><strong>L6</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[20] === game.gameData.minBarrel, 'success': game.gameData.boardScores[20] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[20] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[21] === game.gameData.minPie, 'success': game.gameData.boardScores[21] === game.gameData.maxPie }">{{ game.gameData.boardScores[21] | number }}</td>
@@ -153,7 +153,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[25] === game.gameData.minRivet, 'success': game.gameData.boardScores[25] === game.gameData.maxRivet }">{{ game.gameData.boardScores[25] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L6 === game.gameData.minLevel, 'success': game.gameData.levelScores.L6 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L6 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L7">
+					<tr ng-if="game.gameData.scoreMap[26]">
 						<td><strong>L7</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[26] === game.gameData.minBarrel, 'success': game.gameData.boardScores[26] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[26] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[27] === game.gameData.minPie, 'success': game.gameData.boardScores[27] === game.gameData.maxPie }">{{ game.gameData.boardScores[27] | number }}</td>
@@ -163,7 +163,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[31] === game.gameData.minRivet, 'success': game.gameData.boardScores[31] === game.gameData.maxRivet }">{{ game.gameData.boardScores[31] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L7 === game.gameData.minLevel, 'success': game.gameData.levelScores.L7 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L7 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L8">
+					<tr ng-if="game.gameData.scoreMap[32]">
 						<td><strong>L8</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[32] === game.gameData.minBarrel, 'success': game.gameData.boardScores[32] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[32] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[33] === game.gameData.minPie, 'success': game.gameData.boardScores[33] === game.gameData.maxPie }">{{ game.gameData.boardScores[33] | number }}</td>
@@ -173,7 +173,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[37] === game.gameData.minRivet, 'success': game.gameData.boardScores[37] === game.gameData.maxRivet }">{{ game.gameData.boardScores[37] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L8 === game.gameData.minLevel, 'success': game.gameData.levelScores.L8 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L8 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L9">
+					<tr ng-if="game.gameData.scoreMap[38]">
 						<td><strong>L9</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[38] === game.gameData.minBarrel, 'success': game.gameData.boardScores[38] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[38] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[39] === game.gameData.minPie, 'success': game.gameData.boardScores[39] === game.gameData.maxPie }">{{ game.gameData.boardScores[39] | number }}</td>
@@ -183,7 +183,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[43] === game.gameData.minRivet, 'success': game.gameData.boardScores[43] === game.gameData.maxRivet }">{{ game.gameData.boardScores[43] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L9 === game.gameData.minLevel, 'success': game.gameData.levelScores.L9 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L9 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L10">
+					<tr ng-if="game.gameData.scoreMap[44]">
 						<td><strong>L10</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[44] === game.gameData.minBarrel, 'success': game.gameData.boardScores[44] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[44] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[45] === game.gameData.minPie, 'success': game.gameData.boardScores[45] === game.gameData.maxPie }">{{ game.gameData.boardScores[45] | number }}</td>
@@ -193,7 +193,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[49] === game.gameData.minRivet, 'success': game.gameData.boardScores[49] === game.gameData.maxRivet }">{{ game.gameData.boardScores[49] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L10 === game.gameData.minLevel, 'success': game.gameData.levelScores.L10 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L10 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L11">
+					<tr ng-if="game.gameData.scoreMap[50]">
 						<td><strong>L11</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[50] === game.gameData.minBarrel, 'success': game.gameData.boardScores[50] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[50] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[51] === game.gameData.minPie, 'success': game.gameData.boardScores[51] === game.gameData.maxPie }">{{ game.gameData.boardScores[51] | number }}</td>
@@ -203,7 +203,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[55] === game.gameData.minRivet, 'success': game.gameData.boardScores[55] === game.gameData.maxRivet }">{{ game.gameData.boardScores[55] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L11 === game.gameData.minLevel, 'success': game.gameData.levelScores.L11 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L11 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L12">
+					<tr ng-if="game.gameData.scoreMap[56]">
 						<td><strong>L12</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[56] === game.gameData.minBarrel, 'success': game.gameData.boardScores[56] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[56] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[57] === game.gameData.minPie, 'success': game.gameData.boardScores[57] === game.gameData.maxPie }">{{ game.gameData.boardScores[57] | number }}</td>
@@ -213,7 +213,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[61] === game.gameData.minRivet, 'success': game.gameData.boardScores[61] === game.gameData.maxRivet }">{{ game.gameData.boardScores[61] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L12 === game.gameData.minLevel, 'success': game.gameData.levelScores.L12 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L12 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L13">
+					<tr ng-if="game.gameData.scoreMap[62]">
 						<td><strong>L13</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[62] === game.gameData.minBarrel, 'success': game.gameData.boardScores[62] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[62] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[63] === game.gameData.minPie, 'success': game.gameData.boardScores[63] === game.gameData.maxPie }">{{ game.gameData.boardScores[63] | number }}</td>
@@ -223,7 +223,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[67] === game.gameData.minRivet, 'success': game.gameData.boardScores[67] === game.gameData.maxRivet }">{{ game.gameData.boardScores[67] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L13 === game.gameData.minLevel, 'success': game.gameData.levelScores.L13 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L13 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L14">
+					<tr ng-if="game.gameData.scoreMap[68]">
 						<td><strong>L14</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[68] === game.gameData.minBarrel, 'success': game.gameData.boardScores[68] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[68] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[69] === game.gameData.minPie, 'success': game.gameData.boardScores[69] === game.gameData.maxPie }">{{ game.gameData.boardScores[69] | number }}</td>
@@ -233,7 +233,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[73] === game.gameData.minRivet, 'success': game.gameData.boardScores[73] === game.gameData.maxRivet }">{{ game.gameData.boardScores[73] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L14 === game.gameData.minLevel, 'success': game.gameData.levelScores.L14 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L14 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L15">
+					<tr ng-if="game.gameData.scoreMap[74]">
 						<td><strong>L15</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[74] === game.gameData.minBarrel, 'success': game.gameData.boardScores[74] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[74] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[75] === game.gameData.minPie, 'success': game.gameData.boardScores[75] === game.gameData.maxPie }">{{ game.gameData.boardScores[75] | number }}</td>
@@ -243,7 +243,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[79] === game.gameData.minRivet, 'success': game.gameData.boardScores[79] === game.gameData.maxRivet }">{{ game.gameData.boardScores[79] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L15 === game.gameData.minLevel, 'success': game.gameData.levelScores.L15 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L15 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L16">
+					<tr ng-if="game.gameData.scoreMap[80]">
 						<td><strong>L16</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[80] === game.gameData.minBarrel, 'success': game.gameData.boardScores[80] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[80] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[81] === game.gameData.minPie, 'success': game.gameData.boardScores[81] === game.gameData.maxPie }">{{ game.gameData.boardScores[81] | number }}</td>
@@ -253,7 +253,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[85] === game.gameData.minRivet, 'success': game.gameData.boardScores[85] === game.gameData.maxRivet }">{{ game.gameData.boardScores[85] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L16 === game.gameData.minLevel, 'success': game.gameData.levelScores.L16 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L16 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L17">
+					<tr ng-if="game.gameData.scoreMap[86]">
 						<td><strong>L17</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[86] === game.gameData.minBarrel, 'success': game.gameData.boardScores[86] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[86] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[87] === game.gameData.minPie, 'success': game.gameData.boardScores[87] === game.gameData.maxPie }">{{ game.gameData.boardScores[87] | number }}</td>
@@ -263,7 +263,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[91] === game.gameData.minRivet, 'success': game.gameData.boardScores[91] === game.gameData.maxRivet }">{{ game.gameData.boardScores[91] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L17 === game.gameData.minLevel, 'success': game.gameData.levelScores.L17 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L17 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L18">
+					<tr ng-if="game.gameData.scoreMap[92]">
 						<td><strong>L18</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[92] === game.gameData.minBarrel, 'success': game.gameData.boardScores[92] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[92] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[93] === game.gameData.minPie, 'success': game.gameData.boardScores[93] === game.gameData.maxPie }">{{ game.gameData.boardScores[93] | number }}</td>
@@ -273,7 +273,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[97] === game.gameData.minRivet, 'success': game.gameData.boardScores[97] === game.gameData.maxRivet }">{{ game.gameData.boardScores[97] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L18 === game.gameData.minLevel, 'success': game.gameData.levelScores.L18 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L18 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L19">
+					<tr ng-if="game.gameData.scoreMap[98]">
 						<td><strong>L19</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[98] === game.gameData.minBarrel, 'success': game.gameData.boardScores[98] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[98] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[99] === game.gameData.minPie, 'success': game.gameData.boardScores[99] === game.gameData.maxPie }">{{ game.gameData.boardScores[99] | number }}</td>
@@ -283,7 +283,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[103] === game.gameData.minRivet, 'success': game.gameData.boardScores[103] === game.gameData.maxRivet }">{{ game.gameData.boardScores[103] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L19 === game.gameData.minLevel, 'success': game.gameData.levelScores.L19 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L19 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L20">
+					<tr ng-if="game.gameData.scoreMap[104]">
 						<td><strong>L20</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[104] === game.gameData.minBarrel, 'success': game.gameData.boardScores[104] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[104] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[105] === game.gameData.minPie, 'success': game.gameData.boardScores[105] === game.gameData.maxPie }">{{ game.gameData.boardScores[105] | number }}</td>
@@ -293,7 +293,7 @@
 						<td ng-class="{ 'danger': game.gameData.boardScores[109] === game.gameData.minRivet, 'success': game.gameData.boardScores[109] === game.gameData.maxRivet }">{{ game.gameData.boardScores[109] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.levelScores.L20 === game.gameData.minLevel, 'success': game.gameData.levelScores.L20 === game.gameData.maxLevel }">{{ game.gameData.levelScores.L20 | number }}</td>
 					</tr>
-					<tr ng-if="game.gameData.levelScores.L21">
+					<tr ng-if="game.gameData.scoreMap[110]">
 						<td><strong>L21</strong></td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[110] === game.gameData.minBarrel, 'success': game.gameData.boardScores[110] === game.gameData.maxBarrel }">{{ game.gameData.boardScores[110] | number }}</td>
 						<td ng-class="{ 'danger': game.gameData.boardScores[111] === game.gameData.minPie, 'success': game.gameData.boardScores[111] === game.gameData.maxPie }">{{ game.gameData.boardScores[111] | number }}</td>
@@ -338,7 +338,7 @@
 
 				<tbody>
 
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[0]">
 						<td>{{ game.gameData.scoreMap[0] | number }}</td>
 						<td></td>
 						<td></td>
@@ -346,7 +346,7 @@
 						<td></td>
 						<td>{{ game.gameData.scoreMap[1] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[2]">
 						<td>{{ game.gameData.scoreMap[2] | number }}</td>
 						<td></td>
 						<td></td>
@@ -354,7 +354,7 @@
 						<td></td>
 						<td>{{ game.gameData.scoreMap[4] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[5]">
 						<td>{{ game.gameData.scoreMap[5] | number }}</td>
 						<td>{{ game.gameData.scoreMap[6] | number }}</td>
 						<td></td>
@@ -362,7 +362,7 @@
 						<td></td>
 						<td>{{ game.gameData.scoreMap[8] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[9]">
 						<td>{{ game.gameData.scoreMap[9] | number }}</td>
 						<td>{{ game.gameData.scoreMap[10] | number }}</td>
 						<td>{{ game.gameData.scoreMap[11] | number }}</td>
@@ -370,7 +370,7 @@
 						<td></td>
 						<td>{{ game.gameData.scoreMap[13] | number }}</td>
 					</tr>
-					<tr style="border-top-style: double;">
+					<tr style="border-top-style: double;" ng-if="game.gameData.scoreMap[14]">
 						<td>{{ game.gameData.scoreMap[14] | number }}</td>
 						<td>{{ game.gameData.scoreMap[15] | number }}</td>
 						<td>{{ game.gameData.scoreMap[16] | number }}</td>
@@ -378,7 +378,7 @@
 						<td>{{ game.gameData.scoreMap[18] | number }}</td>
 						<td>{{ game.gameData.scoreMap[19] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[20]">
 						<td>{{ game.gameData.scoreMap[20] | number }}</td>
 						<td>{{ game.gameData.scoreMap[21] | number }}</td>
 						<td>{{ game.gameData.scoreMap[22] | number }}</td>
@@ -386,7 +386,7 @@
 						<td>{{ game.gameData.scoreMap[24] | number }}</td>
 						<td>{{ game.gameData.scoreMap[25] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[26]">
 						<td>{{ game.gameData.scoreMap[26] | number }}</td>
 						<td>{{ game.gameData.scoreMap[27] | number }}</td>
 						<td>{{ game.gameData.scoreMap[28] | number }}</td>
@@ -394,7 +394,7 @@
 						<td>{{ game.gameData.scoreMap[30] | number }}</td>
 						<td>{{ game.gameData.scoreMap[31] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[32]">
 						<td>{{ game.gameData.scoreMap[32] | number }}</td>
 						<td>{{ game.gameData.scoreMap[33] | number }}</td>
 						<td>{{ game.gameData.scoreMap[34] | number }}</td>
@@ -402,7 +402,7 @@
 						<td>{{ game.gameData.scoreMap[36] | number }}</td>
 						<td>{{ game.gameData.scoreMap[37] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[38]">
 						<td>{{ game.gameData.scoreMap[38] | number }}</td>
 						<td>{{ game.gameData.scoreMap[39] | number }}</td>
 						<td>{{ game.gameData.scoreMap[40] | number }}</td>
@@ -410,7 +410,7 @@
 						<td>{{ game.gameData.scoreMap[42] | number }}</td>
 						<td>{{ game.gameData.scoreMap[43] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[44]">
 						<td>{{ game.gameData.scoreMap[44] | number }}</td>
 						<td>{{ game.gameData.scoreMap[45] | number }}</td>
 						<td>{{ game.gameData.scoreMap[46] | number }}</td>
@@ -418,7 +418,7 @@
 						<td>{{ game.gameData.scoreMap[48] | number }}</td>
 						<td>{{ game.gameData.scoreMap[49] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[50]">
 						<td>{{ game.gameData.scoreMap[50] | number }}</td>
 						<td>{{ game.gameData.scoreMap[51] | number }}</td>
 						<td>{{ game.gameData.scoreMap[52] | number }}</td>
@@ -426,7 +426,7 @@
 						<td>{{ game.gameData.scoreMap[54] | number }}</td>
 						<td>{{ game.gameData.scoreMap[55] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[56]">
 						<td>{{ game.gameData.scoreMap[56] | number }}</td>
 						<td>{{ game.gameData.scoreMap[57] | number }}</td>
 						<td>{{ game.gameData.scoreMap[58] | number }}</td>
@@ -434,7 +434,7 @@
 						<td>{{ game.gameData.scoreMap[60] | number }}</td>
 						<td>{{ game.gameData.scoreMap[61] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[62]">
 						<td>{{ game.gameData.scoreMap[62] | number }}</td>
 						<td>{{ game.gameData.scoreMap[63] | number }}</td>
 						<td>{{ game.gameData.scoreMap[64] | number }}</td>
@@ -442,7 +442,7 @@
 						<td>{{ game.gameData.scoreMap[66] | number }}</td>
 						<td>{{ game.gameData.scoreMap[67] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[68]">
 						<td>{{ game.gameData.scoreMap[68] | number }}</td>
 						<td>{{ game.gameData.scoreMap[69] | number }}</td>
 						<td>{{ game.gameData.scoreMap[70] | number }}</td>
@@ -450,7 +450,7 @@
 						<td>{{ game.gameData.scoreMap[72] | number }}</td>
 						<td>{{ game.gameData.scoreMap[73] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[74]">
 						<td>{{ game.gameData.scoreMap[74] | number }}</td>
 						<td>{{ game.gameData.scoreMap[75] | number }}</td>
 						<td>{{ game.gameData.scoreMap[76] | number }}</td>
@@ -458,7 +458,7 @@
 						<td>{{ game.gameData.scoreMap[78] | number }}</td>
 						<td>{{ game.gameData.scoreMap[79] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[80]">
 						<td>{{ game.gameData.scoreMap[80] | number }}</td>
 						<td>{{ game.gameData.scoreMap[81] | number }}</td>
 						<td>{{ game.gameData.scoreMap[82] | number }}</td>
@@ -466,7 +466,7 @@
 						<td>{{ game.gameData.scoreMap[84] | number }}</td>
 						<td>{{ game.gameData.scoreMap[85] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[86]">
 						<td>{{ game.gameData.scoreMap[86] | number }}</td>
 						<td>{{ game.gameData.scoreMap[87] | number }}</td>
 						<td>{{ game.gameData.scoreMap[88] | number }}</td>
@@ -474,7 +474,7 @@
 						<td>{{ game.gameData.scoreMap[90] | number }}</td>
 						<td>{{ game.gameData.scoreMap[91] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[92]">
 						<td>{{ game.gameData.scoreMap[92] | number }}</td>
 						<td>{{ game.gameData.scoreMap[93] | number }}</td>
 						<td>{{ game.gameData.scoreMap[94] | number }}</td>
@@ -482,7 +482,7 @@
 						<td>{{ game.gameData.scoreMap[96] | number }}</td>
 						<td>{{ game.gameData.scoreMap[97] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[98]">
 						<td>{{ game.gameData.scoreMap[98] | number }}</td>
 						<td>{{ game.gameData.scoreMap[99] | number }}</td>
 						<td>{{ game.gameData.scoreMap[100] | number }}</td>
@@ -490,7 +490,7 @@
 						<td>{{ game.gameData.scoreMap[102] | number }}</td>
 						<td>{{ game.gameData.scoreMap[103] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[104]">
 						<td>{{ game.gameData.scoreMap[104] | number }}</td>
 						<td>{{ game.gameData.scoreMap[105] | number }}</td>
 						<td>{{ game.gameData.scoreMap[106] | number }}</td>
@@ -498,7 +498,7 @@
 						<td>{{ game.gameData.scoreMap[108] | number }}</td>
 						<td>{{ game.gameData.scoreMap[109] | number }}</td>
 					</tr>
-					<tr>
+					<tr ng-if="game.gameData.scoreMap[110]">
 						<td>{{ game.gameData.scoreMap[110] | number }}</td>
 						<td>{{ game.gameData.scoreMap[111] | number }}</td>
 						<td>{{ game.gameData.scoreMap[112] | number }}</td>

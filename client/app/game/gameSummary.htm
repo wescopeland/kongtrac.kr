@@ -138,7 +138,7 @@
 							{{ game.gameData.platform }}
 						</td>
 					</tr>
-					<tr class="small">
+					<tr class="small" ng-if="game.gameData.deaths[3]">
 						<td class="text-right ibox-left">Final Board</td>
 						<td>
 							L{{ game.getMappedBoardNumber(game.gameData.deaths[3].board) }}
@@ -151,7 +151,7 @@
 							{{ game.gameData.startScore | number }}
 						</td>
 					</tr>
-					<tr class="small">
+					<tr class="small" ng-if="game.gameData.deathPoints">
 						<td class="text-right ibox-left">Death Points</td>
 						<td>
 							{{ game.gameData.deathPoints | number }}
@@ -175,13 +175,13 @@
 							{{ game.gameData.minPace.pace | number }} (L{{ game.getMappedBoardNumber(game.gameData.minPace.boardNumber) }})
 						</td>
 					</tr>
-					<tr class="small">
+					<tr class="small" ng-if="game.gameData.longestLifeBoardCount">
 						<td class="text-right ibox-left">Longest Life</td>
 						<td>
 							{{ game.gameData.longestLifeBoardCount | number }} Boards ({{game.gameData.longestLifeBoardCount / 6 | number:0}} Levels)
 						</td>
 					</tr>
-					<tr class="small">
+					<tr class="small" ng-if="game.gameData.averageLifeBoardCount">
 						<td class="text-right ibox-left">Average Life</td>
 						<td>
 							{{ game.gameData.averageLifeBoardCount | number }} Boards ({{game.gameData.averageLifeBoardCount / 6 | number:0}} Levels)
