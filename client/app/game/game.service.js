@@ -466,7 +466,9 @@
         	var barrelBoardSum = 0;
         	var barrelBoardCount = 0;
 
-        	// FIXME: What if it doesn't make it past the start?
+            var barrelAveragesMap = [];
+            var currentBarrelInLevel = 1;
+
         	for (var i = 14; i < b.length; i += 1) {
 
         		// Every other board is a barrel board.
@@ -475,13 +477,20 @@
         			barrelBoardSum += b[i];
         			barrelBoardCount += 1;
 
+                    if (currentBarrelInLevel === 3) {
+
+                        barrelAveragesMap.push( Math.round((barrelBoardSum / barrelBoardCount) / 100) * 100 );
+                        currentBarrelInLevel = 1;
+
+                    } else {
+                        currentBarrelInLevel += 1;
+                    }
+
         		}
 
         	}
 
-        	var unroundedBarrelAverage = (barrelBoardSum / barrelBoardCount);
-        	var roundedBarrelAverage = Math.round(unroundedBarrelAverage / 100) * 100;
-        	return roundedBarrelAverage;
+        	return barrelAveragesMap;
 
         }
 
@@ -494,17 +503,19 @@
         	var levelSum = 0;
         	var levelCount = 0;
 
+            var levelAveragesMap = [];
+
         	// Begin at L5 and end at L21 or the duration of the game.
         	for (var i = 4; (i < 22 && i < levelScoresArray.length); i += 1) {
 
         		levelSum += levelScoresArray[i];
         		levelCount += 1;
 
+                levelAveragesMap.push( Math.round((levelSum / levelCount) / 100) * 100 );
+
         	}
 
-        	var unroundedLevelAverage = (levelSum / levelCount);
-        	var roundedLevelAverage = Math.round(unroundedLevelAverage / 100) * 100;
-        	return roundedLevelAverage;
+        	return levelAveragesMap;
 
         }
 
@@ -516,7 +527,8 @@
         	var pieBoardSum = 0;
         	var pieBoardCount = 0;
 
-        	// FIXME: What if it doesn't make it past the start?
+            var pieAveragesMap = [];
+
         	for (var i = 15; i < b.length; i += 6) {
 
         		if (i < 116) {
@@ -524,13 +536,13 @@
         			pieBoardSum += b[i];
         			pieBoardCount += 1;
 
+                    pieAveragesMap.push( Math.round((pieBoardSum / pieBoardCount) / 100) * 100 );
+
         		}
 
         	}
 
-        	var unroundedPieAverage = (pieBoardSum / pieBoardCount);
-        	var roundedPieAverage = Math.round(unroundedPieAverage / 100) * 100;
-        	return roundedPieAverage;
+        	return pieAveragesMap;
 
         }
 
@@ -542,7 +554,8 @@
         	var springBoardSum = 0;
         	var springBoardCount = 0;
 
-        	// FIXME: What if it doesn't make it past the start?
+            var springAveragesMap = [];
+
         	for (var i = 17; i < b.length; i += 6) {
 
         		if (i < 116) {
@@ -550,13 +563,13 @@
         			springBoardSum += b[i];
         			springBoardCount += 1;
 
+                    springAveragesMap.push( Math.round((springBoardSum / springBoardCount) / 100) * 100 );
+
         		}
 
         	}
 
-        	var unroundedSpringAverage = (springBoardSum / springBoardCount);
-        	var roundedSpringAverage = Math.round(unroundedSpringAverage / 100) * 100;
-        	return roundedSpringAverage;
+        	return springAveragesMap;
 
         }
 
@@ -568,6 +581,8 @@
         	var rivetBoardSum = 0;
         	var rivetBoardCount = 0;
 
+            var rivetAveragesMap = [];
+
         	// FIXME: What if it doesn't make it past the start?
         	for (var i = 19; i < b.length; i += 6) {
 
@@ -576,13 +591,13 @@
         			rivetBoardSum += b[i];
         			rivetBoardCount += 1;
 
+                    rivetAveragesMap.push( Math.round((rivetBoardSum / rivetBoardCount) / 100) * 100 );
+
         		}
 
         	}
 
-        	var unroundedRivetAverage = (rivetBoardSum / rivetBoardCount);
-        	var roundedRivetAverage = Math.round(unroundedRivetAverage / 100) * 100;
-        	return roundedRivetAverage;
+        	return rivetAveragesMap;
 
         }
 
@@ -625,110 +640,110 @@
 
         	var levelScores = {};
 
-            for (var i = 0; i < inputBoardScores.length; i++) {
+            for (var i = 0; i < inputBoardScores.length; i += 1) {
 
                 if (i === 0 || i === 1) {
-                    if (!levelScores.L1) { levelScores.L1 = b[i]; }
+                    if (!levelScores.L1) { levelScores.L1 = b[i]; continue; }
                     levelScores.L1 += b[i];
                 }
 
                 if (i === 2 || i === 3 || i === 4) {
-                    if (!levelScores.L2) { levelScores.L2 = b[i]; }
+                    if (!levelScores.L2) { levelScores.L2 = b[i]; continue; }
                     levelScores.L2 += b[i];
                 }
 
                 if (i === 5 || i === 6 || i === 7 || i === 8) {
-                    if (!levelScores.L3) { levelScores.L3 = b[i]; }
+                    if (!levelScores.L3) { levelScores.L3 = b[i]; continue; }
                     levelScores.L3 += b[i];
                 }
 
                 if (i === 9 || i === 10 || i === 11 || i === 12 || i === 13) {
-                    if (!levelScores.L4) { levelScores.L4 = b[i]; }
+                    if (!levelScores.L4) { levelScores.L4 = b[i]; continue; }
                     levelScores.L4 += b[i];
                 }
 
                 if (i === 14 || i === 15 || i === 16 || i === 17 || i === 18 || i === 19) {
-                    if (!levelScores.L5) { levelScores.L5 = b[i]; }
+                    if (!levelScores.L5) { levelScores.L5 = b[i]; continue; }
                     levelScores.L5 += b[i];
                 }
 
                 if (i === 20 || i === 21 || i === 22 || i === 23 || i === 24 || i === 25) {
-                    if (!levelScores.L6) { levelScores.L6 = b[i]; }
+                    if (!levelScores.L6) { levelScores.L6 = b[i]; continue; }
                     levelScores.L6 += b[i];
                 }
 
                 if (i === 26 || i === 27 || i === 28 || i === 29 || i === 30 || i === 31) {
-                    if (!levelScores.L7) { levelScores.L7 = b[i]; }
+                    if (!levelScores.L7) { levelScores.L7 = b[i]; continue; }
                     levelScores.L7 += b[i];
                 }
 
                 if (i === 32 || i === 33 || i === 34 || i === 35 || i === 36 || i === 37) {
-                    if (!levelScores.L8) { levelScores.L8 = b[i]; }
+                    if (!levelScores.L8) { levelScores.L8 = b[i]; continue; }
                     levelScores.L8 += b[i];
                 }
 
                 if (i === 38 || i === 39 || i === 40 || i === 41 || i === 42 || i === 43) {
-                    if (!levelScores.L9) { levelScores.L9 = b[i]; }
+                    if (!levelScores.L9) { levelScores.L9 = b[i]; continue; }
                     levelScores.L9 += b[i];
                 }
 
                 if (i === 44 || i === 45 || i === 46 || i === 47 || i === 48 || i === 49) {
-                    if (!levelScores.L10) { levelScores.L10 = b[i]; }
+                    if (!levelScores.L10) { levelScores.L10 = b[i]; continue; }
                     levelScores.L10 += b[i];
                 }
 
                 if (i === 50 || i === 51 || i === 52 || i === 53 || i === 54 || i === 55) {
-                    if (!levelScores.L11) { levelScores.L11 = b[i]; }
+                    if (!levelScores.L11) { levelScores.L11 = b[i]; continue; }
                     levelScores.L11 += b[i];
                 }
 
                 if (i === 56 || i === 57 || i === 58 || i === 59 || i === 60 || i === 61) {
-                    if (!levelScores.L12) { levelScores.L12 = b[i]; }
+                    if (!levelScores.L12) { levelScores.L12 = b[i]; continue; }
                     levelScores.L12 += b[i];
                 }
 
                 if (i === 62 || i === 63 || i === 64 || i === 65 || i === 66 || i === 67) {
-                    if (!levelScores.L13) { levelScores.L13 = b[i]; }
+                    if (!levelScores.L13) { levelScores.L13 = b[i]; continue; }
                     levelScores.L13 += b[i];
                 }
 
                 if (i === 68 || i === 69 || i === 70 || i === 71 || i === 72 || i === 73) {
-                    if (!levelScores.L14) { levelScores.L14 = b[i]; }
+                    if (!levelScores.L14) { levelScores.L14 = b[i]; continue; }
                     levelScores.L14 += b[i];
                 }
 
                 if (i === 74 || i === 75 || i === 76 || i === 77 || i === 78 || i === 79) {
-                    if (!levelScores.L15) { levelScores.L15 = b[i]; }
+                    if (!levelScores.L15) { levelScores.L15 = b[i]; continue; }
                     levelScores.L15 += b[i];
                 }
 
                 if (i === 80 || i === 81 || i === 82 || i === 83 || i === 84 || i === 85) {
-                    if (!levelScores.L16) { levelScores.L16 = b[i]; }
+                    if (!levelScores.L16) { levelScores.L16 = b[i]; continue; }
                     levelScores.L16 += b[i];
                 }
 
                 if (i === 86 || i === 87 || i === 88 || i === 89 || i === 90 || i === 91) {
-                    if (!levelScores.L17) { levelScores.L17 = b[i]; }
+                    if (!levelScores.L17) { levelScores.L17 = b[i]; continue; }
                     levelScores.L17 += b[i];
                 }
 
                 if (i === 92 || i === 93 || i === 94 || i === 95 || i === 96 || i === 97) {
-                    if (!levelScores.L18) { levelScores.L18 = b[i]; }
+                    if (!levelScores.L18) { levelScores.L18 = b[i]; continue; }
                     levelScores.L18 += b[i];
                 }
 
                 if (i === 98 || i === 99 || i === 100 || i === 101 || i === 102 || i === 103) {
-                    if (!levelScores.L19) { levelScores.L19 = b[i]; }
+                    if (!levelScores.L19) { levelScores.L19 = b[i]; continue; }
                     levelScores.L19 += b[i];
                 }
 
                 if (i === 104 || i === 105 || i === 106 || i === 107 || i === 108 || i === 109) {
-                    if (!levelScores.L20) { levelScores.L20 = b[i]; }
+                    if (!levelScores.L20) { levelScores.L20 = b[i]; continue; }
                     levelScores.L20 += b[i];
                 }
 
                 if (i === 110 || i === 111 || i === 112 || i === 113 || i === 114 || i === 115) {
-                    if (!levelScores.L21) { levelScores.L21 = b[i]; }
+                    if (!levelScores.L21) { levelScores.L21 = b[i]; continue; }
                     levelScores.L21 += b[i];
                 }
 
@@ -819,14 +834,21 @@
 
         	// We need: every level score, total sum, start score, average barrel/pie/spring/rivet.
         	_levelScores = getIndividualLevelScoresFromBoardScores(inputBoardScores);
-        	
+
             _game.levelScores = _levelScores;
         	_game.startScore = getStartScoreFromLevelScores(_levelScores);
-        	_game.barrelAverage = getAverageBarrelFromBoardScores(inputBoardScores);
-        	_game.pieAverage = getAveragePieFromBoardScores(inputBoardScores);
-        	_game.springAverage = getAverageSpringFromBoardScores(inputBoardScores);
-        	_game.rivetAverage = getAverageRivetFromBoardScores(inputBoardScores);
-        	_game.levelAverage = getAverageLevelFromLevelScores(_levelScores);
+
+        	_game.barrelAverages = getAverageBarrelFromBoardScores(inputBoardScores);
+        	_game.pieAverages = getAveragePieFromBoardScores(inputBoardScores);
+        	_game.springAverages = getAverageSpringFromBoardScores(inputBoardScores);
+        	_game.rivetAverages = getAverageRivetFromBoardScores(inputBoardScores);
+        	_game.levelAverages = getAverageLevelFromLevelScores(_levelScores);
+
+            _game.finalBarrelAverage = _game.barrelAverages[_game.barrelAverages.length - 1];
+            _game.finalPieAverage = _game.pieAverages[_game.pieAverages.length - 1];
+            _game.finalSpringAverage = _game.springAverages[_game.springAverages.length - 1];
+            _game.finalRivetAverage = _game.rivetAverages[_game.rivetAverages.length - 1];
+            _game.finalLevelAverage = _game.levelAverages[_game.levelAverages.length - 1];
 
         }
 

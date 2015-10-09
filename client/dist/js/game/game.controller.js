@@ -14,6 +14,7 @@
         vm.$state = $state;
         vm.gameData = {};
         vm.gameEditData = {};
+        vm.inputLevelSlider = 0;
         vm.paceChartConfiguration = {};
         vm.scoreChartConfiguration = {};
         vm.weights = {};
@@ -21,6 +22,7 @@
         // Public Functions
         vm.camelize = camelize;
         vm.expand = expand;
+        vm.formatSlider = formatSlider;
         vm.getAllLevels = getAllLevels;
         vm.getMappedBoardNumber = getMappedBoardNumber;
         vm.handleEditCommit = handleEditCommit;
@@ -192,6 +194,8 @@
         		vm.gameData = response;
                 console.log(response);
 
+                vm.inputLevelSlider = vm.gameData.levelAverages.length + 4;
+
                 vm.gameEditData.date = vm.gameData.date;
                 vm.gameEditData.score = vm.gameData.score;
                 vm.gameEditData.player = vm.gameData.player;
@@ -264,8 +268,7 @@
                         }
                     });
 
-                }
-                
+                }    
 
         	});
 
@@ -283,6 +286,10 @@
 
         function expand(inputPoints) {
             return submitGameService.expandAbbreviatedPoints(inputPoints);
+        }
+
+        function formatSlider(value) {
+            return 'L' + value;
         }
 
         function getAllLevels() {

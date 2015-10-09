@@ -1,9 +1,10 @@
 <div class="row">
 
 	<!-- Score Summary Bars -->
-	<div ng-if="game.gameData.levelAverage">
+	<div ng-if="game.gameData.finalLevelAverage">
 
 		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
 			<div class="table-responsive">
 				<table class="table">
 					<tbody>
@@ -13,8 +14,8 @@
 							<td style="border-top: none;">
 								<div class="progress progress-striped" style="height: 100%;">
 									<div class="progress-bar progress-bar-default"
-									     ng-style="{ 'width': ( ( (game.gameData.levelAverage - game.weights.minLevel) / (game.weights.maxLevel - game.weights.minLevel) ) * 100 ) + '%' }">
-										{{ game.gameData.levelAverage | number }}
+									     ng-style="{ 'width': ( ( (game.gameData.levelAverages[game.inputLevelSlider - 5] - game.weights.minLevel) / (game.weights.maxLevel - game.weights.minLevel) ) * 100 ) + '%' }">
+										{{ game.gameData.levelAverages[game.inputLevelSlider - 5] | number }}
 									</div>
 								</div>
 							</td>
@@ -25,8 +26,8 @@
 							<td style="border-top: none;">
 								<div class="progress progress-striped" style="height: 100%;">
 									<div class="progress-bar progress-bar-danger"
-									     ng-style="{ 'width': ( ( (game.gameData.barrelAverage - game.weights.minBarrel) / (game.weights.maxBarrel - game.weights.minBarrel) ) * 100 ) + '%' }">
-										{{ game.gameData.barrelAverage | number }}
+									     ng-style="{ 'width': ( ( (game.gameData.barrelAverages[game.inputLevelSlider - 5] - game.weights.minBarrel) / (game.weights.maxBarrel - game.weights.minBarrel) ) * 100 ) + '%' }">
+										{{ game.gameData.barrelAverages[game.inputLevelSlider - 5] | number }}
 									</div>
 								</div>
 							</td>
@@ -37,8 +38,8 @@
 							<td style="border-top: none;">
 								<div class="progress progress-striped" style="height: 100%;">
 									<div class="progress-bar progress-bar-warning"
-									     ng-style="{ 'width': ( ( (game.gameData.pieAverage - game.weights.minPie) / (game.weights.maxPie - game.weights.minPie) ) * 100 ) + '%' }">
-										{{ game.gameData.pieAverage | number }}
+									     ng-style="{ 'width': ( ( (game.gameData.pieAverages[game.inputLevelSlider - 5] - game.weights.minPie) / (game.weights.maxPie - game.weights.minPie) ) * 100 ) + '%' }">
+										{{ game.gameData.pieAverages[game.inputLevelSlider - 5] | number }}
 									</div>
 								</div>
 							</td>
@@ -49,8 +50,8 @@
 							<td style="border-top: none;">
 								<div class="progress progress-striped" style="height: 100%;">
 									<div class="progress-bar progress-bar-info"
-									     ng-style="{ 'width': ( ( (game.gameData.springAverage - game.weights.minSpring) / (game.weights.maxSpring - game.weights.minSpring) ) * 100 ) + '%' }">
-										{{ game.gameData.springAverage | number }}
+									     ng-style="{ 'width': ( ( (game.gameData.springAverages[game.inputLevelSlider - 5] - game.weights.minSpring) / (game.weights.maxSpring - game.weights.minSpring) ) * 100 ) + '%' }">
+										{{ game.gameData.springAverages[game.inputLevelSlider - 5] | number }}
 									</div>
 								</div>
 							</td>
@@ -61,8 +62,8 @@
 							<td style="border-top: none;">
 								<div class="progress progress-striped" style="height: 100%;">
 									<div class="progress-bar progress-bar-primary"
-									     ng-style="{ 'width': ( ( (game.gameData.rivetAverage - game.weights.minRivet) / (game.weights.maxRivet - game.weights.minRivet) ) * 100 ) + '%' }">
-										{{ game.gameData.rivetAverage | number }}
+									     ng-style="{ 'width': ( ( (game.gameData.rivetAverages[game.inputLevelSlider - 5] - game.weights.minRivet) / (game.weights.maxRivet - game.weights.minRivet) ) * 100 ) + '%' }">
+										{{ game.gameData.rivetAverages[game.inputLevelSlider - 5] | number }}
 									</div>
 								</div>
 							</td>
@@ -71,6 +72,10 @@
 					</tbody>
 				</table>
 			</div>
+
+			<label>Level Slider</label>
+			<slider ng-model="game.inputLevelSlider" formatter="game.formatSlider" min="5" step="1" max="game.gameData.levelAverages.length + 4" value="testOptions.value"></slider>
+
 		</div>
 
 		<div class="clearfix visible-sm visible-xs"></div>
@@ -78,16 +83,16 @@
 	</div>
 
 	<!-- Detail Table -->
-	<div ng-class="{ 'col-lg-4': game.gameData.levelAverage,
-	                 'col-md-4': game.gameData.levelAverage,
-	                 'col-sm-12': game.gameData.levelAverage,
-	                 'col-xs-12': game.gameData.levelAverage,
-	                 'col-lg-8': !game.gameData.levelAverage,
-	                 'col-lg-offset-2': !game.gameData.levelAverage,
-	                 'col-md-10': !game.gameData.levelAverage,
-	                 'col-md-offset-1': !game.gameData.levelAverage,
-	                 'col-sm-12': !game.gameData.levelAverage,
-	                 'col-xs-12': !game.gameData.levelAveraeg }">
+	<div ng-class="{ 'col-lg-4': game.gameData.finalLevelAverage,
+	                 'col-md-4': game.gameData.finalLevelAverage,
+	                 'col-sm-12': game.gameData.finalLevelAverage,
+	                 'col-xs-12': game.gameData.finalLevelAverage,
+	                 'col-lg-8': !game.gameData.finalLevelAverage,
+	                 'col-lg-offset-2': !game.gameData.finalLevelAverage,
+	                 'col-md-10': !game.gameData.finalLevelAverage,
+	                 'col-md-offset-1': !game.gameData.finalLevelAverage,
+	                 'col-sm-12': !game.gameData.finalLevelAverage,
+	                 'col-xs-12': !game.gameData.finalLevelAverage }">
 
 		<div class="table-responsive">
 
@@ -182,7 +187,7 @@
 <div class="row">
 
 	<!-- Pace Chart -->
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="game.gameData.levelAverage">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="game.gameData.finalLevelAverage">
 		<highchart id="gamePaceChart" config="game.paceChartConfiguration"></highchart>
 	</div>
 

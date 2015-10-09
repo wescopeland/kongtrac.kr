@@ -27,6 +27,7 @@
     "algoliasearch": "3",
     "moment": "~2.10.6",
     "angular-smart-table": "~2.1.4",
-    "angular-moment": "~0.10.3"
+    "angular-moment": "~0.10.3",
+    "angular-bootstrap-slider": "~0.1.18"
   }
 }

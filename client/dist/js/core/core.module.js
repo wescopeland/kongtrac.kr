@@ -10,6 +10,7 @@
             'highcharts-ng',
             'algoliasearch',
             'smart-table',
-            'angularMoment'
+            'angularMoment',
+            'ui.bootstrap-slider'
         ]);
 })();
