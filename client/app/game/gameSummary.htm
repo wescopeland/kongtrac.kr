@@ -69,12 +69,27 @@
 							</td>
 						</tr>
 
+						<tr>
+							<th class="text-right" style="width: 5em; border-top: none;">Moment</th>
+							<td style="border-top: none;">
+								<div style="height: 100%; padding-right: 80px;">
+									<slider ng-model="game.inputLevelSlider" 
+									        formatter="game.formatSlider" 
+									        min="5" 
+									        step="1" 
+									        max="game.gameData.levelAverages.length + 4" 
+									        value="testOptions.value">
+									</slider>
+									<label style="margin-top: -22px; margin-right: -70px;" class="pull-right">
+									    L{{ game.inputLevelSlider }}
+									</label>
+								</div>
+							</td>
+						</tr>
+
 					</tbody>
 				</table>
 			</div>
-
-			<label>Level Slider</label>
-			<slider ng-model="game.inputLevelSlider" formatter="game.formatSlider" min="5" step="1" max="game.gameData.levelAverages.length + 4" value="testOptions.value"></slider>
 
 		</div>
 
