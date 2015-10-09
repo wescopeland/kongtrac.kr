@@ -1,6 +1,6 @@
 <div class="row">
 	<h2>
-		{{ game.gameData.player }} &mdash; {{ game.gameData.score | number }}
+		<a ng-href="{{ '#/player/' + game.camelize(game.gameData.player) }}">{{ game.gameData.player }}</a> &mdash; {{ game.gameData.score | number }}
 		<small>
 		    <a ng-if="game.$state.current.name !== 'game.summary'" ng-href="{{ '#/game/' + game.gameData.$id + '/summary' }}">Summary</a>
 		    <span ng-if="game.$state.current.name === 'game.summary'">Summary</span>

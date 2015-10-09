@@ -625,28 +625,114 @@
 
         	var levelScores = {};
 
-        	if (b[0] && b[1]) { levelScores.L1 = b[0] + b[1]; }
-        	if (b[2] && b[3] && b[4]) { levelScores.L2 = b[2] + b[3] + b[4]; }
-        	if (b[5] && b[6] && b[7] && b[8]) { levelScores.L3 = b[5] + b[6] + b[7] + b[8]; }
-        	if (b[9] && b[10] && b[11] && b[12] && b[13]) { levelScores.L4 = b[9] + b[10] + b[11] + b[12] + b[13]; }
-        	if (b[14] && b[15] && b[16] && b[17] && b[18] && b[19]) { levelScores.L5 = b[14] + b[15] + b[16] + b[17] + b[18] + b[19]; }
-        	if (b[20] && b[21] && b[22] && b[23] && b[24] && b[25]) { levelScores.L6 = b[20] + b[21] + b[22] + b[23] + b[24] + b[25]; }
-        	if (b[26] && b[27] && b[28] && b[29] && b[30] && b[31]) { levelScores.L7 = b[26] + b[27] + b[28] + b[29] + b[30] + b[31]; }
-        	if (b[32] && b[33] && b[34] && b[35] && b[36] && b[37]) { levelScores.L8 = b[32] + b[33] + b[34] + b[35] + b[36] + b[37]; }
-        	if (b[38] && b[39] && b[40] && b[41] && b[42] && b[43]) { levelScores.L9 = b[38] + b[39] + b[40] + b[41] + b[42] + b[43]; }
-        	if (b[44] && b[45] && b[46] && b[47] && b[48] && b[49]) { levelScores.L10 = b[44] + b[45] + b[46] + b[47] + b[48] + b[49]; }
-        	if (b[50] && b[51] && b[52] && b[53] && b[54] && b[55]) { levelScores.L11 = b[50] + b[51] + b[52] + b[53] + b[54] + b[55]; }
-        	if (b[56] && b[57] && b[58] && b[59] && b[60] && b[61]) { levelScores.L12 = b[56] + b[57] + b[58] + b[59] + b[60] + b[61]; }
-        	if (b[62] && b[63] && b[64] && b[65] && b[66] && b[67]) { levelScores.L13 = b[62] + b[63] + b[64] + b[65] + b[66] + b[67]; }
-        	if (b[68] && b[69] && b[70] && b[71] && b[72] && b[73]) { levelScores.L14 = b[68] + b[69] + b[70] + b[71] + b[72] + b[73]; }
-        	if (b[74] && b[75] && b[76] && b[77] && b[78] && b[79]) { levelScores.L15 = b[74] + b[75] + b[76] + b[77] + b[78] + b[79]; }
-        	if (b[80] && b[81] && b[82] && b[83] && b[84] && b[85]) { levelScores.L16 = b[80] + b[81] + b[82] + b[83] + b[84] + b[85]; }
-        	if (b[86] && b[87] && b[88] && b[89] && b[90] && b[91]) { levelScores.L17 = b[86] + b[87] + b[88] + b[89] + b[90] + b[91]; }
-        	if (b[92] && b[93] && b[94] && b[95] && b[96] && b[97]) { levelScores.L18 = b[92] + b[93] + b[94] + b[95] + b[96] + b[97]; }
-        	if (b[98] && b[99] && b[100] && b[101] && b[102] && b[103]) { levelScores.L19 = b[98] + b[99] + b[100] + b[101] + b[102] + b[103]; }
-        	if (b[104] && b[105] && b[106] && b[107] && b[108] && b[109]) { levelScores.L20 = b[104] + b[105] + b[106] + b[107] + b[108] + b[109]; }
-        	if (b[110] && b[111] && b[112] && b[113] && b[114] && b[115]) { levelScores.L21 = b[110] + b[111] + b[112] + b[113] + b[114] + b[115]; }
-        	if (b[116]) { levelScores.KS = b[116]; }
+            for (var i = 0; i < inputBoardScores.length; i++) {
+
+                if (i === 0 || i === 1) {
+                    if (!levelScores.L1) { levelScores.L1 = b[i]; }
+                    levelScores.L1 += b[i];
+                }
+
+                if (i === 2 || i === 3 || i === 4) {
+                    if (!levelScores.L2) { levelScores.L2 = b[i]; }
+                    levelScores.L2 += b[i];
+                }
+
+                if (i === 5 || i === 6 || i === 7 || i === 8) {
+                    if (!levelScores.L3) { levelScores.L3 = b[i]; }
+                    levelScores.L3 += b[i];
+                }
+
+                if (i === 9 || i === 10 || i === 11 || i === 12 || i === 13) {
+                    if (!levelScores.L4) { levelScores.L4 = b[i]; }
+                    levelScores.L4 += b[i];
+                }
+
+                if (i === 14 || i === 15 || i === 16 || i === 17 || i === 18 || i === 19) {
+                    if (!levelScores.L5) { levelScores.L5 = b[i]; }
+                    levelScores.L5 += b[i];
+                }
+
+                if (i === 20 || i === 21 || i === 22 || i === 23 || i === 24 || i === 25) {
+                    if (!levelScores.L6) { levelScores.L6 = b[i]; }
+                    levelScores.L6 += b[i];
+                }
+
+                if (i === 26 || i === 27 || i === 28 || i === 29 || i === 30 || i === 31) {
+                    if (!levelScores.L7) { levelScores.L7 = b[i]; }
+                    levelScores.L7 += b[i];
+                }
+
+                if (i === 32 || i === 33 || i === 34 || i === 35 || i === 36 || i === 37) {
+                    if (!levelScores.L8) { levelScores.L8 = b[i]; }
+                    levelScores.L8 += b[i];
+                }
+
+                if (i === 38 || i === 39 || i === 40 || i === 41 || i === 42 || i === 43) {
+                    if (!levelScores.L9) { levelScores.L9 = b[i]; }
+                    levelScores.L9 += b[i];
+                }
+
+                if (i === 44 || i === 45 || i === 46 || i === 47 || i === 48 || i === 49) {
+                    if (!levelScores.L10) { levelScores.L10 = b[i]; }
+                    levelScores.L10 += b[i];
+                }
+
+                if (i === 50 || i === 51 || i === 52 || i === 53 || i === 54 || i === 55) {
+                    if (!levelScores.L11) { levelScores.L11 = b[i]; }
+                    levelScores.L11 += b[i];
+                }
+
+                if (i === 56 || i === 57 || i === 58 || i === 59 || i === 60 || i === 61) {
+                    if (!levelScores.L12) { levelScores.L12 = b[i]; }
+                    levelScores.L12 += b[i];
+                }
+
+                if (i === 62 || i === 63 || i === 64 || i === 65 || i === 66 || i === 67) {
+                    if (!levelScores.L13) { levelScores.L13 = b[i]; }
+                    levelScores.L13 += b[i];
+                }
+
+                if (i === 68 || i === 69 || i === 70 || i === 71 || i === 72 || i === 73) {
+                    if (!levelScores.L14) { levelScores.L14 = b[i]; }
+                    levelScores.L14 += b[i];
+                }
+
+                if (i === 74 || i === 75 || i === 76 || i === 77 || i === 78 || i === 79) {
+                    if (!levelScores.L15) { levelScores.L15 = b[i]; }
+                    levelScores.L15 += b[i];
+                }
+
+                if (i === 80 || i === 81 || i === 82 || i === 83 || i === 84 || i === 85) {
+                    if (!levelScores.L16) { levelScores.L16 = b[i]; }
+                    levelScores.L16 += b[i];
+                }
+
+                if (i === 86 || i === 87 || i === 88 || i === 89 || i === 90 || i === 91) {
+                    if (!levelScores.L17) { levelScores.L17 = b[i]; }
+                    levelScores.L17 += b[i];
+                }
+
+                if (i === 92 || i === 93 || i === 94 || i === 95 || i === 96 || i === 97) {
+                    if (!levelScores.L18) { levelScores.L18 = b[i]; }
+                    levelScores.L18 += b[i];
+                }
+
+                if (i === 98 || i === 99 || i === 100 || i === 101 || i === 102 || i === 103) {
+                    if (!levelScores.L19) { levelScores.L19 = b[i]; }
+                    levelScores.L19 += b[i];
+                }
+
+                if (i === 104 || i === 105 || i === 106 || i === 107 || i === 108 || i === 109) {
+                    if (!levelScores.L20) { levelScores.L20 = b[i]; }
+                    levelScores.L20 += b[i];
+                }
+
+                if (i === 110 || i === 111 || i === 112 || i === 113 || i === 114 || i === 115) {
+                    if (!levelScores.L21) { levelScores.L21 = b[i]; }
+                    levelScores.L21 += b[i];
+                }
+
+            }
 
         	return levelScores;
 

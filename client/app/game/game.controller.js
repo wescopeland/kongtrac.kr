@@ -19,6 +19,7 @@
         vm.weights = {};
 
         // Public Functions
+        vm.camelize = camelize;
         vm.expand = expand;
         vm.getAllLevels = getAllLevels;
         vm.getMappedBoardNumber = getMappedBoardNumber;
@@ -212,9 +213,7 @@
                     vm.gameEditData.hasCompleteData = false;
                 }
 
-                console.log(vm.gameEditData);
-
-        		vm.paceChartConfiguration.series.push({
+                vm.paceChartConfiguration.series.push({
         			data: vm.gameData.paceMap,
         			name: vm.gameData.player.split(' ').pop() + ' (Pace) ' + $filter('number')(vm.gameData.score),
     				color: '#000000',
@@ -225,9 +224,9 @@
     				}
         		});
 
-                if (vm.gameData.deaths) {
+                if (response.deaths) {
 
-                    vm.gameData.deaths.forEach(function(death) {
+                    response.deaths.forEach(function(death) {
 
                         var newPacePlotLine = {
                             color: '#C0D0E0',
@@ -269,6 +268,16 @@
                 
 
         	});
+
+        }
+
+        function camelize(inputString) {
+
+            if (inputString) {
+                return inputString.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
+                    return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
+                }).replace(/\s+/g, '');
+            }
 
         }
 

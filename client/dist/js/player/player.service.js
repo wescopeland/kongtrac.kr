@@ -79,7 +79,7 @@
 
         	inputGamesDataArray.forEach(function(game) {
 
-        		if (game.platform === 'Arcade' && (game.score > arcadeHighest)) {
+        		if ( (game.platform === 'Arcade' || game.platform === 'JAMMA') && (game.score > arcadeHighest) ) {
         			arcadeHighest = game.score;
         		}
 
