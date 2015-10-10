@@ -1,0 +1,57 @@
+<div class="row">
+
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<h2>Submit event</h2>
+	</div>
+
+</div>
+
+<br>
+
+<div class="row">
+
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<h3>Required fields</h3>
+	</div>
+
+	<form>
+
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<label class="control-label">Event Name</label>
+			<input class="form-control" placeholder="Event Name" ng-model="submit.inputEventName">
+		</div>
+
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+			<label class="control-label">Dates</label>
+			<datepicker date-format="{{ 'MM/dd/yyyy' }}">
+				<input class="form-control" ng-model="submit.inputStartDate" type="text" placeholder="Start Date">
+			</datepicker>
+			<datepicker date-format="{{ 'MM/dd/yyyy' }}">
+				<input class="form-control" ng-model="submit.inputEndDate" type="text" placeholder="End Date">
+			</datepicker>
+				
+		</div>
+
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<label class="control-label">Online / Offline (Live)</label>
+			<select class="form-control" ng-model="submit.inputOnlineOffline">
+				<option>Online</option>
+				<option>Offline (Live)</option>
+			</select>
+		</div>
+
+		<div class="form-group text-right col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12" ng-if="!submit.inputHasCompleteData">
+			<button class="btn btn-primary" ng-click="submit.handleCommit()">
+				Commit
+			</button>
+		</div>
+
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<hr>
+		</div>
+
+	</form>
+
+</div>
+

@@ -60,9 +60,7 @@
 	                	Ranking <span class="caret"></span>
 	              	</a>
 	              	<ul class="dropdown-menu">
-		                <li>
-		                	<a href="#/home">Current Top</a>
-		                </li>
+		                <li><a href="#/home">Current Top</a></li>
 	                </ul>
 
 	            </li>
@@ -73,9 +71,8 @@
 	                	Submit <span class="caret"></span>
 	                </a>
 	                <ul class="dropdown-menu">
-	                	<li>
-	                		<a ui-sref="submitGame">Individual Game</a>
-	                	</li>
+	                	<li><a ui-sref="submitGame">Individual Game</a></li>
+	                	<li><a ui-sref="submitEvent">Event Details</a></li>
 	                </ul>
 
 	            </li>
@@ -123,6 +120,7 @@
 	<script src="angularjs-datepicker/dist/angular-datepicker.min.js"></script>
 	<script src="http://code.highcharts.com/highcharts.src.js"></script>
 	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+	<script src="http://code.highcharts.com/modules/offline-exporting.js"></script>
 	<script src="highcharts-ng/dist/highcharts-ng.min.js"></script>
 	<script src="algoliasearch/dist/algoliasearch.angular.min.js"></script>
 	<script src="moment/min/moment.min.js"></script>
@@ -145,6 +143,8 @@
 	<script src="dist/js/submit/submit.route.js"></script>
 	<script src="dist/js/submit/submitGame.controller.js"></script>
 	<script src="dist/js/submit/submitGame.service.js"></script>
+	<script src="dist/js/submit/submitEvent.controller.js"></script>
+	<script src="dist/js/submit/submitEvent.service.js"></script>
 
 	<script src="dist/js/scores/scores.module.js"></script>
 	<script src="dist/js/scores/scores.service.js"></script>
@@ -159,6 +159,11 @@
 	<script src="dist/js/player/player.route.js"></script>
 	<script src="dist/js/player/player.controller.js"></script>
 	<script src="dist/js/player/player.service.js"></script>
+
+	<script src="dist/js/event/event.module.js"></script>
+	<script src="dist/js/event/event.route.js"></script>
+	<script src="dist/js/event/event.controller.js"></script>
+	<script src="dist/js/event/event.service.js"></script>
 
 	<script src="dist/js/quicksearch/quicksearch.module.js"></script>
 	<script src="dist/js/quicksearch/globalsearch.directive.js"></script>

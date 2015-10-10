@@ -250,7 +250,32 @@
 			var thirdManBoardCount = (inputDeathsArray[2].board - inputDeathsArray[1].board) + 1;
         	var fourthManBoardCount = (inputDeathsArray[3].board - inputDeathsArray[2].board) + 1;
 
-        	return Math.max(firstManBoardCount, secondManBoardCount, thirdManBoardCount, fourthManBoardCount);
+            var longestLife = {};
+
+            longestLife.boardCount = Math.max(firstManBoardCount, secondManBoardCount, thirdManBoardCount, fourthManBoardCount);
+
+            longestLife.levelCount = 0;
+            if (longestLife.boardCount > 2) {
+                longestLife.levelCount += 1;
+            }
+
+            if (longestLife.boardCount > 5) {
+                longestLife.levelCount += 1;
+            }
+
+            if (longestLife.boardCount > 9) {
+                longestLife.levelCount += 1;
+            }
+
+            if (longestLife.boardCount > 14) {
+                longestLife.levelCount += 1;
+            }
+
+            for (var i = 15; i < longestLife.boardCount; i += 6) {
+                longestLife.levelCount += 1;
+            }
+
+            return longestLife;
 
         }
 
@@ -325,16 +350,35 @@
 
         }
 
-        function findMinLevel(inputLevelScores) {
+        function getMappableLevels(inputBoardScores) {
+
+            var mappableLevels = [];
+
+            // Get the mappable levels.
+            var currentLevel = 5;
+            for (var i = 19; i < inputBoardScores.length; i += 6) {
+
+                mappableLevels.push('L' + currentLevel);
+                currentLevel += 1;
+
+            }
+
+            return mappableLevels;
+
+        }
+
+        function findMinLevel(inputLevelScores, inputMappableLevels) {
 
             var levelScoresArray = [];
+
             var currentLevel = 1;
 
+            // Map the level scores.
             for (var key in inputLevelScores) {
 
                 if (inputLevelScores.hasOwnProperty(key)) {
 
-                    if (currentLevel >= 5) {
+                    if (currentLevel >= 5 && inputMappableLevels.indexOf(key) > -1) {
                         levelScoresArray.push(inputLevelScores[key]);
                     }
                     
@@ -771,13 +815,15 @@
 
                         processBoardScores(_game.boardScores);
                         _game.deathPoints = calculateDeathPoints(_game.deaths);
-                        _game.longestLifeBoardCount = calculateLongestLife(_game.deaths);
+                        _game.longestLife = calculateLongestLife(_game.deaths);
                         _game.averageLifeBoardCount = calculateAverageLife(_game.deaths);
                         
                         _game.paceMap = buildPaceMap(_game.boardScores, _game.deaths, _game.startScore);
                         _game.scoreMap = buildScoreMap(_game.boardScores, _game.deaths, _game.startScore);
                         _game.maxPace = getMaxPace(_game.paceMap);
                         _game.minPace = getMinPace(_game.paceMap);
+
+                        _game.mappableLevels = getMappableLevels(_game.boardScores);
 
                         _game.minBarrel = findMinBarrel(_game.boardScores);
                         _game.maxBarrel = findMaxBarrel(_game.boardScores);
@@ -787,7 +833,7 @@
                         _game.maxSpring = findMaxSpring(_game.boardScores);
                         _game.minRivet = findMinRivet(_game.boardScores);
                         _game.maxRivet = findMaxRivet(_game.boardScores);
-                        _game.minLevel = findMinLevel(_game.levelScores);
+                        _game.minLevel = findMinLevel(_game.levelScores, _game.boardScores);
                         _game.maxLevel = findMaxLevel(_game.levelScores);
 
                     }

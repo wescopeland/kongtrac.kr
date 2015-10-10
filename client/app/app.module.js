@@ -9,6 +9,7 @@
             'kongtrac.scores',
             'kongtrac.game',
             'kongtrac.player',
+            'kongtrac.event',
             'kongtrac.search'
         ]);
 })();

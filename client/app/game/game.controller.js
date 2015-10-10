@@ -85,7 +85,8 @@
 
         		options: {
         			chart: {
-        				type: 'line'
+        				type: 'line',
+                        zoomType: 'x'
         			},
         			title: {
         				text: 'Pace history for this game'
@@ -137,7 +138,9 @@
 
                 options: {
                     chart: {
-                        type: 'line'
+                        type: 'line',
+                        zoomType: 'x',
+                        animation: true
                     },
                     title: {
                         text: 'Score history for this game'
@@ -146,7 +149,7 @@
                         formatter: function() {
                             return '<b>' + getScoreChartMappedBoardNumber(this.x) + '</b>: ' + $filter('number')(this.y);
                         }
-                    },
+                    }
                 },
                 series: [],
                 credits: {
@@ -181,7 +184,14 @@
                     }
                 },
                 exporting: {
-                    enabled: true
+                    enabled: true,
+                    sourceWidth: 1400,
+                    width: 1400,
+                    sourceHeight: 100,
+                    scale: 1,
+                    chartOptions: {
+                        subtitle: null
+                    }
                 }
 
             };
@@ -195,7 +205,7 @@
         		vm.gameData = response;
                 console.log(response);
 
-                vm.inputLevelSlider = vm.gameData.levelAverages.length + 4;
+                vm.inputLevelSlider = vm.gameData.mappableLevels.length + 4;
 
                 vm.gameEditData.date = vm.gameData.date;
                 vm.gameEditData.score = vm.gameData.score;
@@ -277,17 +287,12 @@
 
         function calculateAverageBarPercentage(inputAverageMap, inputMin, inputMax) {
 
-            //game.gameData.levelAverages[game.inputLevelSlider - 5] - game.weights.minLevel) / (game.weights.maxLevel - game.weights.minLevel) ) * 100 ) + '%'
-
             var screenPeriodAverage = inputAverageMap[vm.inputLevelSlider - 5];
-
             var percentage = (screenPeriodAverage - inputMin) / (inputMax - inputMin) * 100;
 
             if (percentage > 100) {
                 percentage = 100;
-            }
-
-            if (percentage < 14) {
+            } else if (percentage < 14) {
                 percentage = 14;
             }
 

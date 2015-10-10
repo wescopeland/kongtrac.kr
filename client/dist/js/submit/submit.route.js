@@ -12,7 +12,12 @@
     			url: '/submitGame',
     			templateUrl: 'app/submit/submitGame.htm',
     			controller: 'SubmitGameController as submit'
-    		});
+    		})
+            .state('submitEvent', {
+                url: '/submitEvent',
+                templateUrl: 'app/submit/submitEvent.htm',
+                controller: 'SubmitEventController as submit'
+            });
 
     }
     submitConfiguration.$inject = ["$stateProvider"];

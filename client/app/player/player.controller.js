@@ -15,6 +15,7 @@
         vm.onlyShowComplete = false;
         vm.pbChartConfiguration = {};
         vm.playerData = {};
+        vm.playerGameTableData = [];
 
         activate();
 
@@ -64,11 +65,14 @@
 
         function activate() {
 
-        	vm.pbChartConfiguration = {
+            vm.displayedPlayerGameTable = [].concat(vm.playerGameTableData);
+
+            vm.pbChartConfiguration = {
 
         		options: {
         			chart: {
-        				type: 'line'
+        				type: 'line',
+                        zoomType: 'x'
         			},
         			title: {
         				text: 'Personal best history' 
@@ -153,7 +157,21 @@
 
         			console.log(vm.playerData);
 
-        			if (vm.playerData.pbMap.length > 0) {
+                    vm.playerData.gamesData.forEach(function(game) {
+
+                        var newGameTableObject = {
+                            date: game.date,
+                            score: game.score,
+                            platform: game.platform,
+                            finalBoard: game.finalBoard,
+                            id: game.$id
+                        }
+
+                        vm.playerGameTableData.push(newGameTableObject);
+
+                    });
+
+                    if (vm.playerData.pbMap.length > 0) {
         				$interval.cancel(processPlayerInterval);
         			}
 
