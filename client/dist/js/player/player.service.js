@@ -117,16 +117,17 @@
 
         function getFirstMillionDate(inputGamesDataArray) {
 
-        	var firstMillionDate = null;
+            var firstMillionDate = null;
 
         	inputGamesDataArray.forEach(function(game) {
 
-        		if (game.isKillscreen && game.score > 1000000) {
+                if (game.score >= 1000000) {
 
-        			var currentDate = new Date(game.date);
+                    var currentDate = new Date(game.date);
 
         			if (currentDate < firstMillionDate || !firstMillionDate) {
         				firstMillionDate = currentDate;
+                        console.log(firstMillionDate);
         			}
 
         		}
