@@ -75,6 +75,14 @@
                         gameData.deaths = inputGameProperties.deaths;
                     }
 
+                    if (inputGameProperties.inputIsDayUnknown) {
+                        gameData.concealedDay = true;
+                    }
+
+                    if (inputGameProperties.inputIsMonthUnknown) {
+                        gameData.concealedMonth = true;
+                    }
+
                     console.log(gameData);
 
                     gameData.$save();

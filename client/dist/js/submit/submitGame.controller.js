@@ -61,6 +61,14 @@
         	gamePropertiesObject.isKillscreen = vm.inputIsKillscreen;
             gamePropertiesObject.hasCompleteData = vm.inputHasCompleteData;
 
+            if (vm.inputIsDayUnknown) {
+                gamePropertiesObject.concealedDay = true;
+            }
+
+            if (vm.inputIsMonthUnknown) {
+                gamePropertiesObject.concealedMonth = true;
+            }
+
         	if (vm.inputHasCompleteData) {
 
         		gamePropertiesObject.boardScores = vm.gameScoresMap;
