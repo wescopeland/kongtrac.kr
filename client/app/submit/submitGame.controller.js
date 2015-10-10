@@ -61,12 +61,63 @@
         	gamePropertiesObject.isKillscreen = vm.inputIsKillscreen;
             gamePropertiesObject.hasCompleteData = vm.inputHasCompleteData;
 
-            if (vm.inputIsDayUnknown) {
+            if (vm.inputIsDayUnknown && !vm.inputIsMonthUnknown) {
+
                 gamePropertiesObject.concealedDay = true;
+                
+                if (gamePropertiesObject.date.indexOf('Jan') > -1) {
+                    gamePropertiesObject.date = '01/15/' + gamePropertiesObject.date.split(' ')[0];
+                }
+
+                if (gamePropertiesObject.date.indexOf('Feb') > -1) {
+                    gamePropertiesObject.date = '02/15/' + gamePropertiesObject.date.split(' ')[0];
+                }
+
+                if (gamePropertiesObject.date.indexOf('Mar') > -1) {
+                    gamePropertiesObject.date = '03/15/' + gamePropertiesObject.date.split(' ')[0];
+                }
+
+                if (gamePropertiesObject.date.indexOf('Apr') > -1) {
+                    gamePropertiesObject.date = '04/15/' + gamePropertiesObject.date.split(' ')[0];
+                }
+
+                if (gamePropertiesObject.date.indexOf('May') > -1) {
+                    gamePropertiesObject.date = '05/15/' + gamePropertiesObject.date.split(' ')[0];
+                }
+
+                if (gamePropertiesObject.date.indexOf('Jun') > -1) {
+                    gamePropertiesObject.date = '06/15/' + gamePropertiesObject.date.split(' ')[0];
+                }
+
+                if (gamePropertiesObject.date.indexOf('Jul') > -1) {
+                    gamePropertiesObject.date = '07/15/' + gamePropertiesObject.date.split(' ')[0];
+                }
+
+                if (gamePropertiesObject.date.indexOf('Aug') > -1) {
+                    gamePropertiesObject.date = '08/15/' + gamePropertiesObject.date.split(' ')[0];
+                }
+
+                if (gamePropertiesObject.date.indexOf('Sep') > -1) {
+                    gamePropertiesObject.date = '09/15/' + gamePropertiesObject.date.split(' ')[0];
+                }
+
+                if (gamePropertiesObject.date.indexOf('Oct') > -1) {
+                    gamePropertiesObject.date = '10/15/' + gamePropertiesObject.date.split(' ')[0];
+                }
+
+                if (gamePropertiesObject.date.indexOf('Nov') > -1) {
+                    gamePropertiesObject.date = '11/15/' + gamePropertiesObject.date.split(' ')[0];
+                }
+
+                if (gamePropertiesObject.date.indexOf('Dec') > -1) {
+                    gamePropertiesObject.date = '12/15/' + gamePropertiesObject.date.split(' ')[0];
+                }
+
             }
 
-            if (vm.inputIsMonthUnknown) {
+            if (vm.inputIsMonthUnknown && vm.inputIsDayUnknown) {
                 gamePropertiesObject.concealedMonth = true;
+                gamePropertiesObject.date = '06/06/' + gamePropertiesObject.date;
             }
 
         	if (vm.inputHasCompleteData) {
