@@ -1,1 +1,124 @@
-<p>hello world</p>
+<div class="row">
+	<h2>
+		{{ event.eventData.name }}
+	</h2>
+</div>
+
+<div class="row">
+
+	<!-- Scores Histogram -->
+	<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+		<highchart id="eventScoresHistogram" config="event.histogramChartConfiguration"></highchart>
+	</div>
+
+	<div class="clearfix visible-sm visible-xs"></div>
+
+	<!-- Detail Table -->
+	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+		<div class="table-responsive">
+
+			<table class="table table-condensed table-striped table-hover">
+
+				<thead>
+					<tr>
+						<th colspan="2" class="text-center ibox-header">Event Details</th>
+					</tr>
+				</thead>
+
+				<tbody>
+
+					<tr class="small">
+						<td class="text-right ibox-left" style="width: 40%;">Dates</td>
+						<td>{{ event.eventData.startDate | amDateFormat: 'MMM DD YYYY' }} &ndash; {{ event.eventData.endDate | amDateFormat: 'MMM DD YYYY' }}</td>
+					</tr>
+
+					<tr class="small">
+						<td class="text-right ibox-left">Online / Offline</td>
+						<td>{{ event.eventData.onlineOffline }}</td>
+					</tr>
+
+					<tr class="small">
+						<td class="text-right ibox-left">Prize Pool</td>
+						<td>{{ event.eventData.prizePool | currency }}</td>
+					</tr>
+
+					<tr class="small">
+						<td class="text-right ibox-left">Format</td>
+						<td ng-if="event.eventData.format === 0">High Score Competition</td>
+						<td ng-if="event.eventData.format === 1">Bracket Competition</td>
+						<td ng-if="event.eventData.format === 2">High Score into Bracket</td>
+					</tr>
+
+					<tr class="small">
+						<td class="text-right ibox-left">Players Competing</td>
+						<td>{{ event.eventData.games.length }}</td>
+					</tr>
+
+					<tr class="small">
+						<td class="text-right ibox-left">New PBs</td>
+						<td></td>
+					</tr>
+
+				</tbody>
+
+			</table>
+
+		</div>
+
+	</div>
+
+</div>
+
+<h3 style="display: inline;">Scoreboard</h3>
+<label for="onlyShowComplete" class="pull-right">
+	<input type="checkbox" id="onlyShowComplete" name="onlyShowComplete" ng-model="event.onlyShowComplete"> Only show games with complete data
+</label>
+<div class="row">
+
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+		<div class="table-responsive">
+
+			<table st-table="event.eventData.gamesData" class="table table-hover">
+
+				<thead>
+					<tr class="eventheader">
+						<th>Position</th>
+						<th st-sort="player">Player</th>
+						<th st-sort="score">Score</th>
+						<th st-sort="winnings">Winnings</th>
+						<th class=""></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr ng-repeat="game in event.eventData.gamesData | orderBy:'-score'" ng-hide="event.onlyShowComplete && !event.hasCompleteData">
+
+						<td>{{ $index + 1 }}</td>
+
+						<!--
+						<td ng-if="!game.hasCompleteData">{{ game.score | number }}</td>
+						<td ng-if="game.hasCompleteData">
+							<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
+						</td>
+						-->
+
+						<td><a ng-href="{{ '#/player/' + event.camelize(game.player) }}">{{ game.player }}</a></td>
+
+						<td>
+							<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
+						</td>
+
+						<td>{{ game.winnings | currency }}</td>
+
+					</tr>
+				</tbody>
+
+			</table>
+
+		</div>
+
+	</div>
+
+</div>

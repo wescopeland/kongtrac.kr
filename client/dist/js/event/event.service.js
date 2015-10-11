@@ -6,15 +6,38 @@
         .service('eventService', eventService);
 
     /* @ngInject */
-    function eventService() {
+    function eventService($q, $firebaseObject, $firebaseArray) {
 
-        this.func = func;
+        // Private Variables
+        var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
+        var _event = {};
+
+        this.getEventData = getEventData;
 
         ////////////////
 
-        function func() {
+        function getEventData(inputEvent) {
+
+            var eventData = $firebaseObject(
+                _fbRef
+                    .child('events')
+                    .child(inputEvent)
+            );
+
+            return $q(function(resolve, reject) {
+
+                eventData.$loaded().then(function() {
+
+                    _event = eventData;
+                    resolve(_event);
+
+                });
+
+            });
+
         }
 
     }
+    eventService.$inject = ["$q", "$firebaseObject", "$firebaseArray"];
 
 })();

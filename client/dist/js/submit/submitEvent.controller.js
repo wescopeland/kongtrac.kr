@@ -6,7 +6,7 @@
         .controller('SubmitEventController', SubmitEventController);
 
     /* @ngInject */
-    function SubmitEventController(submitEventService) {
+    function SubmitEventController($scope, submitEventService) {
 
         var vm = this;
 
@@ -30,6 +30,11 @@
 
             addAnotherGame();
 
+            $scope.$on('eventAdded', function() {
+                console.log(arguments[1].eventId);
+                $state.go('event', { eventId: arguments[1].eventId });
+            });
+
         }
 
         function addAnotherGame() {
@@ -37,7 +42,8 @@
             vm.eventGames.push({
                 player: null,
                 score: null,
-                platform: null
+                platform: null,
+                winnings: null
             });
 
         }
@@ -58,6 +64,6 @@
         }
 
     }
-    SubmitEventController.$inject = ["submitEventService"];
+    SubmitEventController.$inject = ["$scope", "submitEventService"];
 
 })();

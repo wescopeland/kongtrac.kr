@@ -6,7 +6,7 @@
         .controller('PlayerController', PlayerController);
 
     /* @ngInject */
-    function PlayerController($interval, $stateParams, $filter, playerService, gameService) {
+    function PlayerController($interval, $stateParams, $filter, playerService, gameService, eventService) {
 
         var vm = this;
 
@@ -176,7 +176,52 @@
                             id: game.$id
                         }
 
-                        vm.playerGameTableData.push(newGameTableObject);
+                        if (game.event) {
+
+                            eventService.getEventData(game.event).then(function then(response) {
+
+                                newGameTableObject.eventId = game.event;
+                                newGameTableObject.eventName = response.name;
+                                newGameTableObject.eventWinnings = response.winnings[camelize(vm.playerData.name)];
+                                newGameTableObject.eventStartDate = response.startDate;
+                                newGameTableObject.eventEndDate = response.endDate;
+
+                                // Find this player's position in the specified event.
+                                var eventGames = [];
+                                var pushedEventData = false;
+                                response.games.forEach(function(gameId) {
+
+                                    gameService.getGameData(gameId).then(function then(gameResponse) {
+
+                                        eventGames.push({
+                                            player: camelize(gameResponse.player),
+                                            score: gameResponse.score
+                                        });
+
+                                        eventGames = $filter('orderBy')(eventGames, '-score');
+                                        for (var i = 0; i < eventGames.length; i += 1) {
+
+                                            if (eventGames[i].player === vm.inputPlayer) {
+                                                newGameTableObject.eventPosition = i + 1;
+                                                break;
+                                            }
+
+                                        }
+
+                                        if (!pushedEventData) {
+                                            vm.playerGameTableData.push(newGameTableObject);
+                                            pushedEventData = true;
+                                        }
+
+                                    });
+
+                                });
+
+                            });
+
+                        } else {
+                            vm.playerGameTableData.push(newGameTableObject);
+                        }
 
                     });
 
@@ -187,6 +232,14 @@
         		}, 300);
 
         	});
+
+        }
+
+        function camelize(inputString) {
+
+            return inputString.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
+                return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
+            }).replace(/\s+/g, '');
 
         }
 

@@ -123,45 +123,6 @@
 	        			playerGamesArray.$add(newGameReference.key());
 	        		});
 
-	        		// Check if this is a player's PB.
-	        		var personalBestData = $firebaseObject(
-	        			_fbRef
-	        				.child('personalBests')
-	        		);
-
-	        		personalBestData.$loaded().then(function() {
-
-	        			console.log(personalBestData);
-
-	        			if ( !personalBestData[camelize(newGame.player)] ) {
-
-	        				var newPersonalBest = {
-	        					score: newGame.score,
-	        					gameId: newGameReference.key(),
-	        					platform: newGame.platform,
-	        					player: newGame.player,
-	        					date: String(newGame.date)
-	        				};
-
-	        				personalBestData[camelize(newGame.player)] = newPersonalBest;
-
-
-	        			} else if ( personalBestData[camelize(newGame.player)].score < newGame.score ) {
-
-	        				personalBestData[camelize(newGame.player)] = {
-	        					score: newGame.score,
-	        					gameId: newGameReference.key(),
-	        					platform: newGame.platform,
-	        					player: newGame.player,
-	        					date: String(newGame.date)
-	        				};
-
-	        			}
-
-	        			personalBestData.$save();
-
-	        		});
-
 	        	});
 
         	});

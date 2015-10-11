@@ -6,7 +6,7 @@
         .service('submitEventService', submitEventService);
 
     /* @ngInject */
-    function submitEventService($q, $firebaseArray, $firebaseObject) {
+    function submitEventService($q, $firebaseArray, $firebaseObject, $rootScope, $state) {
 
         var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
 
@@ -85,46 +85,6 @@
 
                                 playerGamesArray.$loaded().then(function() {
                                     playerGamesArray.$add(newGameReference.key());
-
-                                    // Check if this is a player's PB.
-                                    var personalBestData = $firebaseObject(
-                                        _fbRef
-                                            .child('personalBests')
-                                    );
-
-                                    personalBestData.$loaded().then(function() {
-
-                                        console.log(personalBestData);
-
-                                        if ( !personalBestData[camelize(newGameProperties.player)] ) {
-
-                                            var newPersonalBest = {
-                                                score: newGameProperties.score,
-                                                gameId: newGameReference.key(),
-                                                platform: newGameProperties.platform,
-                                                player: newGameProperties.player,
-                                                date: String(newGameProperties.date)
-                                            };
-
-                                            personalBestData[camelize(newGameProperties.player)] = newPersonalBest;
-
-
-                                        } else if ( personalBestData[camelize(newGameProperties.player)].score < newGameProperties.score ) {
-
-                                            personalBestData[camelize(newGameProperties.player)] = {
-                                                score: newGameProperties.score,
-                                                gameId: newGameReference.key(),
-                                                platform: newGameProperties.platform,
-                                                player: newGameProperties.player,
-                                                date: String(newGameProperties.date)
-                                            };
-
-                                        }
-
-                                        personalBestData.$save();
-
-                                    });
-
                                 });
 
                             });
@@ -151,9 +111,22 @@
             eventList.$loaded().then(function() {
 
                 var newEvent = inputEventProperties;
+                newEvent.winnings = {};
+
+                // Add the event winnings records.
+                inputEventGames.forEach(function(game) {
+
+                    if (game.winnings && game.winnings > 0) {
+                        newEvent.winnings[camelize(game.player)] = game.winnings;
+                    }
+
+                });
+
                 console.log(newEvent);
 
                 eventList.$add(newEvent).then(function(newEventReference) {
+
+                    $rootScope.$broadcast('eventAdded', { eventId: newEventReference.key() });
 
                     // We need to add each game to the games table and this event record.
                     handleEventGames(inputEventGames, newEventReference);
