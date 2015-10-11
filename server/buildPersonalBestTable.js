@@ -20,7 +20,14 @@
 
 			for (var key in playersObject) {
 				if (playersObject.hasOwnProperty(key)) {
-					playersArray.push(uncamelize(key));
+
+					var name = uncamelize(key);
+					if (name === 'Dave Mc Crary') {
+						name = 'Dave McCrary';
+					}
+
+					playersArray.push(name);
+					
 				}
 			}
 

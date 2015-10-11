@@ -171,6 +171,11 @@
 
         			_player = playerData;
         			_player.name = uncamelize(playerData.$id);
+
+                    if (_player.name === 'Dave Mc Crary') {
+                        _player.name = 'Dave McCrary';
+                    }
+
         			_player.gameIds = getPlayerGameIds(_player.games);
 
         			resolve(_player);
