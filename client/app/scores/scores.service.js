@@ -6,72 +6,172 @@
         .service('scoresService', scoresService);
 
     /* @ngInject */
-    function scoresService($q, $firebaseObject, $firebaseArray) {
+    function scoresService($q, $firebaseObject, $firebaseArray, $filter) {
 
     	var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
     	var _sortedPersonalBests = [];
 
         // Public Functions
-    	this.getArcadeTopTen = getArcadeTopTen;
-        this.generateCombinedTopTen = generateCombinedTopTen;
-        this.getMameTopTen = getMameTopTen;
+    	this.getArcadePersonalBests = getArcadePersonalBests;
+        this.generateCombinedHSL = generateCombinedHSL;
+        this.getMamePersonalBests = getMamePersonalBests;
 
         ////////////////
 
-        function generateCombinedTopTen() {
+        function generateCombinedHSL() {
 
-            var personalBests = $firebaseArray(
-                _fbRef
-                    .child('personalBests')
-            );
+            var pbPromises = {
+                arcadePBs: getArcadePersonalBests(),
+                mamePBs: getMamePersonalBests()
+            };
 
             return $q(function(resolve, reject) {
 
-                personalBests.$loaded().then(function() {
+                $q.all(pbPromises).then(function(responses) {
 
-                    _sortedPersonalBests = personalBests.sort(function(a, b) {
-                        return b.score - a.score;
+                    var sanitizedArcade = [];
+                    var sanitizedMAME = [];
+
+                    responses.arcadePBs.forEach(function(pb) {
+
+                        if (pb.score !== 0) {
+
+                            sanitizedArcade.push({
+                                player: pb.playerName,
+                                score: pb.score,
+                                date: pb.date,
+                                platform: 'Arcade'
+                            });
+
+                        }
+
                     });
 
-                    resolve(_sortedPersonalBests);
+                    responses.mamePBs.forEach(function(pb) {
 
+                        if (pb.score !== 0) {
+
+                            sanitizedMAME.push({
+                                player: pb.playerName,
+                                score: pb.score,
+                                date: pb.date,
+                                platform: 'MAME'
+                            });
+
+                        }
+
+                    });
+
+                    var combinedPlatforms = sanitizedArcade.concat(sanitizedMAME);
+                    combinedPlatforms = $filter('orderBy')(combinedPlatforms, '-score');
+
+                    var knownPlayers = [];
+                    for (var i = 0; i < combinedPlatforms.length; i += 1) {
+
+                        if (knownPlayers.indexOf(combinedPlatforms[i].player) > -1) {
+
+                            combinedPlatforms.splice(i, 1);
+                            i -= 1;
+
+                        } else {
+                            knownPlayers.push(combinedPlatforms[i].player);
+                        }
+
+                    }
+
+                    var hsl = {
+                        arcade: sanitizedArcade,
+                        mame: sanitizedMAME,
+                        combined: combinedPlatforms
+                    };
+
+                    resolve(hsl);
+
+                });
+
+            });
+
+            /*
+            return $q(function(resolve, reject) {
+
+                var sanitizedArcade = [];
+                var sanitizedMAME = [];
+
+                inputArcadeBests.forEach(function(pb) {
+
+                    sanitizedArcade.push({
+                        player: pb.player,
+                        score: pb.score,
+                        date: pb.date
+                    });
+
+                });
+
+                inputMAMEBests.forEach(function(pb) {
+
+                    sanitizedMAME.push({
+                        player: pb.player,
+                        score: pb.score,
+                        date: pb.date
+                    });
+
+                });
+
+                var combinedPlatforms = sanitizedArcade + sanitizedMAME;
+                resolve(combinedPlatforms);
+
+            });
+            */
+
+        }
+
+        function getArcadePersonalBests() {
+
+            return $q(function(resolve, reject) {
+
+                var arcadePersonalBests = $firebaseArray(_fbRef.child('arcadePersonalBests'));
+                arcadePersonalBests.$loaded().then(function() {
+                    resolve(arcadePersonalBests);
                 });
 
             });
 
         }
 
-        function getArcadeTopTen() {
+        function getMamePersonalBests() {
 
-        	var arcadeTopTen = [];
+            return $q(function(resolve, reject) {
 
-        	_sortedPersonalBests.forEach(function(personalBest) {
+                var mamePersonalBests = $firebaseArray(_fbRef.child('mamePersonalBests'));
+                mamePersonalBests.$loaded().then(function() {
+                    resolve(mamePersonalBests);
+                });
 
-        		if (personalBest.platform === 'Arcade') {
-        			arcadeTopTen.push(personalBest);
-        		}
-
-        	});
-
-        	return arcadeTopTen;
+            });
 
         }
 
-        function getMameTopTen() {
+        function uncamelize(inputString) {
 
-        	var mameTopTen = [];
+            var separator = ' ';
 
-        	_sortedPersonalBests.forEach(function(personalBest) {
+            // Assume separator is _ if no one has been provided.
+            if(typeof(separator) == "undefined") {
+              separator = "_";
+            }
+        
+            // Replace all capital letters by separator followed by lowercase one
+            var text = inputString.replace(/[A-Z]/g, function (letter) {
+              return separator + letter.toUpperCase();
+            });
 
-        		if (personalBest.platform === 'MAME') {
-        			mameTopTen.push(personalBest);
-        		}
-
-        	});
-
-        	return mameTopTen;
+            text = text[0].toUpperCase() + text.slice(1);
+        
+            // Remove first separator (to avoid _hello_world name)
+            return text.replace("/^" + separator + "/", '');
 
         }
 
     }
+
 })();

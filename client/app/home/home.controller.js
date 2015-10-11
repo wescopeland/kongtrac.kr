@@ -11,9 +11,9 @@
         var vm = this;
 
         // Public Variables
-        vm.arcadeTopTenScores = [];
-        vm.combinedTopTenScores = [];
-        vm.mameTopTenScores = [];
+        vm.arcadeHSL = [];
+        vm.HSL = [];
+        vm.mameHSL = [];
         vm.showSeparate = false;
         
         // Public Functions
@@ -27,16 +27,15 @@
 
         function activate() {
 
-        	scoresService.generateCombinedTopTen().then(function then(response) {
-
-        		vm.combinedTopTenScores = response;
-
-        		vm.arcadeTopTenScores = scoresService.getArcadeTopTen();
-        		vm.mameTopTenScores = scoresService.getMameTopTen();
+        	scoresService.generateCombinedHSL().then(function then(response) {
 
                 console.log(response);
 
-        	});
+                vm.arcadeHSL = response.arcade;
+                vm.mameHSL = response.mame;
+                vm.HSL = response.combined;
+
+            });
 
         }
 

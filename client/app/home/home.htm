@@ -22,7 +22,7 @@
 					</thead>
 
 					<tbody>
-						<tr ng-repeat="score in home.combinedTopTenScores">
+						<tr ng-repeat="score in home.HSL | orderBy:'-score'">
 							<td>{{ $index + 1 }}</td>
 							<td ng-if="score.platform === 'MAME'" title="MAME"><i class="fa fa-lg fa-keyboard-o"></i></td>
 							<td ng-if="score.platform === 'Arcade'" title="Arcade Cabinet"><i class="fa fa-lg fa-map-pin" style="padding-left: 4px;"></i></td>

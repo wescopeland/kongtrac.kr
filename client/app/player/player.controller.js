@@ -82,6 +82,15 @@
                             return '<b>' + $filter('amDateFormat')(this.x, 'MM/DD/YYYY') + '</b>: ' + $filter('number')(this.y);
                         }
                     },
+                    exporting: {
+                        enabled: true,
+                        sourceWidth: 1300,
+                        sourceHeight: 600,
+                        scale: 1,
+                        chartOptions: {
+                            subtitle: null
+                        }
+                    }
         		},
         		series: [],
         		credits: {

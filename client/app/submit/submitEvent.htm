@@ -41,14 +41,63 @@
 			</select>
 		</div>
 
-		<div class="form-group text-right col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12" ng-if="!submit.inputHasCompleteData">
-			<button class="btn btn-primary" ng-click="submit.handleCommit()">
-				Commit
-			</button>
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<label class="control-label">Format</label>
+			<select class="form-control" ng-model="submit.inputFormat">
+				<option ng-value="0">High Score Competition</option>
+				<option ng-value="1">Bracket</option>
+				<option ng-value="2">High Score Competition Followed by Bracket</option>
+			</select>
 		</div>
 
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 			<hr>
+		</div>
+
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<h3>Scores</h3>
+		</div>
+
+		<div class="form-group col-lg-3 col-lg-offset-2 col-md-5 col-md-offset-1 col-sm-4 col-xs-4" style="margin-bottom: 0">
+			<label class="control-label">Player</label>
+		</div>
+
+		<div class="form-group col-lg-2 col-md-2 col-sm-4 col-xs-4" style="margin-bottom: 0">
+			<label class="control-label">Score</label>
+		</div>
+
+		<div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-4" style="margin-bottom: 0">
+			<label class="control-label">Platform</label>
+		</div>
+
+		<div ng-repeat="eventScore in submit.eventGames">
+
+			<div class="form-group col-lg-3 col-lg-offset-2 col-md-5 col-md-offset-1 col-sm-4 col-xs-4">
+				<input class="form-control" placeholder="Player" ng-model="eventScore.player">
+			</div>
+
+			<div class="form-group col-lg-2 col-md-2 col-sm-4 col-xs-4">
+				<input class="form-control" placeholder="Score" ng-model="eventScore.score">
+			</div>
+
+			<div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-4">
+				<select class="form-control" ng-model="eventScore.platform">
+					<option>Arcade</option>
+					<option>MAME</option>
+					<option>JAMMA</option>
+				</select>
+			</div>
+
+		</div>
+
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12" ng-if="!submit.inputHasCompleteData">
+			<button class="btn btn-default" ng-click="submit.addAnotherGame()">
+				<i class="fa fa-plus"></i> Add Another Game
+			</button>
+
+			<button class="btn btn-primary pull-right" ng-click="submit.handleCommit()">
+				Commit
+			</button>
 		</div>
 
 	</form>

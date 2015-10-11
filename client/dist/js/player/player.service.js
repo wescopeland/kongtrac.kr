@@ -127,7 +127,6 @@
 
         			if (currentDate < firstMillionDate || !firstMillionDate) {
         				firstMillionDate = currentDate;
-                        console.log(firstMillionDate);
         			}
 
         		}
