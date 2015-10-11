@@ -832,7 +832,7 @@
                         _game.maxSpring = findMaxSpring(_game.boardScores);
                         _game.minRivet = findMinRivet(_game.boardScores);
                         _game.maxRivet = findMaxRivet(_game.boardScores);
-                        _game.minLevel = findMinLevel(_game.levelScores, _game.boardScores);
+                        _game.minLevel = findMinLevel(_game.levelScores, _game.mappableLevels);
                         _game.maxLevel = findMaxLevel(_game.levelScores);
 
                     }
