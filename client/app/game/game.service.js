@@ -287,7 +287,7 @@
             var barrelScores = [];
 
             // Begin at 5-1.
-            for (var i = 14; i < 116; i += 1) {
+            for (var i = 14; i < 116 && i < b.length; i += 1) {
 
                 // Every other board is a barrel. If this isn't a barrel, go to next iteration.
                 if (i % 2 === 0) {
@@ -310,7 +310,7 @@
             var barrelScores = [];
 
             // Begin at 5-1.
-            for (var i = 14; i < 116; i += 1) {
+            for (var i = 14; i < 116 && i < b.length; i += 1) {
 
                 // Every other board is a barrel. If this isn't a barrel, go to next iteration.
                 if (i % 2 === 0) {
@@ -322,6 +322,23 @@
             var minBarrel = Math.min.apply(Math, barrelScores);
 
             return minBarrel;
+
+        }
+
+        function getMappableLevels(inputBoardScores) {
+
+            var mappableLevels = [];
+
+            // Get the mappable levels.
+            var currentLevel = 5;
+            for (var i = 19; i < inputBoardScores.length; i += 6) {
+
+                mappableLevels.push('L' + currentLevel);
+                currentLevel += 1;
+
+            }
+
+            return mappableLevels;
 
         }
 
@@ -350,27 +367,9 @@
 
         }
 
-        function getMappableLevels(inputBoardScores) {
-
-            var mappableLevels = [];
-
-            // Get the mappable levels.
-            var currentLevel = 5;
-            for (var i = 19; i < inputBoardScores.length; i += 6) {
-
-                mappableLevels.push('L' + currentLevel);
-                currentLevel += 1;
-
-            }
-
-            return mappableLevels;
-
-        }
-
         function findMinLevel(inputLevelScores, inputMappableLevels) {
 
             var levelScoresArray = [];
-
             var currentLevel = 1;
 
             // Map the level scores.
@@ -378,7 +377,7 @@
 
                 if (inputLevelScores.hasOwnProperty(key)) {
 
-                    if (currentLevel >= 5 && inputMappableLevels.indexOf(key) > -1) {
+                    if (currentLevel >= 5) {
                         levelScoresArray.push(inputLevelScores[key]);
                     }
                     
@@ -402,7 +401,7 @@
             var pieScores = [];
 
             // Begin at 5-1.
-            for (var i = 15; i < 116; i += 6) {
+            for (var i = 15; i < 116 && i < b.length; i += 6) {
                 pieScores.push(b[i]);
             }
 
@@ -420,7 +419,7 @@
             var pieScores = [];
 
             // Begin at 5-1.
-            for (var i = 15; i < 116; i += 6) {
+            for (var i = 15; i < 116 && i < b.length; i += 6) {
                 pieScores.push(b[i]);
             }
 
@@ -438,7 +437,7 @@
             var springScores = [];
 
             // Begin at 5-1.
-            for (var i = 17; i < 116; i += 6) {
+            for (var i = 17; i < 116 && i < b.length; i += 6) {
                 springScores.push(b[i]);
             }
 
@@ -456,7 +455,7 @@
             var springScores = [];
 
             // Begin at 5-1.
-            for (var i = 17; i < 116; i += 6) {
+            for (var i = 17; i < 116 && i < b.length; i += 6) {
                 springScores.push(b[i]);
             }
 
@@ -474,7 +473,7 @@
             var rivetScores = [];
 
             // Begin at 5-1.
-            for (var i = 19; i < 116; i += 6) {
+            for (var i = 19; i < 116 && i < b.length; i += 6) {
                 rivetScores.push(b[i]);
             }
 
@@ -492,7 +491,7 @@
             var rivetScores = [];
 
             // Begin at 5-1.
-            for (var i = 19; i < 116; i += 6) {
+            for (var i = 19; i < 116 && i < b.length; i += 6) {
                 rivetScores.push(b[i]);
             }
 
