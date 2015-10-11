@@ -134,6 +134,7 @@
         	playerService.getPlayerData(vm.inputPlayer).then(function then(response) {
 
         		vm.playerData = response;
+                vm.playerData.hasEvents = false;
 
         		vm.playerData.gamesData = [];
 
@@ -177,6 +178,8 @@
                         }
 
                         if (game.event) {
+
+                            vm.playerData.hasEvents = true;
 
                             eventService.getEventData(game.event).then(function then(response) {
 

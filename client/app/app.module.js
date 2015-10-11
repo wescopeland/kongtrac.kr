@@ -10,6 +10,7 @@
             'kongtrac.game',
             'kongtrac.player',
             'kongtrac.event',
+            'kongtrac.compare',
             'kongtrac.search'
         ]);
 })();

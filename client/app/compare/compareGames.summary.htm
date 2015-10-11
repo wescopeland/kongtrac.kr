@@ -1,0 +1,253 @@
+<div class="row">
+
+	<!-- Score Summary Bars -->
+	<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+		<div class="table-responsive">
+			<table class="table">
+				<tbody>
+
+					<tr ng-repeat="game in compare.gamesData">
+						<th class="text-right" style="width: 10em; border-top: none; vertical-align: middle; padding-bottom: 1px; padding-top: 1px;">
+						    Levels ({{ game.player.split(' ')[1] }})
+						</th>
+						<td style="border-top: none; padding-bottom: 1px; padding-top: 1px;">
+							<div class="progress progress-striped" 
+							     style="height: 100%; margin-bottom: 2px;">
+							    <div class="progress-bar progress-bar-default"
+							         ng-style="{ 'width': compare.calculateAverageBarPercentage(game.levelAverages, compare.weights.minLevel, compare.weights.maxLevel) }">
+							    	{{ game.levelAverages[compare.inputLevelSlider - 5] | number }}
+							    </div>
+							</div>
+						</td>
+					</tr>
+
+					<tr><th style="border-top: none; padding-bottom: 1px;"></th></tr>
+
+					<tr ng-repeat="game in compare.gamesData">
+						<th class="text-right" style="width: 10em; border-top: none; vertical-align: middle; padding-bottom: 1px; padding-top: 1px;">
+						    Barrels ({{ game.player.split(' ')[1] }})
+						</th>
+						<td style="border-top: none; padding-bottom: 1px; padding-top: 1px;">
+							<div class="progress progress-striped" 
+							     style="height: 100%; margin-bottom: 2px;">
+							    <div class="progress-bar progress-bar-danger"
+							         ng-style="{ 'width': compare.calculateAverageBarPercentage(game.barrelAverages, compare.weights.minBarrel, compare.weights.maxBarrel) }">
+							    	{{ game.barrelAverages[compare.inputLevelSlider - 5] | number }}
+							    </div>
+							</div>
+						</td>
+					</tr>
+
+					<tr><th style="border-top: none; padding-bottom: 1px;"></th></tr>
+
+					<tr ng-repeat="game in compare.gamesData">
+						<th class="text-right" style="width: 10em; border-top: none; vertical-align: middle; padding-bottom: 1px; padding-top: 1px;">
+						    Pies ({{ game.player.split(' ')[1] }})
+						</th>
+						<td style="border-top: none; padding-bottom: 1px; padding-top: 1px;">
+							<div class="progress progress-striped" 
+							     style="height: 100%; margin-bottom: 2px;">
+							    <div class="progress-bar progress-bar-warning"
+							         ng-style="{ 'width': compare.calculateAverageBarPercentage(game.pieAverages, compare.weights.minPie, compare.weights.maxPie) }">
+							    	{{ game.pieAverages[compare.inputLevelSlider - 5] | number }}
+							    </div>
+							</div>
+						</td>
+					</tr>
+
+					<tr><th style="border-top: none; padding-bottom: 1px;"></th></tr>
+
+					<tr ng-repeat="game in compare.gamesData">
+						<th class="text-right" style="width: 10em; border-top: none; vertical-align: middle; padding-bottom: 1px; padding-top: 1px;">
+						    Springs ({{ game.player.split(' ')[1] }})
+						</th>
+						<td style="border-top: none; padding-bottom: 1px; padding-top: 1px;">
+							<div class="progress progress-striped" 
+							     style="height: 100%; margin-bottom: 2px;">
+							    <div class="progress-bar progress-bar-info"
+							         ng-style="{ 'width': compare.calculateAverageBarPercentage(game.springAverages, compare.weights.minSpring, compare.weights.maxSpring) }">
+							    	{{ game.springAverages[compare.inputLevelSlider - 5] | number }}
+							    </div>
+							</div>
+						</td>
+					</tr>
+
+					<tr><th style="border-top: none; padding-bottom: 1px;"></th></tr>
+
+					<tr ng-repeat="game in compare.gamesData">
+						<th class="text-right" style="width: 10em; border-top: none; vertical-align: middle; padding-bottom: 1px; padding-top: 1px;">
+						    Rivets ({{ game.player.split(' ')[1] }})
+						</th>
+						<td style="border-top: none; padding-bottom: 1px; padding-top: 1px;">
+							<div class="progress progress-striped" 
+							     style="height: 100%; margin-bottom: 2px;">
+							    <div class="progress-bar progress-bar-primary"
+							         ng-style="{ 'width': compare.calculateAverageBarPercentage(game.rivetAverages, compare.weights.minRivet, compare.weights.maxRivet) }">
+							    	{{ game.rivetAverages[compare.inputLevelSlider - 5] | number }}
+							    </div>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<th class="text-right" style="width: 10em; border-top: none;">Moment</th>
+						<td style="border-top: none;">
+							<div style="height: 100%; padding-right: 80px;">
+								<slider ng-model="compare.inputLevelSlider" 
+								        formatter="compare.formatSlider" 
+								        min="5" 
+								        step="1" 
+								        max="21" 
+								        value="testOptions.value">
+								</slider>
+								<label style="margin-top: -22px; margin-right: -70px;" class="pull-right">
+								    L{{ compare.inputLevelSlider }}
+								</label>
+							</div>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+	<!-- Detail Table -->
+	<div class="table-responsive">
+
+		<table class="table table-condensed table-striped table-hover">
+
+			<thead>
+				<tr>
+					<th colspan="2" class="text-center ibox-header">
+						<span ng-repeat="game in compare.gamesData">
+							{{ game.score | number }} <span ng-if="!$last">v. </span>
+						</span>
+					</th>
+				</tr>
+			</thead>
+
+			<tbody>
+
+				<tr class="small">
+					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Players</td>
+					<td>
+						<span ng-repeat="game in compare.gamesData">
+							{{ game.player }}<br>
+						</span>
+					</td>
+				</tr>
+
+				<tr class="small">
+					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Dates</td>
+					<td>
+						<span ng-repeat="game in compare.gamesData">
+							{{ game.date }}<br>
+						</span>
+					</td>
+				</tr>
+
+				<tr class="small">
+					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Platforms</td>
+					<td>
+						<span ng-repeat="game in compare.gamesData">
+							<i class="fa fa-lg fa-keyboard-o" ng-if="game.platform === 'MAME'"></i>
+							<i class="fa fa-lg fa-map-pin" ng-if="game.platform === 'Arcade'"></i>
+							<i class="fa fa-lg fa-gg" ng-if="game.platform !== 'Arcade' && game.platform !== 'MAME'"></i>
+							{{ game.platform }}
+							<br>
+						</span>
+					</td>
+				</tr>
+
+				<tr class="small">
+					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Final Boards</td>
+					<td>
+						<span ng-repeat="game in compare.gamesData">
+							L{{ compare.getMappedBoardNumber(game.deaths[3].board) }}
+							<span ng-if="compare.getMappedBoardNumber(game.deaths[3].board) === '22-1'"> (Kill Screen)</span><br>
+						</span>
+					</td>
+				</tr>
+
+				<tr class="small">
+					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Starts</td>
+					<td>
+						<span ng-repeat="game in compare.gamesData">
+							{{ game.startScore | number }}<br>
+						</span>
+					</td>
+				</tr>
+
+				<tr class="small">
+					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Death Points</td>
+					<td>
+						<span ng-repeat="game in compare.gamesData">
+							{{ game.deathPoints | number }}<br>
+						</span>
+					</td>
+				</tr>
+
+				<tr class="small">
+					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Level Averages</td>
+					<td>
+						<span ng-repeat="game in compare.gamesData">
+							{{ game.levelAverages[game.levelAverages.length - 1] | number }}<br>
+						</span>
+					</td>
+				</tr>
+
+				<tr class="small">
+					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Max Paces</td>
+					<td>
+						<span ng-repeat="game in compare.gamesData">
+							{{ game.maxPace.pace | number }} (L{{ compare.getMappedBoardNumber(game.maxPace.boardNumber) }})<br>
+						</span>
+					</td>
+				</tr>
+
+				<tr class="small">
+					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Min Paces</td>
+					<td>
+						<span ng-repeat="game in compare.gamesData">
+							{{ game.minPace.pace | number }} (L{{ compare.getMappedBoardNumber(game.minPace.boardNumber) }})<br>
+						</span>
+					</td>
+				</tr>
+
+				<tr class="small">
+					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Longest Lives</td>
+					<td>
+						<span ng-repeat="game in compare.gamesData">
+							{{ game.longestLife.boardCount | number }} Boards ({{ game.longestLife.levelCount | number }} Levels)<br>
+						</span>
+					</td>
+				</tr>
+
+				<tr class="small">
+					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Average Lives</td>
+					<td>
+						<span ng-repeat="game in compare.gamesData">
+							{{ game.averageLifeBoardCount | number }} Boards ({{game.averageLifeBoardCount / 6 | number:0}} Levels)<br>
+						</span>
+					</td>
+				</tr>
+
+			</tbody>
+
+		</table>
+
+	</div>
+
+</div>
+
+<div class="row">
+
+	<!-- Pace Chart -->
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<highchart id="gamePaceChart" config="compare.paceChartConfiguration"></highchart>
+	</div>
+
+</div>

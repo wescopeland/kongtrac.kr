@@ -122,49 +122,53 @@
 
 </div>
 
-<hr>
+<div ng-if="player.playerData.hasEvents">
 
-<h3 style="display: inline;">Event performance</h3>
-<div class="row">
+	<hr>
 
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	<h3 style="display: inline;">Event performance</h3>
+	<div class="row">
 
-		<div class="table-responsive">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-			<table st-table="player.playerData.gamesData" class="table table-hover">
+			<div class="table-responsive">
 
-				<thead>
-					<tr class="eventheader">
-						<th st-sort="platform">Dates</th>
-						<th st-sort="date">Event</th>
-						<th st-sort="score">Position</th>
-						<th st-sort="finalBoard">Score</th>
-						<th class=""></th>
-					</tr>
-				</thead>
+				<table st-table="player.playerData.gamesData" class="table table-hover">
 
-				<tbody>
-					<tr ng-repeat="game in player.playerGameTableData | orderBy:'-endDate'" ng-hide="!game.eventName">
+					<thead>
+						<tr class="eventheader">
+							<th st-sort="platform">Dates</th>
+							<th st-sort="date">Event</th>
+							<th st-sort="score">Position</th>
+							<th st-sort="finalBoard">Score</th>
+							<th class=""></th>
+						</tr>
+					</thead>
 
-						<td>{{ game.eventStartDate | amDateFormat: 'MM/DD/YYYY' }} &ndash; {{ game.eventEndDate | amDateFormat: 'MM/DD/YYYY' }}</td>
-						<td><a ng-href="{{ '#/event/' + game.eventId }}">{{ game.eventName }}</a></td>
-						<td>{{ game.eventPosition }}</td>
+					<tbody>
+						<tr ng-repeat="game in player.playerGameTableData | orderBy:'-endDate'" ng-hide="!game.eventName">
 
-						<!--
-						<td ng-if="!game.hasCompleteData">{{ game.score | number }}</td>
-						<td ng-if="game.hasCompleteData">
-							<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
-						</td>
-						-->
+							<td>{{ game.eventStartDate | amDateFormat: 'MM/DD/YYYY' }} &ndash; {{ game.eventEndDate | amDateFormat: 'MM/DD/YYYY' }}</td>
+							<td><a ng-href="{{ '#/event/' + game.eventId }}">{{ game.eventName }}</a></td>
+							<td>{{ game.eventPosition }}</td>
 
-						<td>
-							<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
-						</td>
+							<!--
+							<td ng-if="!game.hasCompleteData">{{ game.score | number }}</td>
+							<td ng-if="game.hasCompleteData">
+								<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
+							</td>
+							-->
 
-					</tr>
-				</tbody>
+							<td>
+								<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
+							</td>
 
-			</table>
+						</tr>
+					</tbody>
+
+				</table>
+
+			</div>
 
 		</div>
 
