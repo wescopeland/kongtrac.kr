@@ -377,7 +377,7 @@
 
                 if (inputLevelScores.hasOwnProperty(key)) {
 
-                    if (currentLevel >= 5) {
+                    if (currentLevel >= 5 && inputMappableLevels.indexOf(key) > -1) {
                         levelScoresArray.push(inputLevelScores[key]);
                     }
                     
