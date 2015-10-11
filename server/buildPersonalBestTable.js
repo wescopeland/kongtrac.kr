@@ -36,7 +36,7 @@
 
 						var gameData = game.val();
 						if (gameData.player === player) {
-							playerGames.push(gameData);
+							playerGames.push({ data: gameData, key: game.key() });
 						}
 
 					});
@@ -46,16 +46,20 @@
 					var currentMAMEPB = 0;
 					var currentArcadePBDate = null;
 					var currentMAMEPBDate = null;
+					var currentArcadeGameId = null;
+					var currentMameGameId = null;
 					playerGames.forEach(function(playerGame) {
 
-						if ( (playerGame.platform === 'Arcade' || playerGame.platform === 'JAMMA') && playerGame.score > currentArcadePB) {
-							currentArcadePB = playerGame.score;
-							currentArcadePBDate = playerGame.date;
+						if ( (playerGame.data.platform === 'Arcade' || playerGame.data.platform === 'JAMMA') && playerGame.data.score > currentArcadePB) {
+							currentArcadePB = playerGame.data.score;
+							currentArcadePBDate = playerGame.data.date;
+							currentArcadeGameId = playerGame.key;
 						}
 
-						if (playerGame.platform === 'MAME' && playerGame.score > currentMAMEPB) {
-							currentMAMEPB = playerGame.score;
-							currentMAMEPBDate = playerGame.date;
+						if (playerGame.data.platform === 'MAME' && playerGame.data.score > currentMAMEPB) {
+							currentMAMEPB = playerGame.data.score;
+							currentMAMEPBDate = playerGame.data.date;
+							currentMameGameId = playerGame.key;
 						}
 
 					});
@@ -64,13 +68,15 @@
 					_arcadePbRef.child(camelize(player)).set({
 						playerName: player,
 						score: currentArcadePB,
-						date: currentArcadePBDate
+						date: currentArcadePBDate,
+						id: currentArcadeGameId
 					});
 
 					_mamePbRef.child(camelize(player)).set({
 						playerName: player,
 						score: currentMAMEPB,
-						date: currentMAMEPBDate
+						date: currentMAMEPBDate,
+						id: currentMameGameId
 					});
 
 					console.log('Added personal best records for ' + player + '.');

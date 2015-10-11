@@ -40,7 +40,8 @@
                                 player: pb.playerName,
                                 score: pb.score,
                                 date: pb.date,
-                                platform: 'Arcade'
+                                platform: 'Arcade',
+                                id: pb.id
                             });
 
                         }
@@ -55,7 +56,8 @@
                                 player: pb.playerName,
                                 score: pb.score,
                                 date: pb.date,
-                                platform: 'MAME'
+                                platform: 'MAME',
+                                id: pb.id
                             });
 
                         }

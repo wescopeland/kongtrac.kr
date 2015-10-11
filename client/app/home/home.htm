@@ -28,7 +28,7 @@
 							<td ng-if="score.platform === 'Arcade'" title="Arcade Cabinet"><i class="fa fa-lg fa-map-pin" style="padding-left: 4px;"></i></td>
 							<td ng-if="score.platform !== 'Arcade' && score.platform !== 'MAME'" title="Other"><i class="fa fa-lg fa-gg"></i></td>
 							<td><a ng-href="{{ '#/player/' + home.camelize(score.player) }}">{{ score.player }}</a></td>
-							<td><a ng-href="{{ '#/game/' + score.gameId + '/summary' }}">{{ score.score | number }}</a></td>
+							<td><a ng-href="{{ '#/game/' + score.id + '/summary' }}">{{ score.score | number }}</a></td>
 							<td>{{ score.date }}</td>
 						</tr>
 					</tbody>
@@ -66,7 +66,7 @@
 							<td>{{ $index + 1 }}</td>
 							<td title="Arcade Cabinet"><i class="fa fa-lg fa-map-pin" style="padding-left: 4px;"></i></td>
 							<td><a ng-href="{{ '#/player/' + home.camelize(score.player) }}">{{ score.player }}</a></td>
-							<td><a ng-href="{{ '#/game/' + score.gameId + '/summary' }}">{{ score.score | number }}</a></td>
+							<td><a ng-href="{{ '#/game/' + score.id + '/summary' }}">{{ score.score | number }}</a></td>
 							<td>{{ score.date }}</td>
 						</tr>
 					</tbody>
