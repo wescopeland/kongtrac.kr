@@ -2,6 +2,11 @@ var express = require('express');
 var compress = require('compression')();
 var serveStatic = require('serve-static');
 var bodyParser = require('body-parser');
+var every = require('every-moment');
+
+var kongtrackr = require('./server/batch');
+
+kongtrackr.runBatch();
 
 var app = express();
 app.use(compress);
@@ -24,4 +29,9 @@ app.use(function(req, res, next) {
 	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 	next();
 
+});
+
+// Batch schedule
+var timer = every(30, 'minutes', function() {
+	kongtrackr.runBatch();
 });

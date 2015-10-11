@@ -1,7 +1,15 @@
 (function() {
 
+	'use strict';
+
 	var personalBestTable = require('./buildPersonalBestTable');
 
-	personalBestTable.build();
+	function runBatch() {
+		personalBestTable.build();
+	}
+
+	module.exports.runBatch = function() {
+		return runBatch();
+	};
 
 })();

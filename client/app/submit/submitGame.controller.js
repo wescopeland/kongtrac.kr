@@ -6,7 +6,7 @@
         .controller('SubmitGameController', SubmitGameController);
 
     /* @ngInject */
-    function SubmitGameController($scope, boardMapper, submitGameService) {
+    function SubmitGameController($scope, $state, boardMapper, submitGameService) {
 
         var vm = this;
 
@@ -39,6 +39,11 @@
         			'row_above', 'row_below', 'remove_row'
         		]
         	};
+
+            $scope.$on('gameAdded', function() {
+                console.log(arguments[1].gameId);
+                $state.go('game.summary', { gameId: arguments[1].gameId });
+            });
 
         }
 

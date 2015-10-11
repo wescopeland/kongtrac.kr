@@ -6,7 +6,7 @@
         .service('submitGameService', submitGameService);
 
     /* @ngInject */
-    function submitGameService($q, $firebaseObject, $firebaseArray) {
+    function submitGameService($q, $rootScope, $firebaseObject, $firebaseArray) {
 
     	var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
 
@@ -109,6 +109,8 @@
 
 	        	gameList.$add(newGame).then(function(newGameReference) {
 
+                    $rootScope.$broadcast('gameAdded', { gameId: newGameReference.key() });
+
 	        		// Add this game to the player's array of games.
 	        		var playerGamesArray = $firebaseArray(
 	        			_fbRef
@@ -167,5 +169,5 @@
         }
 
     }
-    submitGameService.$inject = ["$q", "$firebaseObject", "$firebaseArray"];
+    submitGameService.$inject = ["$q", "$rootScope", "$firebaseObject", "$firebaseArray"];
 })();
