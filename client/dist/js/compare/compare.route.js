@@ -27,10 +27,6 @@
             .state('compareGames.summary', {
                 url: '/summary',
                 templateUrl: '/app/compare/compareGames.summary.htm'
-            })
-            .state('compareGames.boards', {
-                url: '/boards',
-                templateUrl: '/app/compare/compareGames.boards.htm'
             });
 
     }

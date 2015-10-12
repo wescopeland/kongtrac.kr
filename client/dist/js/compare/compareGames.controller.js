@@ -20,6 +20,7 @@
 
         // Public Functions
         vm.calculateAverageBarPercentage = calculateAverageBarPercentage;
+        vm.camelize = camelize;
         vm.formatSlider = formatSlider;
         vm.getMappedBoardNumber = getMappedBoardNumber;
 
@@ -85,12 +86,27 @@
                         animation: true
                     },
                     title: {
-                        text: null
+                        text: ' '
                     },
                     tooltip: {
                         formatter: function() {
-                            return '<b>' + getPaceChartMappedBoardNumber(this.x) + '</b>: ' + $filter('number')(this.y);
-                        }
+
+                            var tooltipTemplate = '';
+
+                            var sortedPoints = $filter('orderBy')(this.points, '-y');
+                            sortedPoints.forEach(function(point) {
+
+                                tooltipTemplate += '<b>' + '(' + point.series.name.split(' ')[0] + ') ' 
+                                    + getScoreChartMappedBoardNumber(point.x) + '</b>: ' 
+                                    + $filter('number')(point.y) + '<br>';
+
+                            });
+
+                            return tooltipTemplate;
+
+                        },
+                        shared: true,
+                        crosshairs: true
                     },
                     exporting: {
                         enabled: true,
@@ -145,12 +161,27 @@
                         animation: true
                     },
                     title: {
-                        text: null
+                        text: ' '
                     },
                     tooltip: {
                         formatter: function() {
-                            return '<b>' + getScoreChartMappedBoardNumber(this.x) + '</b>: ' + $filter('number')(this.y);
-                        }
+
+                            var tooltipTemplate = '';
+
+                            var sortedPoints = $filter('orderBy')(this.points, '-y');
+                            sortedPoints.forEach(function(point) {
+
+                                tooltipTemplate += '<b>' + '(' + point.series.name.split(' ')[0] + ') ' 
+                                    + getScoreChartMappedBoardNumber(point.x) + '</b>: ' 
+                                    + $filter('number')(point.y) + '<br>';
+
+                            });
+
+                            return tooltipTemplate;
+
+                        },
+                        shared: true,
+                        crosshairs: true
                     },
                     exporting: {
                         enabled: true,
@@ -214,7 +245,7 @@
 
             // Get all input games.
             vm.gamesData = [];
-            vm.inputGameIds.forEach(function(gameId) {
+            vm.inputGameIds.forEach(function(gameId, index) {
 
                 gameService.getGameData(gameId).then(function then(response) {
 
@@ -242,6 +273,16 @@
                             enabled: false
                         }
                     });
+
+                    vm.paceChartConfiguration.options.title.text += gameData.player;
+                    vm.scoreChartConfiguration.options.title.text += gameData.player;
+                    if (index !== vm.inputGameIds.length - 1) {
+                        vm.paceChartConfiguration.options.title.text += ' v. ';
+                        vm.scoreChartConfiguration.options.title.text += ' v. ';
+                    } else {
+                        vm.paceChartConfiguration.options.title.text += ' (Pace History)';
+                        vm.scoreChartConfiguration.options.title.text += ' (Score History)';
+                    }
 
                     if (response.deaths) {
 

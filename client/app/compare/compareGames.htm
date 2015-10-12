@@ -1,14 +1,10 @@
 <div class="row">
 	<h2>
-		<span ng-repeat="game in compare.gamesData">{{ game.player }} ({{ game.score | number }}) <span ng-if="!$last"> v. </span></span>
-		<small>
-		    <a ng-if="compare.$state.current.name !== 'compareGames.summary'" ng-href="{{ '#/game/' + compare.gameData.$id + '/summary' }}">Summary</a>
-		    <span ng-if="compare.$state.current.name === 'compareGames.summary'">Summary</span>
-		</small>
-		<small>
-		    <a ng-if="compare.$state.current.name !== 'compareGames.boards'" ng-href="{{ '#/compare/' + compare.gameData.$id + '/boards' }}">Score breakdown</a>
-		    <span ng-if="compare.$state.current.name === 'compareGames.boards'">Score breakdown</span>
-		</small>
+		<span ng-repeat="game in compare.gamesData">
+		    <a ng-href="{{ '#/player/' + compare.camelize(game.player) }}">{{ game.player }}</a> 
+		     (<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>) 
+		     <span ng-if="!$last"> v. </span>
+		</span>
 	</h2>
 </div>
 

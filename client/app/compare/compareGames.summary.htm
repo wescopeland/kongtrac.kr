@@ -1,7 +1,7 @@
-<div class="row">
+<div class="row" style="margin-top: 15px;">
 
 	<!-- Score Summary Bars -->
-	<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
 		<div class="table-responsive">
 			<table class="table">
@@ -114,140 +114,89 @@
 
 	</div>
 
-	<!-- Detail Table -->
-	<div class="table-responsive">
+</div>
 
-		<table class="table table-condensed table-striped table-hover">
+<br>
 
-			<thead>
-				<tr>
-					<th colspan="2" class="text-center ibox-header">
-						<span ng-repeat="game in compare.gamesData">
-							{{ game.score | number }} <span ng-if="!$last">v. </span>
-						</span>
-					</th>
-				</tr>
-			</thead>
+<div class="row">
 
-			<tbody>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-				<tr class="small">
-					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Players</td>
-					<td>
-						<span ng-repeat="game in compare.gamesData">
-							{{ game.player }}<br>
-						</span>
-					</td>
-				</tr>
+		<!-- Detail Table -->
+		<div class="table-responsive">
 
-				<tr class="small">
-					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Dates</td>
-					<td>
-						<span ng-repeat="game in compare.gamesData">
-							{{ game.date }}<br>
-						</span>
-					</td>
-				</tr>
+			<table class="table table-condensed table-striped table-hover">
 
-				<tr class="small">
-					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Platforms</td>
-					<td>
-						<span ng-repeat="game in compare.gamesData">
+				<thead>
+
+					<tr>
+						<th></th>
+						<th>Date</th>
+						<th>Platform</th>
+						<th>Final Board</th>
+						<th>Start</th>
+						<th>Death Points</th>
+						<th>Level Average</th>
+						<th>Max Pace</th>
+						<th>Min Pace</th>
+					</tr>
+
+				</thead>
+
+				<tbody>
+
+					<tr ng-repeat="game in compare.gamesData">
+
+						<td>{{ game.player }}</td>
+						<td>{{ game.date }}</td>
+						<td>
 							<i class="fa fa-lg fa-keyboard-o" ng-if="game.platform === 'MAME'"></i>
 							<i class="fa fa-lg fa-map-pin" ng-if="game.platform === 'Arcade'"></i>
 							<i class="fa fa-lg fa-gg" ng-if="game.platform !== 'Arcade' && game.platform !== 'MAME'"></i>
 							{{ game.platform }}
-							<br>
-						</span>
-					</td>
-				</tr>
-
-				<tr class="small">
-					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Final Boards</td>
-					<td>
-						<span ng-repeat="game in compare.gamesData">
+						</td>
+						<td>
 							L{{ compare.getMappedBoardNumber(game.deaths[3].board) }}
-							<span ng-if="compare.getMappedBoardNumber(game.deaths[3].board) === '22-1'"> (Kill Screen)</span><br>
-						</span>
-					</td>
-				</tr>
+							<span ng-if="compare.getMappedBoardNumber(game.deaths[3].board) === '22-1'"> (Kill Screen)</span>
+						</td>
+						<td>{{ game.startScore | number }}</td>
+						<td>{{ game.deathPoints | number }}</td>
+						<td>{{ game.levelAverages[game.levelAverages.length - 1] | number }}</td>
+						<td>{{ game.maxPace.pace | number }} (L{{ compare.getMappedBoardNumber(game.maxPace.boardNumber) }})</td>
+						<td>{{ game.minPace.pace | number }} (L{{ compare.getMappedBoardNumber(game.minPace.boardNumber) }})</td>
 
-				<tr class="small">
-					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Starts</td>
-					<td>
-						<span ng-repeat="game in compare.gamesData">
-							{{ game.startScore | number }}<br>
-						</span>
-					</td>
-				</tr>
+					</tr>
 
-				<tr class="small">
-					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Death Points</td>
-					<td>
-						<span ng-repeat="game in compare.gamesData">
-							{{ game.deathPoints | number }}<br>
-						</span>
-					</td>
-				</tr>
+					<tr></tr>
 
-				<tr class="small">
-					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Level Averages</td>
-					<td>
-						<span ng-repeat="game in compare.gamesData">
-							{{ game.levelAverages[game.levelAverages.length - 1] | number }}<br>
-						</span>
-					</td>
-				</tr>
+				</tbody>
 
-				<tr class="small">
-					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Max Paces</td>
-					<td>
-						<span ng-repeat="game in compare.gamesData">
-							{{ game.maxPace.pace | number }} (L{{ compare.getMappedBoardNumber(game.maxPace.boardNumber) }})<br>
-						</span>
-					</td>
-				</tr>
+			</table>
 
-				<tr class="small">
-					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Min Paces</td>
-					<td>
-						<span ng-repeat="game in compare.gamesData">
-							{{ game.minPace.pace | number }} (L{{ compare.getMappedBoardNumber(game.minPace.boardNumber) }})<br>
-						</span>
-					</td>
-				</tr>
-
-				<tr class="small">
-					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Longest Lives</td>
-					<td>
-						<span ng-repeat="game in compare.gamesData">
-							{{ game.longestLife.boardCount | number }} Boards ({{ game.longestLife.levelCount | number }} Levels)<br>
-						</span>
-					</td>
-				</tr>
-
-				<tr class="small">
-					<td class="text-right ibox-left" style="width: 40%; vertical-align: middle;">Average Lives</td>
-					<td>
-						<span ng-repeat="game in compare.gamesData">
-							{{ game.averageLifeBoardCount | number }} Boards ({{game.averageLifeBoardCount / 6 | number:0}} Levels)<br>
-						</span>
-					</td>
-				</tr>
-
-			</tbody>
-
-		</table>
+		</div>
 
 	</div>
 
 </div>
+
+<br>
 
 <div class="row">
 
 	<!-- Pace Chart -->
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<highchart id="gamePaceChart" config="compare.paceChartConfiguration"></highchart>
+	</div>
+
+</div>
+
+<br>
+
+<div class="row">
+
+	<!-- Score Chart -->
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<highchart id="gameScoreChart" config="compare.scoreChartConfiguration"></highchart>
 	</div>
 
 </div>
