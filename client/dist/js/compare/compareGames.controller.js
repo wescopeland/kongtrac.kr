@@ -97,7 +97,7 @@
                             sortedPoints.forEach(function(point) {
 
                                 tooltipTemplate += '<b>' + '(' + point.series.name.split(' ')[0] + ') ' 
-                                    + getScoreChartMappedBoardNumber(point.x) + '</b>: ' 
+                                    + getPaceChartMappedBoardNumber(point.x) + '</b>: ' 
                                     + $filter('number')(point.y) + '<br>';
 
                             });
