@@ -6,7 +6,7 @@
         .controller('SubmitEventController', SubmitEventController);
 
     /* @ngInject */
-    function SubmitEventController($scope, submitEventService) {
+    function SubmitEventController($scope, $state, submitEventService) {
 
         var vm = this;
 
