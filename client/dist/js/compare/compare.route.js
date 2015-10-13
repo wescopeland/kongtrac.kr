@@ -14,7 +14,7 @@
     			controller: 'ComparePlayersController as compare'
     		})
     		.state('compareEvents', {
-                url: '/compare/events?eventIds',
+                url: '/compare/events/:eventIds',
                 templateUrl: '/app/compare/compareEvents.htm',
                 controller: 'CompareEventsController as compare'
             })
