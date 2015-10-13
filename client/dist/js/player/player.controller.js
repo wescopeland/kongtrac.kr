@@ -136,36 +136,26 @@
         		vm.playerData = response;
                 vm.playerData.hasEvents = false;
 
-        		vm.playerData.gamesData = [];
+                playerService.getPlayerGames(vm.playerData.gameIds).then(function then(gamesResponse) {
 
-        		vm.playerData.gameIds.forEach(function(gameId) {
+                    vm.playerData.gamesData = gamesResponse;
 
-        			gameService.getGameData(gameId).then(function then(gameResponse) {
-        				vm.playerData.gamesData.push(gameResponse);
-        			});
+                    vm.playerData.arcadeBest = playerService.getArcadeBest(vm.playerData.gamesData);
+                    vm.playerData.mameBest = playerService.getMAMEBest(vm.playerData.gamesData);
+                    vm.playerData.firstKSDate = playerService.getFirstKSDate(vm.playerData.gamesData);
+                    vm.playerData.firstMillionDate = playerService.getFirstMillionDate(vm.playerData.gamesData);
+                    vm.playerData.pbMap = playerService.buildPBMap(vm.playerData.gamesData);
 
-        		});
-
-        		var processPlayerInterval = $interval(function() {
-
-        			vm.playerData.arcadeBest = playerService.getArcadeBest(vm.playerData.gamesData);
-        			vm.playerData.mameBest = playerService.getMAMEBest(vm.playerData.gamesData);
-        			vm.playerData.firstKSDate = playerService.getFirstKSDate(vm.playerData.gamesData);
-        			vm.playerData.firstMillionDate = playerService.getFirstMillionDate(vm.playerData.gamesData);
-        			vm.playerData.pbMap = playerService.buildPBMap(vm.playerData.gamesData);
-
-        			vm.pbChartConfiguration.series.push({
-        				data: vm.playerData.pbMap,
-        				name: vm.playerData.name.split(' ').pop() + ' (PB History)',
-        				color: '#000000',
-        				lineWidth: 3,
-        				borderWidth: 0,
-        				marker: {
-        					enabled: true
-        				}
-        			});
-
-        			console.log(vm.playerData);
+                    vm.pbChartConfiguration.series.push({
+                        data: vm.playerData.pbMap,
+                        name: vm.playerData.name.split(' ').pop() + ' (PB History)',
+                        color: '#000000',
+                        lineWidth: 3,
+                        borderWidth: 0,
+                        marker: {
+                            enabled: true
+                        }
+                    });
 
                     vm.playerData.gamesData.forEach(function(game) {
 
@@ -175,7 +165,7 @@
                             platform: game.platform,
                             finalBoard: game.finalBoard,
                             id: game.$id
-                        }
+                        };
 
                         if (game.event) {
 
@@ -228,11 +218,9 @@
 
                     });
 
-                    if (vm.playerData.pbMap.length > 0) {
-        				$interval.cancel(processPlayerInterval);
-        			}
+                });
 
-        		}, 300);
+                console.log(vm.playerData);
 
         	});
 

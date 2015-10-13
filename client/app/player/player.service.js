@@ -22,6 +22,7 @@
     	this.getFirstMillionDate = getFirstMillionDate;
     	this.getMAMEBest = getMAMEBest;
         this.getPlayerData = getPlayerData;
+        this.getPlayerGames = getPlayerGames;
 
         ////////////////
 
@@ -159,13 +160,13 @@
 
         function getPlayerData(inputPlayer) {
 
-        	var playerData = $firebaseObject(
-        		_fbRef
-        			.child('players')
-        			.child(inputPlayer)
-        	);
+            return $q(function(resolve, reject) {
 
-        	return $q(function(resolve, reject) {
+            	var playerData = $firebaseObject(
+            		_fbRef
+            			.child('players')
+            			.child(inputPlayer)
+            	);
 
         		playerData.$loaded().then(function() {
 
@@ -178,11 +179,29 @@
 
         			_player.gameIds = getPlayerGameIds(_player.games);
 
-        			resolve(_player);
+                    // Grab all the games attached to this player.
+                    //getPlayerGames(_player.gameIds).then(function then(gamesResponse) {
+
+                        //_player.gamesData = gamesResponse;
+                        resolve(_player);
+
+                    //});
 
         		});
 
         	});
+
+        }
+
+        function getPlayerGames(inputGameIds) {
+
+            var promises = [];
+
+            inputGameIds.forEach(function(gameId) {
+                promises.push(gameService.getGameData(gameId));
+            });
+
+            return $q.all(promises);
 
         }
 
@@ -197,26 +216,6 @@
         	}
 
         	return gameIds;
-
-        }
-
-        function getPlayerGames(inputGameIds) {
-
-        	var gamesData = [];
-
-        	return $q(function(resolve, reject) {
-
-        		gameIds.forEach(function(gameId) {
-
-	        		gameService.getGameData(gameId).then(function then(response) {
-	        			gamesData.push(response);
-	        		});
-
-	        	});
-
-	        	resolve(gamesData);
-
-        	});
 
         }
 

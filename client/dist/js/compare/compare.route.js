@@ -9,7 +9,7 @@
 
     	$stateProvider
     		.state('comparePlayers', {
-    			url: '/compare/players?playerIds',
+    			url: '/compare/players/:playerIds',
     			templateUrl: '/app/compare/comparePlayers.htm',
     			controller: 'ComparePlayersController as compare'
     		})
