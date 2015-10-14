@@ -1,3 +1,57 @@
-<a ng-repeat="hit in match.label" style="background-color: white; color: black; cursor: pointer;">
-	<span>{{ hit.score | number }} - {{ hit.player }}</span>
-</a>
+<ul tabindex="-1" class="typeahead dropdown-menu" ng-show="$isVisible()" role="select" style="width: 30em;">
+
+	<li role="presentation" ng-if="$matches[0].value.games.length > 0">
+		<label style="display: block; 
+		              text-align: center;
+		              width: 100%;
+		              background: #f8f8f8;
+		              border-style: solid;
+		              border-width: 1px 0px 1px 0px;
+		              border-color: #999;">
+		    Games
+		</label>
+	</li>
+
+	<li role="presentation" ng-repeat="game in $matches[0].value.games | orderBy:'-score'" ng-class="{active: $index == $activeIndex}">
+		<a role="menuitem" tabindex="-1" ng-click="vm.openGame(game);" style="cursor: pointer;">
+		    {{ game.score | number }} &ndash; {{ game.player }}
+		</a>
+	</li>
+
+	<li role="presentation" ng-if="$matches[0].value.players.length > 0">
+		<label style="display: block; 
+		              text-align: center;
+		              width: 100%;
+		              background: #f8f8f8;
+		              border-style: solid;
+		              border-width: 1px 0px 1px 0px;
+		              border-color: #999;">
+		    Players
+		</label>
+	</li>
+
+	<li role="presentation" ng-repeat="player in $matches[0].value.players | orderBy:'objectID'" ng-class="{active: $index == $activeIndex}">
+		<a role="menuitem" tabindex="-1" ng-click="vm.openPlayer(player)" style="cursor: pointer;">
+		    {{ vm.uncamelize(player.objectID) }}
+		</a>
+	</li>
+
+	<li role="presentation" ng-if="$matches[0].value.events.length > 0">
+		<label style="display: block; 
+		              text-align: center;
+		              width: 100%;
+		              background: #f8f8f8;
+		              border-style: solid;
+		              border-width: 1px 0px 1px 0px;
+		              border-color: #999;">
+		    Events
+		</label>
+	</li>
+
+	<li role="presentation" ng-repeat="event in $matches[0].value.events" ng-class="{active: $index == $activeIndex}">
+		<a role="menuitem" tabindex="-1" ng-click="vm.openEvent(event)" style="cursor: pointer;">
+		    {{ event.name }}, {{ event.endDate | date:'yyyy' }}
+		</a>
+	</li>
+
+</ul>

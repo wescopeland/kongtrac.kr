@@ -1,10 +1,10 @@
 var Firebase = require('firebase');
 var algoliasearch = require('algoliasearch');
 var client = algoliasearch('NW1XKBQ46B', '3a7149f9ee919a452a7ca647d20f4de8');
-var index = client.initIndex('games');
+var index = client.initIndex('events');
 
 // Connect to our Firebase contacts data
-var fb = new Firebase('kongtrackr.firebaseio.com/games');
+var fb = new Firebase('kongtrackr.firebaseio.com/events');
 
 // Get all data from Firebase
 fb.on('value', initIndex);

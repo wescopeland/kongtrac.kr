@@ -4,7 +4,7 @@
     angular
         .module('kongtrac.core', [
             'ui.router',
-            'ui.bootstrap.tpls',
+            'mgcrea.ngStrap',
             '720kb.datepicker',
             'firebase',
             'highcharts-ng',
