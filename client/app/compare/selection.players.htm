@@ -1,0 +1,51 @@
+<div class="row">
+
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+		<p>
+			Build a list of players you would like to compare.
+			You can compare up to four players at once.
+			You need a minimum of two players for comparison.
+		</p>
+
+		<hr>
+
+		<div class="form-group">
+			<input class="form-control" 
+			       type="text" 
+			       id="playerSearch"
+			       placeholder="Find a player"
+			       ng-model="compare.inputSearchQuery"
+			       autocomplete="off"
+			       bs-options="event as event.name for event in compare.playerSearch($viewValue)"
+			       data-delay="1000"
+			       data-min-length="3"
+			       data-template-url="app/compare/playersearch.popup.template.html"
+			       ng-disabled="compare.inputPlayers.length === 4"
+			       bs-typeahead>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+		<ul>
+			<li ng-repeat="player in compare.inputPlayers">
+				{{ compare.uncamelize(player.objectID) }}
+				 <a ng-click="compare.removePlayer(player)" style="cursor: pointer;">[x]</a>
+			</li>
+		</ul>
+
+		<button ng-disabled="compare.inputPlayers.length < 2" 
+		        class="btn btn-primary pull-right"
+		        ng-click="compare.launchPlayerComparison()">
+		    Compare
+		</button>
+
+	</div>
+
+</div>

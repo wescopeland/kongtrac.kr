@@ -226,7 +226,7 @@
                 vm.gameEditData.score = vm.gameData.score;
                 vm.gameEditData.player = vm.gameData.player;
                 vm.gameEditData.platform = vm.gameData.platform;
-                vm.gameEditData.isKillscreen = vm.gameData.isKillscreen;
+                vm.gameEditData.isKillscreen = vm.gameData.isKillscreen ? vm.gameData.isKillscreen : false;
 
                 if (vm.gameData.hasCompleteData) {
 

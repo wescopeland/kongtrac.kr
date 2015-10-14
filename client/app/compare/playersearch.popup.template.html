@@ -1,0 +1,21 @@
+<ul tabindex="-1" class="typeahead dropdown-menu" ng-show="$isVisible()" role="select" style="width: 30em;">
+
+	<li role="presentation" ng-if="$matches.length > 0">
+		<label style="display: block; 
+		              text-align: center;
+		              width: 100%;
+		              background: #f8f8f8;
+		              border-style: solid;
+		              border-width: 1px 0px 1px 0px;
+		              border-color: #999;">
+		    Players
+		</label>
+	</li>
+
+	<li role="presentation" ng-repeat="match in $matches" ng-class="{active: $index == $activeIndex}">
+		<a role="menuitem" tabindex="-1" ng-click="compare.addPlayer(match.value);" style="cursor: pointer;">
+		    {{ compare.uncamelize(match.value.objectID) }}
+		</a>
+	</li>
+
+</ul>

@@ -18,14 +18,22 @@
         // -- indexSearch(inputIndex, inputQuery);
 
         // Public Functions
-        //this.playerSearch = playerSearch;
+        this.playerSearch = playerSearch;
         this.gameSearch = gameSearch;
-        //this.eventSearch = eventSearch;
+        this.eventSearch = eventSearch;
 
         ////////////////
 
         function gameSearch(inputQuery) {
         	return indexSearch(_gamesIndex, inputQuery);
+        }
+
+        function playerSearch(inputQuery) {
+        	return indexSearch(_playersIndex, inputQuery);
+        }
+
+        function eventSearch(inputQuery) {
+        	return indexSearch(_eventsIndex, inputQuery);
         }
 
         function indexSearch(inputIndex, inputQuery) {
@@ -34,9 +42,18 @@
 
             inputIndex.search(inputQuery, { hitsPerPage: 20 }).then(function then(response) {
 
-            	var sortedHits = $filter('orderBy')(response.hits, '-score');
-            	sortedHits = $filter('filter')(sortedHits, {hasCompleteData: true});
-                deferred.resolve(sortedHits);
+            	if (inputIndex === _gamesIndex) {
+
+            		var sortedHits = $filter('orderBy')(response.hits, '-score');
+            		sortedHits = $filter('filter')(sortedHits, {hasCompleteData: true});
+            		deferred.resolve(sortedHits);
+
+            	} else {
+
+            		var sortedHits = $filter('orderBy')(response.hits, '-objectID');
+            		deferred.resolve(sortedHits);
+
+            	}
 
             }, function(failure) {
 

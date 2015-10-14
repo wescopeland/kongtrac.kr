@@ -79,7 +79,6 @@
                     },
                     tooltip: {
                         formatter: function() {
-                            console.log(this);
                             return '<b>' + $filter('amDateFormat')(this.x, 'MM/DD/YYYY') + '</b>: ' + $filter('number')(this.y);
                         }
                     },
