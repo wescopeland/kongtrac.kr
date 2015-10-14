@@ -16,11 +16,13 @@
         vm.addEvent = addEvent;
         vm.gameSearch = gameSearch;
         vm.playerSearch = playerSearch;
+        vm.eventSearch = eventSearch;
         vm.inputGames = [];
         vm.inputPlayers = [];
         vm.inputEvents = [];
         vm.launchGameComparison = launchGameComparison;
         vm.launchPlayerComparison = launchPlayerComparison;
+        vm.launchEventComparison = launchEventComparison;
         vm.removeGame = removeGame;
         vm.removePlayer = removePlayer;
         vm.removeEvent = removeEvent;
@@ -63,6 +65,10 @@
         	return searchService.playerSearch(inputQuery);
         }
 
+        function eventSearch(inputQuery) {
+            return searchService.eventSearch(inputQuery);
+        }
+
         function launchGameComparison() {
 
         	var gameIdsString = '';
@@ -94,6 +100,23 @@
         	}
 
         	$state.go('comparePlayers', { playerIds: playerIdsString });
+
+        }
+
+        function launchEventComparison() {
+
+            var eventIdsString = '';
+            for (var i = 0; i < vm.inputEvents.length; i += 1) {
+
+                if (i !== 0) {
+                    eventIdsString += '&'
+                }
+
+                eventIdsString += vm.inputEvents[i].objectID;
+
+            }
+
+            $state.go('compareEvents', { eventIds: eventIdsString });
 
         }
 
