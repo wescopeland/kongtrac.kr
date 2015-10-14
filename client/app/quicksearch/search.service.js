@@ -35,6 +35,7 @@
             inputIndex.search(inputQuery, { hitsPerPage: 20 }).then(function then(response) {
 
             	var sortedHits = $filter('orderBy')(response.hits, '-score');
+            	sortedHits = $filter('filter')(sortedHits, {hasCompleteData: true});
                 deferred.resolve(sortedHits);
 
             }, function(failure) {
