@@ -12,7 +12,7 @@
 		</label>
 	</li>
 
-	<li role="presentation" ng-repeat="game in $matches[0].value.games | orderBy:'-score'" ng-class="{active: $index == $activeIndex}">
+	<li role="presentation" ng-repeat="game in $matches[0].value.games | orderBy:'-score' | filter:{hasCompleteData: true}" ng-class="{active: $index == $activeIndex}">
 		<a role="menuitem" tabindex="-1" ng-click="vm.openGame(game);" style="cursor: pointer;">
 		    {{ game.score | number }} &ndash; {{ game.player }}
 		</a>

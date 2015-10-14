@@ -86,7 +86,7 @@
 
             var deferred = $q.defer();
 
-            inputIndex.search(inputQuery, { hitsPerPage: 5 }).then(function then(response) {
+            inputIndex.search(inputQuery, { hitsPerPage: 20 }).then(function then(response) {
 
                 deferred.resolve(response.hits);
 
