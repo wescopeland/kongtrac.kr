@@ -1,3 +1,13 @@
+<div class="row" ng-if="game.gameId === 'averageGame'">
+	<h3>The Average Game</h3>
+	<p>
+		This is a simulation produced on a daily basis from every killscreen entry in the database.
+		Each killscreen game has been taken and averaged into a single game: "the average game".
+		Every scoring metric of every game has been carefully compiled into this single game: every barrel, pie, spring, rivet,
+		death score, and death location. With each new killscreen entry in the database, the average game automatically adjusts itself.
+	</p>
+</div>
+
 <div class="row">
 	<h2>
 		<a ng-href="{{ '#/player/' + game.camelize(game.gameData.player) }}">{{ game.gameData.player }}</a> &mdash; {{ game.gameData.score | number }}
@@ -11,7 +21,10 @@
 		    <span ng-if="game.$state.current.name === 'game.boards' || !game.gameData.hasCompleteData">Score breakdown</span>
 		</small>
 		<small class="pull-right" style="margin-top: 10px;">
-		    <a ng-if="game.$state.current.name !== 'game.edit'" ng-href="{{ '#/game/' + game.gameData.$id + '/edit' }}">Edit</a>
+		    <a ng-if="game.$state.current.name !== 'game.edit' && game.gameId !== 'averageGame'" 
+		       ng-href="{{ '#/game/' + game.gameData.$id + '/edit' }}">
+		        Edit
+		    </a>
 		    <span ng-if="game.$state.current.name === 'game.edit'">Edit</span>
 		</small>
 	</h2>

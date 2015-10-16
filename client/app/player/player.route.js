@@ -9,7 +9,7 @@
     function playerConfiguration($stateProvider) {
 
     	$stateProvider
-    		.state('player', {
+            .state('player', {
     			url: '/player/:playerName',
     			templateUrl: 'app/player/player.htm',
     			controller: 'PlayerController as player'

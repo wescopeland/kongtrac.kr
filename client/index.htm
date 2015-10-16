@@ -61,7 +61,8 @@
 	                	Ranking <span class="caret"></span>
 	              	</a>
 	              	<ul class="dropdown-menu">
-		                <li><a href="#/home">Current Top</a></li>
+		                <li><a href="#/ranking/players">Top Players</a></li>
+		                <li><a href="#/ranking/games">Top Games</a></li>
 	                </ul>
 
 	            </li>
@@ -75,6 +76,17 @@
 	            		<li><a ui-sref="compareSelection.games">Games</a></li>
 	            		<li><a ui-sref="compareSelection.players">Players</a></li>
 	            		<li><a ui-sref="compareSelection.events">Events</a></li>
+	            	</ul>
+
+	            </li>
+
+	            <li class="dropdown">
+
+	            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	            		Calculations <span class="caret"></span>
+	            	</a>
+	            	<ul class="dropdown-menu">
+	            		<li><a ui-sref="game.summary({ gameId: 'averageGame' })">The Average Game</a></li>
 	            	</ul>
 
 	            </li>
@@ -150,9 +162,10 @@
 	<script src="dist/js/core/core.module.js"></script>
 	<script src="dist/js/core/core.route.js"></script>
 
-	<script src="dist/js/home/home.module.js"></script>
-	<script src="dist/js/home/home.route.js"></script>
-	<script src="dist/js/home/home.controller.js"></script>
+	<script src="dist/js/ranking/ranking.module.js"></script>
+	<script src="dist/js/ranking/ranking.route.js"></script>
+	<script src="dist/js/ranking/ranking.controller.js"></script>
+	<script src="dist/js/ranking/dbstats.service.js"></script>
 
 	<script src="dist/js/submit/submit.module.js"></script>
 	<script src="dist/js/submit/submit.route.js"></script>

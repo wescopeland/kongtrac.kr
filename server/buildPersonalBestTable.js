@@ -86,11 +86,11 @@
 						id: currentMameGameId
 					});
 
-					console.log('Added personal best records for ' + player + '.');
-
 				});
 
 			});
+
+			console.log('Reindexed personal best records for ' + playersArray.length + ' players.');
 
 		});
 

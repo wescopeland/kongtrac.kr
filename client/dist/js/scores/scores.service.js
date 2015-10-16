@@ -15,8 +15,50 @@
     	this.getArcadePersonalBests = getArcadePersonalBests;
         this.generateCombinedHSL = generateCombinedHSL;
         this.getMamePersonalBests = getMamePersonalBests;
+        this.getTopCombinedGames = getTopCombinedGames;
+        this.getTopArcadeGames = getTopArcadeGames;
+        this.getTopMameGames = getTopMameGames;
 
         ////////////////
+
+        function getTopCombinedGames() {
+
+            return $q(function(resolve, reject) {
+
+                var topCombinedGames = $firebaseArray(_fbRef.child('topGamesCombined'));
+                topCombinedGames.$loaded().then(function() {
+                    resolve(topCombinedGames);
+                });
+
+            });
+
+        }
+
+        function getTopArcadeGames() {
+
+            return $q(function(resolve, reject) {
+
+                var games = $firebaseArray(_fbRef.child('topGamesArcade'));
+                games.$loaded().then(function() {
+                    resolve(games);
+                });
+
+            });
+
+        }
+
+        function getTopMameGames() {
+
+            return $q(function(resolve, reject) {
+
+                var games = $firebaseArray(_fbRef.child('topGamesMame'));
+                games.$loaded().then(function() {
+                    resolve(games);
+                });
+
+            });
+
+        }
 
         function generateCombinedHSL() {
 
@@ -92,38 +134,6 @@
                 });
 
             });
-
-            /*
-            return $q(function(resolve, reject) {
-
-                var sanitizedArcade = [];
-                var sanitizedMAME = [];
-
-                inputArcadeBests.forEach(function(pb) {
-
-                    sanitizedArcade.push({
-                        player: pb.player,
-                        score: pb.score,
-                        date: pb.date
-                    });
-
-                });
-
-                inputMAMEBests.forEach(function(pb) {
-
-                    sanitizedMAME.push({
-                        player: pb.player,
-                        score: pb.score,
-                        date: pb.date
-                    });
-
-                });
-
-                var combinedPlatforms = sanitizedArcade + sanitizedMAME;
-                resolve(combinedPlatforms);
-
-            });
-            */
 
         }
 

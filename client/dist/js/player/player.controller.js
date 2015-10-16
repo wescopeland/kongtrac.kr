@@ -12,10 +12,15 @@
 
         // Public Variables
         vm.inputPlayer = $stateParams.playerName;
+        vm.isEditing = false;
         vm.onlyShowComplete = false;
         vm.pbChartConfiguration = {};
         vm.playerData = {};
         vm.playerGameTableData = [];
+        vm.playerEditData = {};
+
+        // Public Functions
+        vm.handleEditCommit = handleEditCommit;
 
         activate();
 
@@ -135,6 +140,7 @@
 
         		vm.playerData = response;
                 vm.playerData.hasEvents = false;
+                vm.playerEditData.initials = response.initials;
 
                 playerService.getPlayerGames(vm.playerData.gameIds).then(function then(gamesResponse) {
 
@@ -195,7 +201,7 @@
                                         for (var i = 0; i < eventGames.length; i += 1) {
 
                                             if (eventGames[i].player === vm.inputPlayer) {
-                                                newGameTableObject.eventPosition = i + 1;
+                                                newGameTableObject.eventPosition = (i + 1) + ' of ' + eventGames.length;
                                                 break;
                                             }
 
@@ -231,6 +237,14 @@
             return inputString.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
                 return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
             }).replace(/\s+/g, '');
+
+        }
+
+        function handleEditCommit() {
+
+            playerService.editPlayer(vm.inputPlayer, vm.playerEditData).then(function() {
+                vm.isEditing = false;
+            });
 
         }
 

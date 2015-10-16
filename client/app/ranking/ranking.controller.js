@@ -2,16 +2,17 @@
     'use strict';
 
     angular
-        .module('kongtrac.home')
-        .controller('HomeController', HomeController);
+        .module('kongtrac.ranking')
+        .controller('RankingController', RankingController);
 
     /* @ngInject */
-    function HomeController($scope, scoresService) {
+    function RankingController($scope, scoresService, dbstatsService) {
 
         var vm = this;
 
         // Public Variables
         vm.arcadeHSL = [];
+        vm.dbStats = {};
         vm.HSL = [];
         vm.mameHSL = [];
         vm.showSeparate = false;
@@ -35,6 +36,22 @@
                 vm.mameHSL = response.mame;
                 vm.HSL = response.combined;
 
+            });
+
+            scoresService.getTopCombinedGames().then(function then(response) {
+                vm.combinedGamesHSL = response;
+            });
+
+            scoresService.getTopArcadeGames().then(function then(response) {
+                vm.arcadeGamesHSL = response;
+            });
+
+            scoresService.getTopMameGames().then(function then(response) {
+                vm.mameGamesHSL = response;
+            });
+
+            dbstatsService.getDbStats().then(function then(response) {
+                vm.dbStats = response;
             });
 
         }

@@ -8,7 +8,7 @@
     function coreConfiguration($urlRouterProvider) {
 
     	// Redirect any unmatched URL to /.
-    	$urlRouterProvider.otherwise('/home');
+    	$urlRouterProvider.otherwise('/ranking/players');
 
     }
 

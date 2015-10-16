@@ -89,9 +89,12 @@
 				averageGame.score += averageGame.boardScores[i];
 			}
 
-			for (var i = 0; i < averageGame.deaths; i += 1) {
+			for (var i = 0; i < averageGame.deaths.length; i += 1) {
 				averageGame.score += averageGame.deaths[i].points;
 			}
+
+			var currentDate = new Date();
+			averageGame.date = (currentDate.getMonth() + 1) + '/' + (currentDate.getDate()) + '/' + currentDate.getFullYear();
 
 			_gamesRef.child('averageGame').set({
 				score: averageGame.score,
@@ -100,8 +103,11 @@
 				hasCompleteData: true,
 				isKillscreen: true,
 				platform: 'Simulation',
-				player: 'Kongtrackr AI'
+				player: 'Kongtrackr AI',
+				date: averageGame.date
 			});
+
+			console.log('Built average game.');
 
 		});
 

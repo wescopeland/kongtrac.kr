@@ -4,7 +4,7 @@
     angular
         .module('kongtrac.app', [
             'kongtrac.core',
-            'kongtrac.home',
+            'kongtrac.ranking',
             'kongtrac.submit',
             'kongtrac.scores',
             'kongtrac.game',

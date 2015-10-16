@@ -1,121 +1,193 @@
 <div class="row">
 	<h2>
 		{{ event.eventData.name }}
+
+		<small class="pull-right" style="margin-top: 10px;">
+		    <a ng-click="event.isEditing = !event.isEditing;" style="cursor: pointer;">
+		        <span ng-if="!event.isEditing">Edit</span>
+		        <span ng-if="event.isEditing">Cancel</span>
+		    </a>
+		</small>
 	</h2>
 </div>
 
-<div class="row">
+<div ng-if="event.isEditing" class="row">
 
-	<!-- Scores Histogram -->
-	<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-		<highchart id="eventScoresHistogram" config="event.histogramChartConfiguration"></highchart>
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<h3>Required fields</h3>
 	</div>
 
-	<div class="clearfix visible-sm visible-xs"></div>
+	<form>
 
-	<!-- Detail Table -->
-	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<label class="control-label">Event Name</label>
+			<input class="form-control" placeholder="Event Name" ng-model="event.eventEditData.name">
+		</div>
 
-		<div class="table-responsive">
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 
-			<table class="table table-condensed table-striped table-hover">
+			<label class="control-label">Dates</label>
+			<datepicker date-format="{{ 'MM/dd/yyyy' }}">
+				<input class="form-control" ng-model="event.eventEditData.startDate" type="text" placeholder="Start Date">
+			</datepicker>
+			<datepicker date-format="{{ 'MM/dd/yyyy' }}">
+				<input class="form-control" ng-model="event.eventEditData.endDate" type="text" placeholder="End Date">
+			</datepicker>
+				
+		</div>
 
-				<thead>
-					<tr>
-						<th colspan="2" class="text-center ibox-header">Event Details</th>
-					</tr>
-				</thead>
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<label class="control-label">Online / Offline (Live)</label>
+			<select class="form-control" ng-model="event.eventEditData.onlineOffline">
+				<option>Online</option>
+				<option>Offline (Live)</option>
+			</select>
+		</div>
 
-				<tbody>
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<label class="control-label">Format</label>
+			<select class="form-control" ng-model="event.eventEditData.format">
+				<option value="0">High Score Competition</option>
+				<option value="1">Bracket</option>
+				<option value="2">High Score Competition Followed by Bracket</option>
+			</select>
+		</div>
 
-					<tr class="small">
-						<td class="text-right ibox-left" style="width: 40%;">Dates</td>
-						<td>{{ event.eventData.startDate | amDateFormat: 'MMM DD YYYY' }} &ndash; {{ event.eventData.endDate | amDateFormat: 'MMM DD YYYY' }}</td>
-					</tr>
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<button class="btn btn-primary pull-right" ng-click="event.handleEditCommit()">
+				Commit
+			</button>
+		</div>
 
-					<tr class="small">
-						<td class="text-right ibox-left">Online / Offline</td>
-						<td>{{ event.eventData.onlineOffline }}</td>
-					</tr>
+	</form>
 
-					<tr class="small">
-						<td class="text-right ibox-left">Prize Pool</td>
-						<td>{{ event.eventData.prizePool | currency }}</td>
-					</tr>
+	<br>
 
-					<tr class="small">
-						<td class="text-right ibox-left">Format</td>
-						<td ng-if="event.eventData.format === 0">High Score Competition</td>
-						<td ng-if="event.eventData.format === 1">Bracket Competition</td>
-						<td ng-if="event.eventData.format === 2">High Score into Bracket</td>
-					</tr>
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12" style="padding-top: 15px;">
+		<p>
+		    To add a game to this event, create a new game from the game submission page. 
+		    In the submission form, associate it with this event.
+		</p>
+	</div>
 
-					<tr class="small">
-						<td class="text-right ibox-left">Players Competing</td>
-						<td>{{ event.eventData.games.length }}</td>
-					</tr>
+</div>
 
-					<tr class="small">
-						<td class="text-right ibox-left">New PBs</td>
-						<td></td>
-					</tr>
+<div ng-if="!event.isEditing">
 
-				</tbody>
+	<div class="row">
 
-			</table>
+		<!-- Scores Histogram -->
+		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+			<highchart id="eventScoresHistogram" config="event.histogramChartConfiguration"></highchart>
+		</div>
+
+		<div class="clearfix visible-sm visible-xs"></div>
+
+		<!-- Detail Table -->
+		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+			<div class="table-responsive">
+
+				<table class="table table-condensed table-striped table-hover">
+
+					<thead>
+						<tr>
+							<th colspan="2" class="text-center ibox-header">Event Details</th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+						<tr class="small">
+							<td class="text-right ibox-left" style="width: 40%;">Dates</td>
+							<td>{{ event.eventData.startDate | amDateFormat: 'MMM DD YYYY' }} &ndash; {{ event.eventData.endDate | amDateFormat: 'MMM DD YYYY' }}</td>
+						</tr>
+
+						<tr class="small">
+							<td class="text-right ibox-left">Online / Offline</td>
+							<td>{{ event.eventData.onlineOffline }}</td>
+						</tr>
+
+						<tr class="small">
+							<td class="text-right ibox-left">Prize Pool</td>
+							<td>{{ event.eventData.prizePool | currency }}</td>
+						</tr>
+
+						<tr class="small">
+							<td class="text-right ibox-left">Format</td>
+							<td ng-if="event.eventData.format === 0">High Score Competition</td>
+							<td ng-if="event.eventData.format === 1">Bracket Competition</td>
+							<td ng-if="event.eventData.format === 2">High Score into Bracket</td>
+						</tr>
+
+						<tr class="small">
+							<td class="text-right ibox-left">Players Competing</td>
+							<td>{{ event.eventData.games.length }}</td>
+						</tr>
+
+						<tr class="small">
+							<td class="text-right ibox-left">New PBs</td>
+							<td></td>
+						</tr>
+
+					</tbody>
+
+				</table>
+
+			</div>
 
 		</div>
 
 	</div>
 
-</div>
+	<h3 style="display: inline;">Scoreboard</h3>
+	<label for="onlyShowComplete" class="pull-right">
+		<input type="checkbox" id="onlyShowComplete" name="onlyShowComplete" ng-model="event.onlyShowComplete"> Only show games with complete data
+	</label>
+	<div class="row">
 
-<h3 style="display: inline;">Scoreboard</h3>
-<label for="onlyShowComplete" class="pull-right">
-	<input type="checkbox" id="onlyShowComplete" name="onlyShowComplete" ng-model="event.onlyShowComplete"> Only show games with complete data
-</label>
-<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="table-responsive">
 
-		<div class="table-responsive">
+				<table st-table="event.eventData.gamesData" class="table table-hover">
 
-			<table st-table="event.eventData.gamesData" class="table table-hover">
+					<thead>
+						<tr class="eventheader">
+							<th>Position</th>
+							<th st-sort="player">Player</th>
+							<th st-sort="score">Score</th>
+							<th st-sort="winnings">Winnings</th>
+							<th class=""></th>
+						</tr>
+					</thead>
 
-				<thead>
-					<tr class="eventheader">
-						<th>Position</th>
-						<th st-sort="player">Player</th>
-						<th st-sort="score">Score</th>
-						<th st-sort="winnings">Winnings</th>
-						<th class=""></th>
-					</tr>
-				</thead>
+					<tbody>
+						<tr ng-repeat="game in event.eventData.gamesData | orderBy:'-score'" ng-hide="event.onlyShowComplete && !event.hasCompleteData">
 
-				<tbody>
-					<tr ng-repeat="game in event.eventData.gamesData | orderBy:'-score'" ng-hide="event.onlyShowComplete && !event.hasCompleteData">
+							<td>{{ $index + 1 }}</td>
 
-						<td>{{ $index + 1 }}</td>
+							<!--
+							<td ng-if="!game.hasCompleteData">{{ game.score | number }}</td>
+							<td ng-if="game.hasCompleteData">
+								<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
+							</td>
+							-->
 
-						<!--
-						<td ng-if="!game.hasCompleteData">{{ game.score | number }}</td>
-						<td ng-if="game.hasCompleteData">
-							<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
-						</td>
-						-->
+							<td><a ng-href="{{ '#/player/' + event.camelize(game.player) }}">{{ game.player }}</a></td>
 
-						<td><a ng-href="{{ '#/player/' + event.camelize(game.player) }}">{{ game.player }}</a></td>
+							<td>
+								<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
+							</td>
 
-						<td>
-							<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
-						</td>
+							<td>{{ game.winnings | currency }}</td>
 
-						<td>{{ game.winnings | currency }}</td>
+						</tr>
+					</tbody>
 
-					</tr>
-				</tbody>
+				</table>
 
-			</table>
+			</div>
 
 		</div>
 

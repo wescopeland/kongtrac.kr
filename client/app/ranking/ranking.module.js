@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('kongtrac.home', []);
+        .module('kongtrac.ranking', []);
 })();

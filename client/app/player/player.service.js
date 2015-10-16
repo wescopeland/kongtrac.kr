@@ -17,6 +17,7 @@
     	// -- uncamelize(inputString);
 
     	this.buildPBMap = buildPBMap;
+        this.editPlayer = editPlayer;
     	this.getArcadeBest = getArcadeBest;
     	this.getFirstKSDate = getFirstKSDate;
     	this.getFirstMillionDate = getFirstMillionDate;
@@ -71,6 +72,28 @@
         	});
 
         	return sanitizedPbMap;
+
+        }
+
+        function editPlayer(inputPlayer, inputEditObject) {
+
+            return $q(function(resolve, reject) {
+
+                var playerData = $firebaseObject(
+                    _fbRef
+                        .child('players')
+                        .child(inputPlayer)
+                );
+
+                playerData.$loaded().then(function() {
+
+                    playerData.initials = inputEditObject.initials;
+                    playerData.$save();
+                    resolve();
+
+                });
+
+            });
 
         }
 

@@ -14,6 +14,7 @@
         vm.$state = $state;
         vm.gameData = {};
         vm.gameEditData = {};
+        vm.gameId = $stateParams.gameId;
         vm.inputLevelSlider = 0;
         vm.paceChartConfiguration = {};
         vm.scoreChartConfiguration = {};

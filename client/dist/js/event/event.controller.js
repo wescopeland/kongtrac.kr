@@ -12,11 +12,14 @@
 
         // Public Variables
         vm.eventData = {};
+        vm.eventEditData = {};
         vm.histogramChartConfiguration = {};
         vm.inputEvent = $stateParams.eventId;
+        vm.isEditing = false;
 
         // Public Functions
         vm.camelize = camelize;
+        vm.handleEditCommit = handleEditCommit;
 
         activate();
 
@@ -85,6 +88,14 @@
             eventService.getEventData(vm.inputEvent).then(function then(response) {
 
                 vm.eventData = response;
+
+                vm.eventEditData.name = response.name;
+                vm.eventEditData.startDate = response.startDate;
+                vm.eventEditData.endDate = response.endDate;
+                vm.eventEditData.onlineOffline = response.onlineOffline;
+                vm.eventEditData.format = String(response.format);
+
+                console.log(vm.eventEditData);
 
                 // [100k, 200k, 300k, 400k, 500k, 600k, 700k, 800k, 900k, 1m, 1.1m]
                 var histogramData =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -161,6 +172,14 @@
             return inputString.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
                 return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
             }).replace(/\s+/g, '');
+
+        }
+
+        function handleEditCommit() {
+
+            eventService.editEvent(vm.inputEvent, vm.eventEditData).then(function() {
+                vm.isEditing = false;
+            });
 
         }
 
