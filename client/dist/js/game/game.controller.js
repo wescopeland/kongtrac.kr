@@ -221,13 +221,12 @@
         		vm.gameData = response;
                 console.log(response);
 
-                vm.inputLevelSlider = vm.gameData.mappableLevels.length + 4;
-
                 vm.gameEditData.date = vm.gameData.date;
                 vm.gameEditData.score = vm.gameData.score;
                 vm.gameEditData.player = vm.gameData.player;
                 vm.gameEditData.platform = vm.gameData.platform;
                 vm.gameEditData.isKillscreen = vm.gameData.isKillscreen ? vm.gameData.isKillscreen : false;
+                vm.gameEditData.hasCompleteData = vm.gameData.hasCompleteData ? vm.gameData.hasCompleteData : false;
 
                 if (vm.gameData.hasCompleteData) {
 
@@ -240,9 +239,11 @@
                     vm.gameEditData.deaths[2].board = boardMapper.mapBoardNumberToLevel(vm.gameEditData.deaths[2].board);
                     vm.gameEditData.deaths[3].board = boardMapper.mapBoardNumberToLevel(vm.gameEditData.deaths[3].board);
 
-                } else {
-                    vm.gameEditData.hasCompleteData = false;
+                    vm.inputLevelSlider = vm.gameData.mappableLevels.length + 4;
+
                 }
+
+                console.log(vm.gameEditData);
 
                 vm.paceChartConfiguration.series.push({
         			data: vm.gameData.paceMap,

@@ -69,6 +69,7 @@
                     gameData.platform = inputGameProperties.platform;
                     gameData.isKillscreen = inputGameProperties.isKillscreen;
                     gameData.date = inputGameProperties.date;
+                    gameData.hasCompleteData = inputGameProperties.hasCompleteData;
 
                     if (inputGameProperties.hasCompleteData) {
                         gameData.boardScores = inputGameProperties.boardScores;
