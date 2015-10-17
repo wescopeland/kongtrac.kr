@@ -3,6 +3,10 @@
 
 <head>
 
+	<!-- Outdated Browser -->
+	<link rel="stylesheet" href="outdated-browser/outdatedbrowser/outdatedbrowser.min.css">
+	<script src="outdated-browser/outdatedbrowser/outdatedbrowser.min.js"></script>
+
 	<script src="jquery/dist/jquery.min.js"></script>
 	<script src="bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.0/randomColor.min.js"></script>
@@ -31,6 +35,9 @@
 </head>
 
 <body>
+
+	<!-- Outdated Browser -->
+	<div id="outdated"></div>
 
 	<div class="container">
 		<h1><a ui-sref="playerRanking" class="blacklink">KONGTRAC.KR</a></h1>
@@ -152,6 +159,28 @@
 
     </div>
 
+    <!-- Outdated Browser JS -->
+    <script>
+    	function addLoadEvent(func) {
+    		var oldonload = window.onload;
+    		if (typeof window.onload != 'function') {
+    			window.onload = func;
+    		} else {
+    			window.onload = function() {
+    				oldonload();
+    				func();
+    			}
+    		}
+    	}
+
+    	addLoadEvent(
+    		outdatedBrowser({
+    			bgColor: '#f25648',
+    			color: '#ffffff',
+    			lowerThan: 'transform'
+    		})
+    	);
+    </script>
 
 	<!-- Vendor Dependencies -->
 	<script src="angular-ui-router/release/angular-ui-router.min.js"></script>

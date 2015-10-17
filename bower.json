@@ -29,6 +29,7 @@
     "angular-smart-table": "~2.1.4",
     "angular-moment": "~0.10.3",
     "angular-bootstrap-slider": "~0.1.18",
-    "angular-strap": "~2.3.3"
+    "angular-strap": "~2.3.3",
+    "outdated-browser": "~1.1.2"
   }
 }
