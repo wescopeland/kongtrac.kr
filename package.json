@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/wescopeland/dksta.ts",
   "dependencies": {
+    "algoliasearch": "^3.8.1",
     "body-parser": "^1.14.1",
     "bower": "^1.5.3",
     "compression": "^1.5.2",
@@ -31,7 +32,6 @@
     "serve-static": "^1.10.0"
   },
   "devDependencies": {
-    "algoliasearch": "^3.8.1",
     "del": "^2.0.2",
     "firebase": "^2.3.1",
     "gulp": "^3.9.0",
