@@ -17,6 +17,11 @@
                 url: '/ranking/games',
                 templateUrl: 'app/ranking/ranking.games.htm',
                 controller: 'RankingController as ranking'
+            })
+            .state('completeRanking', {
+                url: '/ranking/complete',
+                templateUrl: 'app/ranking/ranking.complete.htm',
+                controller: 'RankingController as ranking'
             });
 
     }

@@ -30,7 +30,7 @@
 
 			// Get the top ten combined platform games.
 			var combinedTopGames = [];
-			for (var i = 0; i < 10; i += 1) {
+			for (var i = 0; i < 11; i += 1) {
 
 				if (completeGamesArray[i].platform !== 'Simulation') {
 					combinedTopGames.push(completeGamesArray[i]);
