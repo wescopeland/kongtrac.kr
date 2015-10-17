@@ -48,325 +48,347 @@
 			</select>
 		</div>
 
-		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-			<div>
-				<label for="isKS">
-					<input type="checkbox" id="isKS" name="isKS" ng-model="game.gameEditData.isKillscreen"> Kill screen?
-				</label>
-			</div>
-		</div>
-
-		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-			<div>
-				<label for="hasCompleteData">
-					<input type="checkbox" id="hasCompleteData" name="hasCompleteData" ng-model="game.gameEditData.hasCompleteData">
-					 Complete board-by-board data?
-				</label>
-			</div>
-		</div>
-
 		<div class="form-group text-right col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12" ng-if="!game.gameEditData.hasCompleteData">
 			<button class="btn btn-primary" ng-click="game.handleEditCommit()">
 				Commit
 			</button>
 		</div>
 
-		<!-- Complete Board-by-Board Input -->
-		<div ng-if="game.gameEditData.hasCompleteData">
+	</form>
 
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-				<hr>
-			</div>
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<h3>Optional fields</h3>
+	</div>
 
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+	<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 
-				<div class="table">
+		<label class="control-label">Event</label>
+		<input class="form-control" 
+		       type="text" 
+		       id="eventSearch"
+		       placeholder="Find an event"
+		       ng-model="game.gameEditData.eventName"
+		       autocomplete="off"
+		       bs-options="event as event.name for event in game.eventSearch($viewValue)"
+		       data-delay="1000"
+		       data-min-length="3"
+		       data-template-url="app/game/eventsearch.popup.template.html"
+		       ng-disabled="compare.inputEvents.length === 4"
+		       bs-typeahead>
 
-					<table class="table responsive-table">
+	</div>
 
-						<thead>
-							<tr>
-								<th></th>
-								<th>Barrel 1</th>
-								<th>Conveyor</th>
-								<th>Barrel 2</th>
-								<th>Elevator</th>
-								<th>Barrel 3</th>
-								<th>Rivet</th>
-							</tr>
-						</thead>
+	<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<div>
+			<label for="isKS">
+				<input type="checkbox" id="isKS" name="isKS" ng-model="game.gameEditData.isKillscreen"> Kill screen?
+			</label>
+		</div>
+	</div>
 
-						<tbody>
+	<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<div>
+			<label for="hasCompleteData">
+				<input type="checkbox" id="hasCompleteData" name="hasCompleteData" ng-model="game.gameEditData.hasCompleteData">
+				 Complete board-by-board data?
+			</label>
+		</div>
+	</div>
 
-							<tr>
-								<td>L1</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[0] = game.expand(game.gameEditData.boardScores[0])" style="width: 75px;" ng-model="game.gameEditData.boardScores[0]"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[1] = game.expand(game.gameEditData.boardScores[1])" style="width: 75px;" ng-model="game.gameEditData.boardScores[1]"></td>
-							</tr>
-							<tr>
-								<td>L2</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[2] = game.expand(game.gameEditData.boardScores[2])" style="width: 75px;" ng-model="game.gameEditData.boardScores[2]"></td>
-								<td></td>
-								<td></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[3] = game.expand(game.gameEditData.boardScores[3])" style="width: 75px;" ng-model="game.gameEditData.boardScores[3]"></td>
-								<td></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[4] = game.expand(game.gameEditData.boardScores[4])" style="width: 75px;" ng-model="game.gameEditData.boardScores[4]"></td>
-							</tr>
-							<tr>
-								<td>L3</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[5] = game.expand(game.gameEditData.boardScores[5])" style="width: 75px;" ng-model="game.gameEditData.boardScores[5]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[6] = game.expand(game.gameEditData.boardScores[6])" style="width: 75px;" ng-model="game.gameEditData.boardScores[6]"></td>
-								<td></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[7] = game.expand(game.gameEditData.boardScores[7])" style="width: 75px;" ng-model="game.gameEditData.boardScores[7]"></td>
-								<td></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[8] = game.expand(game.gameEditData.boardScores[8])" style="width: 75px;" ng-model="game.gameEditData.boardScores[8]"></td>
-							</tr>
-							<tr>
-								<td>L4</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[9] = game.expand(game.gameEditData.boardScores[9])" style="width: 75px;" ng-model="game.gameEditData.boardScores[9]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[10] = game.expand(game.gameEditData.boardScores[10])" style="width: 75px;" ng-model="game.gameEditData.boardScores[10]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[11] = game.expand(game.gameEditData.boardScores[11])" style="width: 75px;" ng-model="game.gameEditData.boardScores[11]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[12] = game.expand(game.gameEditData.boardScores[12])" style="width: 75px;" ng-model="game.gameEditData.boardScores[12]"></td>
-								<td></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[13] = game.expand(game.gameEditData.boardScores[13])" style="width: 75px;" ng-model="game.gameEditData.boardScores[13]"></td>
-							</tr>
-							<tr>
-								<td>L5</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[14] = game.expand(game.gameEditData.boardScores[14])" style="width: 75px;" ng-model="game.gameEditData.boardScores[14]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[15] = game.expand(game.gameEditData.boardScores[15])" style="width: 75px;" ng-model="game.gameEditData.boardScores[15]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[16] = game.expand(game.gameEditData.boardScores[16])" style="width: 75px;" ng-model="game.gameEditData.boardScores[16]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[17] = game.expand(game.gameEditData.boardScores[17])" style="width: 75px;" ng-model="game.gameEditData.boardScores[17]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[18] = game.expand(game.gameEditData.boardScores[18])" style="width: 75px;" ng-model="game.gameEditData.boardScores[18]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[19] = game.expand(game.gameEditData.boardScores[19])" style="width: 75px;" ng-model="game.gameEditData.boardScores[19]"></td>
-							</tr>
-							<tr>
-								<td>L6</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[20] = game.expand(game.gameEditData.boardScores[20])" style="width: 75px;" ng-model="game.gameEditData.boardScores[20]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[21] = game.expand(game.gameEditData.boardScores[21])" style="width: 75px;" ng-model="game.gameEditData.boardScores[21]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[22] = game.expand(game.gameEditData.boardScores[22])" style="width: 75px;" ng-model="game.gameEditData.boardScores[22]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[23] = game.expand(game.gameEditData.boardScores[23])" style="width: 75px;" ng-model="game.gameEditData.boardScores[23]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[24] = game.expand(game.gameEditData.boardScores[24])" style="width: 75px;" ng-model="game.gameEditData.boardScores[24]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[25] = game.expand(game.gameEditData.boardScores[25])" style="width: 75px;" ng-model="game.gameEditData.boardScores[25]"></td>
-							</tr>
-							<tr>
-								<td>L7</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[26] = game.expand(game.gameEditData.boardScores[26])" style="width: 75px;" ng-model="game.gameEditData.boardScores[26]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[27] = game.expand(game.gameEditData.boardScores[27])" style="width: 75px;" ng-model="game.gameEditData.boardScores[27]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[28] = game.expand(game.gameEditData.boardScores[28])" style="width: 75px;" ng-model="game.gameEditData.boardScores[28]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[29] = game.expand(game.gameEditData.boardScores[29])" style="width: 75px;" ng-model="game.gameEditData.boardScores[29]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[30] = game.expand(game.gameEditData.boardScores[30])" style="width: 75px;" ng-model="game.gameEditData.boardScores[30]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[31] = game.expand(game.gameEditData.boardScores[31])" style="width: 75px;" ng-model="game.gameEditData.boardScores[31]"></td>
-							</tr>
-							<tr>
-								<td>L8</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[32] = game.expand(game.gameEditData.boardScores[32])" style="width: 75px;" ng-model="game.gameEditData.boardScores[32]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[33] = game.expand(game.gameEditData.boardScores[33])" style="width: 75px;" ng-model="game.gameEditData.boardScores[33]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[34] = game.expand(game.gameEditData.boardScores[34])" style="width: 75px;" ng-model="game.gameEditData.boardScores[34]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[35] = game.expand(game.gameEditData.boardScores[35])" style="width: 75px;" ng-model="game.gameEditData.boardScores[35]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[36] = game.expand(game.gameEditData.boardScores[36])" style="width: 75px;" ng-model="game.gameEditData.boardScores[36]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[37] = game.expand(game.gameEditData.boardScores[37])" style="width: 75px;" ng-model="game.gameEditData.boardScores[37]"></td>
-							</tr>
-							<tr>
-								<td>L9</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[38] = game.expand(game.gameEditData.boardScores[38])" style="width: 75px;" ng-model="game.gameEditData.boardScores[38]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[39] = game.expand(game.gameEditData.boardScores[39])" style="width: 75px;" ng-model="game.gameEditData.boardScores[39]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[40] = game.expand(game.gameEditData.boardScores[40])" style="width: 75px;" ng-model="game.gameEditData.boardScores[40]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[41] = game.expand(game.gameEditData.boardScores[41])" style="width: 75px;" ng-model="game.gameEditData.boardScores[41]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[42] = game.expand(game.gameEditData.boardScores[42])" style="width: 75px;" ng-model="game.gameEditData.boardScores[42]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[43] = game.expand(game.gameEditData.boardScores[43])" style="width: 75px;" ng-model="game.gameEditData.boardScores[43]"></td>
-							</tr>
-							<tr>
-								<td>L10</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[44] = game.expand(game.gameEditData.boardScores[44])" style="width: 75px;" ng-model="game.gameEditData.boardScores[44]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[45] = game.expand(game.gameEditData.boardScores[45])" style="width: 75px;" ng-model="game.gameEditData.boardScores[45]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[46] = game.expand(game.gameEditData.boardScores[46])" style="width: 75px;" ng-model="game.gameEditData.boardScores[46]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[47] = game.expand(game.gameEditData.boardScores[47])" style="width: 75px;" ng-model="game.gameEditData.boardScores[47]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[48] = game.expand(game.gameEditData.boardScores[48])" style="width: 75px;" ng-model="game.gameEditData.boardScores[48]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[49] = game.expand(game.gameEditData.boardScores[49])" style="width: 75px;" ng-model="game.gameEditData.boardScores[49]"></td>
-							</tr>
-							<tr>
-								<td>L11</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[50] = game.expand(game.gameEditData.boardScores[50])" style="width: 75px;" ng-model="game.gameEditData.boardScores[50]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[51] = game.expand(game.gameEditData.boardScores[51])" style="width: 75px;" ng-model="game.gameEditData.boardScores[51]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[52] = game.expand(game.gameEditData.boardScores[52])" style="width: 75px;" ng-model="game.gameEditData.boardScores[52]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[53] = game.expand(game.gameEditData.boardScores[53])" style="width: 75px;" ng-model="game.gameEditData.boardScores[53]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[54] = game.expand(game.gameEditData.boardScores[54])" style="width: 75px;" ng-model="game.gameEditData.boardScores[54]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[55] = game.expand(game.gameEditData.boardScores[55])" style="width: 75px;" ng-model="game.gameEditData.boardScores[55]"></td>
-							</tr>
-							<tr>
-								<td>L12</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[56] = game.expand(game.gameEditData.boardScores[56])" style="width: 75px;" ng-model="game.gameEditData.boardScores[56]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[57] = game.expand(game.gameEditData.boardScores[57])" style="width: 75px;" ng-model="game.gameEditData.boardScores[57]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[58] = game.expand(game.gameEditData.boardScores[58])" style="width: 75px;" ng-model="game.gameEditData.boardScores[58]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[59] = game.expand(game.gameEditData.boardScores[59])" style="width: 75px;" ng-model="game.gameEditData.boardScores[59]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[60] = game.expand(game.gameEditData.boardScores[60])" style="width: 75px;" ng-model="game.gameEditData.boardScores[60]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[61] = game.expand(game.gameEditData.boardScores[61])" style="width: 75px;" ng-model="game.gameEditData.boardScores[61]"></td>
-							</tr>
-							<tr>
-								<td>L13</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[62] = game.expand(game.gameEditData.boardScores[62])" style="width: 75px;" ng-model="game.gameEditData.boardScores[62]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[63] = game.expand(game.gameEditData.boardScores[63])" style="width: 75px;" ng-model="game.gameEditData.boardScores[63]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[64] = game.expand(game.gameEditData.boardScores[64])" style="width: 75px;" ng-model="game.gameEditData.boardScores[64]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[65] = game.expand(game.gameEditData.boardScores[65])" style="width: 75px;" ng-model="game.gameEditData.boardScores[65]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[66] = game.expand(game.gameEditData.boardScores[66])" style="width: 75px;" ng-model="game.gameEditData.boardScores[66]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[67] = game.expand(game.gameEditData.boardScores[67])" style="width: 75px;" ng-model="game.gameEditData.boardScores[67]"></td>
-							</tr>
-							<tr>
-								<td>L14</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[68] = game.expand(game.gameEditData.boardScores[68])" style="width: 75px;" ng-model="game.gameEditData.boardScores[68]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[69] = game.expand(game.gameEditData.boardScores[69])" style="width: 75px;" ng-model="game.gameEditData.boardScores[69]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[70] = game.expand(game.gameEditData.boardScores[70])" style="width: 75px;" ng-model="game.gameEditData.boardScores[70]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[71] = game.expand(game.gameEditData.boardScores[71])" style="width: 75px;" ng-model="game.gameEditData.boardScores[71]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[72] = game.expand(game.gameEditData.boardScores[72])" style="width: 75px;" ng-model="game.gameEditData.boardScores[72]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[73] = game.expand(game.gameEditData.boardScores[73])" style="width: 75px;" ng-model="game.gameEditData.boardScores[73]"></td>
-							</tr>
-							<tr>
-								<td>L15</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[74] = game.expand(game.gameEditData.boardScores[74])" style="width: 75px;" ng-model="game.gameEditData.boardScores[74]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[75] = game.expand(game.gameEditData.boardScores[75])" style="width: 75px;" ng-model="game.gameEditData.boardScores[75]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[76] = game.expand(game.gameEditData.boardScores[76])" style="width: 75px;" ng-model="game.gameEditData.boardScores[76]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[77] = game.expand(game.gameEditData.boardScores[77])" style="width: 75px;" ng-model="game.gameEditData.boardScores[77]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[78] = game.expand(game.gameEditData.boardScores[78])" style="width: 75px;" ng-model="game.gameEditData.boardScores[78]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[79] = game.expand(game.gameEditData.boardScores[79])" style="width: 75px;" ng-model="game.gameEditData.boardScores[79]"></td>
-							</tr>
-							<tr>
-								<td>L16</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[80] = game.expand(game.gameEditData.boardScores[80])" style="width: 75px;" ng-model="game.gameEditData.boardScores[80]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[81] = game.expand(game.gameEditData.boardScores[81])" style="width: 75px;" ng-model="game.gameEditData.boardScores[81]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[82] = game.expand(game.gameEditData.boardScores[82])" style="width: 75px;" ng-model="game.gameEditData.boardScores[82]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[83] = game.expand(game.gameEditData.boardScores[83])" style="width: 75px;" ng-model="game.gameEditData.boardScores[83]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[84] = game.expand(game.gameEditData.boardScores[84])" style="width: 75px;" ng-model="game.gameEditData.boardScores[84]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[85] = game.expand(game.gameEditData.boardScores[85])" style="width: 75px;" ng-model="game.gameEditData.boardScores[85]"></td>
-							</tr>
-							<tr>
-								<td>L17</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[86] = game.expand(game.gameEditData.boardScores[86])" style="width: 75px;" ng-model="game.gameEditData.boardScores[86]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[87] = game.expand(game.gameEditData.boardScores[87])" style="width: 75px;" ng-model="game.gameEditData.boardScores[87]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[88] = game.expand(game.gameEditData.boardScores[88])" style="width: 75px;" ng-model="game.gameEditData.boardScores[88]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[89] = game.expand(game.gameEditData.boardScores[89])" style="width: 75px;" ng-model="game.gameEditData.boardScores[89]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[90] = game.expand(game.gameEditData.boardScores[90])" style="width: 75px;" ng-model="game.gameEditData.boardScores[90]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[91] = game.expand(game.gameEditData.boardScores[91])" style="width: 75px;" ng-model="game.gameEditData.boardScores[91]"></td>
-							</tr>
-							<tr>
-								<td>L18</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[92] = game.expand(game.gameEditData.boardScores[92])" style="width: 75px;" ng-model="game.gameEditData.boardScores[92]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[93] = game.expand(game.gameEditData.boardScores[93])" style="width: 75px;" ng-model="game.gameEditData.boardScores[93]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[94] = game.expand(game.gameEditData.boardScores[94])" style="width: 75px;" ng-model="game.gameEditData.boardScores[94]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[95] = game.expand(game.gameEditData.boardScores[95])" style="width: 75px;" ng-model="game.gameEditData.boardScores[95]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[96] = game.expand(game.gameEditData.boardScores[96])" style="width: 75px;" ng-model="game.gameEditData.boardScores[96]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[97] = game.expand(game.gameEditData.boardScores[97])" style="width: 75px;" ng-model="game.gameEditData.boardScores[97]"></td>
-							</tr>
-							<tr>
-								<td>L19</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[98] = game.expand(game.gameEditData.boardScores[98])" style="width: 75px;" ng-model="game.gameEditData.boardScores[98]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[99] = game.expand(game.gameEditData.boardScores[99])" style="width: 75px;" ng-model="game.gameEditData.boardScores[99]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[100] = game.expand(game.gameEditData.boardScores[100])" style="width: 75px;" ng-model="game.gameEditData.boardScores[100]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[101] = game.expand(game.gameEditData.boardScores[101])" style="width: 75px;" ng-model="game.gameEditData.boardScores[101]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[102] = game.expand(game.gameEditData.boardScores[102])" style="width: 75px;" ng-model="game.gameEditData.boardScores[102]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[103] = game.expand(game.gameEditData.boardScores[103])" style="width: 75px;" ng-model="game.gameEditData.boardScores[103]"></td>
-							</tr>
-							<tr>
-								<td>L20</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[104] = game.expand(game.gameEditData.boardScores[104])" style="width: 75px;" ng-model="game.gameEditData.boardScores[104]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[105] = game.expand(game.gameEditData.boardScores[105])" style="width: 75px;" ng-model="game.gameEditData.boardScores[105]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[106] = game.expand(game.gameEditData.boardScores[106])" style="width: 75px;" ng-model="game.gameEditData.boardScores[106]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[107] = game.expand(game.gameEditData.boardScores[107])" style="width: 75px;" ng-model="game.gameEditData.boardScores[107]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[108] = game.expand(game.gameEditData.boardScores[108])" style="width: 75px;" ng-model="game.gameEditData.boardScores[108]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[109] = game.expand(game.gameEditData.boardScores[109])" style="width: 75px;" ng-model="game.gameEditData.boardScores[109]"></td>
-							</tr>
-							<tr>
-								<td>L21</td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[110] = game.expand(game.gameEditData.boardScores[110])" style="width: 75px;" ng-model="game.gameEditData.boardScores[110]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[111] = game.expand(game.gameEditData.boardScores[111])" style="width: 75px;" ng-model="game.gameEditData.boardScores[111]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[112] = game.expand(game.gameEditData.boardScores[112])" style="width: 75px;" ng-model="game.gameEditData.boardScores[112]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[113] = game.expand(game.gameEditData.boardScores[113])" style="width: 75px;" ng-model="game.gameEditData.boardScores[113]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[114] = game.expand(game.gameEditData.boardScores[114])" style="width: 75px;" ng-model="game.gameEditData.boardScores[114]"></td>
-								<td><input type="text" ng-blur="game.gameEditData.boardScores[115] = game.expand(game.gameEditData.boardScores[115])" style="width: 75px;" ng-model="game.gameEditData.boardScores[115]"></td>
-							</tr>
+	<!-- Complete Board-by-Board Input -->
+	<div ng-if="game.gameEditData.hasCompleteData">
 
-						</tbody>
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<hr>
+		</div>
 
-					</table>
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 
-				</div>
+			<div class="table">
 
-			</div>
+				<table class="table responsive-table">
 
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Barrel 1</th>
+							<th>Conveyor</th>
+							<th>Barrel 2</th>
+							<th>Elevator</th>
+							<th>Barrel 3</th>
+							<th>Rivet</th>
+						</tr>
+					</thead>
 
-				<div class="table">
+					<tbody>
 
-					<table class="table responsive-table">
+						<tr>
+							<td>L1</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[0] = game.expand(game.gameEditData.boardScores[0])" style="width: 75px;" ng-model="game.gameEditData.boardScores[0]"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[1] = game.expand(game.gameEditData.boardScores[1])" style="width: 75px;" ng-model="game.gameEditData.boardScores[1]"></td>
+						</tr>
+						<tr>
+							<td>L2</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[2] = game.expand(game.gameEditData.boardScores[2])" style="width: 75px;" ng-model="game.gameEditData.boardScores[2]"></td>
+							<td></td>
+							<td></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[3] = game.expand(game.gameEditData.boardScores[3])" style="width: 75px;" ng-model="game.gameEditData.boardScores[3]"></td>
+							<td></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[4] = game.expand(game.gameEditData.boardScores[4])" style="width: 75px;" ng-model="game.gameEditData.boardScores[4]"></td>
+						</tr>
+						<tr>
+							<td>L3</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[5] = game.expand(game.gameEditData.boardScores[5])" style="width: 75px;" ng-model="game.gameEditData.boardScores[5]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[6] = game.expand(game.gameEditData.boardScores[6])" style="width: 75px;" ng-model="game.gameEditData.boardScores[6]"></td>
+							<td></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[7] = game.expand(game.gameEditData.boardScores[7])" style="width: 75px;" ng-model="game.gameEditData.boardScores[7]"></td>
+							<td></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[8] = game.expand(game.gameEditData.boardScores[8])" style="width: 75px;" ng-model="game.gameEditData.boardScores[8]"></td>
+						</tr>
+						<tr>
+							<td>L4</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[9] = game.expand(game.gameEditData.boardScores[9])" style="width: 75px;" ng-model="game.gameEditData.boardScores[9]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[10] = game.expand(game.gameEditData.boardScores[10])" style="width: 75px;" ng-model="game.gameEditData.boardScores[10]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[11] = game.expand(game.gameEditData.boardScores[11])" style="width: 75px;" ng-model="game.gameEditData.boardScores[11]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[12] = game.expand(game.gameEditData.boardScores[12])" style="width: 75px;" ng-model="game.gameEditData.boardScores[12]"></td>
+							<td></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[13] = game.expand(game.gameEditData.boardScores[13])" style="width: 75px;" ng-model="game.gameEditData.boardScores[13]"></td>
+						</tr>
+						<tr>
+							<td>L5</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[14] = game.expand(game.gameEditData.boardScores[14])" style="width: 75px;" ng-model="game.gameEditData.boardScores[14]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[15] = game.expand(game.gameEditData.boardScores[15])" style="width: 75px;" ng-model="game.gameEditData.boardScores[15]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[16] = game.expand(game.gameEditData.boardScores[16])" style="width: 75px;" ng-model="game.gameEditData.boardScores[16]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[17] = game.expand(game.gameEditData.boardScores[17])" style="width: 75px;" ng-model="game.gameEditData.boardScores[17]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[18] = game.expand(game.gameEditData.boardScores[18])" style="width: 75px;" ng-model="game.gameEditData.boardScores[18]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[19] = game.expand(game.gameEditData.boardScores[19])" style="width: 75px;" ng-model="game.gameEditData.boardScores[19]"></td>
+						</tr>
+						<tr>
+							<td>L6</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[20] = game.expand(game.gameEditData.boardScores[20])" style="width: 75px;" ng-model="game.gameEditData.boardScores[20]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[21] = game.expand(game.gameEditData.boardScores[21])" style="width: 75px;" ng-model="game.gameEditData.boardScores[21]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[22] = game.expand(game.gameEditData.boardScores[22])" style="width: 75px;" ng-model="game.gameEditData.boardScores[22]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[23] = game.expand(game.gameEditData.boardScores[23])" style="width: 75px;" ng-model="game.gameEditData.boardScores[23]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[24] = game.expand(game.gameEditData.boardScores[24])" style="width: 75px;" ng-model="game.gameEditData.boardScores[24]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[25] = game.expand(game.gameEditData.boardScores[25])" style="width: 75px;" ng-model="game.gameEditData.boardScores[25]"></td>
+						</tr>
+						<tr>
+							<td>L7</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[26] = game.expand(game.gameEditData.boardScores[26])" style="width: 75px;" ng-model="game.gameEditData.boardScores[26]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[27] = game.expand(game.gameEditData.boardScores[27])" style="width: 75px;" ng-model="game.gameEditData.boardScores[27]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[28] = game.expand(game.gameEditData.boardScores[28])" style="width: 75px;" ng-model="game.gameEditData.boardScores[28]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[29] = game.expand(game.gameEditData.boardScores[29])" style="width: 75px;" ng-model="game.gameEditData.boardScores[29]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[30] = game.expand(game.gameEditData.boardScores[30])" style="width: 75px;" ng-model="game.gameEditData.boardScores[30]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[31] = game.expand(game.gameEditData.boardScores[31])" style="width: 75px;" ng-model="game.gameEditData.boardScores[31]"></td>
+						</tr>
+						<tr>
+							<td>L8</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[32] = game.expand(game.gameEditData.boardScores[32])" style="width: 75px;" ng-model="game.gameEditData.boardScores[32]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[33] = game.expand(game.gameEditData.boardScores[33])" style="width: 75px;" ng-model="game.gameEditData.boardScores[33]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[34] = game.expand(game.gameEditData.boardScores[34])" style="width: 75px;" ng-model="game.gameEditData.boardScores[34]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[35] = game.expand(game.gameEditData.boardScores[35])" style="width: 75px;" ng-model="game.gameEditData.boardScores[35]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[36] = game.expand(game.gameEditData.boardScores[36])" style="width: 75px;" ng-model="game.gameEditData.boardScores[36]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[37] = game.expand(game.gameEditData.boardScores[37])" style="width: 75px;" ng-model="game.gameEditData.boardScores[37]"></td>
+						</tr>
+						<tr>
+							<td>L9</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[38] = game.expand(game.gameEditData.boardScores[38])" style="width: 75px;" ng-model="game.gameEditData.boardScores[38]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[39] = game.expand(game.gameEditData.boardScores[39])" style="width: 75px;" ng-model="game.gameEditData.boardScores[39]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[40] = game.expand(game.gameEditData.boardScores[40])" style="width: 75px;" ng-model="game.gameEditData.boardScores[40]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[41] = game.expand(game.gameEditData.boardScores[41])" style="width: 75px;" ng-model="game.gameEditData.boardScores[41]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[42] = game.expand(game.gameEditData.boardScores[42])" style="width: 75px;" ng-model="game.gameEditData.boardScores[42]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[43] = game.expand(game.gameEditData.boardScores[43])" style="width: 75px;" ng-model="game.gameEditData.boardScores[43]"></td>
+						</tr>
+						<tr>
+							<td>L10</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[44] = game.expand(game.gameEditData.boardScores[44])" style="width: 75px;" ng-model="game.gameEditData.boardScores[44]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[45] = game.expand(game.gameEditData.boardScores[45])" style="width: 75px;" ng-model="game.gameEditData.boardScores[45]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[46] = game.expand(game.gameEditData.boardScores[46])" style="width: 75px;" ng-model="game.gameEditData.boardScores[46]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[47] = game.expand(game.gameEditData.boardScores[47])" style="width: 75px;" ng-model="game.gameEditData.boardScores[47]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[48] = game.expand(game.gameEditData.boardScores[48])" style="width: 75px;" ng-model="game.gameEditData.boardScores[48]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[49] = game.expand(game.gameEditData.boardScores[49])" style="width: 75px;" ng-model="game.gameEditData.boardScores[49]"></td>
+						</tr>
+						<tr>
+							<td>L11</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[50] = game.expand(game.gameEditData.boardScores[50])" style="width: 75px;" ng-model="game.gameEditData.boardScores[50]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[51] = game.expand(game.gameEditData.boardScores[51])" style="width: 75px;" ng-model="game.gameEditData.boardScores[51]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[52] = game.expand(game.gameEditData.boardScores[52])" style="width: 75px;" ng-model="game.gameEditData.boardScores[52]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[53] = game.expand(game.gameEditData.boardScores[53])" style="width: 75px;" ng-model="game.gameEditData.boardScores[53]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[54] = game.expand(game.gameEditData.boardScores[54])" style="width: 75px;" ng-model="game.gameEditData.boardScores[54]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[55] = game.expand(game.gameEditData.boardScores[55])" style="width: 75px;" ng-model="game.gameEditData.boardScores[55]"></td>
+						</tr>
+						<tr>
+							<td>L12</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[56] = game.expand(game.gameEditData.boardScores[56])" style="width: 75px;" ng-model="game.gameEditData.boardScores[56]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[57] = game.expand(game.gameEditData.boardScores[57])" style="width: 75px;" ng-model="game.gameEditData.boardScores[57]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[58] = game.expand(game.gameEditData.boardScores[58])" style="width: 75px;" ng-model="game.gameEditData.boardScores[58]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[59] = game.expand(game.gameEditData.boardScores[59])" style="width: 75px;" ng-model="game.gameEditData.boardScores[59]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[60] = game.expand(game.gameEditData.boardScores[60])" style="width: 75px;" ng-model="game.gameEditData.boardScores[60]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[61] = game.expand(game.gameEditData.boardScores[61])" style="width: 75px;" ng-model="game.gameEditData.boardScores[61]"></td>
+						</tr>
+						<tr>
+							<td>L13</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[62] = game.expand(game.gameEditData.boardScores[62])" style="width: 75px;" ng-model="game.gameEditData.boardScores[62]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[63] = game.expand(game.gameEditData.boardScores[63])" style="width: 75px;" ng-model="game.gameEditData.boardScores[63]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[64] = game.expand(game.gameEditData.boardScores[64])" style="width: 75px;" ng-model="game.gameEditData.boardScores[64]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[65] = game.expand(game.gameEditData.boardScores[65])" style="width: 75px;" ng-model="game.gameEditData.boardScores[65]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[66] = game.expand(game.gameEditData.boardScores[66])" style="width: 75px;" ng-model="game.gameEditData.boardScores[66]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[67] = game.expand(game.gameEditData.boardScores[67])" style="width: 75px;" ng-model="game.gameEditData.boardScores[67]"></td>
+						</tr>
+						<tr>
+							<td>L14</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[68] = game.expand(game.gameEditData.boardScores[68])" style="width: 75px;" ng-model="game.gameEditData.boardScores[68]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[69] = game.expand(game.gameEditData.boardScores[69])" style="width: 75px;" ng-model="game.gameEditData.boardScores[69]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[70] = game.expand(game.gameEditData.boardScores[70])" style="width: 75px;" ng-model="game.gameEditData.boardScores[70]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[71] = game.expand(game.gameEditData.boardScores[71])" style="width: 75px;" ng-model="game.gameEditData.boardScores[71]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[72] = game.expand(game.gameEditData.boardScores[72])" style="width: 75px;" ng-model="game.gameEditData.boardScores[72]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[73] = game.expand(game.gameEditData.boardScores[73])" style="width: 75px;" ng-model="game.gameEditData.boardScores[73]"></td>
+						</tr>
+						<tr>
+							<td>L15</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[74] = game.expand(game.gameEditData.boardScores[74])" style="width: 75px;" ng-model="game.gameEditData.boardScores[74]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[75] = game.expand(game.gameEditData.boardScores[75])" style="width: 75px;" ng-model="game.gameEditData.boardScores[75]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[76] = game.expand(game.gameEditData.boardScores[76])" style="width: 75px;" ng-model="game.gameEditData.boardScores[76]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[77] = game.expand(game.gameEditData.boardScores[77])" style="width: 75px;" ng-model="game.gameEditData.boardScores[77]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[78] = game.expand(game.gameEditData.boardScores[78])" style="width: 75px;" ng-model="game.gameEditData.boardScores[78]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[79] = game.expand(game.gameEditData.boardScores[79])" style="width: 75px;" ng-model="game.gameEditData.boardScores[79]"></td>
+						</tr>
+						<tr>
+							<td>L16</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[80] = game.expand(game.gameEditData.boardScores[80])" style="width: 75px;" ng-model="game.gameEditData.boardScores[80]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[81] = game.expand(game.gameEditData.boardScores[81])" style="width: 75px;" ng-model="game.gameEditData.boardScores[81]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[82] = game.expand(game.gameEditData.boardScores[82])" style="width: 75px;" ng-model="game.gameEditData.boardScores[82]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[83] = game.expand(game.gameEditData.boardScores[83])" style="width: 75px;" ng-model="game.gameEditData.boardScores[83]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[84] = game.expand(game.gameEditData.boardScores[84])" style="width: 75px;" ng-model="game.gameEditData.boardScores[84]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[85] = game.expand(game.gameEditData.boardScores[85])" style="width: 75px;" ng-model="game.gameEditData.boardScores[85]"></td>
+						</tr>
+						<tr>
+							<td>L17</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[86] = game.expand(game.gameEditData.boardScores[86])" style="width: 75px;" ng-model="game.gameEditData.boardScores[86]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[87] = game.expand(game.gameEditData.boardScores[87])" style="width: 75px;" ng-model="game.gameEditData.boardScores[87]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[88] = game.expand(game.gameEditData.boardScores[88])" style="width: 75px;" ng-model="game.gameEditData.boardScores[88]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[89] = game.expand(game.gameEditData.boardScores[89])" style="width: 75px;" ng-model="game.gameEditData.boardScores[89]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[90] = game.expand(game.gameEditData.boardScores[90])" style="width: 75px;" ng-model="game.gameEditData.boardScores[90]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[91] = game.expand(game.gameEditData.boardScores[91])" style="width: 75px;" ng-model="game.gameEditData.boardScores[91]"></td>
+						</tr>
+						<tr>
+							<td>L18</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[92] = game.expand(game.gameEditData.boardScores[92])" style="width: 75px;" ng-model="game.gameEditData.boardScores[92]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[93] = game.expand(game.gameEditData.boardScores[93])" style="width: 75px;" ng-model="game.gameEditData.boardScores[93]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[94] = game.expand(game.gameEditData.boardScores[94])" style="width: 75px;" ng-model="game.gameEditData.boardScores[94]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[95] = game.expand(game.gameEditData.boardScores[95])" style="width: 75px;" ng-model="game.gameEditData.boardScores[95]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[96] = game.expand(game.gameEditData.boardScores[96])" style="width: 75px;" ng-model="game.gameEditData.boardScores[96]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[97] = game.expand(game.gameEditData.boardScores[97])" style="width: 75px;" ng-model="game.gameEditData.boardScores[97]"></td>
+						</tr>
+						<tr>
+							<td>L19</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[98] = game.expand(game.gameEditData.boardScores[98])" style="width: 75px;" ng-model="game.gameEditData.boardScores[98]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[99] = game.expand(game.gameEditData.boardScores[99])" style="width: 75px;" ng-model="game.gameEditData.boardScores[99]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[100] = game.expand(game.gameEditData.boardScores[100])" style="width: 75px;" ng-model="game.gameEditData.boardScores[100]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[101] = game.expand(game.gameEditData.boardScores[101])" style="width: 75px;" ng-model="game.gameEditData.boardScores[101]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[102] = game.expand(game.gameEditData.boardScores[102])" style="width: 75px;" ng-model="game.gameEditData.boardScores[102]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[103] = game.expand(game.gameEditData.boardScores[103])" style="width: 75px;" ng-model="game.gameEditData.boardScores[103]"></td>
+						</tr>
+						<tr>
+							<td>L20</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[104] = game.expand(game.gameEditData.boardScores[104])" style="width: 75px;" ng-model="game.gameEditData.boardScores[104]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[105] = game.expand(game.gameEditData.boardScores[105])" style="width: 75px;" ng-model="game.gameEditData.boardScores[105]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[106] = game.expand(game.gameEditData.boardScores[106])" style="width: 75px;" ng-model="game.gameEditData.boardScores[106]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[107] = game.expand(game.gameEditData.boardScores[107])" style="width: 75px;" ng-model="game.gameEditData.boardScores[107]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[108] = game.expand(game.gameEditData.boardScores[108])" style="width: 75px;" ng-model="game.gameEditData.boardScores[108]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[109] = game.expand(game.gameEditData.boardScores[109])" style="width: 75px;" ng-model="game.gameEditData.boardScores[109]"></td>
+						</tr>
+						<tr>
+							<td>L21</td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[110] = game.expand(game.gameEditData.boardScores[110])" style="width: 75px;" ng-model="game.gameEditData.boardScores[110]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[111] = game.expand(game.gameEditData.boardScores[111])" style="width: 75px;" ng-model="game.gameEditData.boardScores[111]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[112] = game.expand(game.gameEditData.boardScores[112])" style="width: 75px;" ng-model="game.gameEditData.boardScores[112]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[113] = game.expand(game.gameEditData.boardScores[113])" style="width: 75px;" ng-model="game.gameEditData.boardScores[113]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[114] = game.expand(game.gameEditData.boardScores[114])" style="width: 75px;" ng-model="game.gameEditData.boardScores[114]"></td>
+							<td><input type="text" ng-blur="game.gameEditData.boardScores[115] = game.expand(game.gameEditData.boardScores[115])" style="width: 75px;" ng-model="game.gameEditData.boardScores[115]"></td>
+						</tr>
 
-						<thead>
-							<tr>
-								<th></th>
-								<th>Board</th>
-								<th>Points</th>
-							</tr>
-						</thead>
+					</tbody>
 
-						<tbody>
+				</table>
 
-							<tr>
-								<td>Death One</td>
-								<td>
-									<select style="width: 75px;" 
-									        ng-model="game.gameEditData.deaths[0].board"
-									        ng-options="level as level for level in game.getAllLevels()">
-									</select>
-								</td>
-								<td><input type="number" style="width: 75px;" ng-model="game.gameEditData.deaths[0].points"></td>
-							</tr>
-							<tr>
-								<td>Death Two</td>
-								<td>
-									<select style="width: 75px;" 
-									        ng-model="game.gameEditData.deaths[1].board"
-									        ng-options="level as level for level in game.getAllLevels()">
-									</select>
-								</td>
-								<td><input type="number" style="width: 75px;" ng-model="game.gameEditData.deaths[1].points"></td>
-							</tr>
-							<tr>
-								<td>Death Three</td>
-								<td>
-									<select style="width: 75px;" 
-									        ng-model="game.gameEditData.deaths[2].board"
-									        ng-options="level as level for level in game.getAllLevels()">
-									</select>
-								</td>
-								<td><input type="number" style="width: 75px;" ng-model="game.gameEditData.deaths[2].points"></td>
-							</tr>
-							<tr>
-								<td>Death Four</td>
-								<td>
-									<select style="width: 75px;" 
-									        ng-model="game.gameEditData.deaths[3].board"
-									        ng-options="level as level for level in game.getAllLevels()">
-									</select>
-								</td>
-								<td><input type="number" style="width: 75px;" ng-model="game.gameEditData.deaths[3].points"></td>
-							</tr>
-
-						</tbody>
-
-					</table>
-
-			</div>
-
-			<div class="form-group text-right col-sm-12 col-xs-12">
-				<button class="btn btn-primary pull-right" ng-click="game.handleEditCommit()">
-					Commit
-				</button>
 			</div>
 
 		</div>
 
-	</form>
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+			<div class="table">
+
+				<table class="table responsive-table">
+
+					<thead>
+						<tr>
+							<th></th>
+							<th>Board</th>
+							<th>Points</th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+						<tr>
+							<td>Death One</td>
+							<td>
+								<select style="width: 75px;" 
+								        ng-model="game.gameEditData.deaths[0].board"
+								        ng-options="level as level for level in game.getAllLevels()">
+								</select>
+							</td>
+							<td><input type="number" style="width: 75px;" ng-model="game.gameEditData.deaths[0].points"></td>
+						</tr>
+						<tr>
+							<td>Death Two</td>
+							<td>
+								<select style="width: 75px;" 
+								        ng-model="game.gameEditData.deaths[1].board"
+								        ng-options="level as level for level in game.getAllLevels()">
+								</select>
+							</td>
+							<td><input type="number" style="width: 75px;" ng-model="game.gameEditData.deaths[1].points"></td>
+						</tr>
+						<tr>
+							<td>Death Three</td>
+							<td>
+								<select style="width: 75px;" 
+								        ng-model="game.gameEditData.deaths[2].board"
+								        ng-options="level as level for level in game.getAllLevels()">
+								</select>
+							</td>
+							<td><input type="number" style="width: 75px;" ng-model="game.gameEditData.deaths[2].points"></td>
+						</tr>
+						<tr>
+							<td>Death Four</td>
+							<td>
+								<select style="width: 75px;" 
+								        ng-model="game.gameEditData.deaths[3].board"
+								        ng-options="level as level for level in game.getAllLevels()">
+								</select>
+							</td>
+							<td><input type="number" style="width: 75px;" ng-model="game.gameEditData.deaths[3].points"></td>
+						</tr>
+
+					</tbody>
+
+				</table>
+
+		</div>
+
+		<div class="form-group text-right col-sm-12 col-xs-12">
+			<button class="btn btn-primary pull-right" ng-click="game.handleEditCommit()">
+				Commit
+			</button>
+		</div>
+
+	</div>
 
 </div>

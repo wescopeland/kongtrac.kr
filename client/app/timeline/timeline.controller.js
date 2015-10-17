@@ -534,17 +534,29 @@
 
         		var chartSymbols = {
 
+                    neilChapman: {
+                        color: '#4fc3f7'
+                    },
+
+                    rickFothergill: {
+                        color: '#afb42b'
+                    },
+
         			deanSaglio: {
         				color: '#001f3f'
         			},
 
         			benJosWalbeehm: {
-        				color: '#2ecc40'
+        				color: '#ff8a65'
         			},
 
         			rossBenziger: {
         				color: '#39cccc'
-        			}
+        			},
+
+                    scottKessler: {
+                        color: '#7986cb'
+                    }
 
         		};
 
@@ -623,7 +635,11 @@
 
         			deanSaglio: {
         				color: '#001f3f'
-        			}
+        			},
+
+                    benJosWalbeehm: {
+                        color: '#ff8a65'
+                    }
 
         		};
 

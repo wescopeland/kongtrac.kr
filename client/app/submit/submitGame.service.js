@@ -6,7 +6,7 @@
         .service('submitGameService', submitGameService);
 
     /* @ngInject */
-    function submitGameService($q, $rootScope, $firebaseObject, $firebaseArray) {
+    function submitGameService($q, $rootScope, $firebaseObject, $firebaseArray, eventService) {
 
     	var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
 
@@ -84,10 +84,24 @@
                         gameData.concealedMonth = true;
                     }
 
-                    console.log(gameData);
+                    if (inputGameProperties.event) {
 
-                    gameData.$save();
-                    resolve();
+                        gameData.event = inputGameProperties.event;
+                        eventService.addGameIdToEvent(inputGameProperties.event, inputGameId).then(function() {
+
+                            gameData.$save();
+                            resolve();
+
+                        });
+
+                    } else {
+
+                        gameData.$save();
+                        resolve();
+
+                    }
+
+                    console.log(gameData);
 
                 });
 

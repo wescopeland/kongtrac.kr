@@ -12,10 +12,38 @@
         var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
         var _event = {};
 
+        this.addGameIdToEvent = addGameIdToEvent;
         this.editEvent = editEvent;
         this.getEventData = getEventData;
 
         ////////////////
+
+        function addGameIdToEvent(inputEventId, inputGameId) {
+
+            return $q(function(resolve, reject) {
+
+                removeGameIdFromEvents(inputGameId).then(function() {
+
+                    var eventData = $firebaseObject(
+                        _fbRef
+                            .child('events')
+                            .child(inputEventId)
+                    );
+
+                    eventData.$loaded().then(function() {
+
+                        eventData.games.push(inputGameId);
+                        eventData.$save();
+
+                        resolve();
+
+                    });
+
+                });
+
+            });
+
+        }
 
         function editEvent(inputEventId, inputEditObject) {
 
@@ -58,6 +86,38 @@
 
                     _event = eventData;
                     resolve(_event);
+
+                });
+
+            });
+
+        }
+
+        function removeGameIdFromEvents(inputGameId) {
+
+            return $q(function(resolve, reject) {
+
+                var allEvents = $firebaseArray(
+                    _fbRef
+                        .child('events')
+                );
+
+                allEvents.$loaded().then(function() {
+
+                    allEvents.forEach(function(event) {
+
+                        var gameRemovalIndex = event.games.indexOf(inputGameId);
+
+                        if (gameRemovalIndex !== -1) {
+
+                            event.games.splice(gameRemovalIndex, 1);
+                            allEvents.$save(event);
+
+                        }
+
+                    });
+
+                    resolve();
 
                 });
 

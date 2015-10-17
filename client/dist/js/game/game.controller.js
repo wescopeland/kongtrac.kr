@@ -6,7 +6,7 @@
         .controller('GameController', GameController);
 
     /* @ngInject */
-    function GameController($stateParams, $state, $filter, $timeout, gameService, submitGameService, boardMapper, highchartsNG) {
+    function GameController($stateParams, $state, $filter, $timeout, gameService, searchService, eventService, submitGameService, boardMapper, highchartsNG) {
 
         var vm = this;
 
@@ -23,6 +23,8 @@
         // Public Functions
         vm.calculateAverageBarPercentage = calculateAverageBarPercentage;
         vm.camelize = camelize;
+        vm.chooseEvent = chooseEvent;
+        vm.eventSearch = eventSearch;
         vm.expand = expand;
         vm.formatSlider = formatSlider;
         vm.getAllLevels = getAllLevels;
@@ -228,6 +230,17 @@
                 vm.gameEditData.isKillscreen = vm.gameData.isKillscreen ? vm.gameData.isKillscreen : false;
                 vm.gameEditData.hasCompleteData = vm.gameData.hasCompleteData ? vm.gameData.hasCompleteData : false;
 
+                if (vm.gameData.event) {
+
+                    eventService.getEventData(vm.gameData.event).then(function then(response) {
+
+                        vm.gameEditData.eventName = response.name;
+                        vm.gameEditData.eventId = vm.gameData.event;
+
+                    });
+
+                }
+
                 if (vm.gameData.hasCompleteData) {
 
                     vm.gameEditData.hasCompleteData = true;
@@ -327,6 +340,17 @@
 
         }
 
+        function chooseEvent(inputEvent) {
+
+            vm.gameEditData.eventName = inputEvent.name;
+            vm.gameEditData.eventId = inputEvent.objectID;
+
+        }
+
+        function eventSearch(inputQuery) {
+            return searchService.eventSearch(inputQuery);
+        }
+
         function expand(inputPoints) {
             return submitGameService.expandAbbreviatedPoints(inputPoints);
         }
@@ -382,6 +406,10 @@
             gamePropertiesObject.isKillscreen = vm.gameEditData.isKillscreen;
             gamePropertiesObject.hasCompleteData = vm.gameEditData.hasCompleteData;
 
+            if (vm.gameEditData.eventId) {
+                gamePropertiesObject.event = vm.gameEditData.eventId;
+            }
+
             if (vm.gameEditData.hasCompleteData) {
 
                 gamePropertiesObject.boardScores = vm.gameEditData.boardScores;
@@ -409,5 +437,5 @@
         }
 
     }
-    GameController.$inject = ["$stateParams", "$state", "$filter", "$timeout", "gameService", "submitGameService", "boardMapper", "highchartsNG"];
+    GameController.$inject = ["$stateParams", "$state", "$filter", "$timeout", "gameService", "searchService", "eventService", "submitGameService", "boardMapper", "highchartsNG"];
 })();
