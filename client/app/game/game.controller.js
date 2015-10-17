@@ -221,7 +221,7 @@
         	gameService.getGameData($stateParams.gameId).then(function then(response) {
 
         		vm.gameData = response;
-                console.log(response);
+                console.log(vm.gameData);
 
                 vm.gameEditData.date = vm.gameData.date;
                 vm.gameEditData.score = vm.gameData.score;
@@ -255,8 +255,6 @@
                     vm.inputLevelSlider = vm.gameData.mappableLevels.length + 4;
 
                 }
-
-                console.log(vm.gameEditData);
 
                 vm.paceChartConfiguration.series.push({
         			data: vm.gameData.paceMap,
