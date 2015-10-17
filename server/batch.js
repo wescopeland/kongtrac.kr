@@ -4,6 +4,7 @@
 
 	var personalBestTable = require('./buildPersonalBestTable');
 	var averageGame = require('./buildAverageGame');
+	var perfectGame = require('./buildPerfectGame');
 	var dbStats = require('./buildDbStats');
 	var gameRankings = require('./buildGameRankingsTables');
 	var ksTimeline = require('./buildKillscreenerTimeline');
@@ -19,6 +20,7 @@
 		personalBestTable.build();
 
 		averageGame.build();
+		perfectGame.build();
 
 		dbStats.build();
 		

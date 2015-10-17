@@ -8,6 +8,16 @@
 	</p>
 </div>
 
+<div class="row" ng-if="game.gameId === 'perfectGame'">
+	<h3>The Perfect Game</h3>
+	<p>
+		This is a simulation produced on a daily basis from every game in the database.
+		Each game has been scanned through, and the <em>maximum scores earned on every board</em> have been assembled
+		into a single game: "the perfect game". With each new game entry in the database that breaks the maximum score earned
+		on a board, the perfect game automatically adjusts itself.
+	</p>
+</div>
+
 <div class="row">
 	<h2>
 		<a ng-href="{{ '#/player/' + game.camelize(game.gameData.player) }}">{{ game.gameData.player }}</a> &mdash; {{ game.gameData.score | number }}
@@ -21,7 +31,7 @@
 		    <span ng-if="game.$state.current.name === 'game.boards' || !game.gameData.hasCompleteData">Score breakdown</span>
 		</small>
 		<small class="pull-right" style="margin-top: 10px;">
-		    <a ng-if="game.$state.current.name !== 'game.edit' && game.gameId !== 'averageGame'" 
+		    <a ng-if="game.$state.current.name !== 'game.edit' && game.gameData.platform !== 'Simulation'" 
 		       ng-href="{{ '#/game/' + game.gameData.$id + '/edit' }}">
 		        Edit
 		    </a>

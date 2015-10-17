@@ -17,7 +17,7 @@
 			gamesSnapshot.forEach(function(game) {
 
 				var gameData = game.val();
-				if (gameData.hasCompleteData && gameData.isKillscreen) {
+				if (gameData.hasCompleteData && gameData.isKillscreen && gameData.platform !== 'Simulation') {
 					completeGamesArray.push(gameData);
 				}
 

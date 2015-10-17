@@ -31,7 +31,11 @@
 			// Get the top ten combined platform games.
 			var combinedTopGames = [];
 			for (var i = 0; i < 10; i += 1) {
-				combinedTopGames.push(completeGamesArray[i]);
+
+				if (completeGamesArray[i].platform !== 'Simulation') {
+					combinedTopGames.push(completeGamesArray[i]);
+				}
+
 			}
 
 			// Get the separated platform top tens.
