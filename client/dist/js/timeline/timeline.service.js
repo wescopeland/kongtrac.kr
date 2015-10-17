@@ -34,4 +34,5 @@
         }
 
     }
+    timelineService.$inject = ["$q", "$firebaseObject", "$firebaseArray"];
 })();

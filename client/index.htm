@@ -86,11 +86,11 @@
 	            		Timelines <span class="caret"></span>
 	            	</a>
 	            	<ul class="dropdown-menu">
-	            		<li><a ui-sref="">World Record Timeline</a></li>
-	            		<li><a ui-sref="">Killscreener Timeline</a></li>
-	            		<li><a ui-sref="">1m Point Timeline</a></li>
-	            		<li><a ui-sref="">1.1m Point Timeline</a></li>
-	            		<li><a ui-sref="">1.2m Point Timeline</a></li> 
+	            		<li><a ui-sref="timeline.worldRecord">World Record Timeline</a></li>
+	            		<li><a ui-sref="timeline.killscreen">Killscreener Timeline</a></li>
+	            		<li><a ui-sref="timeline.million">1m Point Timeline</a></li>
+	            		<li><a ui-sref="timeline.millionhundred">1.1m Point Timeline</a></li>
+	            		<li><a ui-sref="timeline.milliontwohundred">1.2m Point Timeline</a></li> 
 	            	</ul>
 
 	            </li>
@@ -145,7 +145,7 @@
     			<footer class="text-muted small">
     				<p>Find us on <a href="http://donkeykongforum.com">Donkey Kong Forum</a> and <a href="https://github.com/wescopeland/kongtrac.kr">GitHub</a>.</p>
     				<p>Heavily influenced by the open-source <a href="http://aligulac.com">Aligulac</a> project. Charts by <a href="https://highcharts.com">Highcharts</a>.</p>
-    				<p>Powered by <a href="https://nodejs.org">Node.js</a>, <a href="https://angularjs.org">AngularJS 1.x</a>, <a href="https://heroku.com">Heroku</a>, and <a href="https://firebase.com">Firebase</a>.</p>
+    				<p>Powered by <a href="https://nodejs.org">Node.js</a>, <a href="https://angularjs.org">AngularJS 1.x</a>, <a href="https://algolia.com">Algolia</a>, <a href="https://heroku.com">Heroku</a>, and <a href="https://firebase.com">Firebase</a>.</p>
     			</footer>
     		</div>
     	</div>
@@ -215,6 +215,11 @@
 	<script src="dist/js/compare/compareEvents.controller.js"></script>
 	<script src="dist/js/compare/compare.service.js"></script>
 	<script src="dist/js/compare/compareSelection.controller.js"></script>
+
+	<script src="dist/js/timeline/timeline.module.js"></script>
+	<script src="dist/js/timeline/timeline.route.js"></script>
+	<script src="dist/js/timeline/timeline.controller.js"></script>
+	<script src="dist/js/timeline/timeline.service.js"></script>
 
 	<script src="dist/js/quicksearch/quicksearch.module.js"></script>
 	<script src="dist/js/quicksearch/globalsearch.directive.js"></script>

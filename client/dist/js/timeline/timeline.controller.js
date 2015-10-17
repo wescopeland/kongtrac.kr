@@ -515,4 +515,5 @@
         }
 
     }
+    TimelineController.$inject = ["$filter", "timelineService"];
 })();

@@ -1,0 +1,57 @@
+<div class="row" style="padding-top: 25px;">
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<p>
+			Since 1982, the arcade world record has been broken <em>{{ timeline.arcadeWRTimeline.length }}</em> times by <em>{{ timeline.arcadeWRPlayerCount }}</em> players.
+		</p>
+
+		<h2>
+			Arcade world record timeline
+		</h2>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<highchart id="arcadeWRChart" config="timeline.arcadeWRChartConfig"></highchart>
+	</div>
+</div>
+
+<br>
+
+<div class="row" style="padding-top: 25px;">
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<p>
+			Since 2000, the arcade world record has been broken <em>{{ timeline.mameWRTimeline.length }}</em> times by <em>{{ timeline.mameWRPlayerCount }}</em> players.
+		</p>
+
+		<h2>
+			Mame world record timeline
+		</h2>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<highchart id="mameWRChart" config="timeline.mameWRChartConfig"></highchart>
+	</div>
+</div>
+
+<br>
+
+<div class="row" style="padding-top: 25px;">
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<p>
+			Since 1982, the combined platform world record has been broken <em>{{ timeline.combinedWRTimeline.length }}</em> times by <em>{{ timeline.combinedWRPlayerCount }}</em> players.
+		</p>
+
+		<h2>
+			Combined platform world record timeline
+		</h2>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<highchart id="combinedWRChart" config="timeline.combinedWRChartConfig"></highchart>
+	</div>
+</div>

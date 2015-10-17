@@ -11,6 +11,7 @@
             'kongtrac.player',
             'kongtrac.event',
             'kongtrac.compare',
+            'kongtrac.timeline',
             'kongtrac.search'
         ]);
 })();
