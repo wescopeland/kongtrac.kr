@@ -5,8 +5,10 @@ var bodyParser = require('body-parser');
 var every = require('every-moment');
 
 var kongtrackr = require('./server/batch');
+var algoliaIndices = require('./server/algoliaUpdate');
 
 kongtrackr.runBatch();
+algoliaIndices.watchData();
 
 var app = express();
 app.use(compress);
