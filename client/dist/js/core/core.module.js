@@ -11,6 +11,7 @@
             'algoliasearch',
             'smart-table',
             'angularMoment',
-            'ui.bootstrap-slider'
+            'ui.bootstrap-slider',
+            'angular-ladda'
         ]);
 })();

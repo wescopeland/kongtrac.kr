@@ -30,6 +30,7 @@
     "angular-moment": "~0.10.3",
     "angular-bootstrap-slider": "~0.1.18",
     "angular-strap": "~2.3.3",
-    "outdated-browser": "~1.1.2"
+    "outdated-browser": "~1.1.2",
+    "angular-ladda": "~0.3.1"
   }
 }

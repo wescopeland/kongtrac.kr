@@ -43,6 +43,10 @@ a.blacklink:hover {
     text-decoration: none;
 }
 
+a:focus, a:hover {
+    text-decoration: none;
+}
+
 /* Centered navbar */
 @media (min-width: 768px) {
     .navbar-nav {

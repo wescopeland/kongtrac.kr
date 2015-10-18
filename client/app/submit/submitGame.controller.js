@@ -22,6 +22,7 @@
         vm.inputPlatform = '';
         vm.inputPlayer = '';
         vm.inputScore = undefined;
+        vm.laddaOn = false;
 
         // Public Functions
         vm.expand = expand;
@@ -56,6 +57,8 @@
         }
 
         function handleCommit() {
+
+            vm.laddaOn = true;
 
         	var gamePropertiesObject = {};
 
