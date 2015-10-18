@@ -12,11 +12,14 @@
 
         // Public Variables
         vm.inputPlayerIds = $stateParams.playerIds.split('&');
+        vm.onlyShowSameEvents = false;
         vm.pbChartConfiguration = {};
+        vm.playersData = [];
         vm.$state = $state;
 
         // Public Functions
         vm.camelize = camelize;
+        vm.getIdenticalEvents = getIdenticalEvents;
 
         activate();
 
@@ -205,6 +208,7 @@
 
                                                 if (eventGames[i].player === camelize(player.name)) {
                                                     newGameTableObject.eventPosition = i + 1;
+                                                    newGameTableObject.eventPositionOf = eventGames.length;
                                                     break;
                                                 }
 
@@ -244,6 +248,78 @@
                     return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
                 }).replace(/\s+/g, '');
             }
+
+        }
+
+        function getIdenticalEvents() {
+
+            var eventSameGameTableData = [];
+            var playerCount = vm.playersData.length;
+
+            // Construct a list of every event each input player participated in.
+            var allEventsCompeted = [];
+            vm.playersData.forEach(function(player) {
+
+                player.gameTableData.forEach(function(game) {
+
+                    if (game.eventName) {
+
+                        // Is this event already tracked? If not, add it with a starting value of 1.
+                        var foundEvent = false;
+                        allEventsCompeted.forEach(function(event) {
+
+                            if (event.name === game.eventName) {
+
+                                event.count += 1;
+                                foundEvent = true;
+
+                            }
+
+                        });
+
+                        if (!foundEvent) {
+
+                            allEventsCompeted.push({
+                                name: game.eventName,
+                                count: 1
+                            });
+
+                        }
+
+                    }
+
+                });
+
+            });
+
+            // If the event count equals the player count, every input player competed in the event.
+            var sameEventsCompeted = [];
+            allEventsCompeted.forEach(function(event) {
+
+                if (event.count === playerCount) {
+                    sameEventsCompeted.push(event);
+                }
+
+            });
+
+            sameEventsCompeted.forEach(function(event) {
+
+                vm.playersData.forEach(function(player) {
+
+                    player.sameEventGames = [];
+                    player.gameTableData.forEach(function(game) {
+
+                        if (game.eventName && game.eventName === event.name) {
+                            player.sameEventGames.push(game);
+                        }
+
+                    });
+
+                });
+
+            });
+
+            console.log(vm.playersData);
 
         }
 

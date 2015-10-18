@@ -117,7 +117,7 @@
 							<td>{{ $index + 1 }}</td>
 							<td title="MAME"><i class="fa fa-lg fa-keyboard-o"></i></td>
 							<td><a ng-href="{{ '#/player/' + ranking.camelize(score.player) }}">{{ score.player }}</a></td>
-							<td><a ng-href="{{ '#/game/' + score.gameId + '/summary' }}">{{ score.score | number }}</a></td>
+							<td><a ng-href="{{ '#/game/' + score.id + '/summary' }}">{{ score.score | number }}</a></td>
 							<td>{{ score.date }}</td>
 						</tr>
 					</tbody>

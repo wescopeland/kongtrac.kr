@@ -809,7 +809,6 @@
         		gameData.$loaded().then(function() {
         			
         			_game = gameData;
-                    console.log(gameData);
 
                     if (_game.boardScores) {
 

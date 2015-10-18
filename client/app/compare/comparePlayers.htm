@@ -68,59 +68,11 @@
 <br>
 
 <div class="row">
+
 	<label for="onlyShowComplete" class="pull-right">
-		<input type="checkbox" id="onlyShowComplete" name="onlyShowComplete" ng-model="compare.onlyShowComplete"> Only show games with complete data
+		<input type="checkbox" id="onlyShowSameEvents" name="onlyShowSameEvents" ng-model="compare.onlyShowSameEvents" ng-click="compare.getIdenticalEvents()"> 
+		 Only show events competed in by selected players
 	</label>
-</div>
-
-<div class="row">
-
-	<div ng-repeat="player in compare.playersData" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-		<h3 style="display: inline;">{{ player.name.split(' ')[player.name.split(' ').length - 1] }} known games</h3>
-
-		<div class="table-responsive">
-
-			<table class="table table-hover">
-
-				<thead>
-					<tr class="eventheader">
-						<th>Date</th>
-						<th>Score</th>
-						<th>Platform</th>
-						<th>Final Board</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr ng-repeat="game in player.gamesData | orderBy:'-date'" ng-hide="compare.onlyShowComplete && !game.hasCompleteData">
-
-						<td ng-if="!game.concealedDay && !game.concealedMonth">{{ game.date | amDateFormat: 'MM/DD/YYYY' }}</td>
-						<td ng-if="game.concealedDay && !game.concealedMonth">{{ game.date | amDateFormat: 'MMMM YYYY' }}</td>
-						<td ng-if="game.concealedDay && game.concealedMonth">{{ game.date | amDateFormat: 'YYYY' }}</td>
-
-						<!--
-						<td ng-if="!game.hasCompleteData">{{ game.score | number }}</td>
-						<td ng-if="game.hasCompleteData">
-							<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
-						</td>
-						-->
-
-						<td>
-							<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
-						</td>
-
-						<td>{{ game.platform }}</td>
-						<td>{{ game.finalBoard }}</td>
-
-					</tr>
-				</tbody>
-
-			</table>
-
-		</div>
-
-	</div>
 
 </div>
 
@@ -128,7 +80,7 @@
 
 	<div ng-repeat="player in compare.playersData" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
-	<h3 style="display: inline;">{{ player.name.split(' ')[player.name.split(' ').length - 1] }} event performance</h3>
+		<h3 style="display: inline;">{{ player.name.split(' ')[player.name.split(' ').length - 1] }} event performance</h3>
 
 		<div class="table-responsive">
 
@@ -144,12 +96,33 @@
 					</tr>
 				</thead>
 
-				<tbody>
+				<tbody ng-if="!compare.onlyShowSameEvents">
 					<tr ng-repeat="game in player.gameTableData | orderBy:'-endDate'" ng-hide="!game.eventName">
 
 						<td>{{ game.eventEndDate | amDateFormat: 'MMMM YYYY' }}</td>
 						<td><a ng-href="{{ '#/event/' + game.eventId }}">{{ game.eventName }}</a></td>
-						<td>{{ game.eventPosition }}</td>
+						<td>{{ game.eventPosition }} of {{ game.eventPositionOf }}</td>
+
+						<!--
+						<td ng-if="!game.hasCompleteData">{{ game.score | number }}</td>
+						<td ng-if="game.hasCompleteData">
+							<a ng-href="{{ '#/game/' + game.$id + '/summary' }}">{{ game.score | number }}</a>
+						</td>
+						-->
+
+						<td>
+							<a ng-href="{{ '#/game/' + game.id + '/summary' }}">{{ game.score | number }}</a>
+						</td>
+
+					</tr>
+				</tbody>
+
+				<tbody ng-if="compare.onlyShowSameEvents">
+					<tr ng-repeat="game in player.sameEventGames | orderBy:'-endDate'" ng-hide="!game.eventName">
+
+						<td>{{ game.eventEndDate | amDateFormat: 'MMMM YYYY' }}</td>
+						<td><a ng-href="{{ '#/event/' + game.eventId }}">{{ game.eventName }}</a></td>
+						<td>{{ game.eventPosition }} of {{ game.eventPositionOf }}</td>
 
 						<!--
 						<td ng-if="!game.hasCompleteData">{{ game.score | number }}</td>
