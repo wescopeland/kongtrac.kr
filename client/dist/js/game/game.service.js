@@ -13,6 +13,7 @@
     	var _levelScores = {};
 
     	// Public Functions
+        this.deleteGame = deleteGame;
     	this.getBoardWeights = getBoardWeights;
         this.getGameData = getGameData;
         this.processBoardScores = processBoardScores;
@@ -276,6 +277,27 @@
             }
 
             return longestLife;
+
+        }
+
+        function deleteGame(inputGameId) {
+
+            return $q(function(resolve, reject) {
+
+                var gameData = $firebaseObject(
+                    _fbRef
+                        .child('games')
+                        .child(inputGameId)
+                );
+
+                gameData.$loaded().then(function() {
+                    
+                    gameData.$remove();
+                    resolve();
+
+                });
+
+            });
 
         }
 

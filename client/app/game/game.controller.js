@@ -24,6 +24,7 @@
         vm.calculateAverageBarPercentage = calculateAverageBarPercentage;
         vm.camelize = camelize;
         vm.chooseEvent = chooseEvent;
+        vm.deleteGame = deleteGame;
         vm.eventSearch = eventSearch;
         vm.expand = expand;
         vm.formatSlider = formatSlider;
@@ -344,6 +345,14 @@
 
             vm.gameEditData.eventName = inputEvent.name;
             vm.gameEditData.eventId = inputEvent.objectID;
+
+        }
+
+        function deleteGame() {
+
+            gameService.deleteGame(inputGameId).then(function() {
+                $state.go('playerRanking');
+            });
 
         }
 
