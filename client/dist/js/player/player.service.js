@@ -200,6 +200,10 @@
                         _player.name = 'Dave McCrary';
                     }
 
+                    if (_player.name === 'Joseph Du Pree') {
+                        _player.name = 'Joseph DuPree';
+                    }
+
         			_player.gameIds = getPlayerGameIds(_player.games);
 
                     // Grab all the games attached to this player.

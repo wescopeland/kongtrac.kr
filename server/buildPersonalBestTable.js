@@ -26,6 +26,10 @@
 						name = 'Dave McCrary';
 					}
 
+					if (name === 'Joseph Du Pree') {
+						name = 'Joseph DuPree';
+					}
+
 					playersArray.push(name);
 					
 				}
