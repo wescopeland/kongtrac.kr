@@ -129,7 +129,7 @@
 						<td class="text-right ibox-left">Date</td>
 						<td ng-if="!game.gameData.concealedDay && !game.gameData.concealedMonth">{{ game.gameData.date | amDateFormat: 'MM/DD/YYYY' }}</td>
 						<td ng-if="game.gameData.concealedDay && !game.gameData.concealedMonth">{{ game.gameData.date | amDateFormat: 'MMMM YYYY' }}</td>
-						<td ng-if="game.gameData.concealedDay && game.gameData.concealedMonth">{{ game.gameData.date | amDateFormat: 'YYYY' }}</td>
+						<td ng-if="game.gameData.concealedDay && game.gameData.concealedMonth">{{ game.gameData.date }}</td>
 					</tr>
 					<tr class="small">
 						<td class="text-right ibox-left">Platform</td>

@@ -8,28 +8,28 @@
 
 		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 			<label class="control-label">Date</label>
-			<datepicker date-format="{{ 'MM/dd/yyyy' }}" ng-if="!game.inputIsDayUnknown">
+			<datepicker date-format="{{ 'MM/dd/yyyy' }}" ng-if="!game.gameEditData.inputIsDayUnknown">
 				<input class="form-control" ng-model="game.gameEditData.date" type="text">
 			</datepicker>
 
-			<datepicker date-format="{{ 'MMMM yyyy' }}" ng-if="game.inputIsDayUnknown && !game.inputIsMonthUnknown">
+			<datepicker date-format="{{ 'MMMM yyyy' }}" ng-if="game.gameEditData.inputIsDayUnknown && !game.gameEditData.inputIsMonthUnknown">
 				<input class="form-control" ng-model="game.gameEditData.date" type="text">
 			</datepicker>
 
-			<datepicker date-format="{{ 'yyyy' }}" ng-if="game.inputIsDayUnknown && game.inputIsMonthUnknown">
+			<datepicker date-format="{{ 'yyyy' }}" ng-if="game.gameEditData.inputIsDayUnknown && game.gameEditData.inputIsMonthUnknown">
 				<input class="form-control" ng-model="game.gameEditData.date" type="text">
 			</datepicker>
 
 			<label for="isMonthUnknown" 
 			       class="pull-right" 
-			       ng-if="game.inputIsDayUnknown === true" 
+			       ng-if="game.gameEditData.inputIsDayUnknown === true" 
 			       style="margin-left: 15px;">
-				<input type="checkbox" ng-change="game.gameEditData.date = null" id="isMonthUnknown" name="isMonthUnknown" ng-model="game.inputIsMonthUnknown"> Month Unknown
+				<input type="checkbox" ng-change="game.gameEditData.date = null" id="isMonthUnknown" name="isMonthUnknown" ng-model="game.gameEditData.inputIsMonthUnknown"> Month Unknown
 			</label>
 
 			<label for="isDayUnknown" 
 			       class="pull-right">
-				<input type="checkbox" ng-change="game.gameEditData.date = null" id="isDayUnknown" name="isDayUnknown" ng-model="game.inputIsDayUnknown"> Day Unknown
+				<input type="checkbox" ng-change="game.gameEditData.date = null" id="isDayUnknown" name="isDayUnknown" ng-model="game.gameEditData.inputIsDayUnknown"> Day Unknown
 			</label>
 				
 		</div>

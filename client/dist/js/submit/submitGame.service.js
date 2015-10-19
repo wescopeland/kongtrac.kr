@@ -71,6 +71,14 @@
                     gameData.date = inputGameProperties.date;
                     gameData.hasCompleteData = inputGameProperties.hasCompleteData;
 
+                    if (inputGameProperties.concealedDay) {
+                        gameData.concealedDay = true;
+                    }
+
+                    if (inputGameProperties.concealedMonth) {
+                        gameData.concealedMonth = true;
+                    }
+
                     if (inputGameProperties.hasCompleteData) {
                         gameData.boardScores = inputGameProperties.boardScores;
                         gameData.deaths = inputGameProperties.deaths;

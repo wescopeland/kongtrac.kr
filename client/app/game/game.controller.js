@@ -229,6 +229,8 @@
                 vm.gameEditData.platform = vm.gameData.platform;
                 vm.gameEditData.isKillscreen = vm.gameData.isKillscreen ? vm.gameData.isKillscreen : false;
                 vm.gameEditData.hasCompleteData = vm.gameData.hasCompleteData ? vm.gameData.hasCompleteData : false;
+                vm.gameEditData.inputIsMonthUnknown = vm.gameData.concealedMonth ? vm.gameData.concealedMonth : false;
+                vm.gameEditData.inputIsDayUnknown = vm.gameData.concealedDay ? vm.gameData.concealedDay : false;
 
                 if (vm.gameData.event) {
 
@@ -406,6 +408,14 @@
 
             if (vm.gameEditData.eventId) {
                 gamePropertiesObject.event = vm.gameEditData.eventId;
+            }
+
+            if (vm.gameEditData.inputIsMonthUnknown) {
+                gamePropertiesObject.concealedMonth = true;
+            }
+
+            if (vm.gameEditData.inputIsDayUnknown) {
+                gamePropertiesObject.concealedDay = true;
             }
 
             if (vm.gameEditData.hasCompleteData) {
