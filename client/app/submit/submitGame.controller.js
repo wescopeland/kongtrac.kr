@@ -132,6 +132,19 @@
                 gamePropertiesObject.date = '06/06/' + gamePropertiesObject.date;
             }
 
+            if (vm.inputIsVerified) {
+
+                gamePropertiesObject.isVerified = true;
+                if (vm.inputTGVerificationURL) {
+                    gamePropertiesObject.tgURL = vm.inputTGVerificationURL;
+                }
+
+                if (vm.inputDKFVerificationURL) {
+                    gamePropertiesObject.dkfURL = vm.inputDKFVerificationURL;
+                }
+
+            }
+
         	if (vm.inputHasCompleteData) {
 
                 if (vm.scoresInputDisplay === 'sums') {

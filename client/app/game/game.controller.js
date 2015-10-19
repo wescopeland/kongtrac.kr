@@ -232,6 +232,19 @@
                 vm.gameEditData.hasCompleteData = vm.gameData.hasCompleteData ? vm.gameData.hasCompleteData : false;
                 vm.gameEditData.inputIsMonthUnknown = vm.gameData.concealedMonth ? vm.gameData.concealedMonth : false;
                 vm.gameEditData.inputIsDayUnknown = vm.gameData.concealedDay ? vm.gameData.concealedDay : false;
+                vm.gameEditData.isVerified = vm.gameData.isVerified ? vm.gameData.isVerified : false;
+
+                if (vm.gameEditData.isVerified) {
+
+                    if (vm.gameData.tgURL) {
+                        vm.gameEditData.tgURL = vm.gameData.tgURL;
+                    }
+
+                    if (vm.gameData.dkfURL) {
+                        vm.gameEditData.dkfURL = vm.gameData.dkfURL;
+                    }
+
+                }
 
                 if (vm.gameData.event) {
 
@@ -425,6 +438,20 @@
 
             if (vm.gameEditData.inputIsDayUnknown) {
                 gamePropertiesObject.concealedDay = true;
+            }
+
+            if (vm.gameEditData.isVerified) {
+                
+                gamePropertiesObject.isVerified = true;
+
+                if (vm.gameEditData.tgURL) {
+                    gamePropertiesObject.tgURL = vm.gameEditData.tgURL;
+                }
+
+                if (vm.gameEditData.dkfURL) {
+                    gamePropertiesObject.dkfURL = vm.gameEditData.dkfURL;
+                }
+
             }
 
             if (vm.gameEditData.hasCompleteData) {

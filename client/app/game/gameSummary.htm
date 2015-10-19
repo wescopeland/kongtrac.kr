@@ -131,6 +131,13 @@
 						<td ng-if="game.gameData.concealedDay && !game.gameData.concealedMonth">{{ game.gameData.date | amDateFormat: 'MMMM YYYY' }}</td>
 						<td ng-if="game.gameData.concealedDay && game.gameData.concealedMonth">{{ game.gameData.date }}</td>
 					</tr>
+					<tr class="small" ng-if="game.gameData.isVerified">
+						<td class="text-right ibox-left">Verification</td>
+						<td>
+						    <a ng-if="game.gameData.tgURL" ng-href="{{ game.gameData.tgURL }}" target="_blank">TG </a>
+						    <a ng-if="game.gameData.dkfURL" ng-href="{{ game.gameData.dkfURL }}" target="_blank">DKF</a>
+						</td>
+					</tr>
 					<tr class="small">
 						<td class="text-right ibox-left">Platform</td>
 						<td>

@@ -89,6 +89,37 @@
 	<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 		<div>
 			<label for="hasCompleteData">
+				<input type="checkbox" id="hasCompleteData" name="hasCompleteData" ng-model="game.gameEditData.isVerified">
+				 Is officially verified?
+			</label>
+		</div>
+	</div>
+
+	<div ng-if="game.gameEditData.isVerified">
+
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<hr>
+		</div>
+
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<label class="control-label">TG Verification URL</label>
+			<input class="form-control" placeholder="http://" ng-model="game.gameEditData.tgURL">
+		</div>
+
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<label class="control-label">DKF Verification Post URL</label>
+			<input class="form-control" placeholder="http://" ng-model="game.gameEditData.dkfURL">
+		</div>
+
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<hr>
+		</div>
+
+	</div>
+
+	<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+		<div>
+			<label for="hasCompleteData">
 				<input type="checkbox" id="hasCompleteData" name="hasCompleteData" ng-model="game.gameEditData.hasCompleteData">
 				 Complete board-by-board data?
 			</label>
@@ -102,6 +133,7 @@
 			<hr>
 		</div>
 
+		<!-- Individuals Input -->
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 
 			<div class="table">
@@ -320,6 +352,7 @@
 
 		</div>
 
+		<!-- Deaths Input -->
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 
 			<div class="table">

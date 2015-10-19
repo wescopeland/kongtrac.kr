@@ -92,6 +92,20 @@
                         gameData.concealedMonth = true;
                     }
 
+                    if (inputGameProperties.isVerified) {
+
+                        gameData.isVerified = true;
+
+                        if (inputGameProperties.tgURL) {
+                            gameData.tgURL = inputGameProperties.tgURL;
+                        }
+
+                        if (inputGameProperties.dkfURL) {
+                            gameData.dkfURL = inputGameProperties.dkfURL;
+                        }
+
+                    }
+
                     if (inputGameProperties.event) {
 
                         gameData.event = inputGameProperties.event;
