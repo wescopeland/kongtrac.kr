@@ -13,6 +13,7 @@
         // Public Variables
         vm.dateFormat = 'MM/dd/yyyy';
         vm.deathScores = [];
+        vm.gameSumScoresMap = [];
         vm.gameScoresMap = [];
         vm.inputDate = '';
         vm.inputHasCompleteData = false;
@@ -23,11 +24,14 @@
         vm.inputPlayer = '';
         vm.inputScore = undefined;
         vm.laddaOn = false;
+        vm.scoresInputDisplay = 'sums';
 
         // Public Functions
         vm.expand = expand;
         vm.getAllLevels = getAllLevels;
         vm.handleCommit = handleCommit;
+        vm.mapIndividualsToSums = mapIndividualsToSums;
+        vm.mapSumsToIndividuals = mapSumsToIndividuals;
 
         activate();
 
@@ -130,6 +134,10 @@
 
         	if (vm.inputHasCompleteData) {
 
+                if (vm.scoresInputDisplay === 'sums') {
+                    convertSumsToIndividuals();
+                }
+
         		gamePropertiesObject.boardScores = vm.gameScoresMap;
 
         		vm.deathScores[0].board = boardMapper.mapLevelToBoardNumber(vm.deathScores[0].board);
@@ -142,6 +150,50 @@
         	}
 
         	submitGameService.submitGame(gamePropertiesObject);
+
+        }
+
+        function convertSumsToIndividuals() {
+
+            var currentBoardSumScore = 0;
+            var previousBoardSumScore = 0;
+
+            for (var i = 0; i < vm.gameSumScoresMap.length; i += 1) {
+
+                currentBoardSumScore = Number(vm.gameSumScoresMap[i]);
+                vm.gameScoresMap[i] = currentBoardSumScore - previousBoardSumScore;
+                previousBoardSumScore = Number(vm.gameSumScoresMap[i]);
+
+            }
+
+
+        }
+
+        function mapIndividualsToSums() {
+
+            vm.scoresInputDisplay = 'sums';
+
+            /*
+            var currentScoreSum = 0;
+            for (var i = 0; i < vm.gameScoresMap.length; i += 1) {
+
+                if (vm.gameScoresMap[i] && vm.gameScoresMap[i] !== '0' && vm.gameScoresMap[i] !== '') {
+
+                    currentScoreSum += Number(vm.gameScoresMap[i]);
+                    vm.gameSumScoresMap[i] = String(currentScoreSum);
+
+                } else {
+                    break;
+                }
+
+            }
+            */
+
+        }
+
+        function mapSumsToIndividuals() {
+
+            vm.scoresInputDisplay = 'individuals';
 
         }
 

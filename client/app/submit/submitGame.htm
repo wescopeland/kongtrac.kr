@@ -93,7 +93,25 @@
 				<hr>
 			</div>
 
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12" style="padding-bottom: 15px;">
+
+				<div class="btn-group" data-toggle="buttons">
+					<button class="btn btn-default" 
+					        ng-class="{ 'active': submit.scoresInputDisplay === 'sums' }"
+					        ng-click="submit.mapIndividualsToSums();">
+					    Sums
+					</button>
+					<button class="btn btn-default" 
+					        ng-click="submit.scoresInputDisplay = 'individuals';"
+					        ng-class="{ 'active': submit.scoresInputDisplay === 'individuals' }">
+					    Individuals
+					</button>
+				</div>
+
+			</div>
+
+			<!-- Sums Input -->
+			<div ng-if="submit.scoresInputDisplay === 'sums'" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 
 				<div class="table">
 
@@ -115,16 +133,235 @@
 
 							<tr>
 								<td>L1</td>
-								<td><input type="text" ng-blur="submit.gameScoresMap[0] = submit.expand(submit.gameScoresMap[0])" style="width: 75px;" ng-model="submit.gameScoresMap[0]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[0] = submit.expand(submit.gameSumScoresMap[0])" style="width: 75px;" ng-model="submit.gameSumScoresMap[0]" placeholder="9000"></td>
 								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
-								<td><input type="text" ng-blur="submit.gameScoresMap[1] = submit.expand(submit.gameScoresMap[1])" style="width: 75px;" ng-model="submit.gameScoresMap[1]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[1] = submit.expand(submit.gameSumScoresMap[1])" style="width: 75px;" ng-model="submit.gameSumScoresMap[1]" placeholder="17000"></td>
 							</tr>
 							<tr>
 								<td>L2</td>
-								<td><input type="text" ng-blur="submit.gameScoresMap[2] = submit.expand(submit.gameScoresMap[2])" style="width: 75px;" ng-model="submit.gameScoresMap[2]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[2] = submit.expand(submit.gameSumScoresMap[2])" style="width: 75px;" ng-model="submit.gameSumScoresMap[2]" placeholder="26500"></td>
+								<td></td>
+								<td></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[3] = submit.expand(submit.gameSumScoresMap[3])" style="width: 75px;" ng-model="submit.gameSumScoresMap[3]"></td>
+								<td></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[4] = submit.expand(submit.gameSumScoresMap[4])" style="width: 75px;" ng-model="submit.gameSumScoresMap[4]"></td>
+							</tr>
+							<tr>
+								<td>L3</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[5] = submit.expand(submit.gameSumScoresMap[5])" style="width: 75px;" ng-model="submit.gameSumScoresMap[5]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[6] = submit.expand(submit.gameSumScoresMap[6])" style="width: 75px;" ng-model="submit.gameSumScoresMap[6]"></td>
+								<td></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[7] = submit.expand(submit.gameSumScoresMap[7])" style="width: 75px;" ng-model="submit.gameSumScoresMap[7]"></td>
+								<td></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[8] = submit.expand(submit.gameSumScoresMap[8])" style="width: 75px;" ng-model="submit.gameSumScoresMap[8]"></td>
+							</tr>
+							<tr>
+								<td>L4</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[9] = submit.expand(submit.gameSumScoresMap[9])" style="width: 75px;" ng-model="submit.gameSumScoresMap[9]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[10] = submit.expand(submit.gameSumScoresMap[10])" style="width: 75px;" ng-model="submit.gameSumScoresMap[10]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[11] = submit.expand(submit.gameSumScoresMap[11])" style="width: 75px;" ng-model="submit.gameSumScoresMap[11]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[12] = submit.expand(submit.gameSumScoresMap[12])" style="width: 75px;" ng-model="submit.gameSumScoresMap[12]"></td>
+								<td></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[13] = submit.expand(submit.gameSumScoresMap[13])" style="width: 75px;" ng-model="submit.gameSumScoresMap[13]"></td>
+							</tr>
+							<tr>
+								<td>L5</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[14] = submit.expand(submit.gameSumScoresMap[14])" style="width: 75px;" ng-model="submit.gameSumScoresMap[14]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[15] = submit.expand(submit.gameSumScoresMap[15])" style="width: 75px;" ng-model="submit.gameSumScoresMap[15]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[16] = submit.expand(submit.gameSumScoresMap[16])" style="width: 75px;" ng-model="submit.gameSumScoresMap[16]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[17] = submit.expand(submit.gameSumScoresMap[17])" style="width: 75px;" ng-model="submit.gameSumScoresMap[17]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[18] = submit.expand(submit.gameSumScoresMap[18])" style="width: 75px;" ng-model="submit.gameSumScoresMap[18]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[19] = submit.expand(submit.gameSumScoresMap[19])" style="width: 75px;" ng-model="submit.gameSumScoresMap[19]"></td>
+							</tr>
+							<tr>
+								<td>L6</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[20] = submit.expand(submit.gameSumScoresMap[20])" style="width: 75px;" ng-model="submit.gameSumScoresMap[20]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[21] = submit.expand(submit.gameSumScoresMap[21])" style="width: 75px;" ng-model="submit.gameSumScoresMap[21]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[22] = submit.expand(submit.gameSumScoresMap[22])" style="width: 75px;" ng-model="submit.gameSumScoresMap[22]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[23] = submit.expand(submit.gameSumScoresMap[23])" style="width: 75px;" ng-model="submit.gameSumScoresMap[23]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[24] = submit.expand(submit.gameSumScoresMap[24])" style="width: 75px;" ng-model="submit.gameSumScoresMap[24]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[25] = submit.expand(submit.gameSumScoresMap[25])" style="width: 75px;" ng-model="submit.gameSumScoresMap[25]"></td>
+							</tr>
+							<tr>
+								<td>L7</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[26] = submit.expand(submit.gameSumScoresMap[26])" style="width: 75px;" ng-model="submit.gameSumScoresMap[26]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[27] = submit.expand(submit.gameSumScoresMap[27])" style="width: 75px;" ng-model="submit.gameSumScoresMap[27]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[28] = submit.expand(submit.gameSumScoresMap[28])" style="width: 75px;" ng-model="submit.gameSumScoresMap[28]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[29] = submit.expand(submit.gameSumScoresMap[29])" style="width: 75px;" ng-model="submit.gameSumScoresMap[29]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[30] = submit.expand(submit.gameSumScoresMap[30])" style="width: 75px;" ng-model="submit.gameSumScoresMap[30]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[31] = submit.expand(submit.gameSumScoresMap[31])" style="width: 75px;" ng-model="submit.gameSumScoresMap[31]"></td>
+							</tr>
+							<tr>
+								<td>L8</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[32] = submit.expand(submit.gameSumScoresMap[32])" style="width: 75px;" ng-model="submit.gameSumScoresMap[32]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[33] = submit.expand(submit.gameSumScoresMap[33])" style="width: 75px;" ng-model="submit.gameSumScoresMap[33]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[34] = submit.expand(submit.gameSumScoresMap[34])" style="width: 75px;" ng-model="submit.gameSumScoresMap[34]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[35] = submit.expand(submit.gameSumScoresMap[35])" style="width: 75px;" ng-model="submit.gameSumScoresMap[35]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[36] = submit.expand(submit.gameSumScoresMap[36])" style="width: 75px;" ng-model="submit.gameSumScoresMap[36]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[37] = submit.expand(submit.gameSumScoresMap[37])" style="width: 75px;" ng-model="submit.gameSumScoresMap[37]"></td>
+							</tr>
+							<tr>
+								<td>L9</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[38] = submit.expand(submit.gameSumScoresMap[38])" style="width: 75px;" ng-model="submit.gameSumScoresMap[38]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[39] = submit.expand(submit.gameSumScoresMap[39])" style="width: 75px;" ng-model="submit.gameSumScoresMap[39]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[40] = submit.expand(submit.gameSumScoresMap[40])" style="width: 75px;" ng-model="submit.gameSumScoresMap[40]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[41] = submit.expand(submit.gameSumScoresMap[41])" style="width: 75px;" ng-model="submit.gameSumScoresMap[41]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[42] = submit.expand(submit.gameSumScoresMap[42])" style="width: 75px;" ng-model="submit.gameSumScoresMap[42]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[43] = submit.expand(submit.gameSumScoresMap[43])" style="width: 75px;" ng-model="submit.gameSumScoresMap[43]"></td>
+							</tr>
+							<tr>
+								<td>L10</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[44] = submit.expand(submit.gameSumScoresMap[44])" style="width: 75px;" ng-model="submit.gameSumScoresMap[44]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[45] = submit.expand(submit.gameSumScoresMap[45])" style="width: 75px;" ng-model="submit.gameSumScoresMap[45]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[46] = submit.expand(submit.gameSumScoresMap[46])" style="width: 75px;" ng-model="submit.gameSumScoresMap[46]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[47] = submit.expand(submit.gameSumScoresMap[47])" style="width: 75px;" ng-model="submit.gameSumScoresMap[47]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[48] = submit.expand(submit.gameSumScoresMap[48])" style="width: 75px;" ng-model="submit.gameSumScoresMap[48]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[49] = submit.expand(submit.gameSumScoresMap[49])" style="width: 75px;" ng-model="submit.gameSumScoresMap[49]"></td>
+							</tr>
+							<tr>
+								<td>L11</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[50] = submit.expand(submit.gameSumScoresMap[50])" style="width: 75px;" ng-model="submit.gameSumScoresMap[50]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[51] = submit.expand(submit.gameSumScoresMap[51])" style="width: 75px;" ng-model="submit.gameSumScoresMap[51]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[52] = submit.expand(submit.gameSumScoresMap[52])" style="width: 75px;" ng-model="submit.gameSumScoresMap[52]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[53] = submit.expand(submit.gameSumScoresMap[53])" style="width: 75px;" ng-model="submit.gameSumScoresMap[53]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[54] = submit.expand(submit.gameSumScoresMap[54])" style="width: 75px;" ng-model="submit.gameSumScoresMap[54]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[55] = submit.expand(submit.gameSumScoresMap[55])" style="width: 75px;" ng-model="submit.gameSumScoresMap[55]"></td>
+							</tr>
+							<tr>
+								<td>L12</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[56] = submit.expand(submit.gameSumScoresMap[56])" style="width: 75px;" ng-model="submit.gameSumScoresMap[56]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[57] = submit.expand(submit.gameSumScoresMap[57])" style="width: 75px;" ng-model="submit.gameSumScoresMap[57]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[58] = submit.expand(submit.gameSumScoresMap[58])" style="width: 75px;" ng-model="submit.gameSumScoresMap[58]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[59] = submit.expand(submit.gameSumScoresMap[59])" style="width: 75px;" ng-model="submit.gameSumScoresMap[59]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[60] = submit.expand(submit.gameSumScoresMap[60])" style="width: 75px;" ng-model="submit.gameSumScoresMap[60]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[61] = submit.expand(submit.gameSumScoresMap[61])" style="width: 75px;" ng-model="submit.gameSumScoresMap[61]"></td>
+							</tr>
+							<tr>
+								<td>L13</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[62] = submit.expand(submit.gameSumScoresMap[62])" style="width: 75px;" ng-model="submit.gameSumScoresMap[62]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[63] = submit.expand(submit.gameSumScoresMap[63])" style="width: 75px;" ng-model="submit.gameSumScoresMap[63]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[64] = submit.expand(submit.gameSumScoresMap[64])" style="width: 75px;" ng-model="submit.gameSumScoresMap[64]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[65] = submit.expand(submit.gameSumScoresMap[65])" style="width: 75px;" ng-model="submit.gameSumScoresMap[65]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[66] = submit.expand(submit.gameSumScoresMap[66])" style="width: 75px;" ng-model="submit.gameSumScoresMap[66]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[67] = submit.expand(submit.gameSumScoresMap[67])" style="width: 75px;" ng-model="submit.gameSumScoresMap[67]"></td>
+							</tr>
+							<tr>
+								<td>L14</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[68] = submit.expand(submit.gameSumScoresMap[68])" style="width: 75px;" ng-model="submit.gameSumScoresMap[68]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[69] = submit.expand(submit.gameSumScoresMap[69])" style="width: 75px;" ng-model="submit.gameSumScoresMap[69]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[70] = submit.expand(submit.gameSumScoresMap[70])" style="width: 75px;" ng-model="submit.gameSumScoresMap[70]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[71] = submit.expand(submit.gameSumScoresMap[71])" style="width: 75px;" ng-model="submit.gameSumScoresMap[71]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[72] = submit.expand(submit.gameSumScoresMap[72])" style="width: 75px;" ng-model="submit.gameSumScoresMap[72]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[73] = submit.expand(submit.gameSumScoresMap[73])" style="width: 75px;" ng-model="submit.gameSumScoresMap[73]"></td>
+							</tr>
+							<tr>
+								<td>L15</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[74] = submit.expand(submit.gameSumScoresMap[74])" style="width: 75px;" ng-model="submit.gameSumScoresMap[74]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[75] = submit.expand(submit.gameSumScoresMap[75])" style="width: 75px;" ng-model="submit.gameSumScoresMap[75]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[76] = submit.expand(submit.gameSumScoresMap[76])" style="width: 75px;" ng-model="submit.gameSumScoresMap[76]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[77] = submit.expand(submit.gameSumScoresMap[77])" style="width: 75px;" ng-model="submit.gameSumScoresMap[77]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[78] = submit.expand(submit.gameSumScoresMap[78])" style="width: 75px;" ng-model="submit.gameSumScoresMap[78]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[79] = submit.expand(submit.gameSumScoresMap[79])" style="width: 75px;" ng-model="submit.gameSumScoresMap[79]"></td>
+							</tr>
+							<tr>
+								<td>L16</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[80] = submit.expand(submit.gameSumScoresMap[80])" style="width: 75px;" ng-model="submit.gameSumScoresMap[80]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[81] = submit.expand(submit.gameSumScoresMap[81])" style="width: 75px;" ng-model="submit.gameSumScoresMap[81]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[82] = submit.expand(submit.gameSumScoresMap[82])" style="width: 75px;" ng-model="submit.gameSumScoresMap[82]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[83] = submit.expand(submit.gameSumScoresMap[83])" style="width: 75px;" ng-model="submit.gameSumScoresMap[83]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[84] = submit.expand(submit.gameSumScoresMap[84])" style="width: 75px;" ng-model="submit.gameSumScoresMap[84]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[85] = submit.expand(submit.gameSumScoresMap[85])" style="width: 75px;" ng-model="submit.gameSumScoresMap[85]"></td>
+							</tr>
+							<tr>
+								<td>L17</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[86] = submit.expand(submit.gameSumScoresMap[86])" style="width: 75px;" ng-model="submit.gameSumScoresMap[86]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[87] = submit.expand(submit.gameSumScoresMap[87])" style="width: 75px;" ng-model="submit.gameSumScoresMap[87]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[88] = submit.expand(submit.gameSumScoresMap[88])" style="width: 75px;" ng-model="submit.gameSumScoresMap[88]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[89] = submit.expand(submit.gameSumScoresMap[89])" style="width: 75px;" ng-model="submit.gameSumScoresMap[89]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[90] = submit.expand(submit.gameSumScoresMap[90])" style="width: 75px;" ng-model="submit.gameSumScoresMap[90]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[91] = submit.expand(submit.gameSumScoresMap[91])" style="width: 75px;" ng-model="submit.gameSumScoresMap[91]"></td>
+							</tr>
+							<tr>
+								<td>L18</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[92] = submit.expand(submit.gameSumScoresMap[92])" style="width: 75px;" ng-model="submit.gameSumScoresMap[92]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[93] = submit.expand(submit.gameSumScoresMap[93])" style="width: 75px;" ng-model="submit.gameSumScoresMap[93]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[94] = submit.expand(submit.gameSumScoresMap[94])" style="width: 75px;" ng-model="submit.gameSumScoresMap[94]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[95] = submit.expand(submit.gameSumScoresMap[95])" style="width: 75px;" ng-model="submit.gameSumScoresMap[95]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[96] = submit.expand(submit.gameSumScoresMap[96])" style="width: 75px;" ng-model="submit.gameSumScoresMap[96]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[97] = submit.expand(submit.gameSumScoresMap[97])" style="width: 75px;" ng-model="submit.gameSumScoresMap[97]"></td>
+							</tr>
+							<tr>
+								<td>L19</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[98] = submit.expand(submit.gameSumScoresMap[98])" style="width: 75px;" ng-model="submit.gameSumScoresMap[98]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[99] = submit.expand(submit.gameSumScoresMap[99])" style="width: 75px;" ng-model="submit.gameSumScoresMap[99]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[100] = submit.expand(submit.gameSumScoresMap[100])" style="width: 75px;" ng-model="submit.gameSumScoresMap[100]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[101] = submit.expand(submit.gameSumScoresMap[101])" style="width: 75px;" ng-model="submit.gameSumScoresMap[101]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[102] = submit.expand(submit.gameSumScoresMap[102])" style="width: 75px;" ng-model="submit.gameSumScoresMap[102]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[103] = submit.expand(submit.gameSumScoresMap[103])" style="width: 75px;" ng-model="submit.gameSumScoresMap[103]"></td>
+							</tr>
+							<tr>
+								<td>L20</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[104] = submit.expand(submit.gameSumScoresMap[104])" style="width: 75px;" ng-model="submit.gameSumScoresMap[104]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[105] = submit.expand(submit.gameSumScoresMap[105])" style="width: 75px;" ng-model="submit.gameSumScoresMap[105]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[106] = submit.expand(submit.gameSumScoresMap[106])" style="width: 75px;" ng-model="submit.gameSumScoresMap[106]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[107] = submit.expand(submit.gameSumScoresMap[107])" style="width: 75px;" ng-model="submit.gameSumScoresMap[107]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[108] = submit.expand(submit.gameSumScoresMap[108])" style="width: 75px;" ng-model="submit.gameSumScoresMap[108]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[109] = submit.expand(submit.gameSumScoresMap[109])" style="width: 75px;" ng-model="submit.gameSumScoresMap[109]"></td>
+							</tr>
+							<tr>
+								<td>L21</td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[110] = submit.expand(submit.gameSumScoresMap[110])" style="width: 75px;" ng-model="submit.gameSumScoresMap[110]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[111] = submit.expand(submit.gameSumScoresMap[111])" style="width: 75px;" ng-model="submit.gameSumScoresMap[111]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[112] = submit.expand(submit.gameSumScoresMap[112])" style="width: 75px;" ng-model="submit.gameSumScoresMap[112]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[113] = submit.expand(submit.gameSumScoresMap[113])" style="width: 75px;" ng-model="submit.gameSumScoresMap[113]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[114] = submit.expand(submit.gameSumScoresMap[114])" style="width: 75px;" ng-model="submit.gameSumScoresMap[114]"></td>
+								<td><input type="text" ng-blur="submit.gameSumScoresMap[115] = submit.expand(submit.gameSumScoresMap[115])" style="width: 75px;" ng-model="submit.gameSumScoresMap[115]"></td>
+							</tr>
+
+						</tbody>
+
+					</table>
+
+				</div>
+
+			</div>
+
+			<!-- Individuals Input -->
+			<div ng-if="submit.scoresInputDisplay === 'individuals'" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+				<div class="table">
+
+					<table class="table responsive-table">
+
+						<thead>
+							<tr>
+								<th></th>
+								<th>Barrel 1</th>
+								<th>Conveyor</th>
+								<th>Barrel 2</th>
+								<th>Elevator</th>
+								<th>Barrel 3</th>
+								<th>Rivet</th>
+							</tr>
+						</thead>
+
+						<tbody>
+
+							<tr>
+								<td>L1</td>
+								<td><input type="text" ng-blur="submit.gameScoresMap[0] = submit.expand(submit.gameScoresMap[0])" style="width: 75px;" ng-model="submit.gameScoresMap[0]" placeholder="9000"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td><input type="text" ng-blur="submit.gameScoresMap[1] = submit.expand(submit.gameScoresMap[1])" style="width: 75px;" ng-model="submit.gameScoresMap[1]" placeholder="8000"></td>
+							</tr>
+							<tr>
+								<td>L2</td>
+								<td><input type="text" ng-blur="submit.gameScoresMap[2] = submit.expand(submit.gameScoresMap[2])" style="width: 75px;" ng-model="submit.gameScoresMap[2]" placeholder="9500"></td>
 								<td></td>
 								<td></td>
 								<td><input type="text" ng-blur="submit.gameScoresMap[3] = submit.expand(submit.gameScoresMap[3])" style="width: 75px;" ng-model="submit.gameScoresMap[3]"></td>
@@ -311,6 +548,7 @@
 
 			</div>
 
+			<!-- Deaths Input -->
 			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 
 				<div class="table">
