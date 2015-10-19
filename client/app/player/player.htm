@@ -62,32 +62,32 @@
 
 					<tbody>
 
-						<tr class="small">
+						<tr class="small" ng-if="player.playerData.initials">
 							<td class="text-right ibox-left" style="width: 40%;">Initials</td>
 							<td>{{ player.playerData.initials }}</td>
 						</tr>
 
-						<tr class="small">
+						<tr class="small" ng-if="player.playerData.arcadeBest">
 							<td class="text-right ibox-left">Arcade PB</td>
 							<td>{{ player.playerData.arcadeBest | number }}</td>
 						</tr>
 
-						<tr class="small">
+						<tr class="small" ng-if="player.playerData.mameBest">
 							<td class="text-right ibox-left">MAME PB</td>
 							<td>{{ player.playerData.mameBest | number }}</td>
 						</tr>
 
-						<tr class="small">
+						<tr class="small" ng-if="player.playerData.firstKSDate">
 							<td class="text-right ibox-left">First KS Date</td>
 							<td>{{ player.playerData.firstKSDate | date }}</td>
 						</tr>
 
-						<tr class="small">
+						<tr class="small" ng-if="player.playerData.firstMillionDate">
 							<td class="text-right ibox-left">First Million Date</td>
 							<td>{{ player.playerData.firstMillionDate | date }}</td>
 						</tr>
 
-						<tr class="small">
+						<tr class="small" ng-if="player.playerData.prizeWinnings">
 							<td class="text-right ibox-left">Prize Winnings</td>
 							<td></td>
 						</tr>
