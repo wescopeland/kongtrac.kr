@@ -14,6 +14,7 @@
         vm.arcadeWRChartConfig = {};
         vm.arcadeWRTimeline = [];
         vm.arcadeWRPlayerCount = 0;
+        vm.daysSinceData = [];
         vm.mameWRChartConfig = {};
         vm.mameWRTimeline = [];
         vm.mameWRPlayerCount = 0;
@@ -856,6 +857,10 @@
         	timelineService.getTimelineData('millionTwoTimeline').then(function then(response) {
         		vm.onetwomillionTimeline = response;
         	});
+
+            timelineService.getDaysSinceData().then(function then(response) {
+                vm.daysSinceData = response;
+            });
 
         }
 

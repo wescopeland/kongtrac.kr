@@ -33,6 +33,10 @@
             .state('timeline.milliontwohundred', {
             	url: '/milliontwohundred',
             	templateUrl: '/app/timeline/timeline.millionTwoHundred.htm'
+            })
+            .state('timeline.daysSince', {
+                url: '/daysSince',
+                templateUrl: '/app/timeline/timeline.daysSince.htm'
             });
 
     }

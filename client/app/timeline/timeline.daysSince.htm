@@ -1,0 +1,26 @@
+<div class="row" style="padding-top: 25px;">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<h2>
+			Days since...
+		</h2>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="table-responsive">
+			<table class="table">
+
+				<tbody>
+
+					<tr ng-repeat="element in timeline.daysSinceData | orderBy:'-date'">
+						<th>{{ element.title }}</th>
+						<td class="text-right">{{ element.stringValue }}</td>
+					</tr>
+
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+</div>

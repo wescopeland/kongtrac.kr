@@ -14,6 +14,7 @@
 	var arcadeWRTimeline = require('./buildArcadeWRTimeline');
 	var mameWRTimeline = require('./buildMAMEWRTimeline');
 	var combinedWRTimeline = require('./buildCombinedWRTimeline');
+	var daysSince = require('./buildDaysSince');
 
 	function runBatch() {
 
@@ -30,6 +31,7 @@
 		millionTimeline.build();
 		millionHundredTimeline.build();
 		millionTwoHundredTimeline.build();
+		daysSince.build();
 
 		arcadeWRTimeline.build();
 		mameWRTimeline.build();
