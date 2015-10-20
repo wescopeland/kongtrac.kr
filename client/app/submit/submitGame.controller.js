@@ -171,11 +171,28 @@
             var currentBoardSumScore = 0;
             var previousBoardSumScore = 0;
 
+            var sanitizedDeaths = angular.copy(vm.deathScores);
+            var deathCount = 0;
+            var currentDeathPoints = 0;
+            sanitizedDeaths[0].board = boardMapper.mapLevelToBoardNumber(sanitizedDeaths[0].board);
+            sanitizedDeaths[1].board = boardMapper.mapLevelToBoardNumber(sanitizedDeaths[1].board);
+            sanitizedDeaths[2].board = boardMapper.mapLevelToBoardNumber(sanitizedDeaths[2].board);
+            sanitizedDeaths[3].board = boardMapper.mapLevelToBoardNumber(sanitizedDeaths[3].board);
+
             for (var i = 0; i < vm.gameSumScoresMap.length; i += 1) {
 
+                while (i === sanitizedDeaths[deathCount].board) {
+
+                    currentDeathPoints += sanitizedDeaths[deathCount].points;
+                    deathCount += 1;
+
+                }
+
                 currentBoardSumScore = Number(vm.gameSumScoresMap[i]);
-                vm.gameScoresMap[i] = currentBoardSumScore - previousBoardSumScore;
+                vm.gameScoresMap[i] = ( (currentBoardSumScore - currentDeathPoints) - previousBoardSumScore);
                 previousBoardSumScore = Number(vm.gameSumScoresMap[i]);
+
+                currentDeathPoints = 0;
 
             }
 
