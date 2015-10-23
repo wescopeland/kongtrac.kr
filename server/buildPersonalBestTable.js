@@ -30,6 +30,22 @@
 						name = 'Joseph DuPree';
 					}
 
+					if (name === 'Jonathan Mc Court') {
+                        name = 'Jonathan McCourt';
+                    }
+
+                    if (name === 'John Mc Neill') {
+                        name = 'John McNeill';
+                    }
+
+                    if (name === 'John Mc Curdy') {
+                        name = 'John McCurdy';
+                    }
+
+                    if (name === 'Melkon Dom Bourian') {
+                        name = 'Melkon DomBourian';
+                    }
+
 					playersArray.push(name);
 					
 				}

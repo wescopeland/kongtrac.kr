@@ -41,7 +41,7 @@
 							<td ng-if="score.platform === 'Arcade'" title="Arcade Cabinet"><i class="fa fa-lg fa-map-pin" style="padding-left: 4px;"></i></td>
 							<td ng-if="score.platform !== 'Arcade' && score.platform !== 'MAME'" title="Other"><i class="fa fa-lg fa-gg"></i></td>
 							<td><a ng-href="{{ '#/player/' + ranking.camelize(score.player) }}">{{ score.player }}</a></td>
-							<td><a ng-href="{{ '#/game/' + score.id + '/summary' }}">{{ score.score | number }}</a></td>
+							<td><a ng-href="{{ '#/game/' + score.gameId + '/summary' }}">{{ score.score | number }}</a></td>
 							
 							<td ng-if="!score.concealedDay && !score.concealedMonth">{{ score.date | amDateFormat: 'MM/DD/YYYY' }}</td>
 							<td ng-if="score.concealedDay && !score.concealedMonth">{{ score.date | amDateFormat: 'MMMM YYYY' }}</td>

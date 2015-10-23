@@ -12,6 +12,7 @@
             'kongtrac.event',
             'kongtrac.compare',
             'kongtrac.timeline',
-            'kongtrac.search'
+            'kongtrac.search',
+            'kongtrac.export'
         ]);
 })();

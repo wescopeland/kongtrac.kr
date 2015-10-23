@@ -44,7 +44,7 @@
 				if (trackedPlayers.indexOf(game.player) === -1 && game.platform !== 'Simulation') {
 
 					killscreenTimeline.push(game);
-					trackedPlayers.push(game.player);
+					trackedPlayers.push(game.player.trim());
 
 				}
 

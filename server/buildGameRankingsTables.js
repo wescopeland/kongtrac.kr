@@ -20,6 +20,8 @@
 			gamesSnapshot.forEach(function(game) {
 
 				var gameData = game.val();
+				var gameId = game.key();
+				gameData.gameId = gameId;
 				completeGamesArray.push(gameData);
 
 			});

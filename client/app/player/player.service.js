@@ -204,6 +204,22 @@
                         _player.name = 'Joseph DuPree';
                     }
 
+                    if (_player.name === 'Jonathan Mc Court') {
+                        _player.name = 'Jonathan McCourt';
+                    }
+
+                    if (_player.name === 'John Mc Neill') {
+                        _player.name = 'John McNeill';
+                    }
+
+                    if (_player.name === 'John Mc Curdy') {
+                        _player.name = ' John McCurdy';
+                    }
+
+                    if (_player.name === 'Melkon Dom Bourian') {
+                        _player.name = 'Melkon DomBourian';
+                    }
+
         			_player.gameIds = getPlayerGameIds(_player.games);
 
                     // Grab all the games attached to this player.
