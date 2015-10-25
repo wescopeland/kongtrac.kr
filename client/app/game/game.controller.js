@@ -441,7 +441,7 @@
             }
 
             if (vm.gameEditData.platform === 'MAME') {
-                gamePropertiesObject.mameVersion = vm.gameEditData.mameVersion;
+                gamePropertiesObject.mameVersion = vm.gameEditData.mameVersion ? vm.gameEditData.mameVersion : null;
             }
 
             if (vm.gameEditData.isVerified) {
