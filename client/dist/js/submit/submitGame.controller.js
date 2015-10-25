@@ -72,7 +72,7 @@
         	gamePropertiesObject.platform = vm.inputPlatform;
         	gamePropertiesObject.isKillscreen = vm.inputIsKillscreen;
             gamePropertiesObject.hasCompleteData = vm.inputHasCompleteData;
-            gamePropertiesObject.mameVersion = vm.inputMameVersion;
+            gamePropertiesObject.mameVersion = vm.inputMameVersion ? vm.inputMameVersion : null;
 
             if (vm.inputIsDayUnknown && !vm.inputIsMonthUnknown) {
 

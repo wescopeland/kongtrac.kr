@@ -148,6 +148,10 @@
         		var newGame = inputGameProperties;
         		console.log(newGame);
 
+                if (newGame.mameVersion === undefined) {
+                    newGame.mameVersion = null;
+                }
+
 	        	gameList.$add(newGame).then(function(newGameReference) {
 
                     $rootScope.$broadcast('gameAdded', { gameId: newGameReference.key() });
