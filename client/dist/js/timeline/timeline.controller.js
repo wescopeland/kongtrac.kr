@@ -370,10 +370,6 @@
                         text: 'Ranges'
                     },
                     categories: [
-                        '2000',
-                        '2001',
-                        '2002',
-                        '2003',
                         '2004',
                         '2005',
                         '2006',
@@ -695,7 +691,11 @@
 
         		vm.ksTimeline.forEach(function(newKs) {
 
-        			var scoreYear = Number(newKs.date.split('/')[2]);
+                    if (newKs.date.length === 4) {
+                        var scoreYear = Number(newKs.date);
+                    } else {
+                        var scoreYear = Number(newKs.date.split('/')[2]);
+                    }
 
         			if (scoreYear < 2000) {
         				histogramData[0] += 1;
@@ -754,45 +754,40 @@
 
         		vm.onemillionTimeline = response;
 
-        		var histogramData =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        		var histogramData =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         		vm.onemillionTimeline.forEach(function(newKs) {
 
-        			var scoreYear = Number(newKs.date.split('/')[2]);
+                    if (newKs.date.length === 4) {
+                        var scoreYear = Number(newKs.date);
+                    } else {
+                        var scoreYear = Number(newKs.date.split('/')[2]);
+                    }
 
-
-        			if (scoreYear === 2000) {
+        			if (scoreYear === 2004) {
         				histogramData[0] += 1;
-        			} else if (scoreYear === 2001) {
-        				histogramData[1] += 1;
-        			} else if (scoreYear === 2002) {
-        				histogramData[2] += 1;
-        			} else if (scoreYear === 2003) {
-        				histogramData[3] += 1;
-        			} else if (scoreYear === 2004) {
-        				histogramData[4] += 1;
         			} else if (scoreYear === 2005) {
-        				histogramData[5] += 1;
+        				histogramData[1] += 1;
         			} else if (scoreYear === 2006) {
-        				histogramData[6] += 1;
+        				histogramData[2] += 1;
         			} else if (scoreYear === 2007) {
-        				histogramData[7] += 1;
+        				histogramData[3] += 1;
         			} else if (scoreYear === 2008) {
-        				histogramData[8] += 1;
+        				histogramData[4] += 1;
         			} else if (scoreYear === 2009) {
-        				histogramData[9] += 1;
+        				histogramData[5] += 1;
         			} else if (scoreYear === 2010) {
-        				histogramData[10] += 1;
+        				histogramData[6] += 1;
         			} else if (scoreYear === 2011) {
-        				histogramData[11] += 1;
+        				histogramData[7] += 1;
         			} else if (scoreYear === 2012) {
-        				histogramData[12] += 1;
+        				histogramData[8] += 1;
         			} else if (scoreYear === 2013) {
-        				histogramData[13] += 1;
+        				histogramData[9] += 1;
         			} else if (scoreYear === 2014) {
-        				histogramData[14] += 1;
+        				histogramData[10] += 1;
         			} else if (scoreYear === 2015) {
-        				histogramData[15] += 1;
+        				histogramData[11] += 1;
         			}
 
         		});
