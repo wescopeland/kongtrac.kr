@@ -63,6 +63,11 @@
 			</select>
 		</div>
 
+		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12" ng-if="submit.inputPlatform === 'MAME'">
+			<label class="control-label">MAME Version (Optional)</label>
+			<input class="form-control" placeholder="WolfMAME 0.106" ng-model="submit.inputMameVersion">
+		</div>
+
 		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 			<div>
 				<label for="isKS">

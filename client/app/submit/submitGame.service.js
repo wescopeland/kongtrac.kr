@@ -92,6 +92,10 @@
                         gameData.concealedMonth = true;
                     }
 
+                    if (inputGameProperties.mameVersion) {
+                        gameData.mameVersion = inputGameProperties.mameVersion;
+                    }
+
                     if (inputGameProperties.isVerified) {
 
                         gameData.isVerified = true;

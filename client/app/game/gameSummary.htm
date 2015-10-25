@@ -144,7 +144,8 @@
 							<i class="fa fa-lg fa-keyboard-o" ng-if="game.gameData.platform === 'MAME'"></i>
 							<i class="fa fa-lg fa-map-pin" ng-if="game.gameData.platform === 'Arcade'"></i>
 							<i class="fa fa-lg fa-gg" ng-if="game.gameData.platform !== 'Arcade' && game.gameData.platform !== 'MAME'"></i>
-							{{ game.gameData.platform }}
+							{{ game.gameData.platform }} 
+							<span ng-if="game.gameData.mameVersion">({{ game.gameData.mameVersion }})</span>
 						</td>
 					</tr>
 					<tr class="small" ng-if="game.gameData.deaths[3]">

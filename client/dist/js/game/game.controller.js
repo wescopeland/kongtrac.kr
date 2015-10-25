@@ -440,6 +440,10 @@
                 gamePropertiesObject.concealedDay = true;
             }
 
+            if (vm.gameEditData.platform === 'MAME') {
+                gamePropertiesObject.mameVersion = vm.gameEditData.mameVersion;
+            }
+
             if (vm.gameEditData.isVerified) {
                 
                 gamePropertiesObject.isVerified = true;
