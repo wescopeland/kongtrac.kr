@@ -19,7 +19,14 @@
 
 				var gameData = game.val();
 
-				var splitDate = gameData.date.split('/');
+				// If we only have a year...
+				if (gameData.date.length === 4) {
+					var newDate = '06/06/' + gameData.date;
+					var splitDate = newDate.split('/');
+				} else {
+					var splitDate = gameData.date.split('/');
+				}
+
 				var isoStringDate = splitDate[2] + '-' + splitDate[0] + '-' + splitDate[1];
 				var isoDate = new Date(isoStringDate);
 
