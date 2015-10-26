@@ -22,6 +22,10 @@ h2 {
     font-variant: small-caps;
 }
 
+.bracket-loser {
+    color: #cccccc;
+}
+
 h2 small {
     margin-left: 0.7em;
 }

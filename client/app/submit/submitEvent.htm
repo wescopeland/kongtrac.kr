@@ -45,8 +45,18 @@
 			<label class="control-label">Format</label>
 			<select class="form-control" ng-model="submit.inputFormat">
 				<option ng-value="0">High Score Competition</option>
-				<option ng-value="1">Bracket</option>
-				<option ng-value="2">High Score Competition Followed by Bracket</option>
+				<option ng-value="1">Single-Elimination Bracket</option>
+				<option ng-value="2">High Score Competition Followed by Single-Elimination Bracket</option>
+			</select>
+		</div>
+
+		<div ng-if="submit.inputFormat === '1' || submit.inputFormat === '2'" class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<label class="control-label">Bracket Participant Count</label>
+			<select class="form-control" ng-model="submit.inputBracketParticipants">
+				<option>16</option>
+				<option>8</option>
+				<option>4</option>
+				<option>2</option>
 			</select>
 		</div>
 
@@ -54,55 +64,539 @@
 			<hr>
 		</div>
 
-		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-			<h3>Scores</h3>
-		</div>
+		<!-- High Score Competition Scores Input -->
+		<div ng-if="submit.inputFormat === '0' || submit.inputFormat === '2'">
 
-		<div class="form-group col-lg-2 col-lg-offset-2 col-md-5 col-md-offset-1 col-sm-3 col-xs-3" style="margin-bottom: 0">
-			<label class="control-label">Player</label>
-		</div>
-
-		<div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3" style="margin-bottom: 0">
-			<label class="control-label">Score</label>
-		</div>
-
-		<div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3" style="margin-bottom: 0">
-			<label class="control-label">Platform</label>
-		</div>
-
-		<div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3" style="margin-bottom: 0">
-			<label class="control-label">Winnings</label>
-		</div>
-
-		<div ng-repeat="eventScore in submit.eventGames">
-
-			<div class="form-group col-lg-2 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-3 col-xs-3">
-				<input class="form-control" placeholder="Player" ng-model="eventScore.player">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+				<h3>Scores</h3>
 			</div>
 
-			<div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3">
-				<input type="number" class="form-control" placeholder="Score" ng-model="eventScore.score">
+			<div class="form-group col-lg-2 col-lg-offset-2 col-md-5 col-md-offset-1 col-sm-3 col-xs-3" style="margin-bottom: 0">
+				<label class="control-label">Player</label>
 			</div>
 
-			<div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3">
-				<select class="form-control" ng-model="eventScore.platform">
-					<option>Arcade</option>
-					<option>MAME</option>
-					<option>JAMMA</option>
-				</select>
+			<div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3" style="margin-bottom: 0">
+				<label class="control-label">Score</label>
 			</div>
 
-			<div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3">
-				<input type="number" class="form-control" placeholder="Winnings" ng-model="eventScore.winnings">
+			<div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3" style="margin-bottom: 0">
+				<label class="control-label">Platform</label>
+			</div>
+
+			<div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3" style="margin-bottom: 0">
+				<label class="control-label">Winnings</label>
+			</div>
+
+			<div ng-repeat="eventScore in submit.eventGames">
+
+				<div class="form-group col-lg-2 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-3 col-xs-3">
+					<input class="form-control" placeholder="Player" ng-model="eventScore.player">
+				</div>
+
+				<div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3">
+					<input type="number" class="form-control" placeholder="Score" ng-model="eventScore.score">
+				</div>
+
+				<div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3">
+					<select class="form-control" ng-model="eventScore.platform">
+						<option>Arcade</option>
+						<option>MAME</option>
+						<option>JAMMA</option>
+					</select>
+				</div>
+
+				<div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3">
+					<input type="number" class="form-control" placeholder="Winnings" ng-model="eventScore.winnings">
+				</div>
+
+				<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12" ng-if="!submit.inputHasCompleteData">
+					<button class="btn btn-default" ng-click="submit.addAnotherGame()" ng-if="$last">
+						<i class="fa fa-plus"></i> Add Another Game
+					</button>
+				</div>
+
+			</div>
+
+		</div>
+
+		<!-- Bracket Games Input -->
+		<div ng-if="submit.inputFormat === '1' || submit.inputFormat === '2'" class="form-group">
+
+			<!-- Ro16 -->
+			<div ng-if="submit.inputBracketParticipants >= 16">
+
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+						<label class="control-label">Ro16 Matchups</label>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner1" ng-value="submit.ro16Player1">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player1" ng-init="submit.ro16Player1 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner1" ng-value="submit.ro16Player2">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player2" ng-init="submit.ro16Player2 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner2" ng-value="submit.ro16Player3">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player3" ng-init="submit.ro16Player3 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner2" ng-value="submit.ro16Player4">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player4" ng-init="submit.ro16Player4 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner3" ng-value="submit.ro16Player5">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player5" ng-init="submit.ro16Player5 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner3" ng-value="submit.ro16Player6">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player6" ng-init="submit.ro16Player6 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner4" ng-value="submit.ro16Player7">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player7" ng-init="submit.ro16Player7 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner4" ng-value="submit.ro16Player8">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player8" ng-init="submit.ro16Player8 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner5" ng-value="submit.ro16Player9">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player9" ng-init="submit.ro16Player9 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner5" ng-value="submit.ro16Player10">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player10" ng-init="submit.ro16Player10 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner6" ng-value="submit.ro16Player11">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player11" ng-init="submit.ro16Player11 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner6" ng-value="submit.ro16Player12">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player12" ng-init="submit.ro16Player12 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner7" ng-value="submit.ro16Player13">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player13" ng-init="submit.ro16Player13 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner7" ng-value="submit.ro16Player14">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player14" ng-init="submit.ro16Player14 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner8" ng-value="submit.ro16Player17">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player17" ng-init="submit.ro16Player17 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro16Winner8" ng-value="submit.ro16Player18">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro16Player18" ng-init="submit.ro16Player18 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<br>
+
+			</div>
+
+			<!-- Ro8 -->
+			<div ng-if="submit.inputBracketParticipants >= 8">
+
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+						<label class="control-label">Ro8 Matchups</label>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro8Winner1" ng-value="submit.ro8Player1">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro8Player1" ng-init="submit.ro8Player1 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro8Winner1" ng-value="submit.ro8Player2">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro8Player2" ng-init="submit.ro8Player2 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro8Winner2" ng-value="submit.ro8Player3">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro8Player3" ng-init="submit.ro8Player3 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro8Winner2" ng-value="submit.ro8Player4">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro8Player4" ng-init="submit.ro8Player4 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro8Winner3" ng-value="submit.ro8Player5">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro8Player5" ng-init="submit.ro8Player5 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro8Winner3" ng-value="submit.ro8Player6">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro8Player6" ng-init="submit.ro8Player6 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro8Winner4" ng-value="submit.ro8Player7">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro8Player7" ng-init="submit.ro8Player7 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro8Winner4" ng-value="submit.ro8Player8">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro8Player8" ng-init="submit.ro8Player8 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<br>
+
+			</div>
+
+			<!-- Ro4 -->
+			<div ng-if="submit.inputBracketParticipants >= 4">
+
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+						<label class="control-label">Ro4 Matchups</label>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro4Winner1" ng-value="submit.ro4Player1">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro4Player1" ng-init="submit.ro4Player1 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro4Winner1" ng-value="submit.ro4Player2">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro4Player2" ng-init="submit.ro4Player2 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro4Winner2" ng-value="submit.ro4Player3">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro4Player3" ng-init="submit.ro4Player3 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro4Winner2" ng-value="submit.ro4Player4">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro4Player4" ng-init="submit.ro4Player4 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<br>
+
+			</div>
+
+			<!-- Ro2 -->
+			<div ng-if="submit.inputBracketParticipants >= 2">
+
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+						<label class="control-label">Final Matchup</label>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro2Winner" ng-value="submit.ro2Player1">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro2Player1" ng-init="submit.ro2Player1 = ''">
+							</div>
+						</div>
+						<div class="col-sm-2 text-center">
+							<p style="margin-bottom: 0px; margin-top: 10px;">vs.</p>
+						</div>
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" ng-model="submit.ro2Winner" ng-value="submit.ro2Player2">
+								</span>
+								<input class="form-control" placeholder="Player Name" ng-model="submit.ro2Player2" ng-init="submit.ro2Player2 = ''">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<br>
+
 			</div>
 
 		</div>
 
 		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12" ng-if="!submit.inputHasCompleteData">
-			<button class="btn btn-default" ng-click="submit.addAnotherGame()">
-				<i class="fa fa-plus"></i> Add Another Game
-			</button>
-
 			<button class="btn btn-primary pull-right" ng-click="submit.handleCommit()">
 				Commit
 			</button>

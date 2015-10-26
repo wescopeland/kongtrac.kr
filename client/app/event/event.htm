@@ -125,11 +125,6 @@
 							<td>{{ event.eventData.games.length }}</td>
 						</tr>
 
-						<tr class="small">
-							<td class="text-right ibox-left">New PBs</td>
-							<td></td>
-						</tr>
-
 					</tbody>
 
 				</table>
@@ -137,6 +132,344 @@
 			</div>
 
 		</div>
+
+	</div>
+
+	<div ng-if="event.eventData.format === 1 || event.eventData.format === 2" style="padding-bottom: 50px; padding-top: 20px;">
+
+		<h3 style="display: inline;">Bracket Results</h3>
+		<hr style="margin-top: 0">
+		<div class="row">
+
+			<div ng-if="event.eventData.ro16">
+
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+						<label class="control-label">Ro16 Matchups</label>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameOneWinner !== event.eventData.ro16.gameOnePlayers[0] }">
+							    {{ event.eventData.ro16.gameOnePlayers[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameOneWinner !== event.eventData.ro16.gameOnePlayers[1] }">
+							    {{ event.eventData.ro16.gameOnePlayers[1] }}
+							</label>
+						</div>
+
+					</div>
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameTwoWinner !== event.eventData.ro16.gameTwoPlayers[0] }">
+							    {{ event.eventData.ro16.gameTwoPlayers[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameTwoWinner !== event.eventData.ro16.gameTwoPlayers[1] }">
+							    {{ event.eventData.ro16.gameTwoPlayers[1] }}
+							</label>
+						</div>
+
+					</div>
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameThreeWinner !== event.eventData.ro16.gameThreePlayers[0] }">
+							    {{ event.eventData.ro16.gameThreePlayers[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameThreeWinner !== event.eventData.ro16.gameThreePlayers[1] }">
+							    {{ event.eventData.ro16.gameThreePlayers[1] }}
+							</label>
+						</div>
+
+					</div>
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameFourWinner !== event.eventData.ro16.gameFourPlayers[0] }">
+							    {{ event.eventData.ro16.gameFourPlayers[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameFourWinner !== event.eventData.ro16.gameFourPlayers[1] }">
+							    {{ event.eventData.ro16.gameFourPlayers[1] }}
+							</label>
+						</div>
+
+					</div>
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameFiveWinner !== event.eventData.ro16.gameFivePlayers[0] }">
+							    {{ event.eventData.ro16.gameFivePlayers[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameFiveWinner !== event.eventData.ro16.gameFivePlayers[1] }">
+							    {{ event.eventData.ro16.gameFivePlayers[1] }}
+							</label>
+						</div>
+
+					</div>
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameSixWinner !== event.eventData.ro16.gameSixPlayers[0] }">
+							    {{ event.eventData.ro16.gameSixPlayers[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameSixWinner !== event.eventData.ro16.gameSixPlayers[1] }">
+							    {{ event.eventData.ro16.gameSixPlayers[1] }}
+							</label>
+						</div>
+
+					</div>
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameSevenWinner !== event.eventData.ro16.gameSevenPlayers[0] }">
+							    {{ event.eventData.ro16.gameSevenPlayers[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameSevenWinner !== event.eventData.ro16.gameSevenPlayers[1] }">
+							    {{ event.eventData.ro16.gameSevenPlayers[1] }}
+							</label>
+						</div>
+
+					</div>
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameEightWinner !== event.eventData.ro16.gameEightPlayers[0] }">
+							    {{ event.eventData.ro16.gameEightPlayers[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro16.gameEightWinner !== event.eventData.ro16.gameEightPlayers[1] }">
+							    {{ event.eventData.ro16.gameEightPlayers[1] }}
+							</label>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div ng-if="event.eventData.ro8" style="padding-bottom: 15px;">
+
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+						<label class="control-label">Ro8 Matchups</label>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro8.gameOneWinner !== event.eventData.ro8.gameOnePlayers[0] }">
+							    {{ event.eventData.ro8.gameOnePlayers[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro8.gameOneWinner !== event.eventData.ro8.gameOnePlayers[1] }">
+							    {{ event.eventData.ro8.gameOnePlayers[1] }}
+							</label>
+						</div>
+
+					</div>
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro8.gameTwoWinner !== event.eventData.ro8.gameTwoPlayers[0] }">
+							    {{ event.eventData.ro8.gameTwoPlayers[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro8.gameTwoWinner !== event.eventData.ro8.gameTwoPlayers[1] }">
+							    {{ event.eventData.ro8.gameTwoPlayers[1] }}
+							</label>
+						</div>
+
+					</div>
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro8.gameThreeWinner !== event.eventData.ro8.gameThreePlayers[0] }">
+							    {{ event.eventData.ro8.gameThreePlayers[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro8.gameThreeWinner !== event.eventData.ro8.gameThreePlayers[1] }">
+							    {{ event.eventData.ro8.gameThreePlayers[1] }}
+							</label>
+						</div>
+
+					</div>
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro8.gameFourWinner !== event.eventData.ro8.gameFourPlayers[0] }">
+							    {{ event.eventData.ro8.gameFourPlayers[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro8.gameFourWinner !== event.eventData.ro8.gameFourPlayers[1] }">
+							    {{ event.eventData.ro8.gameFourPlayers[1] }}
+							</label>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div ng-if="event.eventData.ro4" style="padding-bottom: 15px;">
+
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+						<label class="control-label">Ro4 Matchups</label>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro4.gameOneWinner !== event.eventData.ro4.gameOnePlayers[0] }">
+							    {{ event.eventData.ro4.gameOnePlayers[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro4.gameOneWinner !== event.eventData.ro4.gameOnePlayers[1] }">
+							    {{ event.eventData.ro4.gameOnePlayers[1] }}
+							</label>
+						</div>
+
+					</div>
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro4.gameTwoWinner !== event.eventData.ro4.gameTwoPlayers[0] }">
+							    {{ event.eventData.ro4.gameTwoPlayers[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro4.gameTwoWinner !== event.eventData.ro4.gameTwoPlayers[1] }">
+							    {{ event.eventData.ro4.gameTwoPlayers[1] }}
+							</label>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div ng-if="event.eventData.ro2">
+
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+						<label class="control-label">Final Matchup</label>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro2.winner !== event.eventData.ro2.players[0] }">
+							    {{ event.eventData.ro2.players[0] }}
+							</label>
+						</div>
+						<div class="col-sm-2 text-center">
+							<label>vs.</label>
+						</div>
+						<div class="col-sm-5 text-center">
+							<label ng-class="{ 'bracket-loser': event.eventData.ro2.winner !== event.eventData.ro2.players[1] }">
+							    {{ event.eventData.ro2.players[1] }}
+							</label>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<br>
 
 	</div>
 
