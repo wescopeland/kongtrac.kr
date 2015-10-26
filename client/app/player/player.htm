@@ -180,7 +180,7 @@
 						</thead>
 
 						<tbody>
-							<tr ng-repeat="game in player.playerGameTableData | orderBy:'-endDate'" ng-hide="!game.eventName">
+							<tr ng-repeat="game in player.playerGameTableData | orderBy:'-realEventEndDate'" ng-hide="!game.eventName">
 
 								<td>{{ game.eventStartDate | amDateFormat: 'MM/DD/YYYY' }} &ndash; {{ game.eventEndDate | amDateFormat: 'MM/DD/YYYY' }}</td>
 								<td><a ng-href="{{ '#/event/' + game.eventId }}">{{ game.eventName }}</a></td>

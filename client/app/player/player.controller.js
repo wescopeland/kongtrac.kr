@@ -184,6 +184,7 @@
                                 newGameTableObject.eventWinnings = response.winnings[camelize(vm.playerData.name)];
                                 newGameTableObject.eventStartDate = response.startDate;
                                 newGameTableObject.eventEndDate = response.endDate;
+                                newGameTableObject.realEventEndDate = new Date(response.endDate);
 
                                 // Find this player's position in the specified event.
                                 var eventGames = [];

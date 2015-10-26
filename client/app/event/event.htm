@@ -496,7 +496,7 @@
 					</thead>
 
 					<tbody>
-						<tr ng-repeat="game in event.eventData.gamesData | orderBy:'-score'" ng-hide="event.onlyShowComplete && !event.hasCompleteData">
+						<tr ng-repeat="game in event.eventData.gamesData | orderBy:'-score'" ng-hide="event.onlyShowComplete && !game.hasCompleteData">
 
 							<td>{{ $index + 1 }}</td>
 
