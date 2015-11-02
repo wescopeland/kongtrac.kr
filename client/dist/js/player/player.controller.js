@@ -186,6 +186,15 @@
                                 newGameTableObject.eventEndDate = response.endDate;
                                 newGameTableObject.realEventEndDate = new Date(response.endDate);
 
+                                // Was this a bracket event?
+                                if (response.format === 1 || response.format === 2) {
+                                    newGameTableObject.eventName += ' (Score Competition)';
+
+                                    var bracketResultTableObject = angular.copy(newGameTableObject);
+                                    // TODO
+
+                                }
+
                                 // Find this player's position in the specified event.
                                 var eventGames = [];
                                 var pushedEventData = false;

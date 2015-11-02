@@ -8,7 +8,7 @@ var kongtrackr = require('./server/batch');
 var algoliaIndices = require('./server/algoliaUpdate');
 
 kongtrackr.runBatch();
-algoliaIndices.watchData();
+//algoliaIndices.watchData();
 
 var app = express();
 app.use(compress);
