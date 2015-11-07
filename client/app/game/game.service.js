@@ -6,7 +6,7 @@
         .service('gameService', gameService);
 
     /* @ngInject */
-    function gameService($q, $firebaseArray, $firebaseObject, boardMapper) {
+    function gameService($q, $firebaseArray, $firebaseObject, boardMapper, eventService) {
 
     	var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
     	var _game = {};
@@ -856,6 +856,14 @@
                         _game.maxRivet = findMaxRivet(_game.boardScores);
                         _game.minLevel = findMinLevel(_game.levelScores, _game.mappableLevels);
                         _game.maxLevel = findMaxLevel(_game.levelScores);
+
+                    }
+
+                    if (_game.event) {
+
+                        eventService.getEventData(_game.event).then(function then(response) {
+                            _game.eventName = response.name;
+                        });
 
                     }
 

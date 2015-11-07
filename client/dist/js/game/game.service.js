@@ -6,7 +6,7 @@
         .service('gameService', gameService);
 
     /* @ngInject */
-    function gameService($q, $firebaseArray, $firebaseObject, boardMapper) {
+    function gameService($q, $firebaseArray, $firebaseObject, boardMapper, eventService) {
 
     	var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
     	var _game = {};
@@ -859,6 +859,14 @@
 
                     }
 
+                    if (_game.event) {
+
+                        eventService.getEventData(_game.event).then(function then(response) {
+                            _game.eventName = response.name;
+                        });
+
+                    }
+
                     _game.finalBoard = getFinalBoard(_game);
 
         			resolve(_game);
@@ -920,5 +928,5 @@
         }
 
     }
-    gameService.$inject = ["$q", "$firebaseArray", "$firebaseObject", "boardMapper"];
+    gameService.$inject = ["$q", "$firebaseArray", "$firebaseObject", "boardMapper", "eventService"];
 })();

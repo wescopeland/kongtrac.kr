@@ -131,6 +131,10 @@
 						<td ng-if="game.gameData.concealedDay && !game.gameData.concealedMonth">{{ game.gameData.date | amDateFormat: 'MMMM YYYY' }}</td>
 						<td ng-if="game.gameData.concealedDay && game.gameData.concealedMonth">{{ game.gameData.date }}</td>
 					</tr>
+					<tr class="small" ng-if="game.gameData.eventName">
+						<td class="text-right ibox-left">Event</td>
+						<td>{{ game.gameData.eventName }}</td>
+					</tr>
 					<tr class="small" ng-if="game.gameData.isVerified">
 						<td class="text-right ibox-left">Verification</td>
 						<td>
