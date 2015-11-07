@@ -115,6 +115,10 @@
                         gameData.event = inputGameProperties.event;
                         eventService.addGameIdToEvent(inputGameProperties.event, inputGameId).then(function() {
 
+                            if (inputGameProperties.eventWinnings) {
+                                eventService.addWinningsToEvent(inputGameProperties.event, camelize(inputGameProperties.player), inputGameProperties.eventWinnings);
+                            }
+
                             gameData.$save();
                             resolve();
 

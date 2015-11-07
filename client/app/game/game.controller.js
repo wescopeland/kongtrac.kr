@@ -253,6 +253,18 @@
                         vm.gameEditData.eventName = response.name;
                         vm.gameEditData.eventId = vm.gameData.event;
 
+                        if (response.winnings) {
+
+                            for (var key in response.winnings) {
+                                if (response.winnings.hasOwnProperty(key)) {
+                                    if (key === camelize(vm.gameEditData.player)) {
+                                        vm.gameEditData.eventWinnings = response.winnings[key];
+                                    }
+                                }
+                            }
+
+                        }
+
                     });
 
                 }
@@ -430,6 +442,10 @@
 
             if (vm.gameEditData.eventId) {
                 gamePropertiesObject.event = vm.gameEditData.eventId;
+            }
+
+            if (vm.gameEditData.eventWinnings) {
+                gamePropertiesObject.eventWinnings = vm.gameEditData.eventWinnings;
             }
 
             if (vm.gameEditData.inputIsMonthUnknown) {

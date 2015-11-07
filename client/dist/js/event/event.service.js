@@ -13,6 +13,7 @@
         var _event = {};
 
         this.addGameIdToEvent = addGameIdToEvent;
+        this.addWinningsToEvent = addWinningsToEvent;
         this.editEvent = editEvent;
         this.getEventData = getEventData;
 
@@ -38,6 +39,38 @@
                         resolve();
 
                     });
+
+                });
+
+            });
+
+        }
+
+        function addWinningsToEvent(inputEventId, inputPlayer, inputWinningsAmount) {
+
+            return $q(function(resolve, reject) {
+
+                var eventData = $firebaseObject(
+                    _fbRef
+                        .child('events')
+                        .child(inputEventId)
+                );
+
+                eventData.$loaded().then(function() {
+
+                    if (eventData.winnings) {
+
+                        eventData.winnings[inputPlayer] = inputWinningsAmount;
+
+                    } else {
+
+                        eventData.winnings = {};
+                        eventData.winnings[inputPlayer] = inputWinningsAmount;
+
+                    }
+
+                    eventData.$save();
+                    resolve();
 
                 });
 
