@@ -148,7 +148,7 @@
 				}
 
 				// Is this a death? If so, inflate the pace.
-				while (inputDeathsArray[currentDeathCount].board === i) {
+				while (inputDeathsArray[currentDeathCount] && inputDeathsArray[currentDeathCount].board === i) {
 
 					currentDeathPoints += inputDeathsArray[currentDeathCount].points;
 					currentDeathCount += 1;
