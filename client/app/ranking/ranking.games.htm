@@ -16,8 +16,20 @@
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 			<h2>
-				Current combined top 10 games
+				Current combined top {{ ranking.topGamesLimit }} games
 				<a ng-click="ranking.showSeparateScores()" class="pull-right" style="font-size: 15px; padding-top: 16px; cursor: pointer;">Show separate platforms</a>
+				<a ng-click="ranking.setTopGamesLimit(50)"
+				   ng-if="ranking.topGamesLimit === 10" 
+				   class="pull-right" 
+				   style="font-size: 15px; padding-top: 16px; margin-right: 15px; cursor: pointer;">
+				    Show top 50
+				</a>
+				<a ng-click="ranking.setTopGamesLimit(10)"
+				   ng-if="ranking.topGamesLimit === 50" 
+				   class="pull-right" 
+				   style="font-size: 15px; padding-top: 16px; margin-right: 15px; cursor: pointer;">
+				    Show top 10
+				</a>
 			</h2>
 		</div>
 	</div>
@@ -35,7 +47,7 @@
 					</thead>
 
 					<tbody>
-						<tr ng-repeat="score in ranking.combinedGamesHSL | orderBy:'-score' | limitTo:10">
+						<tr ng-repeat="score in ranking.combinedGamesHSL | orderBy:'-score' | limitTo: ranking.topGamesLimit">
 							<td>{{ $index + 1 }}</td>
 							<td ng-if="score.platform === 'MAME'" title="MAME"><i class="fa fa-lg fa-keyboard-o"></i></td>
 							<td ng-if="score.platform === 'Arcade'" title="Arcade Cabinet"><i class="fa fa-lg fa-map-pin" style="padding-left: 4px;"></i></td>
@@ -59,8 +71,20 @@
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 			<h2>
-				Arcade top 10 games
+				Arcade top {{ ranking.topGamesLimit }} games
 				<a ng-click="ranking.hideSeparateScores()" class="pull-right" style="font-size: 15px; padding-top: 16px; cursor: pointer;">Show combined platforms</a>
+				<a ng-click="ranking.setTopGamesLimit(50)"
+				   ng-if="ranking.topGamesLimit === 10" 
+				   class="pull-right" 
+				   style="font-size: 15px; padding-top: 16px; margin-right: 15px; cursor: pointer;">
+				    Show top 50
+				</a>
+				<a ng-click="ranking.setTopGamesLimit(10)"
+				   ng-if="ranking.topGamesLimit === 50" 
+				   class="pull-right" 
+				   style="font-size: 15px; padding-top: 16px; margin-right: 15px; cursor: pointer;">
+				    Show top 10
+				</a>
 			</h2>
 		</div>
 	</div>
@@ -78,7 +102,7 @@
 					</thead>
 
 					<tbody>
-						<tr ng-repeat="score in ranking.arcadeGamesHSL | orderBy:'-score' | limitTo: 10">
+						<tr ng-repeat="score in ranking.arcadeGamesHSL | orderBy:'-score' | limitTo: ranking.topGamesLimit">
 							<td>{{ $index + 1 }}</td>
 							<td title="Arcade Cabinet"><i class="fa fa-lg fa-map-pin" style="padding-left: 4px;"></i></td>
 							<td><a ng-href="{{ '#/player/' + ranking.camelize(score.player) }}">{{ score.player }}</a></td>
@@ -100,8 +124,20 @@
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 			<h2>
-				Mame top 10 games
+				Mame top {{ ranking.topGamesLimit }} games
 				<a ng-click="ranking.hideSeparateScores()" class="pull-right" style="font-size: 15px; padding-top: 16px; cursor: pointer;">Show combined platforms</a>
+				<a ng-click="ranking.setTopGamesLimit(50)"
+				   ng-if="ranking.topGamesLimit === 10" 
+				   class="pull-right" 
+				   style="font-size: 15px; padding-top: 16px; margin-right: 15px; cursor: pointer;">
+				    Show top 50
+				</a>
+				<a ng-click="ranking.setTopGamesLimit(10)"
+				   ng-if="ranking.topGamesLimit === 50" 
+				   class="pull-right" 
+				   style="font-size: 15px; padding-top: 16px; margin-right: 15px; cursor: pointer;">
+				    Show top 10
+				</a>
 			</h2>
 		</div>
 	</div>
@@ -119,7 +155,7 @@
 					</thead>
 
 					<tbody>
-						<tr ng-repeat="score in ranking.mameGamesHSL | orderBy:'-score' | limitTo: 10">
+						<tr ng-repeat="score in ranking.mameGamesHSL | orderBy:'-score' | limitTo: ranking.topGamesLimit">
 							<td>{{ $index + 1 }}</td>
 							<td title="MAME"><i class="fa fa-lg fa-keyboard-o"></i></td>
 							<td><a ng-href="{{ '#/player/' + ranking.camelize(score.player) }}">{{ score.player }}</a></td>

@@ -32,7 +32,7 @@
 
 			// Get the top ten combined platform games.
 			var combinedTopGames = [];
-			for (var i = 0; i < 11; i += 1) {
+			for (var i = 0; i <= 100; i += 1) {
 
 				if (completeGamesArray[i].platform !== 'Simulation') {
 					combinedTopGames.push(completeGamesArray[i]);
@@ -45,14 +45,14 @@
 			var mameTopGames = [];
 			var arcadePushCount = 0;
 			var mamePushCount = 0;
-			for (var i = 0; i < 50; i += 1) {
+			for (var i = 0; i < 200; i += 1) {
 
-				if ((completeGamesArray[i].platform === 'Arcade' || completeGamesArray[i].platform === 'JAMMA') && arcadePushCount < 10) {
+				if ((completeGamesArray[i].platform === 'Arcade' || completeGamesArray[i].platform === 'JAMMA') && arcadePushCount < 100) {
 
 					arcadeTopGames.push(completeGamesArray[i]);
 					arcadePushCount += 1;
 
-				} else if (completeGamesArray[i].platform === 'MAME' && mamePushCount < 10) {
+				} else if (completeGamesArray[i].platform === 'MAME' && mamePushCount < 100) {
 
 					mameTopGames.push(completeGamesArray[i]);
 					mamePushCount += 1;

@@ -14,12 +14,13 @@
         vm.arcadeHSL = [];
         vm.dbStats = {};
         vm.HSL = [];
-        vm.mameHSL = [];
         vm.showSeparate = false;
+        vm.topGamesLimit = 10;
         
         // Public Functions
         vm.camelize = camelize;
         vm.hideSeparateScores = hideSeparateScores;
+        vm.setTopGamesLimit = setTopGamesLimit;
         vm.showSeparateScores = showSeparateScores;
 
         activate();
@@ -66,6 +67,10 @@
 
         function hideSeparateScores() {
         	vm.showSeparate = false;
+        }
+
+        function setTopGamesLimit(inputNewLimit) {
+            vm.topGamesLimit = inputNewLimit;
         }
 
         function showSeparateScores() {
