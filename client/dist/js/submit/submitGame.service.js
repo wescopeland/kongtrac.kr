@@ -9,7 +9,7 @@
     /* @ngInject */
     function submitGameService($q, $rootScope, $firebaseObject, $firebaseArray, eventService) {
 
-    	var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
+    	var _fbRef = firebase.database().ref();
 
     	this.checkAndSetWeights = checkAndSetWeights;
     	this.expandAbbreviatedPoints = expandAbbreviatedPoints;

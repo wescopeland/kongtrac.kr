@@ -8,7 +8,7 @@
     /* @ngInject */
     function timelineService($q, $firebaseObject, $firebaseArray) {
 
-    	var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
+    	var _fbRef = firebase.database().ref();
 
     	// Public Functions
         this.getDaysSinceData = getDaysSinceData;

@@ -15,8 +15,8 @@
   ],
   "dependencies": {
     "angular": "~1.4.6",
-    "angularfire": "~1.1.2",
-    "firebase": "~2.3.0",
+    "angularfire": "~2.0.2",
+    "firebase": "~3.4.0",
     "fontawesome": "~4.4.0",
     "jquery": "~2.1.4",
     "angular-ui-router": "~0.2.15",
@@ -32,5 +32,8 @@
     "angular-strap": "~2.3.3",
     "outdated-browser": "~1.1.2",
     "angular-ladda": "~0.3.1"
+  },
+  "resolutions": {
+    "angularfire": "~2.0.2"
   }
 }

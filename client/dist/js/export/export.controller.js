@@ -9,7 +9,7 @@
     /* @ngInject */
     function ExportController($q, $firebaseArray, $firebaseObject) {
 
-    	var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
+    	var _fbRef = firebase.database().ref();
 
         var vm = this;
 

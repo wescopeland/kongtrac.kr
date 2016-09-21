@@ -10,7 +10,7 @@
     function eventService($q, $firebaseObject, $firebaseArray) {
 
         // Private Variables
-        var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
+        var _fbRef = firebase.database().ref();
         var _event = {};
 
         this.addGameIdToEvent = addGameIdToEvent;

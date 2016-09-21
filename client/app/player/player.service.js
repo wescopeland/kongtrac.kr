@@ -9,7 +9,7 @@
     function playerService($q, $filter, $firebaseObject, $firebaseArray, gameService) {
 
     	// Private Variables
-    	var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
+    	var _fbRef = firebase.database().ref();
     	var _player = {};
 
     	// Private Functions

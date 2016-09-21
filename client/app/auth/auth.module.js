@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('kongtrac.scores', ['firebase']);
+        .module('kongtrac.auth', ['firebase']);
 })();

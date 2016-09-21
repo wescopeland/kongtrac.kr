@@ -41,7 +41,7 @@
 			var currentWorldRecordScore = 0;
 			mameGamesArray.forEach(function(game) {
 
-				if (game.score > currentWorldRecordScore) {
+				if (game.score > currentWorldRecordScore && game.score >= 850000) {
 
 					worldRecordTimeline.push(game);
 					currentWorldRecordScore = game.score;

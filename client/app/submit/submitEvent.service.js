@@ -8,7 +8,7 @@
     /* @ngInject */
     function submitEventService($q, $firebaseArray, $firebaseObject, $rootScope, $state) {
 
-        var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
+        var _fbRef = firebase.database().ref();
 
         this.submitEvent = submitEvent;
 

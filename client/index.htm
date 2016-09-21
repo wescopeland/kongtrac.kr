@@ -8,9 +8,23 @@
 	<script src="outdated-browser/outdatedbrowser/outdatedbrowser.min.js"></script>
 
 	<script src="jquery/dist/jquery.min.js"></script>
+    <script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
 	<script src="bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.0/randomColor.min.js"></script>
 	<script src="angular/angular.min.js"></script>
+
+    <!-- Initialize Firebase -->
+    <script src="firebase/firebase.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyDAAMsWb780h8LGZqx5W4AcUv0cnVsj4GA",
+            authDomain: "kongtrackr.firebaseapp.com",
+            databaseURL: "https://kongtrackr.firebaseio.com",
+            storageBucket: "kongtrackr.appspot.com",
+            messagingSenderId: "262693445312"
+        };
+        firebase.initializeApp(config);
+    </script>
 
 	<!-- Twitter Bootstrap -->
 	<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
@@ -206,7 +220,6 @@
 	<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="angular-strap/dist/angular-strap.min.js"></script>
 	<script src="angular-strap/dist/angular-strap.tpl.min.js"></script>
-	<script src="firebase/firebase.js"></script>
 	<script src="angularfire/dist/angularfire.min.js"></script>
 	<script src="angularjs-datepicker/dist/angular-datepicker.min.js"></script>
 	<script src="http://code.highcharts.com/highcharts.src.js"></script>
@@ -228,6 +241,12 @@
 
 	<script src="dist/js/core/core.module.js"></script>
 	<script src="dist/js/core/core.route.js"></script>
+
+    <script src="dist/js/auth/auth.module.js"></script>
+    <script src="dist/js/auth/auth.route.js"></script>
+    <script src="dist/js/auth/auth.run.js"></script>
+    <script src="dist/js/auth/auth.service.js"></script>
+    <script src="dist/js/auth/login.controller.js"></script>
 
     <script src="dist/js/blocks/blocks.module.js"></script>
     <script src="dist/js/blocks/noSpecialCharacters.directive.js"></script>

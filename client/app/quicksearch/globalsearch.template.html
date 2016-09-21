@@ -6,6 +6,7 @@
 		       placeholder="Find a player, game, or event" 
 		       style="width: 30em;" 
 		       ng-model="vm.inputSearchQuery"
+		       ng-model-options="{ debounce: 1000 }"
 		       autocomplete="off"
 		       bs-options="event as event.name for event in vm.globalSearch($viewValue)"
 		       data-delay="1000"

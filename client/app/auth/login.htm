@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <h2>
+            Login
+        </h2>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <p>
+            Only users with designated contributor accounts are allowed to directly modify
+            the database. Note that the database can be publicly exported by using the
+            <a ui-sref="exportDatabase">database export page</a>. If you feel you should have
+            a contributor account, you can request one by submitting a ticket to the project's
+            <a href="https://github.com/wescopeland/kongtrac.kr/issues" target="_blank">Github repository</a>.
+        </p>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <form name="loginForm">
+
+        <div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+            <label class="control-label">Email</label>
+            <input class="form-control" required placeholder="Email" ng-model="login.inputEmail">
+        </div>
+
+        <div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+            <label class="control-label">Password</label>
+            <input type="password" class="form-control" required placeholder="Password" ng-model="login.inputPassword">
+        </div>
+
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+            <button class="btn btn-primary pull-right" type="submit" ng-disabled="loginForm.$invalid" ng-click="login.clickFirebaseLogin()">Login</button>
+        </div>
+
+    </form>
+
+</div>

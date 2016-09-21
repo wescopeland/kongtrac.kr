@@ -131,7 +131,10 @@
         			},
         			labels: {
         				formatter: abbreviateNumber
-        			}
+        			},
+                    min: 850000,
+                    max: 1240000,
+                    tickInterval: 50000
         		},
         		plotOptions: {
         			marker: {
@@ -195,7 +198,10 @@
         			},
         			labels: {
         				formatter: abbreviateNumber
-        			}
+        			},
+                    min: 850000,
+                    max: 1240000,
+                    tickInterval: 50000
         		},
         		plotOptions: {
         			marker: {
@@ -260,7 +266,9 @@
         			labels: {
         				formatter: abbreviateNumber
         			},
-        			max: 1240000
+        			min: 850000,
+                    max: 1240000,
+                    tickInterval: 50000
         		},
         		plotOptions: {
         			marker: {

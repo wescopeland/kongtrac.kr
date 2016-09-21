@@ -8,7 +8,7 @@
     /* @ngInject */
     function dbstatsService($firebaseObject, $q) {
 
-    	var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
+    	var _fbRef = firebase.database().ref();
 
         this.getDbStats = getDbStats;
 
