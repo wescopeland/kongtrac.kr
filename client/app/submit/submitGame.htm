@@ -14,11 +14,11 @@
 		<h3>Required fields</h3>
 	</div>
 
-	<form>
+	<form name="gameForm" novalidate>
 
 		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 			<label class="control-label">Player</label>
-			<input class="form-control" no-special-characters placeholder="Player" ng-model="submit.inputPlayer">
+			<input class="form-control" required no-special-characters placeholder="Player" ng-model="submit.inputPlayer">
 		</div>
 
 		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
@@ -51,12 +51,12 @@
 
 		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 			<label class="control-label">Score</label>
-			<input class="form-control" placeholder="Score" ng-model="submit.inputScore">
+			<input class="form-control" required placeholder="Score" ng-model="submit.inputScore">
 		</div>
 
 		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 			<label class="control-label">Platform</label>
-			<select class="form-control" ng-model="submit.inputPlatform">
+			<select class="form-control" required ng-model="submit.inputPlatform">
 				<option>Arcade</option>
 				<option>MAME</option>
 				<option>JAMMA</option>
@@ -117,7 +117,7 @@
 		</div>
 
 		<div class="form-group text-right col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12" ng-if="!submit.inputHasCompleteData">
-			<button class="btn btn-primary" ng-click="submit.handleCommit()" ladda="submit.laddaOn" data-style="expand-left">
+			<button class="btn btn-primary" ng-disabled="gameForm.$invalid" ng-click="submit.handleCommit()" ladda="submit.laddaOn" data-style="expand-left">
 				Commit
 			</button>
 		</div>
@@ -648,8 +648,10 @@
 
 			</div>
 
+			{{ gameForm.$invalid | json }}
+
 			<div class="form-group text-right col-sm-12 col-xs-12">
-				<button class="btn btn-primary pull-right" ng-click="submit.handleCommit()">
+				<button class="btn btn-primary pull-right" ng-disabled="gameForm.$invalid" ng-click="submit.handleCommit()">
 					Commit
 				</button>
 			</div>

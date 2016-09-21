@@ -14,11 +14,11 @@
 		<h3>Required fields</h3>
 	</div>
 
-	<form>
+	<form name="eventForm">
 
 		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 			<label class="control-label">Event Name</label>
-			<input class="form-control" placeholder="Event Name" ng-model="submit.inputEventName">
+			<input class="form-control" required placeholder="Event Name" ng-model="submit.inputEventName">
 		</div>
 
 		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
@@ -35,7 +35,7 @@
 
 		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 			<label class="control-label">Online / Offline (Live)</label>
-			<select class="form-control" ng-model="submit.inputOnlineOffline">
+			<select class="form-control" required ng-model="submit.inputOnlineOffline">
 				<option>Online</option>
 				<option>Offline (Live)</option>
 			</select>
@@ -43,7 +43,7 @@
 
 		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 			<label class="control-label">Format</label>
-			<select class="form-control" ng-model="submit.inputFormat">
+			<select class="form-control" required ng-model="submit.inputFormat">
 				<option ng-value="0">High Score Competition</option>
 				<option ng-value="1">Single-Elimination Bracket</option>
 				<option ng-value="2">High Score Competition Followed by Single-Elimination Bracket</option>
@@ -52,7 +52,7 @@
 
 		<div ng-if="submit.inputFormat === '1' || submit.inputFormat === '2'" class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 			<label class="control-label">Bracket Participant Count</label>
-			<select class="form-control" ng-model="submit.inputBracketParticipants">
+			<select class="form-control" required ng-model="submit.inputBracketParticipants">
 				<option>16</option>
 				<option>8</option>
 				<option>4</option>
@@ -90,15 +90,15 @@
 			<div ng-repeat="eventScore in submit.eventGames">
 
 				<div class="form-group col-lg-2 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-3 col-xs-3">
-					<input class="form-control" no-special-characters placeholder="Player" ng-model="eventScore.player">
+					<input class="form-control" required no-special-characters placeholder="Player" ng-model="eventScore.player">
 				</div>
 
 				<div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3">
-					<input type="number" class="form-control" placeholder="Score" ng-model="eventScore.score">
+					<input type="number" required class="form-control" placeholder="Score" ng-model="eventScore.score">
 				</div>
 
 				<div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3">
-					<select class="form-control" ng-model="eventScore.platform">
+					<select class="form-control" required ng-model="eventScore.platform">
 						<option>Arcade</option>
 						<option>MAME</option>
 						<option>JAMMA</option>
@@ -140,7 +140,7 @@
 								<span class="input-group-addon">
 									<input type="radio" ng-model="submit.ro16Winner1" ng-value="submit.ro16Player1">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player1" ng-init="submit.ro16Player1 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player1" ng-init="submit.ro16Player1 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -149,9 +149,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro16Winner1" ng-value="submit.ro16Player2">
+									<input type="radio" required ng-model="submit.ro16Winner1" ng-value="submit.ro16Player2">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player2" ng-init="submit.ro16Player2 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player2" ng-init="submit.ro16Player2 = ''">
 							</div>
 						</div>
 
@@ -168,7 +168,7 @@
 								<span class="input-group-addon">
 									<input type="radio" ng-model="submit.ro16Winner2" ng-value="submit.ro16Player3">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player3" ng-init="submit.ro16Player3 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player3" ng-init="submit.ro16Player3 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -177,9 +177,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro16Winner2" ng-value="submit.ro16Player4">
+									<input type="radio" required ng-model="submit.ro16Winner2" ng-value="submit.ro16Player4">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player4" ng-init="submit.ro16Player4 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player4" ng-init="submit.ro16Player4 = ''">
 							</div>
 						</div>
 
@@ -194,9 +194,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro16Winner3" ng-value="submit.ro16Player5">
+									<input type="radio" required ng-model="submit.ro16Winner3" ng-value="submit.ro16Player5">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player5" ng-init="submit.ro16Player5 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player5" ng-init="submit.ro16Player5 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -205,9 +205,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro16Winner3" ng-value="submit.ro16Player6">
+									<input type="radio" required ng-model="submit.ro16Winner3" ng-value="submit.ro16Player6">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player6" ng-init="submit.ro16Player6 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player6" ng-init="submit.ro16Player6 = ''">
 							</div>
 						</div>
 
@@ -222,9 +222,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro16Winner4" ng-value="submit.ro16Player7">
+									<input type="radio" required ng-model="submit.ro16Winner4" ng-value="submit.ro16Player7">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player7" ng-init="submit.ro16Player7 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player7" ng-init="submit.ro16Player7 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -233,9 +233,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro16Winner4" ng-value="submit.ro16Player8">
+									<input type="radio" required ng-model="submit.ro16Winner4" ng-value="submit.ro16Player8">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player8" ng-init="submit.ro16Player8 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player8" ng-init="submit.ro16Player8 = ''">
 							</div>
 						</div>
 
@@ -250,9 +250,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro16Winner5" ng-value="submit.ro16Player9">
+									<input type="radio" required ng-model="submit.ro16Winner5" ng-value="submit.ro16Player9">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player9" ng-init="submit.ro16Player9 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player9" ng-init="submit.ro16Player9 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -261,9 +261,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro16Winner5" ng-value="submit.ro16Player10">
+									<input type="radio" required ng-model="submit.ro16Winner5" ng-value="submit.ro16Player10">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player10" ng-init="submit.ro16Player10 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player10" ng-init="submit.ro16Player10 = ''">
 							</div>
 						</div>
 
@@ -278,9 +278,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro16Winner6" ng-value="submit.ro16Player11">
+									<input type="radio" required ng-model="submit.ro16Winner6" ng-value="submit.ro16Player11">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player11" ng-init="submit.ro16Player11 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player11" ng-init="submit.ro16Player11 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -289,9 +289,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro16Winner6" ng-value="submit.ro16Player12">
+									<input type="radio" required ng-model="submit.ro16Winner6" ng-value="submit.ro16Player12">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player12" ng-init="submit.ro16Player12 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player12" ng-init="submit.ro16Player12 = ''">
 							</div>
 						</div>
 
@@ -306,9 +306,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro16Winner7" ng-value="submit.ro16Player13">
+									<input type="radio" required ng-model="submit.ro16Winner7" ng-value="submit.ro16Player13">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player13" ng-init="submit.ro16Player13 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player13" ng-init="submit.ro16Player13 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -317,9 +317,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro16Winner7" ng-value="submit.ro16Player14">
+									<input type="radio" required ng-model="submit.ro16Winner7" ng-value="submit.ro16Player14">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player14" ng-init="submit.ro16Player14 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player14" ng-init="submit.ro16Player14 = ''">
 							</div>
 						</div>
 
@@ -334,9 +334,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro16Winner8" ng-value="submit.ro16Player17">
+									<input type="radio" required ng-model="submit.ro16Winner8" ng-value="submit.ro16Player17">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player17" ng-init="submit.ro16Player17 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player17" ng-init="submit.ro16Player17 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -345,9 +345,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro16Winner8" ng-value="submit.ro16Player18">
+									<input type="radio" required ng-model="submit.ro16Winner8" ng-value="submit.ro16Player18">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro16Player18" ng-init="submit.ro16Player18 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro16Player18" ng-init="submit.ro16Player18 = ''">
 							</div>
 						</div>
 
@@ -375,9 +375,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro8Winner1" ng-value="submit.ro8Player1">
+									<input type="radio" required ng-model="submit.ro8Winner1" ng-value="submit.ro8Player1">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro8Player1" ng-init="submit.ro8Player1 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro8Player1" ng-init="submit.ro8Player1 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -386,9 +386,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro8Winner1" ng-value="submit.ro8Player2">
+									<input type="radio" required ng-model="submit.ro8Winner1" ng-value="submit.ro8Player2">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro8Player2" ng-init="submit.ro8Player2 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro8Player2" ng-init="submit.ro8Player2 = ''">
 							</div>
 						</div>
 
@@ -403,9 +403,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro8Winner2" ng-value="submit.ro8Player3">
+									<input type="radio" required ng-model="submit.ro8Winner2" ng-value="submit.ro8Player3">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro8Player3" ng-init="submit.ro8Player3 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro8Player3" ng-init="submit.ro8Player3 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -414,9 +414,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro8Winner2" ng-value="submit.ro8Player4">
+									<input type="radio" required ng-model="submit.ro8Winner2" ng-value="submit.ro8Player4">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro8Player4" ng-init="submit.ro8Player4 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro8Player4" ng-init="submit.ro8Player4 = ''">
 							</div>
 						</div>
 
@@ -431,9 +431,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro8Winner3" ng-value="submit.ro8Player5">
+									<input type="radio" required ng-model="submit.ro8Winner3" ng-value="submit.ro8Player5">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro8Player5" ng-init="submit.ro8Player5 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro8Player5" ng-init="submit.ro8Player5 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -442,9 +442,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro8Winner3" ng-value="submit.ro8Player6">
+									<input type="radio" required ng-model="submit.ro8Winner3" ng-value="submit.ro8Player6">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro8Player6" ng-init="submit.ro8Player6 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro8Player6" ng-init="submit.ro8Player6 = ''">
 							</div>
 						</div>
 
@@ -459,9 +459,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro8Winner4" ng-value="submit.ro8Player7">
+									<input type="radio" required ng-model="submit.ro8Winner4" ng-value="submit.ro8Player7">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro8Player7" ng-init="submit.ro8Player7 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro8Player7" ng-init="submit.ro8Player7 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -470,9 +470,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro8Winner4" ng-value="submit.ro8Player8">
+									<input type="radio" required ng-model="submit.ro8Winner4" ng-value="submit.ro8Player8">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro8Player8" ng-init="submit.ro8Player8 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro8Player8" ng-init="submit.ro8Player8 = ''">
 							</div>
 						</div>
 
@@ -500,9 +500,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro4Winner1" ng-value="submit.ro4Player1">
+									<input type="radio" required ng-model="submit.ro4Winner1" ng-value="submit.ro4Player1">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro4Player1" ng-init="submit.ro4Player1 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro4Player1" ng-init="submit.ro4Player1 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -511,9 +511,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro4Winner1" ng-value="submit.ro4Player2">
+									<input type="radio" required ng-model="submit.ro4Winner1" ng-value="submit.ro4Player2">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro4Player2" ng-init="submit.ro4Player2 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro4Player2" ng-init="submit.ro4Player2 = ''">
 							</div>
 						</div>
 
@@ -528,9 +528,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro4Winner2" ng-value="submit.ro4Player3">
+									<input type="radio" required ng-model="submit.ro4Winner2" ng-value="submit.ro4Player3">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro4Player3" ng-init="submit.ro4Player3 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro4Player3" ng-init="submit.ro4Player3 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -539,9 +539,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro4Winner2" ng-value="submit.ro4Player4">
+									<input type="radio" required ng-model="submit.ro4Winner2" ng-value="submit.ro4Player4">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro4Player4" ng-init="submit.ro4Player4 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro4Player4" ng-init="submit.ro4Player4 = ''">
 							</div>
 						</div>
 
@@ -569,9 +569,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro2Winner" ng-value="submit.ro2Player1">
+									<input type="radio" required ng-model="submit.ro2Winner" ng-value="submit.ro2Player1">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro2Player1" ng-init="submit.ro2Player1 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro2Player1" ng-init="submit.ro2Player1 = ''">
 							</div>
 						</div>
 						<div class="col-sm-2 text-center">
@@ -580,9 +580,9 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="radio" ng-model="submit.ro2Winner" ng-value="submit.ro2Player2">
+									<input type="radio" required ng-model="submit.ro2Winner" ng-value="submit.ro2Player2">
 								</span>
-								<input class="form-control" no-special-characters placeholder="Player Name" ng-model="submit.ro2Player2" ng-init="submit.ro2Player2 = ''">
+								<input class="form-control" required no-special-characters placeholder="Player Name" ng-model="submit.ro2Player2" ng-init="submit.ro2Player2 = ''">
 							</div>
 						</div>
 
@@ -597,7 +597,7 @@
 		</div>
 
 		<div class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12" ng-if="!submit.inputHasCompleteData">
-			<button class="btn btn-primary pull-right" ng-click="submit.handleCommit()">
+			<button class="btn btn-primary pull-right" ng-disabled="eventForm.$invalid" ng-click="submit.handleCommit()">
 				Commit
 			</button>
 		</div>
