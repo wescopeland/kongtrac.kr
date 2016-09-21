@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    timelineConfiguration.$inject = ["$stateProvider"];
     angular
         .module('kongtrac.timeline')
         .config(timelineConfiguration);
@@ -40,6 +41,5 @@
             });
 
     }
-    timelineConfiguration.$inject = ["$stateProvider"];
 
 })();

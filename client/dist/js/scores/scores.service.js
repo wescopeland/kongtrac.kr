@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    scoresService.$inject = ["$q", "$firebaseObject", "$firebaseArray", "$filter"];
     angular
         .module('kongtrac.scores')
         .service('scoresService', scoresService);
@@ -185,6 +186,5 @@
         }
 
     }
-    scoresService.$inject = ["$q", "$firebaseObject", "$firebaseArray", "$filter"];
 
 })();

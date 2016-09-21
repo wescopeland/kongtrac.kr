@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    SubmitEventController.$inject = ["$scope", "$state", "submitEventService"];
     angular
         .module('kongtrac.submit')
         .controller('SubmitEventController', SubmitEventController);
@@ -180,6 +181,5 @@
         }
 
     }
-    SubmitEventController.$inject = ["$scope", "$state", "submitEventService"];
 
 })();

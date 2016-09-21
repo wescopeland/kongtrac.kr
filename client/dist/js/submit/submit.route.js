@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    submitConfiguration.$inject = ["$stateProvider"];
     angular
         .module('kongtrac.submit')
         .config(submitConfiguration);
@@ -20,6 +21,5 @@
             });
 
     }
-    submitConfiguration.$inject = ["$stateProvider"];
 
 })();

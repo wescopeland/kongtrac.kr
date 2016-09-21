@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    searchService.$inject = ["$q", "$filter", "algolia"];
     angular
         .module('kongtrac.search')
         .service('searchService', searchService);
@@ -66,5 +67,4 @@
         }
 
     }
-    searchService.$inject = ["$q", "$filter", "algolia"];
 })();

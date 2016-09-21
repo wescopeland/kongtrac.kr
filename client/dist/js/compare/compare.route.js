@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    compareConfiguration.$inject = ["$stateProvider"];
     angular
         .module('kongtrac.compare')
         .config(compareConfiguration);
@@ -48,6 +49,5 @@
             });
 
     }
-    compareConfiguration.$inject = ["$stateProvider"];
 
 })();

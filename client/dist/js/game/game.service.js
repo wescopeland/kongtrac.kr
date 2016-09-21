@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    gameService.$inject = ["$q", "$firebaseArray", "$firebaseObject", "boardMapper", "eventService"];
     angular
         .module('kongtrac.game')
         .service('gameService', gameService);
@@ -928,5 +929,4 @@
         }
 
     }
-    gameService.$inject = ["$q", "$firebaseArray", "$firebaseObject", "boardMapper", "eventService"];
 })();

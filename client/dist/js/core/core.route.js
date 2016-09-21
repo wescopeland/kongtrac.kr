@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    coreConfiguration.$inject = ["$urlRouterProvider"];
     angular
         .module('kongtrac.core')
         .config(coreConfiguration);
@@ -11,6 +12,5 @@
     	$urlRouterProvider.otherwise('/ranking/players');
 
     }
-    coreConfiguration.$inject = ["$urlRouterProvider"];
 
 })();

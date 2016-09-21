@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    EventController.$inject = ["$stateParams", "eventService", "gameService"];
     angular
         .module('kongtrac.event')
         .controller('EventController', EventController);
@@ -184,6 +185,5 @@
         }
 
     }
-    EventController.$inject = ["$stateParams", "eventService", "gameService"];
 
 })();

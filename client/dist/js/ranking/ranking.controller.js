@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    RankingController.$inject = ["$scope", "scoresService", "dbstatsService"];
     angular
         .module('kongtrac.ranking')
         .controller('RankingController', RankingController);
@@ -78,5 +79,4 @@
         }
 
     }
-    RankingController.$inject = ["$scope", "scoresService", "dbstatsService"];
 })();

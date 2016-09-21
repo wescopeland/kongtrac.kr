@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    ExportController.$inject = ["$q", "$firebaseArray", "$firebaseObject"];
     angular
         .module('kongtrac.export')
         .controller('ExportController', ExportController);
@@ -90,6 +91,5 @@
         }
 
     }
-    ExportController.$inject = ["$q", "$firebaseArray", "$firebaseObject"];
 
 })();

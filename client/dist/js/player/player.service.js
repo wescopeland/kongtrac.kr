@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    playerService.$inject = ["$q", "$filter", "$firebaseObject", "$firebaseArray", "gameService"];
     angular
         .module('kongtrac.player')
         .service('playerService', playerService);
@@ -284,6 +285,5 @@
         }
 
     }
-    playerService.$inject = ["$q", "$filter", "$firebaseObject", "$firebaseArray", "gameService"];
 
 })();

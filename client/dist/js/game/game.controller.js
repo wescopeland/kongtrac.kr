@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    GameController.$inject = ["$stateParams", "$state", "$filter", "$timeout", "gameService", "searchService", "eventService", "submitGameService", "boardMapper", "highchartsNG"];
     angular
         .module('kongtrac.game')
         .controller('GameController', GameController);
@@ -501,5 +502,4 @@
         }
 
     }
-    GameController.$inject = ["$stateParams", "$state", "$filter", "$timeout", "gameService", "searchService", "eventService", "submitGameService", "boardMapper", "highchartsNG"];
 })();

@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    gameConfiguration.$inject = ["$stateProvider"];
     angular
         .module('kongtrac.export')
         .config(gameConfiguration);
@@ -15,6 +16,5 @@
     		});
 
     }
-    gameConfiguration.$inject = ["$stateProvider"];
 
 })();

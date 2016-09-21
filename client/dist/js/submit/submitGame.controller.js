@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    SubmitGameController.$inject = ["$scope", "$state", "boardMapper", "submitGameService"];
     angular
         .module('kongtrac.submit')
         .controller('SubmitGameController', SubmitGameController);
@@ -229,5 +230,4 @@
         }
 
     }
-    SubmitGameController.$inject = ["$scope", "$state", "boardMapper", "submitGameService"];
 })();

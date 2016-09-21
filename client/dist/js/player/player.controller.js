@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    PlayerController.$inject = ["$interval", "$stateParams", "$filter", "playerService", "gameService", "eventService"];
     angular
         .module('kongtrac.player')
         .controller('PlayerController', PlayerController);
@@ -259,6 +260,5 @@
         }
 
     }
-    PlayerController.$inject = ["$interval", "$stateParams", "$filter", "playerService", "gameService", "eventService"];
 
 })();

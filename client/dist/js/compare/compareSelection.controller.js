@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    CompareSelectionController.$inject = ["$scope", "$state", "searchService"];
     angular
         .module('kongtrac.compare')
         .controller('CompareSelectionController', CompareSelectionController);
@@ -181,6 +182,5 @@
         }
 
     }
-    CompareSelectionController.$inject = ["$scope", "$state", "searchService"];
 
 })();

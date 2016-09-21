@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    playerConfiguration.$inject = ["$stateProvider"];
     angular
         .module('kongtrac.player')
         .config(playerConfiguration);
@@ -16,6 +17,5 @@
     		});
 
     }
-    playerConfiguration.$inject = ["$stateProvider"];
 
 })();

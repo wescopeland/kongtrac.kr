@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    timelineService.$inject = ["$q", "$firebaseObject", "$firebaseArray"];
     angular
         .module('kongtrac.timeline')
         .service('timelineService', timelineService);
@@ -67,5 +68,4 @@
         }
 
     }
-    timelineService.$inject = ["$q", "$firebaseObject", "$firebaseArray"];
 })();

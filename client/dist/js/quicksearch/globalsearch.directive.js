@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    GlobalSearchController.$inject = ["$scope", "$state", "$q", "algolia"];
     angular
         .module('kongtrac.search')
         .directive('globalSearch', globalSearch);
@@ -126,6 +127,5 @@
         });
 
     }
-    GlobalSearchController.$inject = ["$scope", "$state", "$q", "algolia"];
 
 })();

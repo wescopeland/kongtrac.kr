@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    TimelineController.$inject = ["$filter", "timelineService"];
     angular
         .module('kongtrac.timeline')
         .controller('TimelineController', TimelineController);
@@ -322,7 +323,9 @@
                         '2012',
                         '2013',
                         '2014',
-                        '2015'
+                        '2015',
+                        '2016',
+                        '2017'
                     ],
                     crosshair: true
                 },
@@ -381,7 +384,9 @@
                         '2012',
                         '2013',
                         '2014',
-                        '2015'
+                        '2015',
+                        '2016',
+                        '2017'
                     ],
                     crosshair: true
                 },
@@ -434,7 +439,9 @@
                         '2012',
                         '2013',
                         '2014',
-                        '2015'
+                        '2015',
+                        '2016',
+                        '2017'
                     ],
                     crosshair: true
                 },
@@ -687,7 +694,7 @@
 
         		vm.ksTimeline = response;
 
-        		var histogramData =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        		var histogramData =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         		vm.ksTimeline.forEach(function(newKs) {
 
@@ -731,6 +738,10 @@
         				histogramData[15] += 1;
         			} else if (scoreYear === 2015) {
         				histogramData[16] += 1;
+        			} else if (scoreYear === 2016) {
+        				histogramData[17] += 1;
+        			} else if (scoreYear === 2017) {
+        				histogramData[18] += 1;
         			}
 
         		});
@@ -754,7 +765,7 @@
 
         		vm.onemillionTimeline = response;
 
-        		var histogramData =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        		var histogramData =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         		vm.onemillionTimeline.forEach(function(newKs) {
 
@@ -788,6 +799,10 @@
         				histogramData[10] += 1;
         			} else if (scoreYear === 2015) {
         				histogramData[11] += 1;
+        			} else if (scoreYear === 2016) {
+        				histogramData[12] += 1;
+        			} else if (scoreYear === 2017) {
+        				histogramData[13] += 1;
         			}
 
         		});
@@ -811,7 +826,7 @@
 
         		vm.oneonemillionTimeline = response;
 
-        		var histogramData =  [0, 0, 0, 0, 0, 0];
+        		var histogramData =  [0, 0, 0, 0, 0, 0, 0 ,0];
 
         		vm.oneonemillionTimeline.forEach(function(newKs) {
 
@@ -830,6 +845,10 @@
         				histogramData[4] += 1;
         			} else if (scoreYear === 2015) {
         				histogramData[5] += 1;
+        			} else if (scoreYear === 2016) {
+        				histogramData[6] += 1;
+        			} else if (scoreYear === 2017) {
+        				histogramData[7] += 1;
         			}
 
         		});
@@ -870,5 +889,4 @@
         }
 
     }
-    TimelineController.$inject = ["$filter", "timelineService"];
 })();

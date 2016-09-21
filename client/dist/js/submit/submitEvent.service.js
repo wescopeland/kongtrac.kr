@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    submitEventService.$inject = ["$q", "$firebaseArray", "$firebaseObject", "$rootScope", "$state"];
     angular
         .module('kongtrac.submit')
         .service('submitEventService', submitEventService);
@@ -138,6 +139,5 @@
         }
         
     }
-    submitEventService.$inject = ["$q", "$firebaseArray", "$firebaseObject", "$rootScope", "$state"];
 
 })();

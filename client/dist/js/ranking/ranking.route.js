@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    rankingConfiguration.$inject = ["$stateProvider"];
     angular
         .module('kongtrac.ranking')
         .config(rankingConfiguration);
@@ -25,6 +26,5 @@
             });
 
     }
-    rankingConfiguration.$inject = ["$stateProvider"];
 
 })();

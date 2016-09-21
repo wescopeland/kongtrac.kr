@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    CompareGamesController.$inject = ["$stateParams", "$state", "$filter", "compareService", "gameService", "boardMapper"];
     angular
         .module('kongtrac.compare')
         .controller('CompareGamesController', CompareGamesController);
@@ -372,6 +373,5 @@
         }
 
     }
-    CompareGamesController.$inject = ["$stateParams", "$state", "$filter", "compareService", "gameService", "boardMapper"];
 
 })();

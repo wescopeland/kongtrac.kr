@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    dbstatsService.$inject = ["$firebaseObject", "$q"];
     angular
         .module('kongtrac.ranking')
         .service('dbstatsService', dbstatsService);
@@ -35,6 +36,5 @@
         }
 
     }
-    dbstatsService.$inject = ["$firebaseObject", "$q"];
 
 })();
