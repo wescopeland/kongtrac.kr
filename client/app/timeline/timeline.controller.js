@@ -693,7 +693,7 @@
 
         		vm.ksTimeline = response;
 
-        		var histogramData =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        		var histogramData =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         		vm.ksTimeline.forEach(function(newKs) {
 
@@ -764,7 +764,7 @@
 
         		vm.onemillionTimeline = response;
 
-        		var histogramData =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        		var histogramData =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         		vm.onemillionTimeline.forEach(function(newKs) {
 
@@ -825,7 +825,7 @@
 
         		vm.oneonemillionTimeline = response;
 
-        		var histogramData =  [0, 0, 0, 0, 0, 0];
+        		var histogramData =  [0, 0, 0, 0, 0, 0, 0 ,0];
 
         		vm.oneonemillionTimeline.forEach(function(newKs) {
 
