@@ -39,7 +39,7 @@
 			var currentWorldRecordScore = 0;
 			completeGamesArray.forEach(function(game) {
 
-				if (game.score > currentWorldRecordScore && game.platform !== 'Simulation') {
+				if (game.score > currentWorldRecordScore && game.platform !== 'Simulation' && game.score >= 800000) {
 
 					worldRecordTimeline.push(game);
 					currentWorldRecordScore = game.score;
