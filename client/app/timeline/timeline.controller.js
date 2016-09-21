@@ -322,7 +322,9 @@
                         '2012',
                         '2013',
                         '2014',
-                        '2015'
+                        '2015',
+                        '2016',
+                        '2017'
                     ],
                     crosshair: true
                 },
@@ -381,7 +383,9 @@
                         '2012',
                         '2013',
                         '2014',
-                        '2015'
+                        '2015',
+                        '2016',
+                        '2017'
                     ],
                     crosshair: true
                 },
@@ -434,7 +438,9 @@
                         '2012',
                         '2013',
                         '2014',
-                        '2015'
+                        '2015',
+                        '2016',
+                        '2017'
                     ],
                     crosshair: true
                 },
@@ -731,6 +737,10 @@
         				histogramData[15] += 1;
         			} else if (scoreYear === 2015) {
         				histogramData[16] += 1;
+        			} else if (scoreYear === 2016) {
+        				histogramData[17] += 1;
+        			} else if (scoreYear === 2017) {
+        				histogramData[18] += 1;
         			}
 
         		});
@@ -788,6 +798,10 @@
         				histogramData[10] += 1;
         			} else if (scoreYear === 2015) {
         				histogramData[11] += 1;
+        			} else if (scoreYear === 2016) {
+        				histogramData[12] += 1;
+        			} else if (scoreYear === 2017) {
+        				histogramData[13] += 1;
         			}
 
         		});
@@ -830,6 +844,10 @@
         				histogramData[4] += 1;
         			} else if (scoreYear === 2015) {
         				histogramData[5] += 1;
+        			} else if (scoreYear === 2016) {
+        				histogramData[6] += 1;
+        			} else if (scoreYear === 2017) {
+        				histogramData[7] += 1;
         			}
 
         		});
