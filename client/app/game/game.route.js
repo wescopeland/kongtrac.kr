@@ -24,7 +24,12 @@
             })
             .state('game.edit', {
                 url: '/edit',
-                templateUrl: '/app/game/gameEdit.htm'
+                templateUrl: '/app/game/gameEdit.htm',
+                resolve: {
+                    'currentAuth': ['$firebaseAuth', function($firebaseAuth) {
+                        return $firebaseAuth().$requireSignIn();
+                    }]
+                }
             });
 
     }

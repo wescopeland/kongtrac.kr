@@ -39,10 +39,8 @@
 
                 $firebaseAuth().$signInWithEmailAndPassword(inputEmail, inputPassword).then(function(user) {
 
-                    _fbUser = user;
-                    console.debug('_fbUser', _fbUser);
-
-                    resolve(_fbUser);
+                    _authData = user;
+                    resolve(_authData);
 
                 });
 
