@@ -32,7 +32,6 @@
         vm.handleCommit = handleCommit;
         vm.mapIndividualsToSums = mapIndividualsToSums;
         vm.mapSumsToIndividuals = mapSumsToIndividuals;
-        vm.playerSearch = playerSearch;
 
         activate();
 
