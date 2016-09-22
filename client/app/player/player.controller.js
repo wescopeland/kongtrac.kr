@@ -181,7 +181,7 @@
 
                                 newGameTableObject.eventId = game.event;
                                 newGameTableObject.eventName = response.name;
-                                newGameTableObject.eventWinnings = response.winnings[camelize(vm.playerData.name)];
+                                newGameTableObject.eventWinnings = response.winnings ? response.winnings[camelize(vm.playerData.name)] : null;
                                 newGameTableObject.eventStartDate = response.startDate;
                                 newGameTableObject.eventEndDate = response.endDate;
                                 newGameTableObject.realEventEndDate = new Date(response.endDate);

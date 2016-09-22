@@ -158,7 +158,7 @@
 
 	        	gameList.$add(newGame).then(function(newGameReference) {
 
-                    $rootScope.$broadcast('gameAdded', { gameId: newGameReference.key() });
+                    $rootScope.$broadcast('gameAdded', { gameId: newGameReference.key });
 
 	        		// Add this game to the player's array of games.
 	        		var playerGamesArray = $firebaseArray(
@@ -169,7 +169,7 @@
 	        		);
 
 	        		playerGamesArray.$loaded().then(function() {
-	        			playerGamesArray.$add(newGameReference.key());
+	        			playerGamesArray.$add(newGameReference.key);
 	        		});
 
 	        	});

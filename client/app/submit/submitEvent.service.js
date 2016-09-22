@@ -71,7 +71,7 @@
                             dbGames.$add(newGameProperties).then(function(newGameReference) {
 
                                 console.log(newGameReference);
-                                dbEvent.games.push(newGameReference.key());
+                                dbEvent.games.push(newGameReference.key);
                                 dbEvent.$save();
 
                                 // Add this game to the player's array of games.
@@ -84,7 +84,7 @@
 
 
                                 playerGamesArray.$loaded().then(function() {
-                                    playerGamesArray.$add(newGameReference.key());
+                                    playerGamesArray.$add(newGameReference.key);
                                 });
 
                             });
@@ -110,6 +110,8 @@
 
             eventList.$loaded().then(function() {
 
+                console.debug('eventList', eventList);
+
                 var newEvent = inputEventProperties;
                 newEvent.winnings = {};
 
@@ -126,7 +128,9 @@
 
                 eventList.$add(newEvent).then(function(newEventReference) {
 
-                    $rootScope.$broadcast('eventAdded', { eventId: newEventReference.key() });
+                    console.debug('newEventReference', newEventReference);
+
+                    $rootScope.$broadcast('eventAdded', { eventId: newEventReference.key });
 
                     // We need to add each game to the games table and this event record.
                     handleEventGames(inputEventGames, newEventReference);
