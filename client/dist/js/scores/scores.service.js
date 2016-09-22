@@ -82,7 +82,7 @@
                             sanitizedArcade.push({
                                 player: pb.playerName,
                                 score: pb.score,
-                                date: pb.date,
+                                date: moment(pb.date),
                                 platform: 'Arcade',
                                 id: pb.id
                             });
@@ -98,7 +98,7 @@
                             sanitizedMAME.push({
                                 player: pb.playerName,
                                 score: pb.score,
-                                date: pb.date,
+                                date: moment(pb.date),
                                 platform: 'MAME',
                                 id: pb.id
                             });

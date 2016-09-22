@@ -35,14 +35,14 @@
 					</thead>
 
 					<tbody>
-						<tr ng-repeat="score in ranking.HSL | orderBy:'-score'">
-							<td>{{ $index + 1 }}</td>
+						<tr ng-repeat="score in ranking.HSL | orderBy:['-score', 'date']">
+							<td>{{ score.score === ranking.HSL[$index - 1].score ? $index : $index+1 }}</td>
 							<td ng-if="score.platform === 'MAME'" title="MAME"><i class="fa fa-lg fa-keyboard-o"></i></td>
 							<td ng-if="score.platform === 'Arcade'" title="Arcade Cabinet"><i class="fa fa-lg fa-map-pin" style="padding-left: 4px;"></i></td>
 							<td ng-if="score.platform !== 'Arcade' && score.platform !== 'MAME'" title="Other"><i class="fa fa-lg fa-gg"></i></td>
 							<td><a ng-href="{{ '#/player/' + ranking.camelize(score.player) }}">{{ score.player }}</a></td>
 							<td><a ng-href="{{ '#/game/' + score.id + '/summary' }}">{{ score.score | number }}</a></td>
-							<td>{{ score.date }}</td>
+							<td>{{ score.date | amDateFormat:'MM/DD/YYYY' }}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -76,11 +76,11 @@
 
 					<tbody>
 						<tr ng-repeat="score in ranking.arcadeHSL | orderBy:'-score'">
-							<td>{{ $index + 1 }}</td>
+							<td>{{ score.score === ranking.arcadeHSL[$index - 1].score ? $index : $index+1 }}</td>
 							<td title="Arcade Cabinet"><i class="fa fa-lg fa-map-pin" style="padding-left: 4px;"></i></td>
 							<td><a ng-href="{{ '#/player/' + ranking.camelize(score.player) }}">{{ score.player }}</a></td>
 							<td><a ng-href="{{ '#/game/' + score.id + '/summary' }}">{{ score.score | number }}</a></td>
-							<td>{{ score.date }}</td>
+							<td>{{ score.date | amDateFormat:'MM/DD/YYYY' }}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -114,11 +114,11 @@
 
 					<tbody>
 						<tr ng-repeat="score in ranking.mameHSL | orderBy:'-score'">
-							<td>{{ $index + 1 }}</td>
+							<td>{{ score.score === ranking.mameHSL[$index - 1].score ? $index : $index+1 }}</td>
 							<td title="MAME"><i class="fa fa-lg fa-keyboard-o"></i></td>
 							<td><a ng-href="{{ '#/player/' + ranking.camelize(score.player) }}">{{ score.player }}</a></td>
 							<td><a ng-href="{{ '#/game/' + score.gameId + '/summary' }}">{{ score.score | number }}</a></td>
-							<td>{{ score.date }}</td>
+							<td>{{ score.date | amDateFormat:'MM/DD/YYYY' }}</td>
 						</tr>
 					</tbody>
 				</table>
