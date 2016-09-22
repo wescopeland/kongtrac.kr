@@ -41,7 +41,7 @@
 
             var deferred = $q.defer();
 
-            inputIndex.search(inputQuery, { hitsPerPage: 20 }).then(function then(response) {
+            inputIndex.search(inputQuery, { hitsPerPage: 40 }).then(function then(response) {
 
             	if (inputIndex === _gamesIndex) {
 
