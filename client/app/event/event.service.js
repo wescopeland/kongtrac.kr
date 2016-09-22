@@ -139,12 +139,16 @@
 
                     allEvents.forEach(function(event) {
 
-                        var gameRemovalIndex = event.games.indexOf(inputGameId);
+                        if (event.games) {
 
-                        if (gameRemovalIndex !== -1) {
+                            var gameRemovalIndex = event.games.indexOf(inputGameId);
 
-                            event.games.splice(gameRemovalIndex, 1);
-                            allEvents.$save(event);
+                            if (gameRemovalIndex !== -1) {
+
+                                event.games.splice(gameRemovalIndex, 1);
+                                allEvents.$save(event);
+
+                            }
 
                         }
 

@@ -26,6 +26,10 @@
 						name = 'Dave McCrary';
 					}
 
+					if (name === 'Joe Mc Donald') {
+						name = 'Joe McDonald';
+					}
+
 					if (name === 'Joseph Du Pree') {
 						name = 'Joseph DuPree';
 					}
@@ -44,6 +48,14 @@
 
                     if (name === 'Melkon Dom Bourian') {
                         name = 'Melkon DomBourian';
+                    }
+
+                    if (name === 'William Mc Evoy') {
+                    	name = 'William McEvoy';
+                    }
+
+                    if (name === 'William Callinan I V') {
+                    	name = 'William Callinan IV';
                     }
 
 					playersArray.push(name);

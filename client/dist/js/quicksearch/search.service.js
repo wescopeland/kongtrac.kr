@@ -49,6 +49,11 @@
             		sortedHits = $filter('filter')(sortedHits, {hasCompleteData: true});
             		deferred.resolve(sortedHits);
 
+                } else if (inputIndex === _playersIndex) {
+
+                    var sortedHits = $filter('orderBy')(response.hits, 'objectID');
+                    deferred.resolve(sortedHits);
+
             	} else {
 
             		var sortedHits = $filter('orderBy')(response.hits, '-objectID');
