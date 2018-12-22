@@ -2,13 +2,10 @@
     'use strict';
 
     compareConfiguration.$inject = ["$stateProvider"];
-    angular
-        .module('kongtrac.compare')
-        .config(compareConfiguration);
+    angular.module('kongtrac.compare').config(compareConfiguration);
 
     function compareConfiguration($stateProvider) {
-
-    	$stateProvider
+        $stateProvider
             .state('compareSelection', {
                 abstract: true,
                 url: '/compare/selection',
@@ -21,18 +18,18 @@
             })
             .state('compareSelection.players', {
                 url: '/players',
-                templateUrl: '/app/compare/selection.players.htm',
+                templateUrl: '/app/compare/selection.players.htm'
             })
             .state('compareSelection.events', {
                 url: '/events',
                 templateUrl: '/app/compare/selection.events.htm'
             })
-    		.state('comparePlayers', {
-    			url: '/compare/players/:playerIds',
-    			templateUrl: '/app/compare/comparePlayers.htm',
-    			controller: 'ComparePlayersController as compare'
-    		})
-    		.state('compareEvents', {
+            .state('comparePlayers', {
+                url: '/compare/players/:playerIds',
+                templateUrl: '/app/compare/comparePlayers.htm',
+                controller: 'ComparePlayersController as compare'
+            })
+            .state('compareEvents', {
                 url: '/compare/events/:eventIds',
                 templateUrl: '/app/compare/compareEvents.htm',
                 controller: 'CompareEventsController as compare'
@@ -47,7 +44,5 @@
                 url: '/summary',
                 templateUrl: '/app/compare/compareGames.summary.htm'
             });
-
     }
-
 })();

@@ -12,64 +12,62 @@ var playersRef = new Firebase('kongtrackr.firebaseio.com/players');
 var eventsRef = new Firebase('kongtrackr.firebaseio.com/events');
 
 function watchData() {
+    // Manage when data is updated on Firebase.
+    gamesRef.on('child_added', addOrUpdateGames);
+    gamesRef.on('child_changed', addOrUpdateGames);
 
-	// Manage when data is updated on Firebase.
-	gamesRef.on('child_added', addOrUpdateGames);
-	gamesRef.on('child_changed', addOrUpdateGames);
+    playersRef.on('child_added', addOrUpdatePlayers);
+    playersRef.on('child_changed', addOrUpdatePlayers);
 
-	playersRef.on('child_added', addOrUpdatePlayers);
-	playersRef.on('child_changed', addOrUpdatePlayers);
+    eventsRef.on('child_added', addOrUpdateEvents);
+    eventsRef.on('child_changed', addOrUpdateEvents);
 
-	eventsRef.on('child_added', addOrUpdateEvents);
-	eventsRef.on('child_changed', addOrUpdateEvents);
+    function addOrUpdateGames(dataSnapshot) {
+        // Get Firebase object
+        var firebaseObject = dataSnapshot.val();
 
-	function addOrUpdateGames(dataSnapshot) {
-	  // Get Firebase object
-	  var firebaseObject = dataSnapshot.val();
+        // Specify Algolia's objectID using the Firebase object key
+        firebaseObject.objectID = dataSnapshot.key();
 
-	  // Specify Algolia's objectID using the Firebase object key
-	  firebaseObject.objectID = dataSnapshot.key();
+        // Add or update object
+        gamesIndex.saveObject(firebaseObject, function(err, content) {
+            if (err) {
+                throw err;
+            }
+        });
+    }
 
-	  // Add or update object
-	  gamesIndex.saveObject(firebaseObject, function(err, content) {
-	    if (err) {
-	      throw err;
-	    }
-	  });
-	}
+    function addOrUpdatePlayers(dataSnapshot) {
+        // Get Firebase object
+        var firebaseObject = dataSnapshot.val();
 
-	function addOrUpdatePlayers(dataSnapshot) {
-	  // Get Firebase object
-	  var firebaseObject = dataSnapshot.val();
+        // Specify Algolia's objectID using the Firebase object key
+        firebaseObject.objectID = dataSnapshot.key();
 
-	  // Specify Algolia's objectID using the Firebase object key
-	  firebaseObject.objectID = dataSnapshot.key();
+        // Add or update object
+        playersIndex.saveObject(firebaseObject, function(err, content) {
+            if (err) {
+                throw err;
+            }
+        });
+    }
 
-	  // Add or update object
-	  playersIndex.saveObject(firebaseObject, function(err, content) {
-	    if (err) {
-	      throw err;
-	    }
-	  });
-	}
+    function addOrUpdateEvents(dataSnapshot) {
+        // Get Firebase object
+        var firebaseObject = dataSnapshot.val();
 
-	function addOrUpdateEvents(dataSnapshot) {
-	  // Get Firebase object
-	  var firebaseObject = dataSnapshot.val();
+        // Specify Algolia's objectID using the Firebase object key
+        firebaseObject.objectID = dataSnapshot.key();
 
-	  // Specify Algolia's objectID using the Firebase object key
-	  firebaseObject.objectID = dataSnapshot.key();
-
-	  // Add or update object
-	  eventsIndex.saveObject(firebaseObject, function(err, content) {
-	    if (err) {
-	      throw err;
-	    }
-	  });
-	}
-
+        // Add or update object
+        eventsIndex.saveObject(firebaseObject, function(err, content) {
+            if (err) {
+                throw err;
+            }
+        });
+    }
 }
 
 module.exports.watchData = function() {
-	return watchData();
+    return watchData();
 };

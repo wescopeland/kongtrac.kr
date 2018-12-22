@@ -8,7 +8,6 @@
 
     /* @ngInject */
     function RankingController($scope, scoresService, dbstatsService) {
-
         var vm = this;
 
         // Public Variables
@@ -17,7 +16,7 @@
         vm.HSL = [];
         vm.showSeparate = false;
         vm.topGamesLimit = 10;
-        
+
         // Public Functions
         vm.camelize = camelize;
         vm.hideSeparateScores = hideSeparateScores;
@@ -29,15 +28,12 @@
         ////////////////
 
         function activate() {
-
-        	scoresService.generateCombinedHSL().then(function then(response) {
-
+            scoresService.generateCombinedHSL().then(function then(response) {
                 console.log(response);
 
                 vm.arcadeHSL = response.arcade;
                 vm.mameHSL = response.mame;
                 vm.HSL = response.combined;
-
             });
 
             scoresService.getTopCombinedGames().then(function then(response) {
@@ -55,19 +51,20 @@
             dbstatsService.getDbStats().then(function then(response) {
                 vm.dbStats = response;
             });
-
         }
 
         function camelize(inputString) {
-
-        	return inputString.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
-			    return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
-			}).replace(/\s+/g, '');
-
+            return inputString
+                .replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
+                    return index == 0
+                        ? letter.toLowerCase()
+                        : letter.toUpperCase();
+                })
+                .replace(/\s+/g, '');
         }
 
         function hideSeparateScores() {
-        	vm.showSeparate = false;
+            vm.showSeparate = false;
         }
 
         function setTopGamesLimit(inputNewLimit) {
@@ -75,8 +72,7 @@
         }
 
         function showSeparateScores() {
-        	vm.showSeparate = true;
+            vm.showSeparate = true;
         }
-
     }
 })();

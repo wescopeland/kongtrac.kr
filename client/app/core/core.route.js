@@ -1,15 +1,10 @@
 (function() {
     'use strict';
 
-    angular
-        .module('kongtrac.core')
-        .config(coreConfiguration);
+    angular.module('kongtrac.core').config(coreConfiguration);
 
     function coreConfiguration($urlRouterProvider) {
-
-    	// Redirect any unmatched URL to /.
-    	$urlRouterProvider.otherwise('/ranking/players');
-
+        // Redirect any unmatched URL to /.
+        $urlRouterProvider.otherwise('/ranking/players');
     }
-
 })();

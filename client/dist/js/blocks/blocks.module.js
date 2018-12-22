@@ -1,6 +1,5 @@
 (function() {
     'use strict';
 
-    angular
-        .module('kongtrac.blocks', []);
+    angular.module('kongtrac.blocks', []);
 })();

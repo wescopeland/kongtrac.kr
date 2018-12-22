@@ -1,70 +1,62 @@
 (function() {
+    'use strict';
 
-	'use strict';
+    var Firebase = require('firebase');
 
-	var Firebase = require('firebase');
+    var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
+    var _gamesRef = _fbRef.child('games');
+    var _timelinesRef = _fbRef.child('timelines');
 
-	var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
-	var _gamesRef = _fbRef.child('games');
-	var _timelinesRef = _fbRef.child('timelines');
+    var buildKillscreenerTimeline = function() {
+        _gamesRef.once('value', function(gamesSnapshot) {
+            // Grab every KS game in the database.
+            var killscreenGamesArray = [];
 
-	var buildKillscreenerTimeline = function() {
+            gamesSnapshot.forEach(function(game) {
+                var gameData = game.val();
 
-		_gamesRef.once('value', function(gamesSnapshot) {
+                // If we only have a year...
+                if (gameData.date.length === 4) {
+                    var newDate = '06/06/' + gameData.date;
+                    var splitDate = newDate.split('/');
+                } else {
+                    var splitDate = gameData.date.split('/');
+                }
 
-			// Grab every KS game in the database.
-			var killscreenGamesArray = [];
+                var isoStringDate =
+                    splitDate[2] + '-' + splitDate[0] + '-' + splitDate[1];
+                var isoDate = new Date(isoStringDate);
 
-			gamesSnapshot.forEach(function(game) {
+                gameData.isoDate = isoDate;
+                gameData.gameId = game.key();
 
-				var gameData = game.val();
+                if (gameData.isKillscreen) {
+                    killscreenGamesArray.push(gameData);
+                }
+            });
 
-				// If we only have a year...
-				if (gameData.date.length === 4) {
-					var newDate = '06/06/' + gameData.date;
-					var splitDate = newDate.split('/');
-				} else {
-					var splitDate = gameData.date.split('/');
-				}
-				
-				var isoStringDate = splitDate[2] + '-' + splitDate[0] + '-' + splitDate[1];
-				var isoDate = new Date(isoStringDate);
+            // Sort the killscreenGamesArray by date.
+            killscreenGamesArray.sort(function(a, b) {
+                return a.isoDate - b.isoDate;
+            });
 
-				gameData.isoDate = isoDate;
-				gameData.gameId = game.key();
+            var trackedPlayers = [];
+            var killscreenTimeline = [];
+            killscreenGamesArray.forEach(function(game) {
+                if (
+                    trackedPlayers.indexOf(game.player) === -1 &&
+                    game.platform !== 'Simulation'
+                ) {
+                    killscreenTimeline.push(game);
+                    trackedPlayers.push(game.player.trim());
+                }
+            });
 
-				if (gameData.isKillscreen) {
-					killscreenGamesArray.push(gameData);
-				}
+            _timelinesRef.child('ksTimeline').set(killscreenTimeline);
+        });
+    };
 
-			});
-
-			// Sort the killscreenGamesArray by date.
-			killscreenGamesArray.sort(function(a, b) {
-				return a.isoDate - b.isoDate;
-			});
-
-			var trackedPlayers = [];
-			var killscreenTimeline = [];
-			killscreenGamesArray.forEach(function(game) {
-
-				if (trackedPlayers.indexOf(game.player) === -1 && game.platform !== 'Simulation') {
-
-					killscreenTimeline.push(game);
-					trackedPlayers.push(game.player.trim());
-
-				}
-
-			});
-
-			_timelinesRef.child('ksTimeline').set(killscreenTimeline);
-
-		});
-
-	};
-
-	module.exports.build = function() {
-		return buildKillscreenerTimeline();
-	};
-
+    module.exports.build = function() {
+        return buildKillscreenerTimeline();
+    };
 })();

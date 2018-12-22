@@ -1,6 +1,5 @@
 (function() {
     'use strict';
 
-    angular
-        .module('kongtrac.game', []);
+    angular.module('kongtrac.game', []);
 })();

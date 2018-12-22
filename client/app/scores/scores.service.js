@@ -1,18 +1,15 @@
 (function() {
     'use strict';
 
-    angular
-        .module('kongtrac.scores')
-        .service('scoresService', scoresService);
+    angular.module('kongtrac.scores').service('scoresService', scoresService);
 
     /* @ngInject */
     function scoresService($q, $firebaseObject, $firebaseArray, $filter) {
-
-    	var _fbRef = firebase.database().ref();
-    	var _sortedPersonalBests = [];
+        var _fbRef = firebase.database().ref();
+        var _sortedPersonalBests = [];
 
         // Public Functions
-    	this.getArcadePersonalBests = getArcadePersonalBests;
+        this.getArcadePersonalBests = getArcadePersonalBests;
         this.generateCombinedHSL = generateCombinedHSL;
         this.getMamePersonalBests = getMamePersonalBests;
         this.getTopCombinedGames = getTopCombinedGames;
@@ -22,62 +19,47 @@
         ////////////////
 
         function getTopCombinedGames() {
-
             return $q(function(resolve, reject) {
-
-                var topCombinedGames = $firebaseArray(_fbRef.child('topGamesCombined'));
+                var topCombinedGames = $firebaseArray(
+                    _fbRef.child('topGamesCombined')
+                );
                 topCombinedGames.$loaded().then(function() {
                     resolve(topCombinedGames);
                 });
-
             });
-
         }
 
         function getTopArcadeGames() {
-
             return $q(function(resolve, reject) {
-
                 var games = $firebaseArray(_fbRef.child('topGamesArcade'));
                 games.$loaded().then(function() {
                     resolve(games);
                 });
-
             });
-
         }
 
         function getTopMameGames() {
-
             return $q(function(resolve, reject) {
-
                 var games = $firebaseArray(_fbRef.child('topGamesMame'));
                 games.$loaded().then(function() {
                     resolve(games);
                 });
-
             });
-
         }
 
         function generateCombinedHSL() {
-
             var pbPromises = {
                 arcadePBs: getArcadePersonalBests(),
                 mamePBs: getMamePersonalBests()
             };
 
             return $q(function(resolve, reject) {
-
                 $q.all(pbPromises).then(function(responses) {
-
                     var sanitizedArcade = [];
                     var sanitizedMAME = [];
 
                     responses.arcadePBs.forEach(function(pb) {
-
                         if (pb.score !== 0) {
-
                             sanitizedArcade.push({
                                 player: pb.playerName,
                                 score: pb.score,
@@ -85,15 +67,11 @@
                                 platform: 'Arcade',
                                 id: pb.id
                             });
-
                         }
-
                     });
 
                     responses.mamePBs.forEach(function(pb) {
-
                         if (pb.score !== 0) {
-
                             sanitizedMAME.push({
                                 player: pb.playerName,
                                 score: pb.score,
@@ -101,26 +79,28 @@
                                 platform: 'MAME',
                                 id: pb.id
                             });
-
                         }
-
                     });
 
-                    var combinedPlatforms = sanitizedArcade.concat(sanitizedMAME);
-                    combinedPlatforms = $filter('orderBy')(combinedPlatforms, '-score');
+                    var combinedPlatforms = sanitizedArcade.concat(
+                        sanitizedMAME
+                    );
+                    combinedPlatforms = $filter('orderBy')(
+                        combinedPlatforms,
+                        '-score'
+                    );
 
                     var knownPlayers = [];
                     for (var i = 0; i < combinedPlatforms.length; i += 1) {
-
-                        if (knownPlayers.indexOf(combinedPlatforms[i].player) > -1) {
-
+                        if (
+                            knownPlayers.indexOf(combinedPlatforms[i].player) >
+                            -1
+                        ) {
                             combinedPlatforms.splice(i, 1);
                             i -= 1;
-
                         } else {
                             knownPlayers.push(combinedPlatforms[i].player);
                         }
-
                     }
 
                     var hsl = {
@@ -130,60 +110,49 @@
                     };
 
                     resolve(hsl);
-
                 });
-
             });
-
         }
 
         function getArcadePersonalBests() {
-
             return $q(function(resolve, reject) {
-
-                var arcadePersonalBests = $firebaseArray(_fbRef.child('arcadePersonalBests'));
+                var arcadePersonalBests = $firebaseArray(
+                    _fbRef.child('arcadePersonalBests')
+                );
                 arcadePersonalBests.$loaded().then(function() {
                     resolve(arcadePersonalBests);
                 });
-
             });
-
         }
 
         function getMamePersonalBests() {
-
             return $q(function(resolve, reject) {
-
-                var mamePersonalBests = $firebaseArray(_fbRef.child('mamePersonalBests'));
+                var mamePersonalBests = $firebaseArray(
+                    _fbRef.child('mamePersonalBests')
+                );
                 mamePersonalBests.$loaded().then(function() {
                     resolve(mamePersonalBests);
                 });
-
             });
-
         }
 
         function uncamelize(inputString) {
-
             var separator = ' ';
 
             // Assume separator is _ if no one has been provided.
-            if(typeof(separator) == "undefined") {
-              separator = "_";
+            if (typeof separator == 'undefined') {
+                separator = '_';
             }
-        
+
             // Replace all capital letters by separator followed by lowercase one
-            var text = inputString.replace(/[A-Z]/g, function (letter) {
-              return separator + letter.toUpperCase();
+            var text = inputString.replace(/[A-Z]/g, function(letter) {
+                return separator + letter.toUpperCase();
             });
 
             text = text[0].toUpperCase() + text.slice(1);
-        
+
             // Remove first separator (to avoid _hello_world name)
-            return text.replace("/^" + separator + "/", '');
-
+            return text.replace('/^' + separator + '/', '');
         }
-
     }
-
 })();

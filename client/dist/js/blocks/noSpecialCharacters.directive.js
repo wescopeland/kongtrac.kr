@@ -10,14 +10,12 @@
         var directive = {
             require: 'ngModel',
             link: link,
-            restrict: 'A',
+            restrict: 'A'
         };
         return directive;
 
         function link(scope, element, attrs, modelCtrl) {
-
             modelCtrl.$parsers.push(function(inputValue) {
-
                 if (inputValue == undefined) {
                     return '';
                 }
@@ -29,11 +27,7 @@
                 }
 
                 return cleanInputValue;
-
             });
-
         }
-
     }
-
 })();

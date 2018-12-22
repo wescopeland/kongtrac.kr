@@ -1,7 +1,5 @@
 (function() {
     'use strict';
 
-    angular
-        .module('kongtrac.export', []);
-        
+    angular.module('kongtrac.export', []);
 })();

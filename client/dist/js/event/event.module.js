@@ -1,7 +1,5 @@
 (function() {
     'use strict';
 
-    angular
-        .module('kongtrac.event', []);
-        
+    angular.module('kongtrac.event', []);
 })();

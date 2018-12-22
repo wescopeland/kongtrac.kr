@@ -7,13 +7,10 @@
 
     /* @ngInject */
     function compareService() {
-
         this.func = func;
 
         ////////////////
 
-        function func() {
-        }
-        
+        function func() {}
     }
 })();

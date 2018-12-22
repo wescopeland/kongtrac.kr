@@ -7,8 +7,14 @@
         .controller('CompareGamesController', CompareGamesController);
 
     /* @ngInject */
-    function CompareGamesController($stateParams, $state, $filter, compareService, gameService, boardMapper) {
-
+    function CompareGamesController(
+        $stateParams,
+        $state,
+        $filter,
+        compareService,
+        gameService,
+        boardMapper
+    ) {
         var vm = this;
 
         // Public Variables
@@ -35,41 +41,40 @@
         ////////////////
 
         function abbreviateNumber() {
-            
             var number = this.value;
             var decPlaces = 2;
 
             number = Number(number);
 
             // 2 decimal places => 100, 3 => 1000, etc
-            decPlaces = Math.pow(10,decPlaces);
+            decPlaces = Math.pow(10, decPlaces);
 
             // Enumerate number abbreviations
-            var abbrev = [ "k", "m", "b", "t" ];
+            var abbrev = ['k', 'm', 'b', 't'];
 
             // Go through the array backwards, so we do the largest first
-            for (var i=abbrev.length-1; i>=0; i--) {
-
+            for (var i = abbrev.length - 1; i >= 0; i--) {
                 // Convert array index to "1000", "1000000", etc
-                var size = Math.pow(10,(i+1)*3);
+                var size = Math.pow(10, (i + 1) * 3);
 
                 // If the number is bigger or equal do the abbreviation
-                if(size <= number) {
-                     // Here, we multiply by decPlaces, round, and then divide by decPlaces.
-                     // This gives us nice rounding to a particular decimal place.
-                     number = Math.round(number*decPlaces/size)/decPlaces;
+                if (size <= number) {
+                    // Here, we multiply by decPlaces, round, and then divide by decPlaces.
+                    // This gives us nice rounding to a particular decimal place.
+                    number =
+                        Math.round((number * decPlaces) / size) / decPlaces;
 
-                     // Handle special case where we round up to the next abbreviation
-                     if((number == 1000) && (i < abbrev.length - 1)) {
-                         number = 1;
-                         i++;
-                     }
+                    // Handle special case where we round up to the next abbreviation
+                    if (number == 1000 && i < abbrev.length - 1) {
+                        number = 1;
+                        i++;
+                    }
 
-                     // Add the letter for the abbreviation
-                     number += abbrev[i];
+                    // Add the letter for the abbreviation
+                    number += abbrev[i];
 
-                     // We are done... stop
-                     break;
+                    // We are done... stop
+                    break;
                 }
             }
 
@@ -77,9 +82,7 @@
         }
 
         function activate() {
-
             vm.paceChartConfiguration = {
-
                 options: {
                     chart: {
                         type: 'line',
@@ -91,20 +94,25 @@
                     },
                     tooltip: {
                         formatter: function() {
-
                             var tooltipTemplate = '';
 
-                            var sortedPoints = $filter('orderBy')(this.points, '-y');
+                            var sortedPoints = $filter('orderBy')(
+                                this.points,
+                                '-y'
+                            );
                             sortedPoints.forEach(function(point) {
-
-                                tooltipTemplate += '<b>' + '(' + point.series.name.split(' ')[0] + ') ' 
-                                    + getPaceChartMappedBoardNumber(point.x) + '</b>: ' 
-                                    + $filter('number')(point.y) + '<br>';
-
+                                tooltipTemplate +=
+                                    '<b>' +
+                                    '(' +
+                                    point.series.name.split(' ')[0] +
+                                    ') ' +
+                                    getPaceChartMappedBoardNumber(point.x) +
+                                    '</b>: ' +
+                                    $filter('number')(point.y) +
+                                    '<br>';
                             });
 
                             return tooltipTemplate;
-
                         },
                         shared: true,
                         crosshairs: true
@@ -134,7 +142,29 @@
                         formatter: getPaceChartMappedBoardNumber
                     },
                     plotLines: [],
-                    tickPositions: [0, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96, 102, 108, 114, 115]
+                    tickPositions: [
+                        0,
+                        6,
+                        12,
+                        18,
+                        24,
+                        30,
+                        36,
+                        42,
+                        48,
+                        54,
+                        60,
+                        66,
+                        72,
+                        78,
+                        84,
+                        90,
+                        96,
+                        102,
+                        108,
+                        114,
+                        115
+                    ]
                 },
                 yAxis: {
                     title: {
@@ -150,11 +180,9 @@
                         symbol: 'circle'
                     }
                 }
-
             };
 
             vm.scoreChartConfiguration = {
-
                 options: {
                     chart: {
                         type: 'line',
@@ -166,20 +194,25 @@
                     },
                     tooltip: {
                         formatter: function() {
-
                             var tooltipTemplate = '';
 
-                            var sortedPoints = $filter('orderBy')(this.points, '-y');
+                            var sortedPoints = $filter('orderBy')(
+                                this.points,
+                                '-y'
+                            );
                             sortedPoints.forEach(function(point) {
-
-                                tooltipTemplate += '<b>' + '(' + point.series.name.split(' ')[0] + ') ' 
-                                    + getScoreChartMappedBoardNumber(point.x) + '</b>: ' 
-                                    + $filter('number')(point.y) + '<br>';
-
+                                tooltipTemplate +=
+                                    '<b>' +
+                                    '(' +
+                                    point.series.name.split(' ')[0] +
+                                    ') ' +
+                                    getScoreChartMappedBoardNumber(point.x) +
+                                    '</b>: ' +
+                                    $filter('number')(point.y) +
+                                    '<br>';
                             });
 
                             return tooltipTemplate;
-
                         },
                         shared: true,
                         crosshairs: true
@@ -209,7 +242,27 @@
                         formatter: getScoreChartMappedBoardNumber
                     },
                     plotLines: [],
-                    tickPositions: [8, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, 79, 85, 91, 97, 103, 109, 115]
+                    tickPositions: [
+                        8,
+                        13,
+                        19,
+                        25,
+                        31,
+                        37,
+                        43,
+                        49,
+                        55,
+                        61,
+                        67,
+                        73,
+                        79,
+                        85,
+                        91,
+                        97,
+                        103,
+                        109,
+                        115
+                    ]
                 },
                 yAxis: {
                     title: {
@@ -236,7 +289,6 @@
                         subtitle: null
                     }
                 }
-
             };
 
             // Get the board weights.
@@ -247,9 +299,7 @@
             // Get all input games.
             vm.gamesData = [];
             vm.inputGameIds.forEach(function(gameId, index) {
-
                 gameService.getGameData(gameId).then(function then(response) {
-
                     var gameData = response;
                     console.log(response);
 
@@ -257,7 +307,10 @@
 
                     vm.paceChartConfiguration.series.push({
                         data: gameData.paceMap,
-                        name: gameData.player.split(' ').pop() + ' (Pace) ' + $filter('number')(gameData.score),
+                        name:
+                            gameData.player.split(' ').pop() +
+                            ' (Pace) ' +
+                            $filter('number')(gameData.score),
                         lineWidth: 3,
                         borderWidth: 0,
                         marker: {
@@ -267,7 +320,10 @@
 
                     vm.scoreChartConfiguration.series.push({
                         data: gameData.scoreMap,
-                        name: gameData.player.split(' ').pop() + ' (Score) ' + $filter('number')(gameData.score),
+                        name:
+                            gameData.player.split(' ').pop() +
+                            ' (Score) ' +
+                            $filter('number')(gameData.score),
                         lineWidth: 3,
                         borderWidth: 0,
                         marker: {
@@ -275,20 +331,22 @@
                         }
                     });
 
-                    vm.paceChartConfiguration.options.title.text += gameData.player;
-                    vm.scoreChartConfiguration.options.title.text += gameData.player;
+                    vm.paceChartConfiguration.options.title.text +=
+                        gameData.player;
+                    vm.scoreChartConfiguration.options.title.text +=
+                        gameData.player;
                     if (index !== vm.inputGameIds.length - 1) {
                         vm.paceChartConfiguration.options.title.text += ' v. ';
                         vm.scoreChartConfiguration.options.title.text += ' v. ';
                     } else {
-                        vm.paceChartConfiguration.options.title.text += ' (Pace History)';
-                        vm.scoreChartConfiguration.options.title.text += ' (Score History)';
+                        vm.paceChartConfiguration.options.title.text +=
+                            ' (Pace History)';
+                        vm.scoreChartConfiguration.options.title.text +=
+                            ' (Score History)';
                     }
 
                     if (response.deaths) {
-
                         response.deaths.forEach(function(death) {
-
                             var newPacePlotLine = {
                                 value: death.board - 19,
                                 width: 1
@@ -298,23 +356,23 @@
                                 value: death.board,
                                 width: 1
                             };
-
-                        })
-
+                        });
                     }
 
                     vm.gamesData.push(gameData);
-
                 });
-
             });
-
         }
 
-        function calculateAverageBarPercentage(inputAverageMap, inputMin, inputMax) {
-
+        function calculateAverageBarPercentage(
+            inputAverageMap,
+            inputMin,
+            inputMax
+        ) {
             var screenPeriodAverage = inputAverageMap[vm.inputLevelSlider - 5];
-            var percentage = (screenPeriodAverage - inputMin) / (inputMax - inputMin) * 100;
+            var percentage =
+                ((screenPeriodAverage - inputMin) / (inputMax - inputMin)) *
+                100;
 
             if (percentage > 100) {
                 percentage = 100;
@@ -323,17 +381,18 @@
             }
 
             return percentage + '%';
-
         }
 
         function camelize(inputString) {
-
             if (inputString) {
-                return inputString.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
-                    return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
-                }).replace(/\s+/g, '');
+                return inputString
+                    .replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
+                        return index == 0
+                            ? letter.toLowerCase()
+                            : letter.toUpperCase();
+                    })
+                    .replace(/\s+/g, '');
             }
-
         }
 
         function formatSlider(value) {
@@ -341,7 +400,6 @@
         }
 
         function getScoreChartMappedBoardNumber(inputBoardNumber) {
-
             var boardNumber;
 
             if (this && this.value && !inputBoardNumber) {
@@ -351,11 +409,9 @@
             }
 
             return boardMapper.mapBoardNumberToLevel(boardNumber);
-
         }
 
         function getPaceChartMappedBoardNumber(inputBoardNumber) {
-
             var boardNumber;
 
             if (this && this.value) {
@@ -365,13 +421,10 @@
             }
 
             return boardMapper.mapBoardNumberToLevel(boardNumber);
-
         }
 
         function getMappedBoardNumber(inputBoardNumber) {
             return boardMapper.mapBoardNumberToLevel(inputBoardNumber);
         }
-
     }
-
 })();

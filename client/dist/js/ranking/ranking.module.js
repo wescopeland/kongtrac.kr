@@ -1,6 +1,5 @@
 (function() {
     'use strict';
 
-    angular
-        .module('kongtrac.ranking', []);
+    angular.module('kongtrac.ranking', []);
 })();

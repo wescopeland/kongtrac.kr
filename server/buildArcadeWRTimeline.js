@@ -1,63 +1,55 @@
 (function() {
+    'use strict';
 
-	'use strict';
+    var Firebase = require('firebase');
 
-	var Firebase = require('firebase');
+    var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
+    var _gamesRef = _fbRef.child('games');
+    var _timelinesRef = _fbRef.child('timelines');
 
-	var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
-	var _gamesRef = _fbRef.child('games');
-	var _timelinesRef = _fbRef.child('timelines');
+    var buildArcadeWRTimeline = function() {
+        _gamesRef.once('value', function(gamesSnapshot) {
+            // Grab every arcade platform game in the database.
+            var arcadeGamesArray = [];
 
-	var buildArcadeWRTimeline = function() {
+            gamesSnapshot.forEach(function(game) {
+                var gameData = game.val();
 
-		_gamesRef.once('value', function(gamesSnapshot) {
+                var splitDate = gameData.date.split('/');
+                var isoStringDate =
+                    splitDate[2] + '-' + splitDate[0] + '-' + splitDate[1];
+                var isoDate = new Date(isoStringDate);
 
-			// Grab every arcade platform game in the database.
-			var arcadeGamesArray = [];
+                gameData.isoDate = isoDate;
+                gameData.gameId = game.key();
 
-			gamesSnapshot.forEach(function(game) {
+                if (gameData.platform === 'Arcade') {
+                    arcadeGamesArray.push(gameData);
+                }
+            });
 
-				var gameData = game.val();
+            // Sort by date.
+            arcadeGamesArray.sort(function(a, b) {
+                return a.isoDate - b.isoDate;
+            });
 
-				var splitDate = gameData.date.split('/');
-				var isoStringDate = splitDate[2] + '-' + splitDate[0] + '-' + splitDate[1];
-				var isoDate = new Date(isoStringDate);
+            var worldRecordTimeline = [];
+            var currentWorldRecordScore = 0;
+            arcadeGamesArray.forEach(function(game) {
+                if (
+                    game.score > currentWorldRecordScore &&
+                    game.score >= 800000
+                ) {
+                    worldRecordTimeline.push(game);
+                    currentWorldRecordScore = game.score;
+                }
+            });
 
-				gameData.isoDate = isoDate;
-				gameData.gameId = game.key();
+            _timelinesRef.child('arcadeWRTimeline').set(worldRecordTimeline);
+        });
+    };
 
-				if (gameData.platform === 'Arcade') {
-					arcadeGamesArray.push(gameData);
-				}
-
-			});
-
-			// Sort by date.
-			arcadeGamesArray.sort(function(a, b) {
-				return a.isoDate - b.isoDate;
-			});
-
-			var worldRecordTimeline = [];
-			var currentWorldRecordScore = 0;
-			arcadeGamesArray.forEach(function(game) {
-
-				if (game.score > currentWorldRecordScore && game.score >= 800000) {
-
-					worldRecordTimeline.push(game);
-					currentWorldRecordScore = game.score;
-
-				}
-
-			});
-
-			_timelinesRef.child('arcadeWRTimeline').set(worldRecordTimeline);
-
-		});
-
-	};
-
-	module.exports.build = function() {
-		return buildArcadeWRTimeline();
-	};
-
+    module.exports.build = function() {
+        return buildArcadeWRTimeline();
+    };
 })();

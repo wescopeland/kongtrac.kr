@@ -1,6 +1,5 @@
 (function() {
     'use strict';
 
-    angular
-        .module('kongtrac.submit', []);
+    angular.module('kongtrac.submit', []);
 })();

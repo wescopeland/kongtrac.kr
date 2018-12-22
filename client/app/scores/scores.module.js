@@ -1,6 +1,5 @@
 (function() {
     'use strict';
 
-    angular
-        .module('kongtrac.scores', ['firebase']);
+    angular.module('kongtrac.scores', ['firebase']);
 })();

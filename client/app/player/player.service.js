@@ -1,200 +1,167 @@
 (function() {
     'use strict';
 
-    angular
-        .module('kongtrac.player')
-        .service('playerService', playerService);
+    angular.module('kongtrac.player').service('playerService', playerService);
 
     /* @ngInject */
-    function playerService($q, $filter, $firebaseObject, $firebaseArray, gameService) {
+    function playerService(
+        $q,
+        $filter,
+        $firebaseObject,
+        $firebaseArray,
+        gameService
+    ) {
+        // Private Variables
+        var _fbRef = firebase.database().ref();
+        var _player = {};
 
-    	// Private Variables
-    	var _fbRef = firebase.database().ref();
-    	var _player = {};
+        // Private Functions
+        // -- getPlayerGames(inputGamesArray);
+        // -- uncamelize(inputString);
 
-    	// Private Functions
-    	// -- getPlayerGames(inputGamesArray);
-    	// -- uncamelize(inputString);
-
-    	this.buildPBMap = buildPBMap;
+        this.buildPBMap = buildPBMap;
         this.editPlayer = editPlayer;
-    	this.getArcadeBest = getArcadeBest;
-    	this.getFirstKSDate = getFirstKSDate;
-    	this.getFirstMillionDate = getFirstMillionDate;
-    	this.getMAMEBest = getMAMEBest;
+        this.getArcadeBest = getArcadeBest;
+        this.getFirstKSDate = getFirstKSDate;
+        this.getFirstMillionDate = getFirstMillionDate;
+        this.getMAMEBest = getMAMEBest;
         this.getPlayerData = getPlayerData;
         this.getPlayerGames = getPlayerGames;
 
         ////////////////
 
         function buildPBMap(inputGamesDataArray) {
+            var unsanitizedPbMap = [];
+            var sanitizedPbMap = [];
 
-        	var unsanitizedPbMap = [];
-        	var sanitizedPbMap = [];
+            var sortedGames = inputGamesDataArray;
 
-        	var sortedGames = inputGamesDataArray;
+            sortedGames.forEach(function(game) {
+                game.date = moment(game.date, 'MM/DD/YYYY');
+            });
 
-        	sortedGames.forEach(function(game) {
-        		game.date = moment(game.date, 'MM/DD/YYYY');
-        	});
+            sortedGames = $filter('orderBy')(sortedGames, 'date');
 
-        	sortedGames = $filter('orderBy')(sortedGames, 'date');
+            var currentPB = 0;
+            sortedGames.forEach(function(game) {
+                if (game.score > currentPB) {
+                    currentPB = game.score;
+                    unsanitizedPbMap.push(game);
+                }
+            });
 
-        	var currentPB = 0;
-        	sortedGames.forEach(function(game) {
+            unsanitizedPbMap.forEach(function(pb) {
+                var newPbObject = {
+                    x: moment(pb.date)
+                        .utc()
+                        .valueOf(),
+                    y: pb.score
+                };
 
-        		if (game.score > currentPB) {
-
-        			currentPB = game.score;
-        			unsanitizedPbMap.push(game);
-
-        		}
-
-        	});
-
-        	unsanitizedPbMap.forEach(function(pb) {
-
-        		var newPbObject = {
-        			x: moment(pb.date).utc().valueOf(),
-        			y: pb.score
-        		};
-
-        		if (pb.platform === 'Arcade') {
-        			newPbObject.fillColor = '#ff4136';
-        		} else if (pb.platform === 'MAME') {
-        			newPbObject.fillColor = '#0074d9';
-        		} else {
+                if (pb.platform === 'Arcade') {
+                    newPbObject.fillColor = '#ff4136';
+                } else if (pb.platform === 'MAME') {
+                    newPbObject.fillColor = '#0074d9';
+                } else {
                     newPbObject.fillColor = '#F012BE';
                 }
 
-        		sanitizedPbMap.push(newPbObject);
+                sanitizedPbMap.push(newPbObject);
+            });
 
-        	});
-
-        	return sanitizedPbMap;
-
+            return sanitizedPbMap;
         }
 
         function editPlayer(inputPlayer, inputEditObject) {
-
             return $q(function(resolve, reject) {
-
                 var playerData = $firebaseObject(
-                    _fbRef
-                        .child('players')
-                        .child(inputPlayer)
+                    _fbRef.child('players').child(inputPlayer)
                 );
 
                 playerData.$loaded().then(function() {
-
                     playerData.initials = inputEditObject.initials;
                     playerData.$save();
                     resolve();
-
                 });
-
             });
-
         }
 
         function getArcadeBest(inputGamesDataArray) {
+            var arcadeHighest = -1;
 
-        	var arcadeHighest = -1;
+            inputGamesDataArray.forEach(function(game) {
+                if (
+                    (game.platform === 'Arcade' || game.platform === 'JAMMA') &&
+                    game.score > arcadeHighest
+                ) {
+                    arcadeHighest = game.score;
+                }
+            });
 
-        	inputGamesDataArray.forEach(function(game) {
+            if (arcadeHighest === -1) {
+                return null;
+            }
 
-        		if ( (game.platform === 'Arcade' || game.platform === 'JAMMA') && (game.score > arcadeHighest) ) {
-        			arcadeHighest = game.score;
-        		}
-
-        	});
-
-        	if (arcadeHighest === -1) {
-        		return null;
-        	}
-
-        	return arcadeHighest;
-
+            return arcadeHighest;
         }
 
         function getFirstKSDate(inputGamesDataArray) {
+            var firstKSDate = null;
 
-        	var firstKSDate = null;
+            inputGamesDataArray.forEach(function(game) {
+                if (game.isKillscreen) {
+                    var currentDate = new Date(game.date);
 
-        	inputGamesDataArray.forEach(function(game) {
+                    if (currentDate < firstKSDate || !firstKSDate) {
+                        firstKSDate = currentDate;
+                    }
+                }
+            });
 
-        		if (game.isKillscreen) {
-
-        			var currentDate = new Date(game.date);
-        			
-        			if (currentDate < firstKSDate || !firstKSDate) {
-        				firstKSDate = currentDate;
-        			}
-
-        		}
-
-        	});
-
-        	return firstKSDate;
-
+            return firstKSDate;
         }
 
         function getFirstMillionDate(inputGamesDataArray) {
-
             var firstMillionDate = null;
 
-        	inputGamesDataArray.forEach(function(game) {
-
+            inputGamesDataArray.forEach(function(game) {
                 if (game.score >= 1000000) {
-
                     var currentDate = new Date(game.date);
 
-        			if (currentDate < firstMillionDate || !firstMillionDate) {
-        				firstMillionDate = currentDate;
-        			}
+                    if (currentDate < firstMillionDate || !firstMillionDate) {
+                        firstMillionDate = currentDate;
+                    }
+                }
+            });
 
-        		}
-
-        	});
-
-        	return firstMillionDate;
-
+            return firstMillionDate;
         }
 
         function getMAMEBest(inputGamesDataArray) {
+            var mameHighest = -1;
 
-        	var mameHighest = -1;
+            inputGamesDataArray.forEach(function(game) {
+                if (game.platform === 'MAME' && game.score > mameHighest) {
+                    mameHighest = game.score;
+                }
+            });
 
-        	inputGamesDataArray.forEach(function(game) {
+            if (mameHighest === -1) {
+                return null;
+            }
 
-        		if (game.platform === 'MAME' && (game.score > mameHighest)) {
-        			mameHighest = game.score;
-        		}
-
-        	});
-
-        	if (mameHighest === -1) {
-        		return null;
-        	}
-
-        	return mameHighest;
-
+            return mameHighest;
         }
 
         function getPlayerData(inputPlayer) {
-
             return $q(function(resolve, reject) {
+                var playerData = $firebaseObject(
+                    _fbRef.child('players').child(inputPlayer)
+                );
 
-            	var playerData = $firebaseObject(
-            		_fbRef
-            			.child('players')
-            			.child(inputPlayer)
-            	);
-
-        		playerData.$loaded().then(function() {
-
-        			_player = playerData;
-        			_player.name = uncamelize(playerData.$id);
+                playerData.$loaded().then(function() {
+                    _player = playerData;
+                    _player.name = uncamelize(playerData.$id);
 
                     if (_player.name === 'Dave Mc Crary') {
                         _player.name = 'Dave McCrary';
@@ -220,24 +187,20 @@
                         _player.name = 'Melkon DomBourian';
                     }
 
-        			_player.gameIds = getPlayerGameIds(_player.games);
+                    _player.gameIds = getPlayerGameIds(_player.games);
 
                     // Grab all the games attached to this player.
                     //getPlayerGames(_player.gameIds).then(function then(gamesResponse) {
 
-                        //_player.gamesData = gamesResponse;
-                        resolve(_player);
+                    //_player.gamesData = gamesResponse;
+                    resolve(_player);
 
                     //});
-
-        		});
-
-        	});
-
+                });
+            });
         }
 
         function getPlayerGames(inputGameIds) {
-
             var promises = [];
 
             inputGameIds.forEach(function(gameId) {
@@ -245,44 +208,37 @@
             });
 
             return $q.all(promises);
-
         }
 
         function getPlayerGameIds(inputGamesObject) {
+            var gameIds = [];
 
-        	var gameIds = [];
+            for (var key in inputGamesObject) {
+                if (inputGamesObject.hasOwnProperty(key)) {
+                    gameIds.push(inputGamesObject[key]);
+                }
+            }
 
-        	for (var key in inputGamesObject) {
-        		if (inputGamesObject.hasOwnProperty(key)) {
-        			gameIds.push(inputGamesObject[key]);
-        		}
-        	}
-
-        	return gameIds;
-
+            return gameIds;
         }
 
         function uncamelize(inputString) {
+            var separator = ' ';
 
-        	var separator = ' ';
+            // Assume separator is _ if no one has been provided.
+            if (typeof separator == 'undefined') {
+                separator = '_';
+            }
 
-        	// Assume separator is _ if no one has been provided.
-			if(typeof(separator) == "undefined") {
-			  separator = "_";
-			}
-		
-			// Replace all capital letters by separator followed by lowercase one
-			var text = inputString.replace(/[A-Z]/g, function (letter) {
-			  return separator + letter.toUpperCase();
-			});
+            // Replace all capital letters by separator followed by lowercase one
+            var text = inputString.replace(/[A-Z]/g, function(letter) {
+                return separator + letter.toUpperCase();
+            });
 
-			text = text[0].toUpperCase() + text.slice(1);
-		
-			// Remove first separator (to avoid _hello_world name)
-			return text.replace("/^" + separator + "/", '');
+            text = text[0].toUpperCase() + text.slice(1);
 
+            // Remove first separator (to avoid _hello_world name)
+            return text.replace('/^' + separator + '/', '');
         }
-
     }
-
 })();

@@ -2,18 +2,15 @@
     'use strict';
 
     rankingConfiguration.$inject = ["$stateProvider"];
-    angular
-        .module('kongtrac.ranking')
-        .config(rankingConfiguration);
+    angular.module('kongtrac.ranking').config(rankingConfiguration);
 
     function rankingConfiguration($stateProvider) {
-
-    	$stateProvider
-    		.state('playerRanking', {
-    			url: '/ranking/players',
-    			templateUrl: 'app/ranking/ranking.players.htm',
+        $stateProvider
+            .state('playerRanking', {
+                url: '/ranking/players',
+                templateUrl: 'app/ranking/ranking.players.htm',
                 controller: 'RankingController as ranking'
-    		})
+            })
             .state('gameRanking', {
                 url: '/ranking/games',
                 templateUrl: 'app/ranking/ranking.games.htm',
@@ -24,7 +21,5 @@
                 templateUrl: 'app/ranking/ranking.complete.htm',
                 controller: 'RankingController as ranking'
             });
-
     }
-
 })();

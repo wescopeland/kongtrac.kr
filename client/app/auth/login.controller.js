@@ -7,7 +7,6 @@
 
     /* @ngInject */
     function LoginController($state, authService) {
-
         var vm = this;
 
         // Public Functions
@@ -17,16 +16,15 @@
         ////////////////
 
         function clickFirebaseLogin() {
-
-            authService.loginToFirebase(vm.inputEmail, vm.inputPassword).then(function(user) {
-                $state.go('playerRanking');
-            });
-
+            authService
+                .loginToFirebase(vm.inputEmail, vm.inputPassword)
+                .then(function(user) {
+                    $state.go('playerRanking');
+                });
         }
 
         function clickTwitchConnect() {
             authService.loginToTwitch();
         }
-
     }
 })();

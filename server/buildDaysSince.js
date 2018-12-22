@@ -1,225 +1,251 @@
 (function() {
+    'use strict';
 
-	'use strict';
+    var Firebase = require('firebase');
+    var moment = require('moment');
+    var preciseRange = require('moment-precise-range');
+    moment().format();
 
-	var Firebase = require('firebase');
-	var moment = require('moment');
-	var preciseRange = require('moment-precise-range');
-	moment().format();
+    var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
+    var _gamesRef = _fbRef.child('games');
+    var _eventsRef = _fbRef.child('events');
+    var _playersRef = _fbRef.child('players');
+    var _timelinesRef = _fbRef.child('timelines');
+    var _daysSinceRef = _fbRef.child('daysSince');
 
-	var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
-	var _gamesRef = _fbRef.child('games');
-	var _eventsRef = _fbRef.child('events');
-	var _playersRef = _fbRef.child('players');
-	var _timelinesRef = _fbRef.child('timelines');
-	var _daysSinceRef = _fbRef.child('daysSince');
-
-	function camelize(inputString) {
-
+    function camelize(inputString) {
         if (inputString) {
-            return inputString.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
-                return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
-            }).replace(/\s+/g, '');
+            return inputString
+                .replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
+                    return index == 0
+                        ? letter.toLowerCase()
+                        : letter.toUpperCase();
+                })
+                .replace(/\s+/g, '');
         }
-
     }
 
-	var buildDaysSince = function() {
+    var buildDaysSince = function() {
+        var now = moment();
 
-		var now = moment();
+        // Most recent KS.
+        _timelinesRef
+            .child('ksTimeline')
+            .once('value', function(ksTimelineSnapshot) {
+                var ksTimelineArray = ksTimelineSnapshot.val();
+                var mostRecentKs = ksTimelineArray[ksTimelineArray.length - 1];
 
-		// Most recent KS.
-		_timelinesRef.child('ksTimeline').once('value', function(ksTimelineSnapshot) {
+                var mostRecentKsDate = moment(mostRecentKs.date, 'MM-DD-YYYY');
 
-			var ksTimelineArray = ksTimelineSnapshot.val();
-			var mostRecentKs = ksTimelineArray[ksTimelineArray.length - 1];
+                var duration = moment.duration(now.diff(mostRecentKsDate));
 
-			var mostRecentKsDate = moment(mostRecentKs.date, 'MM-DD-YYYY');
-			
-			var duration = moment.duration(now.diff(mostRecentKsDate));
+                var durationString = '';
+                if (duration._data.years > 0) {
+                    durationString += duration._data.years + ' years ';
+                }
 
-			var durationString = '';
-			if (duration._data.years > 0) {
-				durationString += (duration._data.years + ' years ');
-			}
+                if (duration._data.months > 0) {
+                    durationString += duration._data.months + ' months ';
+                }
 
-			if (duration._data.months > 0) {
-				durationString += (duration._data.months + ' months ');
-			}
+                if (duration._data.days > 0) {
+                    durationString += duration._data.days + ' days ';
+                }
 
-			if (duration._data.days > 0) {
-				durationString += (duration._data.days + ' days ');
-			}
+                _daysSinceRef.child('lastKs').set({
+                    stringValue: durationString,
+                    objectValue: mostRecentKs,
+                    title: 'A new player reached the kill screen'
+                });
+            });
 
-			_daysSinceRef.child('lastKs').set({
-				stringValue: durationString,
-				objectValue: mostRecentKs,
-				title: 'A new player reached the kill screen'
-			});
+        // Most recent 1m.
+        _timelinesRef
+            .child('millionTimeline')
+            .once('value', function(millionTimelineSnapshot) {
+                var millionTimelineArray = millionTimelineSnapshot.val();
+                var mostRecentMillion =
+                    millionTimelineArray[millionTimelineArray.length - 1];
 
-		});
+                var mostRecentMillionDate = moment(
+                    mostRecentMillion.date,
+                    'MM-DD-YYYY'
+                );
 
-		// Most recent 1m.
-		_timelinesRef.child('millionTimeline').once('value', function(millionTimelineSnapshot) {
+                var duration = moment.duration(now.diff(mostRecentMillionDate));
 
-			var millionTimelineArray = millionTimelineSnapshot.val();
-			var mostRecentMillion = millionTimelineArray[millionTimelineArray.length - 1];
+                var durationString = '';
+                if (duration._data.years > 0) {
+                    durationString += duration._data.years + ' years ';
+                }
 
-			var mostRecentMillionDate = moment(mostRecentMillion.date, 'MM-DD-YYYY');
-			
-			var duration = moment.duration(now.diff(mostRecentMillionDate));
+                if (duration._data.months > 0) {
+                    durationString += duration._data.months + ' months ';
+                }
 
-			var durationString = '';
-			if (duration._data.years > 0) {
-				durationString += (duration._data.years + ' years ');
-			}
+                if (duration._data.days > 0) {
+                    durationString += duration._data.days + ' days ';
+                }
 
-			if (duration._data.months > 0) {
-				durationString += (duration._data.months + ' months ');
-			}
+                _daysSinceRef.child('lastMillion').set({
+                    stringValue: durationString,
+                    objectValue: mostRecentMillion,
+                    title: 'A new player scored 1,000,000 points'
+                });
+            });
 
-			if (duration._data.days > 0) {
-				durationString += (duration._data.days + ' days ');
-			}
+        // Most recent 1.1m.
+        _timelinesRef
+            .child('millionHundredTimeline')
+            .once('value', function(millionHundredTimelineSnapshot) {
+                var millionHundredTimelineArray = millionHundredTimelineSnapshot.val();
+                var mostRecentMillionHundred =
+                    millionHundredTimelineArray[
+                        millionHundredTimelineArray.length - 1
+                    ];
 
-			_daysSinceRef.child('lastMillion').set({
-				stringValue: durationString,
-				objectValue: mostRecentMillion,
-				title: 'A new player scored 1,000,000 points'
-			});
+                var mostRecentMillionHundredDate = moment(
+                    mostRecentMillionHundred.date,
+                    'MM-DD-YYYY'
+                );
 
-		});
+                var duration = moment.duration(
+                    now.diff(mostRecentMillionHundredDate)
+                );
 
-		// Most recent 1.1m.
-		_timelinesRef.child('millionHundredTimeline').once('value', function(millionHundredTimelineSnapshot) {
+                var durationString = '';
+                if (duration._data.years > 0) {
+                    durationString += duration._data.years + ' years ';
+                }
 
-			var millionHundredTimelineArray = millionHundredTimelineSnapshot.val();
-			var mostRecentMillionHundred = millionHundredTimelineArray[millionHundredTimelineArray.length - 1];
+                if (duration._data.months > 0) {
+                    durationString += duration._data.months + ' months ';
+                }
 
-			var mostRecentMillionHundredDate = moment(mostRecentMillionHundred.date, 'MM-DD-YYYY');
-			
-			var duration = moment.duration(now.diff(mostRecentMillionHundredDate));
+                if (duration._data.days > 0) {
+                    durationString += duration._data.days + ' days ';
+                }
 
-			var durationString = '';
-			if (duration._data.years > 0) {
-				durationString += (duration._data.years + ' years ');
-			}
+                _daysSinceRef.child('lastMillionHundred').set({
+                    stringValue: durationString,
+                    objectValue: mostRecentMillionHundred,
+                    title: 'A new player scored 1,100,000 points'
+                });
+            });
 
-			if (duration._data.months > 0) {
-				durationString += (duration._data.months + ' months ');
-			}
+        // Most recent 1.2m.
+        _timelinesRef
+            .child('millionTwoTimeline')
+            .once('value', function(millionTwoTimelineSnapshot) {
+                var millionTwoTimelineArray = millionTwoTimelineSnapshot.val();
+                var mostRecentMillionTwo =
+                    millionTwoTimelineArray[millionTwoTimelineArray.length - 1];
 
-			if (duration._data.days > 0) {
-				durationString += (duration._data.days + ' days ');
-			}
+                var mostRecentMillionTwoDate = moment(
+                    mostRecentMillionTwo.date,
+                    'MM-DD-YYYY'
+                );
 
-			_daysSinceRef.child('lastMillionHundred').set({
-				stringValue: durationString,
-				objectValue: mostRecentMillionHundred,
-				title: 'A new player scored 1,100,000 points'
-			});
+                var duration = moment.duration(
+                    now.diff(mostRecentMillionTwoDate)
+                );
 
-		});
+                var durationString = '';
+                if (duration._data.years > 0) {
+                    durationString += duration._data.years + ' years ';
+                }
 
-		// Most recent 1.2m.
-		_timelinesRef.child('millionTwoTimeline').once('value', function(millionTwoTimelineSnapshot) {
+                if (duration._data.months > 0) {
+                    durationString += duration._data.months + ' months ';
+                }
 
-			var millionTwoTimelineArray = millionTwoTimelineSnapshot.val();
-			var mostRecentMillionTwo = millionTwoTimelineArray[millionTwoTimelineArray.length - 1];
+                if (duration._data.days > 0) {
+                    durationString += duration._data.days + ' days ';
+                }
 
-			var mostRecentMillionTwoDate = moment(mostRecentMillionTwo.date, 'MM-DD-YYYY');
-			
-			var duration = moment.duration(now.diff(mostRecentMillionTwoDate));
+                _daysSinceRef.child('lastMillionTwo').set({
+                    stringValue: durationString,
+                    objectValue: mostRecentMillionTwo,
+                    title: 'A new player scored 1,200,000 points'
+                });
+            });
 
-			var durationString = '';
-			if (duration._data.years > 0) {
-				durationString += (duration._data.years + ' years ');
-			}
+        // New arcade WR.
+        _timelinesRef
+            .child('arcadeWRTimeline')
+            .once('value', function(arcadeWRTimelineSnapshot) {
+                var arcadeWRTimelineArray = arcadeWRTimelineSnapshot.val();
+                var mostRecentArcadeWR =
+                    arcadeWRTimelineArray[arcadeWRTimelineArray.length - 1];
 
-			if (duration._data.months > 0) {
-				durationString += (duration._data.months + ' months ');
-			}
+                var mostRecentArcadeWRDate = moment(
+                    mostRecentArcadeWR.date,
+                    'MM-DD-YYYY'
+                );
 
-			if (duration._data.days > 0) {
-				durationString += (duration._data.days + ' days ');
-			}
+                var duration = moment.duration(
+                    now.diff(mostRecentArcadeWRDate)
+                );
 
-			_daysSinceRef.child('lastMillionTwo').set({
-				stringValue: durationString,
-				objectValue: mostRecentMillionTwo,
-				title: 'A new player scored 1,200,000 points'
-			});
+                var durationString = '';
+                if (duration._data.years > 0) {
+                    durationString += duration._data.years + ' years ';
+                }
 
-		});
+                if (duration._data.months > 0) {
+                    durationString += duration._data.months + ' months ';
+                }
 
-		// New arcade WR.
-		_timelinesRef.child('arcadeWRTimeline').once('value', function(arcadeWRTimelineSnapshot) {
+                if (duration._data.days > 0) {
+                    durationString += duration._data.days + ' days ';
+                }
 
-			var arcadeWRTimelineArray = arcadeWRTimelineSnapshot.val();
-			var mostRecentArcadeWR = arcadeWRTimelineArray[arcadeWRTimelineArray.length - 1];
+                _daysSinceRef.child('lastArcadeWR').set({
+                    stringValue: durationString,
+                    objectValue: mostRecentArcadeWR,
+                    title: 'The arcade world record was broken'
+                });
+            });
 
-			var mostRecentArcadeWRDate = moment(mostRecentArcadeWR.date, 'MM-DD-YYYY');
-			
-			var duration = moment.duration(now.diff(mostRecentArcadeWRDate));
+        // New MAME WR.
+        _timelinesRef
+            .child('mameWRTimeline')
+            .once('value', function(mameWRTimelineSnapshot) {
+                var mameWRTimelineArray = mameWRTimelineSnapshot.val();
+                var mostRecentMameWR =
+                    mameWRTimelineArray[mameWRTimelineArray.length - 1];
 
-			var durationString = '';
-			if (duration._data.years > 0) {
-				durationString += (duration._data.years + ' years ');
-			}
+                var mostRecentMameWRDate = moment(
+                    mostRecentMameWR.date,
+                    'MM-DD-YYYY'
+                );
 
-			if (duration._data.months > 0) {
-				durationString += (duration._data.months + ' months ');
-			}
+                var duration = moment.duration(now.diff(mostRecentMameWRDate));
 
-			if (duration._data.days > 0) {
-				durationString += (duration._data.days + ' days ');
-			}
+                var durationString = '';
+                if (duration._data.years > 0) {
+                    durationString += duration._data.years + ' years ';
+                }
 
-			_daysSinceRef.child('lastArcadeWR').set({
-				stringValue: durationString,
-				objectValue: mostRecentArcadeWR,
-				title: 'The arcade world record was broken'
-			});
+                if (duration._data.months > 0) {
+                    durationString += duration._data.months + ' months ';
+                }
 
-		});
+                if (duration._data.days > 0) {
+                    durationString += duration._data.days + ' days ';
+                }
 
-		// New MAME WR.
-		_timelinesRef.child('mameWRTimeline').once('value', function(mameWRTimelineSnapshot) {
+                _daysSinceRef.child('lastMameWR').set({
+                    stringValue: durationString,
+                    objectValue: mostRecentMameWR,
+                    title: 'The MAME world record was broken'
+                });
+            });
 
-			var mameWRTimelineArray = mameWRTimelineSnapshot.val();
-			var mostRecentMameWR = mameWRTimelineArray[mameWRTimelineArray.length - 1];
+        console.log('Built days since objects.');
+    };
 
-			var mostRecentMameWRDate = moment(mostRecentMameWR.date, 'MM-DD-YYYY');
-
-			var duration = moment.duration(now.diff(mostRecentMameWRDate));
-
-			var durationString = '';
-			if (duration._data.years > 0) {
-				durationString += (duration._data.years + ' years ');
-			}
-
-			if (duration._data.months > 0) {
-				durationString += (duration._data.months + ' months ');
-			}
-
-			if (duration._data.days > 0) {
-				durationString += (duration._data.days + ' days ');
-			}
-
-			_daysSinceRef.child('lastMameWR').set({
-				stringValue: durationString,
-				objectValue: mostRecentMameWR,
-				title: 'The MAME world record was broken'
-			});
-
-		});
-
-		console.log('Built days since objects.');
-
-	};
-
-	module.exports.build = function() {
-		return buildDaysSince();
-	};
-
+    module.exports.build = function() {
+        return buildDaysSince();
+    };
 })();
