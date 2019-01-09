@@ -350,7 +350,8 @@
                         '2015',
                         '2016',
                         '2017',
-                        '2018'
+                        '2018',
+                        '2019'
                     ],
                     crosshair: true
                 },
@@ -410,7 +411,8 @@
                         '2015',
                         '2016',
                         '2017',
-                        '2018'
+                        '2018',
+                        '2019'
                     ],
                     crosshair: true
                 },
@@ -464,7 +466,8 @@
                         '2015',
                         '2016',
                         '2017',
-                        '2018'
+                        '2018',
+                        '2019'
                     ],
                     crosshair: true
                 },
@@ -772,6 +775,8 @@
                             histogramData[18] += 1;
                         } else if (scoreYear === 2018) {
                             histogramData[19] += 1;
+                        } else if (scoreYear === 2019) {
+                            histogramData[20] += 1;
                         }
                     });
 
@@ -849,6 +854,8 @@
                             histogramData[13] += 1;
                         } else if (scoreYear === 2018) {
                             histogramData[14] += 1;
+                        } else if (scoreYear === 2019) {
+                            histogramData[15] += 1;
                         }
                     });
 
@@ -894,6 +901,8 @@
                             histogramData[7] += 1;
                         } else if (scoreYear === 2018) {
                             histogramData[8] += 1;
+                        } else if (scoreYear === 2019) {
+                            histogramData[9] += 1;
                         }
                     });
 
