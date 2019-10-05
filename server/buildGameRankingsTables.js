@@ -3,11 +3,11 @@
 
     var Firebase = require('firebase');
 
-    var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
-    var _gamesRef = _fbRef.child('games');
-    var _combinedTopGamesRef = _fbRef.child('topGamesCombined');
-    var _arcadeTopGamesRef = _fbRef.child('topGamesArcade');
-    var _mameTopGamesRef = _fbRef.child('topGamesMame');
+    const db = Firebase.database();
+    var _gamesRef = db.ref('games');
+    var _combinedTopGamesRef = db.ref('topGamesCombined');
+    var _arcadeTopGamesRef = db.ref('topGamesArcade');
+    var _mameTopGamesRef = db.ref('topGamesMame');
 
     var buildGameRankings = function() {
         _gamesRef.once('value', function(gamesSnapshot) {
@@ -16,7 +16,7 @@
 
             gamesSnapshot.forEach(function(game) {
                 var gameData = game.val();
-                var gameId = game.key();
+                var gameId = game.key;
                 gameData.gameId = gameId;
                 completeGamesArray.push(gameData);
             });

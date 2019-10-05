@@ -10,9 +10,14 @@ var gulp = require('gulp'),
     bust = require('gulp-buster'),
     watch = require('gulp-watch');
 
-gulp.task('scripts', function() {
-    return (
-        gulp
+function clean() {
+    return del(['./client/dist']);
+}
+
+gulp.task(
+    'scripts',
+    gulp.series(clean, function() {
+        return gulp
             .src([
                 './client/app/**/*.module.js',
                 './client/app/**/*.js',
@@ -20,25 +25,13 @@ gulp.task('scripts', function() {
             ])
             .pipe(jshint())
             .pipe(jshint.reporter(stylish))
-            //.pipe(sourcemaps.init())
-            //.pipe(concat('app.min.js', {newLine: ';'}))
             .pipe(ngAnnotate({ add: true }))
-            //.pipe(uglify({mangle: true}))
-            //.pipe(sourcemaps.write())
-            .pipe(gulp.dest('./client/dist/js'))
-    );
-    //.pipe(bust())
-    //.pipe(gulp.dest('./client'))
-});
+            .pipe(gulp.dest('./client/dist/js'));
+    })
+);
 
-gulp.task('clean', function(callback) {
-    del(['./client/dist'], callback);
-});
+gulp.task('default', gulp.series(clean, 'scripts'));
 
-gulp.task('default', ['clean'], function() {
-    gulp.start('scripts');
-});
-
-gulp.task('watch', function() {
-    gulp.watch('./client/app/**/*.js', ['scripts']);
-});
+// gulp.task('watch', function() {
+//     gulp.watch('./client/app/**/*.js', ['scripts']);
+// });

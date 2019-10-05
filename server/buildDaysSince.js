@@ -6,12 +6,12 @@
     var preciseRange = require('moment-precise-range');
     moment().format();
 
-    var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
-    var _gamesRef = _fbRef.child('games');
-    var _eventsRef = _fbRef.child('events');
-    var _playersRef = _fbRef.child('players');
-    var _timelinesRef = _fbRef.child('timelines');
-    var _daysSinceRef = _fbRef.child('daysSince');
+    const db = Firebase.database();
+    var _gamesRef = db.ref('games');
+    var _eventsRef = db.ref('events');
+    var _playersRef = db.ref('players');
+    var _timelinesRef = db.ref('timelines');
+    var _daysSinceRef = db.ref('daysSince');
 
     function camelize(inputString) {
         if (inputString) {

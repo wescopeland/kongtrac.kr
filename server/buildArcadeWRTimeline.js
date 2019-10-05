@@ -3,9 +3,10 @@
 
     var Firebase = require('firebase');
 
-    var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
-    var _gamesRef = _fbRef.child('games');
-    var _timelinesRef = _fbRef.child('timelines');
+    const db = Firebase.database();
+
+    var _gamesRef = db.ref('games');
+    var _timelinesRef = db.ref('timelines');
 
     var buildArcadeWRTimeline = function() {
         _gamesRef.once('value', function(gamesSnapshot) {
@@ -21,7 +22,7 @@
                 var isoDate = new Date(isoStringDate);
 
                 gameData.isoDate = isoDate;
-                gameData.gameId = game.key();
+                gameData.gameId = game.key;
 
                 if (gameData.platform === 'Arcade') {
                     arcadeGamesArray.push(gameData);

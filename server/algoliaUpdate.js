@@ -6,10 +6,12 @@ var gamesIndex = client.initIndex('games');
 var playersIndex = client.initIndex('players');
 var eventsIndex = client.initIndex('events');
 
+const db = Firebase.database();
+
 // Connect to our Firebase data.
-var gamesRef = new Firebase('kongtrackr.firebaseio.com/games');
-var playersRef = new Firebase('kongtrackr.firebaseio.com/players');
-var eventsRef = new Firebase('kongtrackr.firebaseio.com/events');
+const gamesRef = db.ref('games');
+const playersRef = db.ref('players');
+const eventsRef = db.ref('events');
 
 function watchData() {
     // Manage when data is updated on Firebase.
@@ -27,7 +29,7 @@ function watchData() {
         var firebaseObject = dataSnapshot.val();
 
         // Specify Algolia's objectID using the Firebase object key
-        firebaseObject.objectID = dataSnapshot.key();
+        firebaseObject.objectID = dataSnapshot.key;
 
         // Add or update object
         gamesIndex.saveObject(firebaseObject, function(err, content) {
@@ -42,7 +44,7 @@ function watchData() {
         var firebaseObject = dataSnapshot.val();
 
         // Specify Algolia's objectID using the Firebase object key
-        firebaseObject.objectID = dataSnapshot.key();
+        firebaseObject.objectID = dataSnapshot.key;
 
         // Add or update object
         playersIndex.saveObject(firebaseObject, function(err, content) {
@@ -57,7 +59,7 @@ function watchData() {
         var firebaseObject = dataSnapshot.val();
 
         // Specify Algolia's objectID using the Firebase object key
-        firebaseObject.objectID = dataSnapshot.key();
+        firebaseObject.objectID = dataSnapshot.key;
 
         // Add or update object
         eventsIndex.saveObject(firebaseObject, function(err, content) {

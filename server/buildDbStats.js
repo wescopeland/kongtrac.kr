@@ -3,10 +3,10 @@
 
     var Firebase = require('firebase');
 
-    var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
-    var _gamesRef = _fbRef.child('games');
-    var _playersRef = _fbRef.child('players');
-    var _eventsRef = _fbRef.child('events');
+    const db = Firebase.database();
+    var _gamesRef = db.ref('games');
+    var _playersRef = db.ref('players');
+    var _eventsRef = db.ref('events');
 
     var buildDbStats = function() {
         var dbStats = {};
@@ -34,7 +34,7 @@
                         dbStats.eventsCount += 1;
                     });
 
-                    _fbRef.child('dbStats').set({
+                    db.ref('dbStats').set({
                         gamesCount: dbStats.gamesCount,
                         playersCount: dbStats.playersCount,
                         eventsCount: dbStats.eventsCount,

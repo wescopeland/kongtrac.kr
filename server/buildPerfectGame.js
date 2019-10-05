@@ -3,8 +3,8 @@
 
     var Firebase = require('firebase');
 
-    var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
-    var _gamesRef = _fbRef.child('games');
+    const db = Firebase.database();
+    var _gamesRef = db.ref('games');
 
     var buildPerfectGame = function() {
         _gamesRef.once('value', function(gamesSnapshot) {

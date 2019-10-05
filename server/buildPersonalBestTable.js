@@ -3,11 +3,11 @@
 
     var Firebase = require('firebase');
 
-    var _fbRef = new Firebase('https://kongtrackr.firebaseio.com');
-    var _gamesRef = _fbRef.child('games');
-    var _playersRef = _fbRef.child('players');
-    var _arcadePbRef = _fbRef.child('arcadePersonalBests');
-    var _mamePbRef = _fbRef.child('mamePersonalBests');
+    const db = Firebase.database();
+    var _gamesRef = db.ref('games');
+    var _playersRef = db.ref('players');
+    var _arcadePbRef = db.ref('arcadePersonalBests');
+    var _mamePbRef = db.ref('mamePersonalBests');
 
     var buildPersonalBestTable = function() {
         _playersRef.once('value', function(playersSnapshot) {
@@ -69,7 +69,7 @@
                         if (gameData.player === player) {
                             playerGames.push({
                                 data: gameData,
-                                key: game.key()
+                                key: game.key
                             });
                         }
                     });
