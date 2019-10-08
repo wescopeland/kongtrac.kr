@@ -39,7 +39,6 @@
       });
 
       _timelinesRef.child('mameWRTimeline').set(worldRecordTimeline);
-
       console.log('Built MAME WR timeline');
     });
   };

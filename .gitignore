@@ -1,28 +1,40 @@
-# --------------------
-# OSX Files
-# --------------------
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
-._*
-.Spotlight-V100
-.Trashes
+# compiled output
+/dist
+/tmp
+/out-tsc
 
-# --------------------
-# Node Files
-# --------------------
-.nodemonignore
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
 npm-debug.log
-node_modules/
+testem.log
+/typings
 
-# --------------------
-# SASS Files
-# --------------------
-.sass-cache/
+# e2e
+/e2e/*.js
+/e2e/*.map
 
-# --------------------
-# Bower Files
-# --------------------
-.bower-*/
-bower_components
+# System Files
+.DS_Store
+Thumbs.db

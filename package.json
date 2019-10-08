@@ -9,11 +9,13 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --prod --optimization=false",
+    "heroku-postbuild": "npm run postinstall"
   },
   "license": "MIT",
   "homepage": "https://github.com/wescopeland/dksta.ts",
@@ -44,7 +46,7 @@
     "body-parser": "^1.14.1",
     "bootstrap": "^3.3.5",
     "bootstrap-slider": "^10.6.2",
-    "compression": "^1.5.2",
+    "compression": "^1.7.4",
     "core-js": "^3.0.0",
     "every-moment": "0.0.1",
     "express": "^4.13.3",
@@ -71,7 +73,6 @@
     "@types/core-js": "^2.5.2",
     "@types/jquery": "^3.3.31",
     "@types/node": "~8.9.4",
-    "acorn": "^6.1.1",
     "cz-conventional-changelog": "^3.0.2",
     "html-loader": "^0.5.5",
     "prettier": "^1.18.2",
