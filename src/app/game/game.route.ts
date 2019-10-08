@@ -4,20 +4,20 @@ export function gameConfiguration($stateProvider) {
     .state('game', {
       abstract: true,
       url: '/game/:gameId',
-      template: require('./game.htm'),
+      template: require('html-loader!./game.html'),
       controller: 'GameController as game'
     })
     .state('game.summary', {
       url: '/summary',
-      template: require('./gameSummary.htm')
+      template: require('html-loader!./gameSummary.html')
     })
     .state('game.boards', {
       url: '/boards',
-      template: require('./gameBoards.htm')
+      template: require('html-loader!./gameBoards.html')
     })
     .state('game.edit', {
       url: '/edit',
-      template: require('./gameEdit.htm'),
+      template: require('html-loader!./gameEdit.html'),
       resolve: {
         currentAuth: [
           '$firebaseAuth',

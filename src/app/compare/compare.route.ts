@@ -4,39 +4,39 @@ export function compareConfiguration($stateProvider) {
     .state('compareSelection', {
       abstract: true,
       url: '/compare/selection',
-      template: require('./selection.htm'),
+      template: require('html-loader!./selection.html'),
       controller: 'CompareSelectionController as compare'
     })
     .state('compareSelection.games', {
       url: '/games',
-      template: require('./selection.games.htm')
+      template: require('html-loader!./selection.games.html')
     })
     .state('compareSelection.players', {
       url: '/players',
-      template: require('./selection.players.htm')
+      template: require('html-loader!./selection.players.html')
     })
     .state('compareSelection.events', {
       url: '/events',
-      template: require('./selection.events.htm')
+      template: require('html-loader!./selection.events.html')
     })
     .state('comparePlayers', {
       url: '/compare/players/:playerIds',
-      template: require('./compare-players.htm'),
+      template: require('html-loader!./compare-players.html'),
       controller: 'ComparePlayersController as compare'
     })
     .state('compareEvents', {
       url: '/compare/events/:eventIds',
-      template: require('./compare-events.htm'),
+      template: require('html-loader!./compare-events.html'),
       controller: 'CompareEventsController as compare'
     })
     .state('compareGames', {
       abstract: true,
       url: '/compare/games/:gameIds',
-      template: require('./compare-games.htm'),
+      template: require('html-loader!./compare-games.html'),
       controller: 'CompareGamesController as compare'
     })
     .state('compareGames.summary', {
       url: '/summary',
-      template: require('./compare-games-summary.htm')
+      template: require('html-loader!./compare-games-summary.html')
     });
 }

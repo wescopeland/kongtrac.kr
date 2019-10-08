@@ -1,4 +1,7 @@
-import * as angular from 'angular';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { UIRouterUpgradeModule } from '@uirouter/angular-hybrid';
 
 import { authModule } from './auth/auth.module';
 import { blocksModule } from './blocks/blocks.module';
@@ -13,6 +16,18 @@ import { rankingModule } from './ranking/ranking.module';
 import { scoresModule } from './scores/scores.module';
 import { submitModule } from './submit/submit.module';
 import { timelineModule } from './timeline/timeline.module';
+
+@NgModule({
+  imports: [BrowserModule, UpgradeModule, UIRouterUpgradeModule.forRoot()],
+  declarations: [],
+  bootstrap: []
+})
+export class AppModule {
+  constructor(private upgrade: UpgradeModule) {}
+  ngDoBootstrap() {
+    this.upgrade.bootstrap(document.body, [appModule], { strictDi: false });
+  }
+}
 
 export const appModule = angular
   .module('kongtrac.app', [
@@ -32,7 +47,12 @@ export const appModule = angular
   ])
   .config(
     /* @ngInject */
-    function($qProvider) {
+    function($qProvider, $urlServiceProvider) {
       $qProvider.errorOnUnhandledRejections(false);
+      $urlServiceProvider.deferIntercept();
     }
   ).name;
+
+declare var angular: angular.IAngularStatic;
+import { setAngularJSGlobal } from '@angular/upgrade/static';
+setAngularJSGlobal(angular);

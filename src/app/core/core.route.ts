@@ -1,5 +1,7 @@
 /* @ngInject */
-export function coreConfiguration($urlRouterProvider) {
+export function coreConfiguration($locationProvider, $urlRouterProvider) {
+  $locationProvider.hashPrefix('');
+
   // Redirect any unmatched URL to /.
   $urlRouterProvider.otherwise('/ranking/players');
 }

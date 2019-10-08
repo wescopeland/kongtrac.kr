@@ -3,7 +3,7 @@ export function submitConfiguration($stateProvider) {
   $stateProvider
     .state('submitGame', {
       url: '/submitGame',
-      template: require('./submitGame.htm'),
+      template: require('html-loader!./submitGame.html'),
       controller: 'SubmitGameController as submit',
       resolve: {
         currentAuth: [
@@ -16,7 +16,7 @@ export function submitConfiguration($stateProvider) {
     })
     .state('submitEvent', {
       url: '/submitEvent',
-      template: require('./submitEvent.htm'),
+      template: require('html-loader!./submitEvent.html'),
       controller: 'SubmitEventController as submit',
       resolve: {
         currentAuth: [

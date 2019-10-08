@@ -2,7 +2,7 @@
 export function playerConfiguration($stateProvider) {
   $stateProvider.state('player', {
     url: '/player/:playerName',
-    template: require('./player.htm'),
+    template: require('html-loader!./player.html'),
     controller: 'PlayerController as player'
   });
 }

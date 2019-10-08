@@ -2,7 +2,7 @@
 export function authConfiguration($stateProvider) {
   $stateProvider.state('login', {
     url: '/login',
-    template: require('./login.htm'),
+    template: require('html-loader!./login.html'),
     controller: 'LoginController as login'
   });
 }

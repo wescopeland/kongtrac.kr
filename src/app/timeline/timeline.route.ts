@@ -4,31 +4,31 @@ export function timelineConfiguration($stateProvider) {
     .state('timeline', {
       abstract: true,
       url: '/timeline',
-      template: require('./timeline.htm'),
+      template: require('html-loader!./timeline.html'),
       controller: 'TimelineController as timeline'
     })
     .state('timeline.worldRecord', {
       url: '/worldrecord',
-      template: require('./timeline.wr.htm')
+      template: require('html-loader!./timeline.wr.html')
     })
     .state('timeline.killscreen', {
       url: '/killscreen',
-      template: require('./timeline.killscreen.htm')
+      template: require('html-loader!./timeline.killscreen.html')
     })
     .state('timeline.million', {
       url: '/million',
-      template: require('./timeline.million.htm')
+      template: require('html-loader!./timeline.million.html')
     })
     .state('timeline.millionhundred', {
       url: '/millionhundred',
-      template: require('./timeline.millionHundred.htm')
+      template: require('html-loader!./timeline.millionHundred.html')
     })
     .state('timeline.milliontwohundred', {
       url: '/milliontwohundred',
-      template: require('./timeline.millionTwoHundred.htm')
+      template: require('html-loader!./timeline.millionTwoHundred.html')
     })
     .state('timeline.daysSince', {
       url: '/daysSince',
-      template: require('./timeline.daysSince.htm')
+      template: require('html-loader!./timeline.daysSince.html')
     });
 }

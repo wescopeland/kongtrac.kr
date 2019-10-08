@@ -6,14 +6,7 @@ var Highcharts = require('highcharts/highstock');
 (window as any).Highcharts = Highcharts;
 require('highcharts/modules/exporting')(Highcharts);
 
-require('bootstrap/dist/css/bootstrap.min.css');
-require('angularjs-datepicker/dist/angular-datepicker.min.css');
-require('font-awesome/css/font-awesome.css');
-require('ladda/dist/ladda-themeless.min.css');
-require('./style/aligulac-theme.css');
-require('bootstrap-slider/dist/css/bootstrap-slider.min.css');
-
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 (window as any).firebase = firebase;
 
 import 'bootstrap';
@@ -21,7 +14,6 @@ import 'bootstrap';
 import * as angular from 'angular';
 (window as any).angular = angular;
 
-import 'angular-ui-router';
 import 'angular-strap';
 import 'angularjs-datepicker';
 import 'angularfire';
@@ -30,7 +22,6 @@ import 'angular-smart-table';
 import 'angular-moment';
 import 'bootstrap-slider';
 import 'angular-bootstrap-slider/slider';
-// import 'angular-bootstrap-slider/dist/bootstrap-slider.min';
 import 'angular-ladda';
 
 require('./algoliasearch.angular');

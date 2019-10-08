@@ -4,7 +4,7 @@ export function globalSearch() {
     bindToController: true,
     controller: GlobalSearchController,
     controllerAs: 'vm',
-    template: require('./globalsearch.template.html'),
+    template: require('html-loader!./globalsearch.template.html'),
     restrict: 'E',
     scope: {}
   };
