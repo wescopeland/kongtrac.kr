@@ -1,51 +1,94 @@
 {
-    "name": "kongtrac.kr",
-    "version": "1.0.0",
-    "description": "",
-    "main": "server.js",
-    "engines": {
-        "node": "12.11.1",
-        "npm": "6.11.3"
-    },
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "postinstall": "bower cache clean && bower install"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/wescopeland/dksta.ts.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/wescopeland/dksta.ts/issues"
-    },
-    "homepage": "https://github.com/wescopeland/dksta.ts",
-    "dependencies": {
-        "algoliasearch": "^3.8.1",
-        "body-parser": "^1.14.1",
-        "bower": "^1.5.3",
-        "compression": "^1.5.2",
-        "every-moment": "0.0.1",
-        "express": "^4.13.3",
-        "firebase": "^7.1.0",
-        "moment": "^2.10.6",
-        "moment-precise-range": "^0.1.1",
-        "serve-static": "^1.10.0"
-    },
-    "devDependencies": {
-        "del": "^2.0.2",
-        "firebase": "^2.3.1",
-        "gulp": "^4.0.2",
-        "gulp-buster": "^1.0.0",
-        "gulp-concat": "^2.6.0",
-        "gulp-jshint": "^1.11.2",
-        "gulp-ng-annotate": "^1.1.0",
-        "gulp-rename": "^1.2.2",
-        "gulp-sourcemaps": "^1.6.0",
-        "gulp-uglify": "^1.4.1",
-        "gulp-watch": "^4.3.5",
-        "jshint-stylish": "^2.0.1",
-        "prettier": "^1.15.3"
+  "name": "kongtrac.kr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "engines": {
+    "node": "12.11.1",
+    "npm": "6.11.3"
+  },
+  "scripts": {
+    "build": "npm run build:dev",
+    "build:dev": "webpack --config webpack.dev.config.js",
+    "clean:dev": "rimraf .tmp",
+    "prebuild:dev": "npm run clean:dev",
+    "start": "npm run serve:dev",
+    "serve:dev": "webpack-dev-server --config webpack.dev.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wescopeland/dksta.ts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wescopeland/dksta.ts/issues"
+  },
+  "homepage": "https://github.com/wescopeland/dksta.ts",
+  "dependencies": {
+    "algoliasearch": "^3.8.1",
+    "angular": "^1.4.6",
+    "angular-bootstrap-slider": "github:seiyria/angular-bootstrap-slider",
+    "angular-ladda": "^0.3.1",
+    "angular-moment": "^0.10.3",
+    "angular-smart-table": "^2.1.4",
+    "angular-strap": "^2.3.3",
+    "angular-ui-bootstrap": "^0.13.4",
+    "angular-ui-router": "^0.2.15",
+    "angularfire": "^2.3.0",
+    "angularjs-datepicker": "^0.2.11",
+    "body-parser": "^1.14.1",
+    "bootstrap": "^3.3.5",
+    "bootstrap-slider": "^10.6.2",
+    "bower": "^1.5.3",
+    "compression": "^1.5.2",
+    "core-js": "^3.0.0",
+    "every-moment": "0.0.1",
+    "express": "^4.13.3",
+    "firebase": "^7.1.0",
+    "font-awesome": "^4.4.0",
+    "highcharts": "^7.2.0",
+    "highcharts-ng": "0.0.11",
+    "jquery": "^2.1.4",
+    "moment": "^2.10.6",
+    "moment-precise-range": "^0.1.1",
+    "outdated-browser-rework": "^2.9.0",
+    "serve-static": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/algoliasearch": "^3.34.3",
+    "@types/angular": "^1.6.56",
+    "@types/core-js": "^2.5.2",
+    "@types/jquery": "^3.3.31",
+    "awesome-typescript-loader": "^5.2.1",
+    "css-loader": "^3.2.0",
+    "cz-conventional-changelog": "^3.0.2",
+    "del": "^2.0.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^4.2.0",
+    "firebase": "^2.3.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.11.1",
+    "jshint-stylish": "^2.0.1",
+    "ng-annotate-loader": "^0.6.1",
+    "node-sass": "^4.12.0",
+    "prettier": "^1.15.3",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "tslint": "^5.20.0",
+    "tslint-loader": "^3.5.4",
+    "typescript": "^3.4.5",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2",
+    "webpack-merge": "^4.2.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
+  }
 }

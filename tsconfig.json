@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "lib": ["es6", "dom"],
+    "allowJs": true
+  }
+}
