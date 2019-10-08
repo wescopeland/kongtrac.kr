@@ -28,7 +28,7 @@
   "homepage": "https://github.com/wescopeland/dksta.ts",
   "dependencies": {
     "algoliasearch": "^3.8.1",
-    "angular": "^1.4.6",
+    "angular": "^1.7.8",
     "angular-bootstrap-slider": "github:seiyria/angular-bootstrap-slider",
     "angular-ladda": "^0.3.1",
     "angular-moment": "^0.10.3",

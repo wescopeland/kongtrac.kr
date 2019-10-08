@@ -14,18 +14,25 @@ import { scoresModule } from './scores/scores.module';
 import { submitModule } from './submit/submit.module';
 import { timelineModule } from './timeline/timeline.module';
 
-export const appModule = angular.module('kongtrac.app', [
-  coreModule,
-  authModule,
-  blocksModule,
-  rankingModule,
-  submitModule,
-  scoresModule,
-  gameModule,
-  playerModule,
-  eventModule,
-  compareModule,
-  timelineModule,
-  quicksearchModule,
-  exportModule
-]).name;
+export const appModule = angular
+  .module('kongtrac.app', [
+    coreModule,
+    authModule,
+    blocksModule,
+    rankingModule,
+    submitModule,
+    scoresModule,
+    gameModule,
+    playerModule,
+    eventModule,
+    compareModule,
+    timelineModule,
+    quicksearchModule,
+    exportModule
+  ])
+  .config(
+    /* @ngInject */
+    function($qProvider) {
+      $qProvider.errorOnUnhandledRejections(false);
+    }
+  ).name;
