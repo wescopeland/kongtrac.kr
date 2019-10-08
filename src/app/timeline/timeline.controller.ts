@@ -551,6 +551,8 @@ export function TimelineController($filter, timelineService) {
         timelineService
             .getTimelineData('mameWRTimeline')
             .then(function then(response) {
+                console.log('response', response);
+
                 vm.mameWRTimeline = response;
 
                 var chartSymbols = {
@@ -721,6 +723,7 @@ export function TimelineController($filter, timelineService) {
                     0,
                     0,
                     0,
+                    0,
                     0
                 ];
 
@@ -810,6 +813,7 @@ export function TimelineController($filter, timelineService) {
                     0,
                     0,
                     0,
+                    0,
                     0
                 ];
 
@@ -874,7 +878,7 @@ export function TimelineController($filter, timelineService) {
             .then(function then(response) {
                 vm.oneonemillionTimeline = response;
 
-                var histogramData = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+                var histogramData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
                 vm.oneonemillionTimeline.forEach(function(newKs) {
                     var scoreYear = Number(newKs.date.split('/')[2]);
