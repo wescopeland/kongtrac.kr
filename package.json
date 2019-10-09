@@ -2,7 +2,6 @@
   "name": "kongtrac.kr",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
   "engines": {
     "node": "12.11.1",
     "npm": "6.11.3"
@@ -17,7 +16,7 @@
     "heroku-postbuild": "ng build --prod --optimization=false"
   },
   "license": "MIT",
-  "homepage": "https://github.com/wescopeland/dksta.ts",
+  "homepage": "https://kongtrac.kr",
   "dependencies": {
     "@angular/animations": "~8.2.9",
     "@angular/cdk": "~8.2.2",
@@ -37,7 +36,7 @@
     "@uirouter/core": "^6.0.1",
     "algoliasearch": "^3.35.1",
     "angular": "^1.7.8",
-    "angular-bootstrap-slider": "github:seiyria/angular-bootstrap-slider",
+    "angular-bootstrap-slider": "github:wescopeland/angular-bootstrap-slider#63489cb1bbd65f5933270fc8312e1fb40aa74286",
     "angular-instantsearch": "^2.2.2",
     "angular-ladda": "^0.3.1",
     "angular-moment": "^0.10.3",
