@@ -1,24 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { UIRouterUpgradeModule } from '@uirouter/angular-hybrid';
+import { HttpClientModule } from '@angular/common/http';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 
-import { authModule } from './auth/auth.module';
-import { blocksModule } from './blocks/blocks.module';
-import { compareModule } from './compare/compare.module';
-import { coreModule } from './core/core.module';
-import { eventModule } from './event/event.module';
-import { exportModule } from './export/export.module';
-import { gameModule } from './game/game.module';
-import { playerModule } from './player/player.module';
-import { quicksearchModule } from './quicksearch/quicksearch.module';
-import { rankingModule } from './ranking/ranking.module';
-import { scoresModule } from './scores/scores.module';
-import { submitModule } from './submit/submit.module';
-import { timelineModule } from './timeline/timeline.module';
+import { appModule } from './app.module.ajs';
+import { PublicModule } from './public/public.module';
+import { RankingModule } from './ranking/ranking.module';
+import { environment } from '../environments/environment';
 
 @NgModule({
-  imports: [BrowserModule, UpgradeModule, UIRouterUpgradeModule.forRoot()],
+  imports: [
+    BrowserModule,
+    UpgradeModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    PublicModule,
+    RankingModule,
+    UIRouterUpgradeModule.forRoot(),
+    environment.production ? [] : AkitaNgDevtools.forRoot()
+  ],
   declarations: [],
   bootstrap: []
 })
@@ -28,31 +31,3 @@ export class AppModule {
     this.upgrade.bootstrap(document.body, [appModule], { strictDi: false });
   }
 }
-
-export const appModule = angular
-  .module('kongtrac.app', [
-    coreModule,
-    authModule,
-    blocksModule,
-    rankingModule,
-    submitModule,
-    scoresModule,
-    gameModule,
-    playerModule,
-    eventModule,
-    compareModule,
-    timelineModule,
-    quicksearchModule,
-    exportModule
-  ])
-  .config(
-    /* @ngInject */
-    function($qProvider, $urlServiceProvider) {
-      $qProvider.errorOnUnhandledRejections(false);
-      $urlServiceProvider.deferIntercept();
-    }
-  ).name;
-
-declare var angular: angular.IAngularStatic;
-import { setAngularJSGlobal } from '@angular/upgrade/static';
-setAngularJSGlobal(angular);

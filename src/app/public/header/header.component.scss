@@ -1,0 +1,17 @@
+a {
+  color: initial;
+}
+
+h1 {
+  &:hover {
+    text-decoration: none;
+  }
+
+  color: #000;
+}
+
+.subheading {
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin-bottom: 2rem;
+}

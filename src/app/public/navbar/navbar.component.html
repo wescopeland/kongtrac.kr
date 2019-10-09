@@ -1,0 +1,58 @@
+<mat-toolbar>
+  <div class="toolbar-menu">
+    <button mat-button [matMenuTriggerFor]="rankingMenu">
+      Ranking <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #rankingMenu="matMenu">
+      <a mat-menu-item href="#/ranking/complete">Complete high score list</a>
+      <a mat-menu-item href="#/ranking/players">Top ten players</a>
+      <a mat-menu-item href="#/ranking/games">Top ten games</a>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="compareMenu">
+      Compare <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #compareMenu="matMenu">
+      <a mat-menu-item href="#/compare/selection/games">Games</a>
+      <a mat-menu-item href="#/compare/selection/players">Players</a>
+      <a mat-menu-item href="#/compare/selection/events">Events</a>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="timelinesMenu">
+      Timelines <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #timelinesMenu="matMenu">
+      <a mat-menu-item href="#/timeline/worldrecord">World record timeline</a>
+      <a mat-menu-item href="#/timeline/killscreen">Killscreener timeline</a>
+      <a mat-menu-item href="#/timeline/million">1m point timeline</a>
+      <a mat-menu-item href="#/timeline/millionhundred">1.1m point timeline</a>
+      <a mat-menu-item href="#/timeline/milliontwohundred"
+        >1.2m point timeline</a
+      >
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="calculationsMenu">
+      Calculations <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #calculationsMenu="matMenu">
+      <a mat-menu-item href="#/game/averageGame/summary">The average game</a>
+      <a mat-menu-item href="#/game/perfectGame/summary">The perfect game</a>
+      <a mat-menu-item href="#/timeline/daysSince">Days since...</a>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="miscMenu">
+      Misc <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #miscMenu="matMenu">
+      <a mat-menu-item href="#/exportDatabase">Export database</a>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="submitMenu">
+      Submit <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #submitMenu="matMenu">
+      <a mat-menu-item href="#/submitGame">Individual game</a>
+      <a mat-menu-item href="#/submitEvent">Event details</a>
+    </mat-menu>
+  </div>
+</mat-toolbar>

@@ -1,0 +1,35 @@
+<ng-container *ngIf="state$ | async as state">
+  <div class="row">
+    <div
+      class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12"
+    >
+      <kongtrac-tracking-metrics
+        [gameCount]="state.games"
+        [eventCount]="state.events"
+        [killScreenCount]="state.killScreens"
+        [playerCount]="state.players"
+      ></kongtrac-tracking-metrics>
+    </div>
+  </div>
+
+  <kongtrac-ranking-players
+    *ngIf="currentRoute === 'players'"
+    [trimmedArcadeHighScoreList]="trimmedArcadeHighScoreList"
+    [trimmedCompleteHighScoreList]="trimmedCompleteHighScoreList"
+    [trimmedMameHighScoreList]="trimmedMameHighScoreList"
+  ></kongtrac-ranking-players>
+
+  <kongtrac-ranking-complete
+    *ngIf="currentRoute === 'complete'"
+    [completeArcadeHighScoreList]="completeArcadeHighScoreList"
+    [completeCombinedHighScoreList]="completeCombinedHighScoreList"
+    [completedMameHighScoreList]="completeMameHighScoreList"
+  ></kongtrac-ranking-complete>
+
+  <kongtrac-ranking-games
+    *ngIf="currentRoute === 'games'"
+    [topArcadeGames]="topArcadeGames"
+    [topCombinedGames]="topCombinedGames"
+    [topMameGames]="topMameGames"
+  ></kongtrac-ranking-games>
+</ng-container>

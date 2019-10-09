@@ -81,16 +81,6 @@ export function scoresService($q, $firebaseArray, $filter) {
         var combinedPlatforms = sanitizedArcade.concat(sanitizedMAME);
         combinedPlatforms = $filter('orderBy')(combinedPlatforms, '-score');
 
-        var knownPlayers = [];
-        for (var i = 0; i < combinedPlatforms.length; i += 1) {
-          if (knownPlayers.indexOf(combinedPlatforms[i].player) > -1) {
-            combinedPlatforms.splice(i, 1);
-            i -= 1;
-          } else {
-            knownPlayers.push(combinedPlatforms[i].player);
-          }
-        }
-
         var hsl = {
           arcade: sanitizedArcade,
           mame: sanitizedMAME,

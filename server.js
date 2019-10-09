@@ -1,7 +1,7 @@
 const express = require('express');
-const compression = require('compression');
 const path = require('path');
 const Firebase = require('firebase');
+const every = require('every-moment');
 
 const firebaseApiKey = process.env.firebaseApiKey;
 
@@ -18,10 +18,9 @@ const firebaseConfig = {
 const fbApp = Firebase.initializeApp(firebaseConfig);
 
 var kongtrackr = require('./server/batch');
-var algoliaIndices = require('./server/algoliaUpdate');
+// var algoliaIndices = require('./server/algoliaUpdate');
 
 const app = express();
-// app.use(compression);
 
 // Serve only the static files from the dist directory
 app.use(express.static(__dirname + '/dist/kongtrackr'));
@@ -32,10 +31,10 @@ app.get('/*', function(req, res) {
 app.listen(process.env.PORT || 8080);
 console.log(`Kongtrackr server started on ${process.env.PORT || 8080}.`);
 
-// kongtrackr.runBatch();
+kongtrackr.runBatch();
 // algoliaIndices.watchData();
 
-// // Batch schedule
-// var timer = every(30, 'minutes', function() {
-//     kongtrackr.runBatch();
-// });
+// Batch schedule
+var timer = every(30, 'minutes', function() {
+  kongtrackr.runBatch();
+});

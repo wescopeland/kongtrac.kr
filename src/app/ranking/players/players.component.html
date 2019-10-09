@@ -1,0 +1,66 @@
+<div *ngIf="!isShowingSeparatePlatforms" class="row">
+  <div
+    class="mt-3 col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12"
+  >
+    <h2 class="mat-title">
+      Current combined top 10
+      <button
+        mat-button
+        class="pull-right"
+        color="primary"
+        (click)="onShowSeparatePlatformsClick()"
+      >
+        SHOW SEPARATE PLATFORMS
+      </button>
+    </h2>
+    <kongtrac-ranking-table
+      [rankingElements]="trimmedCompleteHighScoreList"
+    ></kongtrac-ranking-table>
+  </div>
+</div>
+
+<ng-container *ngIf="isShowingSeparatePlatforms">
+  <div class="row">
+    <div
+      class="mt-3 col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12"
+    >
+      <h2 class="mat-title">
+        Arcade top 10
+        <button
+          mat-button
+          class="pull-right"
+          color="primary"
+          (click)="onShowSeparatePlatformsClick()"
+        >
+          SHOW COMBINED PLATFORMS
+        </button>
+      </h2>
+      <kongtrac-ranking-table
+        [rankingElements]="trimmedArcadeHighScoreList"
+      ></kongtrac-ranking-table>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="row mb-5">
+    <div
+      class="mt-3 col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12"
+    >
+      <h2 class="mat-title">
+        MAME top 10
+        <button
+          mat-button
+          class="pull-right"
+          color="primary"
+          (click)="onShowSeparatePlatformsClick()"
+        >
+          SHOW COMBINED PLATFORMS
+        </button>
+      </h2>
+      <kongtrac-ranking-table
+        [rankingElements]="trimmedMameHighScoreList"
+      ></kongtrac-ranking-table>
+    </div>
+  </div>
+</ng-container>

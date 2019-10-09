@@ -1,0 +1,85 @@
+<div *ngIf="!isShowingSeparatePlatforms" class="row">
+  <div
+    class="mt-3 col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12"
+  >
+    <h2 class="mat-title">
+      Current combined top {{ maxDisplay }} games
+
+      <div class="pull-right">
+        <button mat-button color="primary" (click)="onShowTopFiftyClick()">
+          SHOW TOP
+          <ng-container *ngIf="maxDisplay === 10">50</ng-container>
+          <ng-container *ngIf="maxDisplay === 50">10</ng-container>
+        </button>
+        <button
+          mat-button
+          color="primary"
+          (click)="onShowSeparatePlatformsClick()"
+        >
+          SHOW SEPARATE PLATFORMS
+        </button>
+      </div>
+    </h2>
+    <kongtrac-ranking-table
+      [rankingElements]="topCombinedGames | slice: 0:maxDisplay"
+    ></kongtrac-ranking-table>
+  </div>
+</div>
+
+<ng-container *ngIf="isShowingSeparatePlatforms">
+  <div class="row">
+    <div
+      class="mt-3 col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12"
+    >
+      <h2 class="mat-title">
+        Arcade top {{ maxDisplay }} games
+        <div class="pull-right">
+          <button mat-button color="primary" (click)="onShowTopFiftyClick()">
+            SHOW TOP
+            <ng-container *ngIf="maxDisplay === 10">50</ng-container>
+            <ng-container *ngIf="maxDisplay === 50">10</ng-container>
+          </button>
+          <button
+            mat-button
+            color="primary"
+            (click)="onShowSeparatePlatformsClick()"
+          >
+            SHOW COMBINED PLATFORMS
+          </button>
+        </div>
+      </h2>
+      <kongtrac-ranking-table
+        [rankingElements]="topArcadeGames | slice: 0:maxDisplay"
+      ></kongtrac-ranking-table>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="row mb-5">
+    <div
+      class="mt-3 col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12"
+    >
+      <h2 class="mat-title">
+        MAME top {{ maxDisplay }} games
+        <div class="pull-right">
+          <button mat-button color="primary" (click)="onShowTopFiftyClick()">
+            SHOW TOP
+            <ng-container *ngIf="maxDisplay === 10">50</ng-container>
+            <ng-container *ngIf="maxDisplay === 50">10</ng-container>
+          </button>
+          <button
+            mat-button
+            color="primary"
+            (click)="onShowSeparatePlatformsClick()"
+          >
+            SHOW COMBINED PLATFORMS
+          </button>
+        </div>
+      </h2>
+      <kongtrac-ranking-table
+        [rankingElements]="topMameGames | slice: 0:maxDisplay"
+      ></kongtrac-ranking-table>
+    </div>
+  </div>
+</ng-container>

@@ -3,10 +3,8 @@
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.0/randomColor.min.js"></script>
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Custom Fonts -->
     <link
@@ -24,157 +22,18 @@
     <link rel="shortcut icon" href="favicon.png" type="image/png" />
 
     <title>kongtrac.kr</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
-    <div class="container">
-      <h1><a ui-sref="playerRanking" class="blacklink">KONGTRAC.KR</a></h1>
-      <p class="subheading text-muted">
-        Donkey Kong Statistics and Permanent Historical Archive
-      </p>
-    </div>
-
-    <!-- Nav Bar -->
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button
-            type="button"
-            class="navbar-toggle"
-            data-toggle="collapse"
-            data-target="#main-menu"
-          >
-            <span class="sr-only">Toggle navigaton</span>
-            <span class="icon-bar"></span> <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Nav Content -->
-      <div class="collapse navbar-collapse" id="main-menu">
-        <ul class="nav navbar-nav">
-          <li class="dropdown">
-            <a href="#/home" class="dropdown-toggle" data-toggle="dropdown">
-              Ranking <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#/ranking/complete">Complete High Score List</a></li>
-              <li><a href="#/ranking/players">Top 10 Players</a></li>
-              <li><a href="#/ranking/games">Top 10 Games</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Compare <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a ui-sref="compareSelection.games">Games</a></li>
-              <li><a ui-sref="compareSelection.players">Players</a></li>
-              <li><a ui-sref="compareSelection.events">Events</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Timelines <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a ui-sref="timeline.worldRecord">World Record Timeline</a>
-              </li>
-              <li>
-                <a ui-sref="timeline.killscreen">Killscreener Timeline</a>
-              </li>
-              <li><a ui-sref="timeline.million">1m Point Timeline</a></li>
-              <li>
-                <a ui-sref="timeline.millionhundred">1.1m Point Timeline</a>
-              </li>
-              <li>
-                <a ui-sref="timeline.milliontwohundred">1.2m Point Timeline</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Calculations <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a ui-sref="game.summary({ gameId: 'averageGame' })"
-                  >The Average Game</a
-                >
-              </li>
-              <li>
-                <a ui-sref="game.summary({ gameId: 'perfectGame' })"
-                  >The Perfect Game</a
-                >
-              </li>
-              <li><a ui-sref="timeline.daysSince">Days Since...</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Misc <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a ui-sref="exportDatabase">Export Database</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Submit <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a ui-sref="submitGame">Individual Game</a></li>
-              <li><a ui-sref="submitEvent">Event Details</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- UI Body -->
-    <div class="container">
-      <!-- Quick Search -->
-      <div class="row">
-        <div
-          class="col-xs-offset-4 col-xs-8 col-sm-8 col-md-8 col-lg-8 text-right text-muted"
-        >
-          <global-search></global-search>
-        </div>
-      </div>
-
-      <!-- Main Content -->
-      <ui-view></ui-view>
-
-      <hr />
-
-      <!-- Footer -->
-      <div class="row">
-        <div class="col-xs-12">
-          <footer class="text-muted small">
-            <p>
-              Find us on
-              <a href="https://github.com/wescopeland/kongtrac.kr">GitHub</a>.
-            </p>
-            <p>
-              Heavily influenced by the open-source
-              <a href="https://aligulac.com">Aligulac</a> project. Charts by
-              <a href="https://highcharts.com">Highcharts</a>.
-            </p>
-            <p>
-              Built by <a href="https://twitch.tv/wescopeland">Wes Copeland</a>.
-              Score verifications by
-              <a href="https://twitch.tv/xelnia_games">Jeremy Young</a>.
-            </p>
-          </footer>
-        </div>
-      </div>
-    </div>
+    <app-component></app-component>
+    <kongtrac-root></kongtrac-root>
   </body>
 </html>

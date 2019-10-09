@@ -1,0 +1,14 @@
+a {
+  &:focus {
+    color: initial;
+    outline: none;
+  }
+}
+
+mat-toolbar {
+  margin-bottom: 2rem;
+}
+
+.toolbar-menu {
+  margin: 0 auto;
+}
