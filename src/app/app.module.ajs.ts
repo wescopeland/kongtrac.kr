@@ -1,3 +1,10 @@
+import {
+  downgradeComponent,
+  downgradeInjectable,
+  setAngularJSGlobal
+} from '@angular/upgrade/static';
+import { MaterialCssVarsService } from 'angular-material-css-vars';
+
 import { authModule } from './auth/auth.module';
 import { blocksModule } from './blocks/blocks.module';
 import { compareModule } from './compare/compare.module';
@@ -12,6 +19,8 @@ import { submitModule } from './submit/submit.module';
 import { timelineModule } from './timeline/timeline.module';
 import { publicModule } from './public/public.module.ajs';
 import { appComponent } from './app.component.ajs';
+
+import { AppComponent } from './app.component';
 
 export const appModule = angular
   .module('kongtrac.app', [
@@ -36,8 +45,12 @@ export const appModule = angular
       $urlServiceProvider.deferIntercept();
     }
   )
+  .factory(
+    'MaterialCssVarsService',
+    downgradeInjectable(MaterialCssVarsService)
+  )
+  .directive('kongtracRoot', downgradeComponent({ component: AppComponent }))
   .component('appComponent', appComponent).name;
 
 declare var angular: angular.IAngularStatic;
-import { setAngularJSGlobal } from '@angular/upgrade/static';
 setAngularJSGlobal(angular);

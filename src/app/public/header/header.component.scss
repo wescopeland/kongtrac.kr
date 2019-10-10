@@ -1,17 +1,26 @@
+@import '~angular-material-css-vars/public-util';
+
 a {
   color: initial;
+
+  @include mat-css-dark-theme {
+    color: white;
+  }
 }
 
 h1 {
   &:hover {
     text-decoration: none;
   }
-
-  color: #000;
 }
 
 .subheading {
+  color: rgba(0, 0, 0, 0.67);
   letter-spacing: 0.1em;
   text-align: center;
   margin-bottom: 2rem;
+
+  @include mat-css-dark-theme {
+    color: rgba(255, 255, 255, 0.67);
+  }
 }
