@@ -4,12 +4,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { UIRouterUpgradeModule } from '@uirouter/angular-hybrid';
 import { HttpClientModule } from '@angular/common/http';
+import { MaterialCssVarsModule } from 'angular-material-css-vars';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 
 import { appModule } from './app.module.ajs';
 import { PublicModule } from './public/public.module';
 import { RankingModule } from './ranking/ranking.module';
+import { QuicksearchModule } from './quicksearch/quicksearch.module';
 import { environment } from '../environments/environment';
+import { AppComponent } from './app.component';
 
 @NgModule({
   imports: [
@@ -19,10 +22,16 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     PublicModule,
     RankingModule,
+    QuicksearchModule,
+    MaterialCssVarsModule.forRoot({
+      darkThemeClass: 'isDarkTheme',
+      lightThemeClass: 'isLightTheme'
+    }),
     UIRouterUpgradeModule.forRoot(),
     environment.production ? [] : AkitaNgDevtools.forRoot()
   ],
-  declarations: [],
+  declarations: [AppComponent],
+  entryComponents: [AppComponent],
   bootstrap: []
 })
 export class AppModule {

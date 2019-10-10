@@ -1,3 +1,13 @@
+@import '~angular-material-css-vars/public-util';
+
 .row {
   margin-bottom: 3rem;
+}
+
+.text-muted {
+  color: rgba(0, 0, 0, 0.67);
+
+  @include mat-css-dark-theme {
+    color: rgba(255, 255, 255, 0.67);
+  }
 }

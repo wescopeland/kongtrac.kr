@@ -39,6 +39,7 @@
     "angular-bootstrap-slider": "github:wescopeland/angular-bootstrap-slider#63489cb1bbd65f5933270fc8312e1fb40aa74286",
     "angular-instantsearch": "^2.2.2",
     "angular-ladda": "^0.3.1",
+    "angular-material-css-vars": "^0.1.5",
     "angular-moment": "^0.10.3",
     "angular-smart-table": "^2.1.4",
     "angular-strap": "^2.3.3",

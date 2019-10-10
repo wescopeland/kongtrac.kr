@@ -6,14 +6,14 @@
       Current combined top {{ maxDisplay }} games
 
       <div class="pull-right">
-        <button mat-button color="primary" (click)="onShowTopFiftyClick()">
+        <button mat-button color="accent" (click)="onShowTopFiftyClick()">
           SHOW TOP
           <ng-container *ngIf="maxDisplay === 10">50</ng-container>
           <ng-container *ngIf="maxDisplay === 50">10</ng-container>
         </button>
         <button
           mat-button
-          color="primary"
+          color="accent"
           (click)="onShowSeparatePlatformsClick()"
         >
           SHOW SEPARATE PLATFORMS
@@ -34,14 +34,14 @@
       <h2 class="mat-title">
         Arcade top {{ maxDisplay }} games
         <div class="pull-right">
-          <button mat-button color="primary" (click)="onShowTopFiftyClick()">
+          <button mat-button color="accent" (click)="onShowTopFiftyClick()">
             SHOW TOP
             <ng-container *ngIf="maxDisplay === 10">50</ng-container>
             <ng-container *ngIf="maxDisplay === 50">10</ng-container>
           </button>
           <button
             mat-button
-            color="primary"
+            color="accent"
             (click)="onShowSeparatePlatformsClick()"
           >
             SHOW COMBINED PLATFORMS
@@ -63,14 +63,14 @@
       <h2 class="mat-title">
         MAME top {{ maxDisplay }} games
         <div class="pull-right">
-          <button mat-button color="primary" (click)="onShowTopFiftyClick()">
+          <button mat-button color="accent" (click)="onShowTopFiftyClick()">
             SHOW TOP
             <ng-container *ngIf="maxDisplay === 10">50</ng-container>
             <ng-container *ngIf="maxDisplay === 50">10</ng-container>
           </button>
           <button
             mat-button
-            color="primary"
+            color="accent"
             (click)="onShowSeparatePlatformsClick()"
           >
             SHOW COMBINED PLATFORMS

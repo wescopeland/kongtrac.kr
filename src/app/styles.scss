@@ -1,0 +1,22 @@
+@import '~angular-material-css-vars/main';
+
+$mat-css-dark-theme-selector: '.isDarkTheme';
+$mat-css-light-theme-selector: '.isLightTheme';
+
+// init theme
+@include initMaterialCssVars();
+
+.isDarkTheme {
+  background-color: #2c2c2c;
+  color: white;
+}
+
+@import '~angular-material-css-vars/public-util';
+
+.text-muted {
+  color: rgba(0, 0, 0, 0.67);
+
+  @include mat-css-dark-theme {
+    color: rgba(255, 255, 255, 0.67);
+  }
+}
