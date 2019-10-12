@@ -1,7 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
   "projects": {
     "kongtrackr": {
       "projectType": "application",
@@ -10,28 +9,31 @@
           "style": "scss"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/kongtrackr",
+      "sourceRoot": "apps/kongtrackr/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/kongtrackr",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "outputPath": "dist/apps/kongtrackr",
+            "index": "apps/kongtrackr/src/index.html",
+            "main": "apps/kongtrackr/src/main.ts",
+            "polyfills": "apps/kongtrackr/src/polyfills.ts",
+            "tsConfig": "apps/kongtrackr/tsconfig.app.json",
             "aot": false,
-            "assets": ["src/favicon.png", "src/assets"],
+            "assets": [
+              "apps/kongtrackr/src/favicon.png",
+              "apps/kongtrackr/src/assets"
+            ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/angularjs-datepicker/dist/angular-datepicker.min.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/ladda/dist/ladda-themeless.min.css",
               "node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css",
-              "src/aligulac-theme.css",
-              "src/app/styles.scss"
+              "apps/kongtrackr/src/aligulac-theme.css",
+              "apps/kongtrackr/src/app/styles.scss"
             ],
             "scripts": ["node_modules/jquery/dist/jquery.min.js"]
           },
@@ -39,8 +41,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/kongtrackr/src/environments/environment.ts",
+                  "with": "apps/kongtrackr/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -88,6 +90,33 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "kongtrackr:build"
+          }
+        }
+      }
+    },
+    "kongtrackr-e2e": {
+      "root": "apps/kongtrackr-e2e",
+      "sourceRoot": "apps/kongtrackr-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/kongtrackr-e2e/cypress.json",
+            "tsConfig": "apps/kongtrackr-e2e/tsconfig.e2e.json",
+            "devServerTarget": "kongtrackr:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "kongtrackr:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/kongtrackr-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/kongtrackr-e2e/**"]
           }
         }
       }

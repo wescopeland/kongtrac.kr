@@ -77,6 +77,8 @@
     "@angular/compiler-cli": "~8.2.9",
     "@angular/language-service": "~8.2.9",
     "@datorama/akita-ngdevtools": "^3.0.2",
+    "@nrwl/cypress": "^8.5.2",
+    "@nrwl/workspace": "^8.6.0",
     "@types/algoliasearch": "^3.34.3",
     "@types/angular": "^1.6.56",
     "@types/core-js": "^2.5.2",
