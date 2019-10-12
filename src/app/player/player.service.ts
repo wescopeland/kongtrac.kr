@@ -29,6 +29,7 @@ export function playerService(
   ////////////////
 
   function buildPBMap(inputGamesDataArray) {
+    console.log(inputGamesDataArray);
     var unsanitizedPbMap = [];
     var sanitizedPbMap = [];
 
@@ -186,6 +187,7 @@ export function playerService(
         }
 
         _player.gameIds = getPlayerGameIds(_player.games);
+        console.log('gameIds', _player.gameIds);
 
         // Grab all the games attached to this player.
         //getPlayerGames(_player.gameIds).then(function then(gamesResponse) {

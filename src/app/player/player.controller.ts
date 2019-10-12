@@ -126,7 +126,7 @@ export function PlayerController(
         labels: {
           formatter: abbreviateNumber
         },
-        max: 1250000
+        max: 1300000
       },
       plotOptions: {
         marker: {
@@ -152,15 +152,19 @@ export function PlayerController(
           vm.playerData.arcadeBest = playerService.getArcadeBest(
             vm.playerData.gamesData
           );
+
           vm.playerData.mameBest = playerService.getMAMEBest(
             vm.playerData.gamesData
           );
+
           vm.playerData.firstKSDate = playerService.getFirstKSDate(
             vm.playerData.gamesData
           );
+
           vm.playerData.firstMillionDate = playerService.getFirstMillionDate(
             vm.playerData.gamesData
           );
+
           vm.playerData.pbMap = playerService.buildPBMap(
             vm.playerData.gamesData
           );
