@@ -134,7 +134,7 @@ export function TimelineController($filter, timelineService) {
                     formatter: abbreviateNumber
                 },
                 min: 850000,
-                max: 1250000,
+                max: 1300000,
                 tickInterval: 50000
             },
             plotOptions: {
