@@ -24,11 +24,7 @@
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let element">
-      <a
-        mat-button
-        color="accent"
-        href="{{ '#/player/' + camelCase(element.name) }}"
-      >
+      <a color="accent" href="{{ '#/player/' + camelCase(element.name) }}">
         {{ element.name }}
       </a>
     </td>
@@ -37,11 +33,7 @@
   <ng-container matColumnDef="score">
     <th mat-header-cell *matHeaderCellDef>Score</th>
     <td mat-cell *matCellDef="let element">
-      <a
-        mat-button
-        color="accent"
-        href="{{ '#/game/' + element.id + '/summary' }}"
-      >
+      <a color="accent" href="{{ '#/game/' + element.id + '/summary' }}">
         {{ element.score | number }}
       </a>
     </td>
