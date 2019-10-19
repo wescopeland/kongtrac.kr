@@ -23,9 +23,9 @@ var kongtrackr = require('./server/batch');
 const app = express();
 
 // Serve only the static files from the dist directory
-app.use(express.static(__dirname + '/dist/kongtrackr'));
+app.use(express.static(__dirname + '/dist/apps/kongtrackr'));
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/kongtrackr/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/apps/kongtrackr/index.html'));
 });
 
 app.listen(process.env.PORT || 8080);

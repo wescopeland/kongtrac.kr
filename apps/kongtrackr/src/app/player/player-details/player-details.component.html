@@ -1,0 +1,29 @@
+<mat-card class="player-details-card">
+  <mat-card-header>
+    <mat-card-title>Player details</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <p>Arcade PB</p>
+        <p>{{ arcadePersonalBest | number }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <p>MAME PB</p>
+        <p>{{ mamePersonalBest | number }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <p>First KS Date</p>
+        <p>{{ firstKillscreenDate | date }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <p>First Million Date</p>
+        <p>{{ firstMillionDate | date }}</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
