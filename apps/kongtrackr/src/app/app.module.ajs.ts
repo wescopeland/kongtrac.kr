@@ -12,7 +12,7 @@ import { coreModule } from './core/core.module';
 import { eventModule } from './event/event.module';
 import { exportModule } from './export/export.module';
 import { gameModule } from './game/game.module';
-import { playerModule } from './player/player.module';
+import { playerModule } from './player/player.module.ajs';
 import { quicksearchModule } from './quicksearch/quicksearch.module.ajs';
 import { scoresModule } from './scores/scores.module';
 import { submitModule } from './submit/submit.module';

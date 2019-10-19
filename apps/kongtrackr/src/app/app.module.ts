@@ -8,8 +8,10 @@ import { MaterialCssVarsModule } from 'angular-material-css-vars';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 
 import { appModule } from './app.module.ajs';
+import { PlayerModule } from './player/player.module';
 import { PublicModule } from './public/public.module';
 import { RankingModule } from './ranking/ranking.module';
+import { SharedModule } from './shared/shared.module';
 import { QuicksearchModule } from './quicksearch/quicksearch.module';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -20,15 +22,17 @@ import { AppComponent } from './app.component';
     UpgradeModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    PublicModule,
-    RankingModule,
-    QuicksearchModule,
     MaterialCssVarsModule.forRoot({
       darkThemeClass: 'isDarkTheme',
       lightThemeClass: 'isLightTheme'
     }),
-    UIRouterUpgradeModule.forRoot(),
-    environment.production ? [] : AkitaNgDevtools.forRoot()
+    environment.production ? [] : AkitaNgDevtools.forRoot(),
+    PlayerModule,
+    PublicModule,
+    RankingModule,
+    SharedModule,
+    QuicksearchModule,
+    UIRouterUpgradeModule.forRoot()
   ],
   declarations: [AppComponent],
   entryComponents: [AppComponent],

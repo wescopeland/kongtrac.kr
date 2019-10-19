@@ -1,9 +1,7 @@
 import * as angular from 'angular';
-import * as Highcharts from 'highcharts';
 
 /* @ngInject */
 export function PlayerController(
-  $interval,
   $stateParams,
   $filter,
   playerService,
@@ -17,6 +15,7 @@ export function PlayerController(
   vm.isEditing = false;
   vm.onlyShowComplete = false;
   vm.pbChartConfiguration = {};
+  vm.pbHistorySeries = {};
   vm.playerData = {};
   vm.playerGameTableData = [];
   vm.playerEditData = {};
@@ -28,116 +27,8 @@ export function PlayerController(
 
   ////////////////
 
-  function abbreviateNumber() {
-    var number = this.value;
-    var decPlaces = 2;
-
-    number = Number(number);
-
-    // 2 decimal places => 100, 3 => 1000, etc
-    decPlaces = Math.pow(10, decPlaces);
-
-    // Enumerate number abbreviations
-    var abbrev = ['k', 'm', 'b', 't'];
-
-    // Go through the array backwards, so we do the largest first
-    for (var i = abbrev.length - 1; i >= 0; i--) {
-      // Convert array index to "1000", "1000000", etc
-      var size = Math.pow(10, (i + 1) * 3);
-
-      // If the number is bigger or equal do the abbreviation
-      if (size <= number) {
-        // Here, we multiply by decPlaces, round, and then divide by decPlaces.
-        // This gives us nice rounding to a particular decimal place.
-        number = Math.round((number * decPlaces) / size) / decPlaces;
-
-        // Handle special case where we round up to the next abbreviation
-        if (number == 1000 && i < abbrev.length - 1) {
-          number = 1;
-          i++;
-        }
-
-        // Add the letter for the abbreviation
-        number += abbrev[i];
-
-        // We are done... stop
-        break;
-      }
-    }
-
-    return number;
-  }
-
   function activate() {
     vm.displayedPlayerGameTable = [].concat(vm.playerGameTableData);
-
-    vm.pbChartConfiguration = {
-      options: {
-        chart: {
-          type: 'line',
-          zoomType: 'x'
-        },
-        title: {
-          text: 'Personal best history'
-        },
-        tooltip: {
-          formatter: function() {
-            return (
-              '<b>' +
-              $filter('amDateFormat')(this.x, 'MM/DD/YYYY') +
-              '</b>: ' +
-              $filter('number')(this.y)
-            );
-          }
-        },
-        exporting: {
-          enabled: true,
-          sourceWidth: 1300,
-          sourceHeight: 600,
-          scale: 1,
-          chartOptions: {
-            subtitle: null
-          }
-        }
-      },
-      series: [],
-      credits: {
-        enabled: false
-      },
-      subtitle: {
-        text: 'Click and drag to zoom'
-      },
-      xAxis: {
-        title: {
-          text: 'Date'
-        },
-        type: 'datetime',
-        labels: {
-          formatter: function() {
-            return Highcharts.dateFormat("%b '%y", this.value);
-          }
-        },
-        plotLines: []
-      },
-      yAxis: {
-        title: {
-          text: 'Score'
-        },
-        labels: {
-          formatter: abbreviateNumber
-        },
-        max: 1300000
-      },
-      plotOptions: {
-        marker: {
-          enabled: true,
-          symbol: 'circle'
-        }
-      },
-      exporting: {
-        enabled: true
-      }
-    };
 
     playerService.getPlayerData(vm.inputPlayer).then(function then(response) {
       vm.playerData = response;
@@ -169,16 +60,16 @@ export function PlayerController(
             vm.playerData.gamesData
           );
 
-          vm.pbChartConfiguration.series.push({
+          vm.pbHistorySeries = {
             data: vm.playerData.pbMap,
             name: vm.playerData.name.split(' ').pop() + ' (PB History)',
-            color: '#000000',
+            // color: '#000000',
             lineWidth: 3,
             borderWidth: 0,
             marker: {
               enabled: true
             }
-          });
+          };
 
           vm.playerData.gamesData.forEach(function(game) {
             var newGameTableObject = {
