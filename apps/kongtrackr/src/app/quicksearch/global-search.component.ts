@@ -27,6 +27,7 @@ function GlobalSearchController($scope, $state, $q, algolia) {
   //////////////////////////
 
   function openGame(inputGame) {
+    console.log('clicked', inputGame);
     vm.inputSearchQuery = '';
     $state.go('game.summary', { gameId: inputGame.objectID });
   }

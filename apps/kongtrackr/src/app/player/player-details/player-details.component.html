@@ -4,23 +4,26 @@
   </mat-card-header>
   <mat-card-content>
     <mat-list>
-      <mat-divider></mat-divider>
-      <mat-list-item>
+      <mat-divider *ngIf="arcadePersonalBest"></mat-divider>
+      <mat-list-item *ngIf="arcadePersonalBest">
         <p>Arcade PB</p>
         <p>{{ arcadePersonalBest | number }}</p>
       </mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item>
+
+      <mat-divider *ngIf="mamePersonalBest"></mat-divider>
+      <mat-list-item *ngIf="mamePersonalBest">
         <p>MAME PB</p>
         <p>{{ mamePersonalBest | number }}</p>
       </mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item>
+
+      <mat-divider *ngIf="firstKillscreenDate"></mat-divider>
+      <mat-list-item *ngIf="firstKillscreenDate">
         <p>First KS Date</p>
         <p>{{ firstKillscreenDate | date }}</p>
       </mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item>
+
+      <mat-divider *ngIf="firstMillionDate"></mat-divider>
+      <mat-list-item *ngIf="firstMillionDate">
         <p>First Million Date</p>
         <p>{{ firstMillionDate | date }}</p>
       </mat-list-item>
