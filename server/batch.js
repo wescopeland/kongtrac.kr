@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var personalBestTable = require('./buildPersonalBestTable');
+  var playerPersonalBests = require('./buildPlayerPersonalBests');
   var averageGame = require('./buildAverageGame');
   var perfectGame = require('./buildPerfectGame');
   var dbStats = require('./buildDbStats');
@@ -16,7 +16,7 @@
   var daysSince = require('./buildDaysSince');
 
   function runBatch() {
-    personalBestTable.build();
+    playerPersonalBests.build();
 
     averageGame.build();
     perfectGame.build();
