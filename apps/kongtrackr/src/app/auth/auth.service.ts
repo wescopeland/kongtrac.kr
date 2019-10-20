@@ -2,6 +2,7 @@
 export function authService($q, $firebaseAuth) {
   // Private Variables
   var _authData = {};
+  let _isSignedIn = false;
 
   // Public Functions
   this.getAuthData = getAuthData;

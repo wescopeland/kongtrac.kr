@@ -9,6 +9,7 @@ export function GameController(
   gameService,
   searchService,
   eventService,
+  playerService,
   submitGameService,
   boardMapper,
   highchartsNG
@@ -22,6 +23,7 @@ export function GameController(
   vm.gameId = $stateParams.gameId;
   vm.inputLevelSlider = 0;
   vm.paceChartConfiguration = {};
+  vm.playerName = '';
   vm.scoreChartConfiguration = {};
   vm.weights = {};
 
@@ -35,6 +37,7 @@ export function GameController(
   vm.formatSlider = formatSlider;
   vm.getAllLevels = getAllLevels;
   vm.getMappedBoardNumber = getMappedBoardNumber;
+  vm.getPlayerName = getPlayerName;
   vm.handleEditCommit = handleEditCommit;
 
   // Private Functions
@@ -273,6 +276,14 @@ export function GameController(
       vm.gameData = response;
       console.log(vm.gameData);
 
+      if (vm.gameData.playerId) {
+        vm.playerName = camelize(vm.gameData.playerId);
+      } else {
+        getPlayerName(vm.gameData).then(name => {
+          vm.playerName = name;
+        });
+      }
+
       vm.gameEditData.date = vm.gameData.date;
       vm.gameEditData.score = vm.gameData.score;
       vm.gameEditData.player = vm.gameData.player;
@@ -345,10 +356,7 @@ export function GameController(
 
       vm.paceChartConfiguration.series.push({
         data: vm.gameData.paceMap,
-        name:
-          vm.gameData.player.split(' ').pop() +
-          ' (Pace) ' +
-          $filter('number')(vm.gameData.score),
+        name: 'Pace ' + $filter('number')(vm.gameData.score),
         color: '#000000',
         lineWidth: 3,
         borderWidth: 0,
@@ -393,10 +401,7 @@ export function GameController(
 
         vm.scoreChartConfiguration.series.push({
           data: vm.gameData.scoreMap,
-          name:
-            vm.gameData.player.split(' ').pop() +
-            ' (Score) ' +
-            $filter('number')(vm.gameData.score),
+          name: 'Score ' + $filter('number')(vm.gameData.score),
           color: '#000000',
           lineWidth: 3,
           borderWidth: 0,
@@ -457,6 +462,10 @@ export function GameController(
 
   function getAllLevels() {
     return boardMapper.getAllLevels();
+  }
+
+  function getPlayerName(gameData: any): Promise<any> {
+    return playerService.findPlayerNameById(camelize(gameData.player));
   }
 
   function getScoreChartMappedBoardNumber(inputBoardNumber) {

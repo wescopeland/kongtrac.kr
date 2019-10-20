@@ -4,6 +4,7 @@ import * as angular from 'angular';
 export function PlayerController(
   $stateParams,
   $filter,
+  $firebaseAuth,
   playerService,
   gameService,
   eventService
@@ -12,6 +13,7 @@ export function PlayerController(
 
   // Public Variables
   vm.inputPlayer = $stateParams.playerName;
+  vm.isAuthenticated = false;
   vm.isEditing = false;
   vm.onlyShowComplete = false;
   vm.pbChartConfiguration = {};
@@ -28,12 +30,22 @@ export function PlayerController(
   ////////////////
 
   function activate() {
+    $firebaseAuth().$onAuthStateChanged(user => {
+      if (user.email) {
+        vm.isAuthenticated = true;
+      } else {
+        vm.isAuthenticated = false;
+      }
+    });
+
     vm.displayedPlayerGameTable = [].concat(vm.playerGameTableData);
 
     playerService.getPlayerData(vm.inputPlayer).then(function then(response) {
       vm.playerData = response;
       vm.playerData.hasEvents = false;
-      vm.playerEditData.initials = response.initials;
+      vm.playerEditData.name = response.name;
+
+      console.log(vm.playerEditData);
 
       playerService
         .getPlayerGames(vm.playerData.gameIds)

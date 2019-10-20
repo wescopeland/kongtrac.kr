@@ -7,7 +7,7 @@
         ng-click="player.isEditing = !player.isEditing;"
         style="cursor: pointer;"
       >
-        <span ng-if="!player.isEditing">Edit</span>
+        <span ng-if="!player.isEditing && player.isAuthenticated">Edit</span>
         <span ng-if="player.isEditing">Cancel</span>
       </a>
     </small>
@@ -25,12 +25,11 @@
     <div
       class="form-group col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12"
     >
-      <label class="control-label">Initials</label>
+      <label class="control-label">Name</label>
       <input
         class="form-control"
-        placeholder="Initials"
-        maxlength="3"
-        ng-model="player.playerEditData.initials"
+        placeholder="Name"
+        ng-model="player.playerEditData.name"
       />
     </div>
 
@@ -41,7 +40,7 @@
         class="btn btn-primary pull-right"
         ng-click="player.handleEditCommit()"
       >
-        Commit
+        Update
       </button>
     </div>
   </form>

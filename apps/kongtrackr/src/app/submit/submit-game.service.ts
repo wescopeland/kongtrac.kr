@@ -11,6 +11,7 @@ export function submitGameService(
   var _fbRef = firebase.database().ref();
 
   this.checkAndSetWeights = checkAndSetWeights;
+  this.createRandomId = createRandomId;
   this.expandAbbreviatedPoints = expandAbbreviatedPoints;
   this.overwriteGame = overwriteGame;
   this.submitGame = submitGame;
@@ -26,6 +27,18 @@ export function submitGameService(
   }
 
   function checkAndSetWeights() {}
+
+  function createRandomId(): string {
+    return (
+      '_' +
+      Math.random()
+        .toString(36)
+        .substr(2, 18) +
+      Math.random()
+        .toString(36)
+        .substr(2, 9)
+    );
+  }
 
   function expandAbbreviatedPoints(inputPointsString) {
     var expansion;
@@ -127,29 +140,51 @@ export function submitGameService(
     // Load both the gameList and playerList, then post the game.
     gameList.$loaded().then(function() {
       var newGame = inputGameProperties;
-      console.log(newGame);
 
       if (newGame.mameVersion === undefined) {
         newGame.mameVersion = null;
       }
 
-      gameList.$add(newGame).then(function(newGameReference) {
-        $rootScope.$broadcast('gameAdded', {
-          gameId: newGameReference.key
-        });
+      let foundPlayerId = null;
 
-        // Add this game to the player's array of games.
-        var playerGamesArray = $firebaseArray(
-          _fbRef
-            .child('players')
-            .child(camelize(newGame.player))
-            .child('games')
-        );
+      // Find the player id by the given player name.
+      $firebaseArray(_fbRef.child('players'))
+        .$loaded()
+        .then(players => {
+          players.forEach(player => {
+            // Found the player by name. Grab the id.
+            if (player.name === inputGameProperties.playerName) {
+              foundPlayerId = player.$id;
+            }
+          });
 
-        playerGamesArray.$loaded().then(function() {
-          playerGamesArray.$add(newGameReference.key);
+          newGame.player = inputGameProperties.playerName;
+          delete newGame.playerName;
+
+          if (foundPlayerId) {
+            newGame.playerId = foundPlayerId;
+          } else {
+            newGame.playerId = createRandomId();
+          }
+
+          gameList.$add(newGame).then(newGameReference => {
+            $rootScope.$broadcast('gameAdded', {
+              gameId: newGameReference.key
+            });
+
+            // Add this game to the player's array of games.
+            let playerGamesArray = $firebaseArray(
+              _fbRef
+                .child('players')
+                .child(newGame.playerId)
+                .child('games')
+            );
+
+            playerGamesArray.$loaded().then(() => {
+              playerGamesArray.$add(newGameReference.key);
+            });
+          });
         });
-      });
     });
   }
 }
