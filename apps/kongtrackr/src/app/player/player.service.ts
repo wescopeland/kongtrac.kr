@@ -25,6 +25,7 @@ export function playerService(
   this.getMAMEBest = getMAMEBest;
   this.getPlayerData = getPlayerData;
   this.getPlayerGames = getPlayerGames;
+  this.findPlayerNameById = findPlayerNameById;
 
   ////////////////
 
@@ -73,15 +74,17 @@ export function playerService(
 
   function editPlayer(inputPlayer, inputEditObject) {
     return $q(function(resolve, reject) {
-      var playerData = $firebaseObject(
-        _fbRef.child('players').child(inputPlayer)
-      );
+      if (inputEditObject.name && inputEditObject.name.trim().length) {
+        var playerData = $firebaseObject(
+          _fbRef.child('players').child(inputPlayer)
+        );
 
-      playerData.$loaded().then(function() {
-        playerData.initials = inputEditObject.initials;
-        playerData.$save();
-        resolve();
-      });
+        playerData.$loaded().then(function() {
+          playerData.name = inputEditObject.name;
+          playerData.$save();
+          resolve();
+        });
+      }
     });
   }
 
@@ -190,6 +193,23 @@ export function playerService(
     }
 
     return gameIds;
+  }
+
+  function findPlayerNameById(inputPlayerId: string) {
+    return new Promise((resolve, reject) => {
+      let playerData = $firebaseObject(
+        _fbRef.child('players').child(inputPlayerId)
+      );
+
+      playerData.$loaded().then(player => {
+        if (playerData.name) {
+          resolve(playerData.name);
+        } else {
+          console.error(player);
+          resolve('no name found');
+        }
+      });
+    });
   }
 
   function uncamelize(inputString) {

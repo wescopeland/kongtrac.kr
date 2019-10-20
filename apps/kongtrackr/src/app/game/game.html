@@ -1,46 +1,70 @@
 <div class="row" ng-if="game.gameId === 'averageGame'">
-	<h3>The Average Game</h3>
-	<p>
-		This is a simulation produced on a daily basis calculated from every killscreen entry in the database.
-		Each killscreen game has been taken and averaged into a single game: "the average game".
-		Every scoring metric of every game has been carefully compiled into this single game: every barrel, pie, spring, rivet,
-		death score, and death location. With each new killscreen entry in the database, the average game automatically adjusts itself.
-	</p>
+  <h3>The Average Game</h3>
+  <p>
+    This is a simulation produced on a daily basis calculated from every
+    killscreen entry in the database. Each killscreen game has been taken and
+    averaged into a single game: "the average game". Every scoring metric of
+    every game has been carefully compiled into this single game: every barrel,
+    pie, spring, rivet, death score, and death location. With each new
+    killscreen entry in the database, the average game automatically adjusts
+    itself.
+  </p>
 </div>
 
 <div class="row" ng-if="game.gameId === 'perfectGame'">
-	<h3>The Perfect Game</h3>
-	<p>
-		This is a simulation produced on a daily basis calculated from every game in the database.
-		Each game has been scanned through, and the <em>maximum scores earned on every board</em> have been assembled
-		into a single game: "the perfect game". With each new game entry in the database that breaks the maximum score earned
-		on a board, the perfect game automatically adjusts itself.
-	</p>
+  <h3>The Perfect Game</h3>
+  <p>
+    This is a simulation produced on a daily basis calculated from every game in
+    the database. Each game has been scanned through, and the
+    <em>maximum scores earned on every board</em> have been assembled into a
+    single game: "the perfect game". With each new game entry in the database
+    that breaks the maximum score earned on a board, the perfect game
+    automatically adjusts itself.
+  </p>
 </div>
 
 <div class="row">
-	<h2>
-		<a ng-href="{{ '#/player/' + game.camelize(game.gameData.player) }}">{{ game.gameData.player }}</a> &mdash; {{ game.gameData.score | number }}
-		<small>
-		    <a ng-if="game.$state.current.name !== 'game.summary'" ng-href="{{ '#/game/' + game.gameData.$id + '/summary' }}">Summary</a>
-		    <span ng-if="game.$state.current.name === 'game.summary'">Summary</span>
-		    {{ $state.current.name }}
-		</small>
-		<small>
-		    <a ng-if="game.$state.current.name !== 'game.boards' && game.gameData.hasCompleteData" ng-href="{{ '#/game/' + game.gameData.$id + '/boards' }}">Score breakdown</a>
-		    <span ng-if="game.$state.current.name === 'game.boards' || !game.gameData.hasCompleteData">Score breakdown</span>
-		</small>
-		<small class="pull-right" style="margin-top: 10px;">
-			<a ng-if="false" ng-click="game.deleteGame()" style="margin-right: 15px;">
-				Delete
-			</a>
-		    <a ng-if="game.$state.current.name !== 'game.edit' && game.gameData.platform !== 'Simulation'" 
-		       ng-href="{{ '#/game/' + game.gameData.$id + '/edit' }}">
-		        Edit
-		    </a>
-		    <span ng-if="game.$state.current.name === 'game.edit'">Edit</span>
-		</small>
-	</h2>
+  <h2>
+    <a
+      ng-href="{{
+        '#/player/' + (game.playerId || game.camelize(game.gameData.player))
+      }}"
+      >{{ game.playerName }}</a
+    >
+    &mdash; {{ game.gameData.score | number }}
+    <small>
+      <a
+        ng-if="game.$state.current.name !== 'game.summary'"
+        ng-href="{{ '#/game/' + game.gameData.$id + '/summary' }}"
+        >Summary</a
+      >
+      <span ng-if="game.$state.current.name === 'game.summary'">Summary</span>
+      {{ $state.current.name }}
+    </small>
+    <small>
+      <a
+        ng-if="game.$state.current.name !== 'game.boards' && game.gameData.hasCompleteData"
+        ng-href="{{ '#/game/' + game.gameData.$id + '/boards' }}"
+        >Score breakdown</a
+      >
+      <span
+        ng-if="game.$state.current.name === 'game.boards' || !game.gameData.hasCompleteData"
+        >Score breakdown</span
+      >
+    </small>
+    <small class="pull-right" style="margin-top: 10px;">
+      <a ng-if="false" ng-click="game.deleteGame()" style="margin-right: 15px;">
+        Delete
+      </a>
+      <a
+        ng-if="game.$state.current.name !== 'game.edit' && game.gameData.platform !== 'Simulation'"
+        ng-href="{{ '#/game/' + game.gameData.$id + '/edit' }}"
+      >
+        Edit
+      </a>
+      <span ng-if="game.$state.current.name === 'game.edit'">Edit</span>
+    </small>
+  </h2>
 </div>
 
 <ui-view></ui-view>

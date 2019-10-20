@@ -60,7 +60,7 @@ export function SubmitGameController(
 
     var gamePropertiesObject = {} as any;
 
-    gamePropertiesObject.player = vm.inputPlayer;
+    gamePropertiesObject.playerName = vm.inputPlayer;
     gamePropertiesObject.date = vm.inputDate;
     gamePropertiesObject.score = Number(vm.inputScore);
     gamePropertiesObject.platform = vm.inputPlatform;
