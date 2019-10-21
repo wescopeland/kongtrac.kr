@@ -4,5 +4,6 @@ export interface RankingElement {
   name: string;
   score: number;
   date: string;
+  playerId?: string;
   id?: string;
 }

@@ -3,18 +3,12 @@ import { StateService } from '@uirouter/angular';
 import { Observable, combineLatest } from 'rxjs';
 
 import { DbStatsQuery, DbStatsService } from '../+state/db-stats';
-import {
-  PersonalBestsArcadeQuery,
-  PersonalBestsArcadeService
-} from '../+state/personal-bests-arcade';
-import {
-  PersonalBestsMameQuery,
-  PersonalBestsMameService
-} from '../+state/personal-bests-mame';
 import { DbStatsState } from '../+state/models/db-stats-state.model';
 import { PersonalBest } from '../+state/models/personal-best.model';
 import { RankingElement } from '../+state/models/ranking-element.model';
 import { Game } from '../+state/models/game.model';
+import { PlayerRankingsQuery } from '../+state/player-rankings/player-rankings.query';
+import { PlayerRankingsService } from '../+state/player-rankings/player-rankings.service';
 import {
   TopCombinedGamesQuery,
   TopCombinedGamesService
@@ -52,10 +46,8 @@ export class RankingShellComponent implements OnInit {
     private _stateService: StateService,
     private _dbStatsQuery: DbStatsQuery,
     private _dbStatsService: DbStatsService,
-    private _personalBestsArcadeQuery: PersonalBestsArcadeQuery,
-    private _personalBestsArcadeService: PersonalBestsArcadeService,
-    private _personalBestsMameQuery: PersonalBestsMameQuery,
-    private _personalBestsMameService: PersonalBestsMameService,
+    private _playerRankingsQuery: PlayerRankingsQuery,
+    private _playerRankingsService: PlayerRankingsService,
     private _topCombinedGamesQuery: TopCombinedGamesQuery,
     private _topCombinedGamesService: TopCombinedGamesService,
     private _topArcadeGamesQuery: TopArcadeGamesQuery,
@@ -72,7 +64,37 @@ export class RankingShellComponent implements OnInit {
     this.state$ = this._dbStatsQuery.select();
 
     this._dbStatsService.getDbStats();
-    this._topCombinedGamesService.getTopCombinedGames();
+
+    this._playerRankingsService.getPlayers().then(() => {
+      const allRankings = this._playerRankingsQuery.getAll();
+
+      this.completeArcadeHighScoreList = this._playerRankingsService.assembleArcadeHighScoreList(
+        allRankings
+      );
+
+      this.trimmedArcadeHighScoreList = this.completeArcadeHighScoreList.slice(
+        0,
+        10
+      );
+
+      this.completeMameHighScoreList = this._playerRankingsService.assembleMameHighScoreList(
+        allRankings
+      );
+
+      this.trimmedMameHighScoreList = this.completeMameHighScoreList.slice(
+        0,
+        10
+      );
+
+      this.completeCombinedHighScoreList = this._playerRankingsService.assembleCombinedHighScoreList(
+        allRankings
+      );
+
+      this.trimmedCompleteHighScoreList = this.completeCombinedHighScoreList.slice(
+        0,
+        10
+      );
+    });
 
     if (this.currentRoute === 'games') {
       combineLatest(
@@ -89,20 +111,6 @@ export class RankingShellComponent implements OnInit {
     }
 
     if (this.currentRoute === 'players' || this.currentRoute === 'complete') {
-      combineLatest(
-        this._personalBestsArcadeService.getPersonalBestsArcade(),
-        this._personalBestsMameService.getPersonalBestsMame()
-      ).subscribe(() => {
-        this.buildLeaderboards(
-          this._personalBestsArcadeQuery.getAll(),
-          this._personalBestsMameQuery.getAll()
-        );
-
-        this.trimmedCompleteHighScoreList = this.completeCombinedHighScoreList.slice(
-          0,
-          10
-        );
-      });
     }
   }
 
@@ -200,62 +208,5 @@ export class RankingShellComponent implements OnInit {
     this.topArcadeGames = sanitizedArcade;
     this.topCombinedGames = sanitizedCombined;
     this.topMameGames = sanitizedMame;
-  }
-
-  buildLeaderboards(
-    personalBestsArcade: PersonalBest[],
-    personalBestsMame: PersonalBest[]
-  ): void {
-    let sanitizedArcade: RankingElement[] = [];
-    let sanitizedMame: RankingElement[] = [];
-
-    personalBestsArcade.sort((a, b) => (b.score > a.score ? 1 : -1));
-    personalBestsMame.sort((a, b) => (b.score > a.score ? 1 : -1));
-
-    personalBestsArcade.forEach(pb => {
-      if (pb.score > 0) {
-        sanitizedArcade.push({
-          name: pb.playerName,
-          score: pb.score,
-          date: pb.date,
-          platform: 'arcade',
-          id: pb.id
-        });
-      }
-    });
-
-    this.completeArcadeHighScoreList = sanitizedArcade.sort((a, b) =>
-      a.score < b.score ? 1 : -1
-    );
-
-    this.trimmedArcadeHighScoreList = this.completeArcadeHighScoreList.slice(
-      0,
-      10
-    );
-
-    personalBestsMame.forEach(pb => {
-      if (pb.score > 0) {
-        sanitizedMame.push({
-          name: pb.playerName,
-          score: pb.score,
-          date: pb.date,
-          platform: 'emulator',
-          id: pb.id
-        });
-      }
-    });
-
-    this.completeMameHighScoreList = sanitizedMame.sort((a, b) =>
-      a.score < b.score ? 1 : -1
-    );
-
-    this.trimmedMameHighScoreList = this.completeMameHighScoreList.slice(0, 10);
-
-    let sanitizedScores = this.getHighestScoreFromPlayer([
-      ...sanitizedArcade,
-      ...sanitizedMame
-    ]).sort((a, b) => (a.score < b.score ? 1 : -1));
-
-    this.completeCombinedHighScoreList = sanitizedScores;
   }
 }
