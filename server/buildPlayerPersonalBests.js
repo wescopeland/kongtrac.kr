@@ -103,8 +103,6 @@ function uncamelize(inputString) {
   return text.replace('/^' + separator + '/', '');
 }
 
-// module.exports.build = function() {
-//   return buildPersonalBests();
-// }
-
-buildPersonalBests();
+module.exports.build = function() {
+  return buildPersonalBests();
+};
