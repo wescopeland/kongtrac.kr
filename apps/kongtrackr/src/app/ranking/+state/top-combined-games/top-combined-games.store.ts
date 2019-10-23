@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
 
-import { Game } from '../models/game.model';
+import { Game } from '../../../shared/models/game.model';
 
 export interface TopCombinedGamesState extends EntityState<Game> {}
 

@@ -274,14 +274,17 @@ export function GameController(
 
     gameService.getGameData($stateParams.gameId).then(function then(response) {
       vm.gameData = response;
-      console.log(vm.gameData);
 
-      if (vm.gameData.playerId) {
-        vm.playerName = camelize(vm.gameData.playerId);
+      if (!vm.gameData.player) {
+        if (vm.gameData.playerId) {
+          vm.playerName = camelize(vm.gameData.playerId);
+        } else {
+          getPlayerName(vm.gameData).then(name => {
+            vm.playerName = name;
+          });
+        }
       } else {
-        getPlayerName(vm.gameData).then(name => {
-          vm.playerName = name;
-        });
+        vm.playerName = vm.gameData.player;
       }
 
       vm.gameEditData.date = vm.gameData.date;

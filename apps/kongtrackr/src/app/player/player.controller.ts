@@ -47,6 +47,8 @@ export function PlayerController(
 
       console.log(vm.playerEditData);
 
+      console.log('vm.playerData', vm.playerData);
+
       playerService
         .getPlayerGames(vm.playerData.gameIds)
         .then(function then(gamesResponse) {

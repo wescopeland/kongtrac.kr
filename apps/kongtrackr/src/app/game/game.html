@@ -27,7 +27,8 @@
   <h2>
     <a
       ng-href="{{
-        '#/player/' + (game.playerId || game.camelize(game.gameData.player))
+        '#/player/' +
+          (game.gameData.playerId || game.camelize(game.gameData.player))
       }}"
       >{{ game.playerName }}</a
     >

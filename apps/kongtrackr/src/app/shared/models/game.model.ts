@@ -5,9 +5,10 @@ export interface Game {
   gameId: string;
   hasCompleteData: boolean;
   isKillscreen: boolean;
-  platform: 'Arcade' | 'MAME';
+  platform: 'Arcade' | 'MAME' | 'JAMMA';
   player: string;
   score: number;
+  $id?: string;
   concealedDay?: boolean;
   concealedMonth?: boolean;
   mameVersion?: string;

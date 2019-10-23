@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { camelCase } from 'lodash';
 
 import { RankingElement } from '../+state/models/ranking-element.model';
 
@@ -10,7 +9,6 @@ import { RankingElement } from '../+state/models/ranking-element.model';
 })
 export class RankingTableComponent implements OnInit {
   @Input() rankingElements: RankingElement[];
-  public camelCase = camelCase;
   public displayedColumns: string[] = [
     'rank',
     'platform',

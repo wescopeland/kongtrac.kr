@@ -6,7 +6,7 @@ import { DbStatsQuery, DbStatsService } from '../+state/db-stats';
 import { DbStatsState } from '../+state/models/db-stats-state.model';
 import { PersonalBest } from '../+state/models/personal-best.model';
 import { RankingElement } from '../+state/models/ranking-element.model';
-import { Game } from '../+state/models/game.model';
+import { Game } from '../../shared/models/game.model';
 import { PlayerRankingsQuery } from '../+state/player-rankings/player-rankings.query';
 import { PlayerRankingsService } from '../+state/player-rankings/player-rankings.service';
 import {

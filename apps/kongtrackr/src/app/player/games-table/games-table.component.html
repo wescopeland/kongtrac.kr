@@ -1,0 +1,62 @@
+<div class="kongtrac-player-games-table">
+  <div class="row">
+    <div class="col-sm-6">
+      <h2 class="mat-title">Known games</h2>
+    </div>
+    <div class="col-sm-6">
+      <mat-slide-toggle color="primary" (change)="onToggleChange($event)">
+        Only show games with complete data
+      </mat-slide-toggle>
+    </div>
+  </div>
+
+  <table
+    mat-table
+    matSort
+    class="mat-elevation-z2"
+    matSortActive="date"
+    matSortDirection="desc"
+    [dataSource]="dataSource"
+  >
+    <ng-container matColumnDef="date">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="!element.concealedDay && !element.concealedMonth">
+          {{ element.date | date }}
+        </ng-container>
+        <ng-container *ngIf="element.concealedDay && !element.concealedMonth">
+          {{ element.date | date: 'MMM yyyy' }}
+        </ng-container>
+        <ng-container *ngIf="element.concealedDay && element.concealedMonth">
+          {{ element.date | date: 'yyyy' }}
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="score">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Score</th>
+      <td mat-cell *matCellDef="let element">
+        <a [href]="'#/game/' + element.$id + '/summary'">
+          {{ element.score | number }}
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="platform">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Platform</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.platform }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="finalBoard">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Final board</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.finalBoard }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

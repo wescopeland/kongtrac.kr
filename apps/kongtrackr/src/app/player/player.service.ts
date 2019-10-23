@@ -162,6 +162,7 @@ export function playerService(
       );
 
       playerData.$loaded().then(function() {
+        console.log('playerData', playerData);
         _player = playerData;
         _player.name = playerData.name || uncamelize(playerData.$id);
 

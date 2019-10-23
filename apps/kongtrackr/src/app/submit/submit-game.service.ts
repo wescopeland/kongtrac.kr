@@ -136,6 +136,7 @@ export function submitGameService(
 
   function submitGame(inputGameProperties) {
     var gameList = $firebaseArray(_fbRef.child('games'));
+    let needsNameAssignment = false;
 
     // Load both the gameList and playerList, then post the game.
     gameList.$loaded().then(function() {
@@ -165,6 +166,18 @@ export function submitGameService(
             newGame.playerId = foundPlayerId;
           } else {
             newGame.playerId = createRandomId();
+            needsNameAssignment = true;
+          }
+
+          if (!needsNameAssignment) {
+            let player = $firebaseObject(
+              _fbRef.child('players').child(newGame.playerId)
+            );
+
+            player.$loaded().then(() => {
+              player.name = newGame.player;
+              player.$save();
+            });
           }
 
           gameList.$add(newGame).then(newGameReference => {
