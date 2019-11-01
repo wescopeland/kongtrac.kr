@@ -156,6 +156,7 @@ export function submitGameService(
             // Found the player by name. Grab the id.
             if (player.name === inputGameProperties.playerName) {
               foundPlayerId = player.$id;
+              console.log({ foundPlayerId });
             }
           });
 
@@ -169,32 +170,34 @@ export function submitGameService(
             needsNameAssignment = true;
           }
 
-          if (!needsNameAssignment) {
-            let player = $firebaseObject(
-              _fbRef.child('players').child(newGame.playerId)
-            );
+          console.log({ newGame });
 
-            player.$loaded().then(() => {
+          let player = $firebaseObject(
+            _fbRef.child('players').child(newGame.playerId)
+          );
+
+          player.$loaded().then(() => {
+            if (needsNameAssignment) {
               player.name = newGame.player;
               player.$save();
-            });
-          }
+            }
 
-          gameList.$add(newGame).then(newGameReference => {
-            $rootScope.$broadcast('gameAdded', {
-              gameId: newGameReference.key
-            });
+            gameList.$add(newGame).then(newGameReference => {
+              // Add this game to the player's array of games.
+              let playerGamesArray = $firebaseArray(
+                _fbRef
+                  .child('players')
+                  .child(newGame.playerId)
+                  .child('games')
+              );
 
-            // Add this game to the player's array of games.
-            let playerGamesArray = $firebaseArray(
-              _fbRef
-                .child('players')
-                .child(newGame.playerId)
-                .child('games')
-            );
+              playerGamesArray.$loaded().then(() => {
+                playerGamesArray.$add(newGameReference.key);
 
-            playerGamesArray.$loaded().then(() => {
-              playerGamesArray.$add(newGameReference.key);
+                $rootScope.$broadcast('gameAdded', {
+                  gameId: newGameReference.key
+                });
+              });
             });
           });
         });
