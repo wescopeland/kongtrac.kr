@@ -22,7 +22,6 @@
         completeGamesArray.push(gameData);
       });
 
-      // Sort the killscreenGamesArray by date.
       completeGamesArray.sort(function(a, b) {
         return a.timeSinceEpoch - b.timeSinceEpoch;
       });
