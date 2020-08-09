@@ -31,9 +31,13 @@ export class GamesTableComponent implements OnChanges {
   constructor() {}
 
   ngOnChanges(e: SimpleChanges) {
+    console.log('games event', e.games);
     if (e.games) {
       this.dataSource.data = this.games;
-      this.dataSource.sort = this.sort;
+
+      setTimeout(() => {
+        this.dataSource.sort = this.sort;
+      });
     }
   }
 

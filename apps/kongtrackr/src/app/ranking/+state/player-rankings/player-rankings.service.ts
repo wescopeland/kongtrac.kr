@@ -92,7 +92,7 @@ export class PlayerRankingsService {
     let mameRankingElements: RankingElement[] = [];
     allRankings.forEach(ranking => {
       let newRankingElement: RankingElement = {
-        platform: 'arcade',
+        platform: 'emulator',
         name: ranking.name,
         playerId: ranking.id,
         score: ranking.currentMamePbScore,

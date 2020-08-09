@@ -71,7 +71,9 @@ export class PbHistoryChartComponent implements OnChanges, OnInit {
             return `${that._shortNumberPipe.transform(this.value)}`;
           }
         },
-        max: 1300000
+        min: 0,
+        max: 1300000,
+        tickInterval: 260000
       },
       plotOptions: {
         series: {
