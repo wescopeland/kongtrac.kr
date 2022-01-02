@@ -347,7 +347,9 @@ export function TimelineController($filter, timelineService) {
           '2017',
           '2018',
           '2019',
-          '2020'
+          '2020',
+          '2021',
+          '2022'
         ],
         crosshair: true
       },
@@ -409,7 +411,9 @@ export function TimelineController($filter, timelineService) {
           '2017',
           '2018',
           '2019',
-          '2020'
+          '2020',
+          '2021',
+          '2022'
         ],
         crosshair: true
       },
@@ -465,7 +469,9 @@ export function TimelineController($filter, timelineService) {
           '2017',
           '2018',
           '2019',
-          '2020'
+          '2020',
+          '2021',
+          '2022'
         ],
         crosshair: true
       },
@@ -776,6 +782,10 @@ export function TimelineController($filter, timelineService) {
           histogramData[20] += 1;
         } else if (scoreYear === 2020) {
           histogramData[21] += 1;
+        } else if (scoreYear === 2021) {
+          histogramData[22] += 1;
+        } else if (scoreYear === 2022) {
+          histogramData[23] += 1;
         }
       });
 
@@ -841,6 +851,10 @@ export function TimelineController($filter, timelineService) {
             histogramData[15] += 1;
           } else if (scoreYear === 2020) {
             histogramData[16] += 1;
+          } else if (scoreYear === 2021) {
+            histogramData[17] += 1;
+          } else if (scoreYear === 2022) {
+            histogramData[18] += 1;
           }
         });
 
@@ -891,6 +905,10 @@ export function TimelineController($filter, timelineService) {
             histogramData[9] += 1;
           } else if (scoreYear === 2020) {
             histogramData[10] += 1;
+          } else if (scoreYear === 2021) {
+            histogramData[11] += 1;
+          } else if (scoreYear === 2022) {
+            histogramData[12] += 1;
           }
         });
 
