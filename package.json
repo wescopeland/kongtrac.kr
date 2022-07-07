@@ -63,7 +63,7 @@
     "instantsearch.js": "^3.7.0",
     "jquery": "^2.1.4",
     "lodash": "^4.17.15",
-    "moment": "^2.10.6",
+    "moment": "^2.29.4",
     "moment-precise-range": "^0.1.1",
     "outdated-browser-rework": "^2.9.0",
     "rxjs": "~6.4.0",
