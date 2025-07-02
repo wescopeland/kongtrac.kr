@@ -1,5 +1,5 @@
 import * as firebase from 'firebase';
-import * as moment from 'moment';
+import moment from 'moment';
 
 /* @ngInject */
 export function scoresService($q, $firebaseArray, $filter) {

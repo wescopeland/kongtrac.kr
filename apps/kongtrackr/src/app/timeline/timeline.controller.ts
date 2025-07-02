@@ -1,5 +1,5 @@
 import * as Highcharts from 'highcharts';
-import * as moment from 'moment';
+import moment from 'moment';
 
 /* @ngInject */
 export function TimelineController($filter, timelineService) {
