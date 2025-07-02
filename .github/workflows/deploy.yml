@@ -1,7 +1,7 @@
 name: Build and Deploy to Coolify
 on:
   push:
-    branches: ["main"]
+    branches: ["master", "main"]
 
 env:
   REGISTRY: ghcr.io
