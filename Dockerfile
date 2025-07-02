@@ -13,7 +13,7 @@ ENV PORT 8080
 
 # Copy package files and install production deps only
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm ci
 
 # Copy built Angular app
 COPY --from=builder /usr/src/app/dist ./dist
