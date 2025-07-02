@@ -35,15 +35,7 @@
               "apps/kongtrackr/src/aligulac-theme.css",
               "apps/kongtrackr/src/app/styles.scss"
             ],
-            "scripts": ["node_modules/jquery/dist/jquery.min.js"],
-            "allowedCommonJsDependencies": [
-              "@uirouter/core",
-              "@uirouter/angular",
-              "@uirouter/angular-hybrid",
-              "@uirouter/angularjs",
-              "lodash",
-              "moment"
-            ]
+            "scripts": ["node_modules/jquery/dist/jquery.min.js"]
           },
           "configurations": {
             "production": {
