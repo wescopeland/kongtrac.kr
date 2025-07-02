@@ -1,29 +1,20 @@
-# Use the specified Node.js version
-FROM node:12.11.1
-
-# Set environment variables (adjust as needed)
-ENV PORT 8080
-
-# Create a directory to hold the application code inside the image
+# Multi-stage build for smaller image
+FROM node:12.11.1 AS builder
 WORKDIR /usr/src/app
-
-# Install Angular CLI globally in the image to use its commands
-RUN npm install -g @angular/cli
-
-# Copy package.json and package-lock.json files to the working directory
 COPY package*.json ./
-
-# Install project dependencies
 RUN npm install
-
-# Copy all project files into the container
 COPY . .
-
-# Build the project (with Angular CLI)
 RUN npm run build
 
-# Expose the port the app runs on
-EXPOSE 8080
+# Production stage
+FROM node:12.11.1-alpine
+WORKDIR /usr/src/app
+ENV PORT 8080
+COPY package*.json ./
+RUN npm ci --only=production
+COPY --from=builder /usr/src/app/dist ./dist
+COPY --from=builder /usr/src/app/server.js ./
+# Copy any other server files needed
 
-# Run the start script
-CMD [ "npm", "start" ]
+EXPOSE 8080
+CMD ["npm", "start"]
