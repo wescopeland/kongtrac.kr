@@ -1,26 +1,29 @@
-# Build stage
-FROM node:12.11.1 AS builder
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+# Single stage - include everything
+FROM node:12.11.1
 
-# Production stage
-FROM node:12.11.1-alpine
-WORKDIR /usr/src/app
+# Set environment variables
 ENV PORT 8080
 
-# Copy package files and install production deps only
+# Create working directory
+WORKDIR /usr/src/app
+
+# Install Angular CLI globally
+RUN npm install -g @angular/cli
+
+# Copy package files
 COPY package*.json ./
-RUN npm ci
 
-# Copy built Angular app
-COPY --from=builder /usr/src/app/dist ./dist
+# Install ALL dependencies (both production and dev)
+RUN npm install
 
-# Copy server files
-COPY server.js ./
-COPY server ./server
+# Copy all source files
+COPY . .
 
+# Build the Angular app
+RUN npm run build
+
+# Expose port
 EXPOSE 8080
+
+# Start the server
 CMD ["npm", "start"]
