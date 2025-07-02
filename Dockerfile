@@ -1,4 +1,4 @@
-# Multi-stage build for smaller image
+# Build stage
 FROM node:12.11.1 AS builder
 WORKDIR /usr/src/app
 COPY package*.json ./
@@ -10,11 +10,17 @@ RUN npm run build
 FROM node:12.11.1-alpine
 WORKDIR /usr/src/app
 ENV PORT 8080
+
+# Copy package files and install production deps only
 COPY package*.json ./
 RUN npm ci --only=production
+
+# Copy built Angular app
 COPY --from=builder /usr/src/app/dist ./dist
-COPY --from=builder /usr/src/app/server.js ./
-# Copy any other server files needed
+
+# Copy server files
+COPY server.js ./
+COPY server ./server
 
 EXPOSE 8080
 CMD ["npm", "start"]
