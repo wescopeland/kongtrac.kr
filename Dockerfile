@@ -1,5 +1,5 @@
 # Single stage - include everything
-FROM node:12.11.1
+FROM node:20-alpine
 
 # Set environment variables
 ENV PORT 8080

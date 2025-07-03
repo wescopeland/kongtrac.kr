@@ -3,16 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "engines": {
-    "node": ">=16",
-    "npm": ">=8"
+    "node": ">=20",
+    "npm": ">=10"
   },
   "scripts": {
-    "ng": "ng",
+    "ng": "NODE_OPTIONS=--openssl-legacy-provider ng",
     "start": "node server.js",
-    "build": "ng build --prod --optimization=false",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "build": "NODE_OPTIONS=--openssl-legacy-provider ng build --prod --optimization=false",
+    "test": "NODE_OPTIONS=--openssl-legacy-provider ng test",
+    "lint": "NODE_OPTIONS=--openssl-legacy-provider ng lint",
+    "e2e": "NODE_OPTIONS=--openssl-legacy-provider ng e2e"
   },
   "license": "MIT",
   "homepage": "https://kongtrac.kr",
