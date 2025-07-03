@@ -72,6 +72,35 @@ export function TimelineController($filter, timelineService) {
     return number;
   }
 
+  function buildYearHistogram(timeline, startYear, endYear) {
+    // If endYear is not provided, use current year.
+    if (!endYear) {
+      endYear = new Date().getFullYear();
+    }
+    
+    // Initialize histogram data with zeros for each year.
+    var histogramData = new Array(endYear - startYear + 1).fill(0);
+    
+    timeline.forEach(function(entry) {
+      var scoreYear;
+      
+      // Handle both YYYY and MM/DD/YYYY date formats.
+      if (entry.date.length === 4) {
+        scoreYear = Number(entry.date);
+      } else {
+        scoreYear = Number(entry.date.split('/')[2]);
+      }
+      
+      // Calculate the index and increment if within range.
+      var index = scoreYear - startYear;
+      if (index >= 0 && index < histogramData.length) {
+        histogramData[index] += 1;
+      }
+    });
+    
+    return histogramData;
+  }
+
   function activate() {
     vm.arcadeWRChartConfig = {
       options: {
@@ -325,30 +354,7 @@ export function TimelineController($filter, timelineService) {
         title: {
           text: 'Ranges'
         },
-        categories: [
-          'Pre-2000',
-          '2000',
-          '2001',
-          '2002',
-          '2003',
-          '2004',
-          '2005',
-          '2006',
-          '2007',
-          '2008',
-          '2009',
-          '2010',
-          '2011',
-          '2012',
-          '2013',
-          '2014',
-          '2015',
-          '2016',
-          '2017',
-          '2018',
-          '2019',
-          '2020'
-        ],
+        categories: [], // Will be set dynamically
         crosshair: true
       },
       yAxis: {
@@ -392,25 +398,7 @@ export function TimelineController($filter, timelineService) {
         title: {
           text: 'Ranges'
         },
-        categories: [
-          '2004',
-          '2005',
-          '2006',
-          '2007',
-          '2008',
-          '2009',
-          '2010',
-          '2011',
-          '2012',
-          '2013',
-          '2014',
-          '2015',
-          '2016',
-          '2017',
-          '2018',
-          '2019',
-          '2020'
-        ],
+        categories: [], // Will be set dynamically
         crosshair: true
       },
       yAxis: {
@@ -454,19 +442,7 @@ export function TimelineController($filter, timelineService) {
         title: {
           text: 'Ranges'
         },
-        categories: [
-          '2010',
-          '2011',
-          '2012',
-          '2013',
-          '2014',
-          '2015',
-          '2016',
-          '2017',
-          '2018',
-          '2019',
-          '2020'
-        ],
+        categories: [], // Will be set dynamically
         crosshair: true
       },
       yAxis: {
@@ -700,84 +676,33 @@ export function TimelineController($filter, timelineService) {
     timelineService.getTimelineData('ksTimeline').then(function then(response) {
       vm.ksTimeline = response;
 
-      var histogramData = [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ];
-
+      var currentYear = new Date().getFullYear();
+      // Build histogram starting from year 2000
+      var histogramData = buildYearHistogram(vm.ksTimeline, 2000, currentYear);
+      
+      // Add a bucket at the beginning for pre-2000 scores
+      histogramData.unshift(0);
+      
+      // Count pre-2000 scores
       vm.ksTimeline.forEach(function(newKs) {
+        var scoreYear;
         if (newKs.date.length === 4) {
-          var scoreYear = Number(newKs.date);
+          scoreYear = Number(newKs.date);
         } else {
-          var scoreYear = Number(newKs.date.split('/')[2]);
+          scoreYear = Number(newKs.date.split('/')[2]);
         }
-
+        
         if (scoreYear < 2000) {
           histogramData[0] += 1;
-        } else if (scoreYear === 2000) {
-          histogramData[1] += 1;
-        } else if (scoreYear === 2001) {
-          histogramData[2] += 1;
-        } else if (scoreYear === 2002) {
-          histogramData[3] += 1;
-        } else if (scoreYear === 2003) {
-          histogramData[4] += 1;
-        } else if (scoreYear === 2004) {
-          histogramData[5] += 1;
-        } else if (scoreYear === 2005) {
-          histogramData[6] += 1;
-        } else if (scoreYear === 2006) {
-          histogramData[7] += 1;
-        } else if (scoreYear === 2007) {
-          histogramData[8] += 1;
-        } else if (scoreYear === 2008) {
-          histogramData[9] += 1;
-        } else if (scoreYear === 2009) {
-          histogramData[10] += 1;
-        } else if (scoreYear === 2010) {
-          histogramData[11] += 1;
-        } else if (scoreYear === 2011) {
-          histogramData[12] += 1;
-        } else if (scoreYear === 2012) {
-          histogramData[13] += 1;
-        } else if (scoreYear === 2013) {
-          histogramData[14] += 1;
-        } else if (scoreYear === 2014) {
-          histogramData[15] += 1;
-        } else if (scoreYear === 2015) {
-          histogramData[16] += 1;
-        } else if (scoreYear === 2016) {
-          histogramData[17] += 1;
-        } else if (scoreYear === 2017) {
-          histogramData[18] += 1;
-        } else if (scoreYear === 2018) {
-          histogramData[19] += 1;
-        } else if (scoreYear === 2019) {
-          histogramData[20] += 1;
-        } else if (scoreYear === 2020) {
-          histogramData[21] += 1;
         }
       });
+      
+      // Build categories array dynamically
+      var categories = ['Pre-2000'];
+      for (var year = 2000; year <= currentYear; year++) {
+        categories.push(year.toString());
+      }
+      vm.ksHistogramConfig.xAxis.categories = categories;
 
       vm.ksHistogramConfig.series = [
         {
@@ -798,51 +723,16 @@ export function TimelineController($filter, timelineService) {
       .then(function then(response) {
         vm.onemillionTimeline = response;
 
-        var histogramData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var startYear = 2004;
+        var currentYear = new Date().getFullYear();
+        var histogramData = buildYearHistogram(vm.onemillionTimeline, startYear, currentYear);
 
-        vm.onemillionTimeline.forEach(function(newKs) {
-          if (newKs.date.length === 4) {
-            var scoreYear = Number(newKs.date);
-          } else {
-            var scoreYear = Number(newKs.date.split('/')[2]);
-          }
-
-          if (scoreYear === 2004) {
-            histogramData[0] += 1;
-          } else if (scoreYear === 2005) {
-            histogramData[1] += 1;
-          } else if (scoreYear === 2006) {
-            histogramData[2] += 1;
-          } else if (scoreYear === 2007) {
-            histogramData[3] += 1;
-          } else if (scoreYear === 2008) {
-            histogramData[4] += 1;
-          } else if (scoreYear === 2009) {
-            histogramData[5] += 1;
-          } else if (scoreYear === 2010) {
-            histogramData[6] += 1;
-          } else if (scoreYear === 2011) {
-            histogramData[7] += 1;
-          } else if (scoreYear === 2012) {
-            histogramData[8] += 1;
-          } else if (scoreYear === 2013) {
-            histogramData[9] += 1;
-          } else if (scoreYear === 2014) {
-            histogramData[10] += 1;
-          } else if (scoreYear === 2015) {
-            histogramData[11] += 1;
-          } else if (scoreYear === 2016) {
-            histogramData[12] += 1;
-          } else if (scoreYear === 2017) {
-            histogramData[13] += 1;
-          } else if (scoreYear === 2018) {
-            histogramData[14] += 1;
-          } else if (scoreYear === 2019) {
-            histogramData[15] += 1;
-          } else if (scoreYear === 2020) {
-            histogramData[16] += 1;
-          }
-        });
+        // Build categories array dynamically
+        var categories = [];
+        for (var year = startYear; year <= currentYear; year++) {
+          categories.push(year.toString());
+        }
+        vm.millionHistogramConfig.xAxis.categories = categories;
 
         vm.millionHistogramConfig.series = [
           {
@@ -863,36 +753,16 @@ export function TimelineController($filter, timelineService) {
       .then(function then(response) {
         vm.oneonemillionTimeline = response;
 
-        var histogramData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var startYear = 2010;
+        var currentYear = new Date().getFullYear();
+        var histogramData = buildYearHistogram(vm.oneonemillionTimeline, startYear, currentYear);
 
-        vm.oneonemillionTimeline.forEach(function(newKs) {
-          console.log({ newKs });
-          var scoreYear = Number(newKs.date.split('/')[2]);
-
-          if (scoreYear === 2010) {
-            histogramData[0] += 1;
-          } else if (scoreYear === 2011) {
-            histogramData[1] += 1;
-          } else if (scoreYear === 2012) {
-            histogramData[2] += 1;
-          } else if (scoreYear === 2013) {
-            histogramData[3] += 1;
-          } else if (scoreYear === 2014) {
-            histogramData[4] += 1;
-          } else if (scoreYear === 2015) {
-            histogramData[5] += 1;
-          } else if (scoreYear === 2016) {
-            histogramData[6] += 1;
-          } else if (scoreYear === 2017) {
-            histogramData[7] += 1;
-          } else if (scoreYear === 2018) {
-            histogramData[8] += 1;
-          } else if (scoreYear === 2019) {
-            histogramData[9] += 1;
-          } else if (scoreYear === 2020) {
-            histogramData[10] += 1;
-          }
-        });
+        // Build categories array dynamically
+        var categories = [];
+        for (var year = startYear; year <= currentYear; year++) {
+          categories.push(year.toString());
+        }
+        vm.millionHundredHistogramConfig.xAxis.categories = categories;
 
         vm.millionHundredHistogramConfig.series = [
           {
