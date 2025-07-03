@@ -1,0 +1,26 @@
+# Development Dockerfile with hot reload support
+FROM node:12.11.1
+
+# Set environment variables
+ENV PORT 4200
+
+# Create working directory
+WORKDIR /usr/src/app
+
+# Install Angular CLI globally
+RUN npm install -g @angular/cli@8.3.8
+
+# Copy package files
+COPY package*.json ./
+
+# Install ALL dependencies
+RUN npm install
+
+# Copy all source files
+COPY . .
+
+# Expose the development server port
+EXPOSE 4200
+
+# Start the development server with polling for file changes
+CMD ["ng", "serve", "--host", "0.0.0.0", "--poll", "2000", "--disable-host-check"]

@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  kongtrac-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4200:4200"
+    volumes:
+      # Mount source code for hot reload
+      - ./apps:/usr/src/app/apps
+      - ./server:/usr/src/app/server
+      - ./angular.json:/usr/src/app/angular.json
+      - ./tsconfig.json:/usr/src/app/tsconfig.json
+      # Prevent node_modules from being overwritten
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+    stdin_open: true
+    tty: true
