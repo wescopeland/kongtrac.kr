@@ -65,3 +65,16 @@ import 'zone.js/dist/zone'; // Included with Angular CLI.
   env: { DEBUG: undefined }
 };
 (window as any).exports = {};
+
+// Polyfill for @uirouter/core inArray function.
+// This fixes compatibility issues with @uirouter/core v6.0.1.
+if (!Array.prototype.includes) {
+  Array.prototype.includes = function(searchElement, fromIndex) {
+    return this.indexOf(searchElement, fromIndex) !== -1;
+  };
+}
+
+// Add inArray utility for @uirouter/core compatibility.
+(window as any).inArray = function(array: any[], item: any): boolean {
+  return array && array.indexOf(item) !== -1;
+};
