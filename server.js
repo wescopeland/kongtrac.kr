@@ -19,18 +19,6 @@ const firebaseConfig = {
 
 const fbApp = Firebase.initializeApp(firebaseConfig);
 
-// Authenticate server as a regular user.
-if (serverEmail && serverPassword) {
-  Firebase.auth()
-    .signInWithEmailAndPassword(serverEmail, serverPassword)
-    .then(() => {
-      console.log('Server authenticated with Firebase');
-    })
-    .catch(error => {
-      console.error('Server authentication failed:', error);
-    });
-}
-
 var kongtrackr = require('./server/batch');
 // var algoliaIndices = require('./server/algoliaUpdate');
 
@@ -45,10 +33,30 @@ app.get('/*', function(req, res) {
 app.listen(process.env.PORT || 8080);
 console.log(`Kongtrackr server started on ${process.env.PORT || 8080}.`);
 
-kongtrackr.runBatch();
-// algoliaIndices.watchData();
-
-// Batch schedule
-var timer = every(30, 'minutes', function() {
+// Function to start batch operations
+function startBatchOperations() {
   kongtrackr.runBatch();
-});
+  // algoliaIndices.watchData();
+  
+  // Batch schedule
+  var timer = every(30, 'minutes', function() {
+    kongtrackr.runBatch();
+  });
+}
+
+// Authenticate server as a regular user.
+if (serverEmail && serverPassword) {
+  Firebase.auth()
+    .signInWithEmailAndPassword(serverEmail, serverPassword)
+    .then(() => {
+      console.log('Server authenticated with Firebase');
+      startBatchOperations();
+    })
+    .catch(error => {
+      console.error('Server authentication failed:', error);
+      // Don't start batch operations if auth fails
+    });
+} else {
+  // If no credentials, start batch operations anyway (for backward compatibility)
+  startBatchOperations();
+}
