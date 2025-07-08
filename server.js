@@ -4,6 +4,8 @@ const Firebase = require('firebase');
 const every = require('every-moment');
 
 const firebaseApiKey = process.env.firebaseApiKey;
+const serverEmail = process.env.FIREBASE_SERVER_EMAIL;
+const serverPassword = process.env.FIREBASE_SERVER_PASSWORD;
 
 const firebaseConfig = {
   apiKey: firebaseApiKey,
@@ -16,6 +18,18 @@ const firebaseConfig = {
 };
 
 const fbApp = Firebase.initializeApp(firebaseConfig);
+
+// Authenticate server as a regular user.
+if (serverEmail && serverPassword) {
+  Firebase.auth()
+    .signInWithEmailAndPassword(serverEmail, serverPassword)
+    .then(() => {
+      console.log('Server authenticated with Firebase');
+    })
+    .catch(error => {
+      console.error('Server authentication failed:', error);
+    });
+}
 
 var kongtrackr = require('./server/batch');
 // var algoliaIndices = require('./server/algoliaUpdate');
